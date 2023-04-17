@@ -1,0 +1,48 @@
+.header {
+  display: flex;
+  flex-direction: column;
+}
+
+.header-main {
+  padding: 24px 10vw;
+}
+
+.logo {
+
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: scale(1.05);
+    cursor: pointer;
+
+    & .logo-path__fill {
+      fill: #000000;
+
+      transition: fill 0.3s ease;
+    }
+
+    & .logo-path__stroke {
+      stroke: #000000;
+
+      transition: stroke 0.3s ease;
+    }
+  }
+
+  &:active {
+    transform: scale(0.95);
+
+    transition: transform 0.3s ease;
+  }
+}
+
+.logo-path__fill {
+  fill: #11397E;
+
+  transition: fill 0.3s ease;
+}
+
+.logo-path__stroke {
+  stroke: #11397E;
+
+  transition: stroke 0.3s ease;
+}

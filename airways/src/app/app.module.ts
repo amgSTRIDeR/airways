@@ -8,9 +8,11 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FooterComponent } from './core/components/footer/footer.component';
+import { HeaderComponent } from './core/components/header/header.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
-  declarations: [AppComponent, FooterComponent],
+  declarations: [AppComponent, FooterComponent, HeaderComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -18,6 +20,7 @@ import { FooterComponent } from './core/components/footer/footer.component';
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
     EffectsModule.forRoot([]),
     BrowserAnimationsModule,
+    MatTooltipModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
