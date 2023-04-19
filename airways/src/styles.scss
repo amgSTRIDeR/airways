@@ -1,4 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
+
+@import "app/core/styles/variables";
+
+.mat-mdc-card-title {
+  color: $primary-color;
+  font-weight: 700;
+}
 
 html, body {
   height: 100%;
@@ -9,6 +17,13 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
+.container {
+  width: 80%;
+}
+
+.w-full {
+  width: 100%;
+}
 
 .m-auto {
   margin: auto;
@@ -63,8 +78,12 @@ body {
   align-items: start;
 }
 
-.item-center {
+.item-end {
   align-items: end;
+}
+
+.gap-half {
+  gap: 0.5rem;
 }
 
 .gap-1 {
@@ -86,3 +105,40 @@ body {
 .gap-5 {
   gap: 5rem;
 }
+
+.text-primary {
+  color: $primary-color;
+}
+
+.text-secondary {
+  color: $secondary-color;
+}
+
+.bg-primary {
+  background-color: $primary-color
+}
+
+.bg-light {
+  background-color: $bg-light-color
+}
+
+.mdc-switch {
+  width: 52px !important;
+}
+
+.mdc-switch__track {
+  height: 32px !important;
+  border-radius: 16px !important;
+}
+
+.mdc-switch__handle-track {
+  width: calc(100% - var(--mdc-switch-handle-width, 34px)) !important;
+}
+
+.mdc-switch__handle {
+  margin-left: 5px !important;
+  width: 26px !important;
+  height: 26px !important;
+  border-radius: 50% !important;
+}
+
