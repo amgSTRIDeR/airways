@@ -11,6 +11,11 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatSelectModule } from '@angular/material/select';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatStepperModule } from '@angular/material/stepper';
 
 @NgModule({
   declarations: [IconLabelComponent, PassengerCardComponent],
@@ -25,6 +30,11 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     MatFormFieldModule,
     MatNativeDateModule,
     MatSlideToggleModule,
+    MatSelectModule,
+    ReactiveFormsModule,
+    MatButtonModule,
+    MatExpansionModule,
+    MatStepperModule,
   ],
   exports: [
     IconLabelComponent,
@@ -38,6 +48,11 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     MatFormFieldModule,
     MatNativeDateModule,
     MatSlideToggleModule,
+    MatSelectModule,
+    ReactiveFormsModule,
+    MatButtonModule,
+    MatExpansionModule,
+    MatStepperModule,
   ],
 })
 export class SharedModule {}

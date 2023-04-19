@@ -1,28 +1,42 @@
-<div class="flex-column flex item-start">
-  <app-icon-label icon="groups" logo="Passenger"></app-icon-label>
-  <mat-card-subtitle>
-    Enter the passenger's names as they appear on document (passport or ID).
-  </mat-card-subtitle>
+<div class="flex flex-column gap-1 w-full">
+  <div class="flex-column flex item-start">
+    <app-icon-label icon="groups" logo="Passenger"></app-icon-label>
+    <mat-card-subtitle>
+      Enter the passenger's names as they appear on document (passport or ID).
+    </mat-card-subtitle>
+  </div>
+  <app-all-passengers-card
+    name="Aduit"
+    [accessible]="true"
+    [cards]="cards"
+  ></app-all-passengers-card>
+
+  <app-all-passengers-card
+    name="Child"
+    [accessible]="true"
+    class="w-full"
+    [cards]="cards"
+  ></app-all-passengers-card>
+  <app-all-passengers-card
+    name="Infant"
+    [accessible]="false"
+    class="w-full"
+    [cards]="cards"
+  ></app-all-passengers-card>
 </div>
-<app-passenger-card
-  name="1. Aduit"
-  [accessible]="true"
-  class="w-full"
-></app-passenger-card>
-<app-passenger-card
-  name="2. Child"
-  [accessible]="true"
-  class="w-full"
-></app-passenger-card>
-<app-passenger-card
-  name="3. Infant"
-  [accessible]="false"
-  class="w-full"
-></app-passenger-card>
-<div class="flex-column flex item-start">
-  <app-icon-label icon="groups" logo="Contact details"></app-icon-label>
-  <mat-card-subtitle>
-    We need contact details to be able to deliver the latest information
-    regarding your flight.
-  </mat-card-subtitle>
+<div class="flex flex-column gap-1 w-full">
+  <div class="flex-column flex item-start">
+    <app-icon-label icon="contact_page" logo="Contact details"></app-icon-label>
+    <mat-card-subtitle>
+      We need contact details to be able to deliver the latest information
+      regarding your flight.
+    </mat-card-subtitle>
+  </div>
+  <app-contact-details-form class="w-full"></app-contact-details-form>
+</div>
+<div class="flex w-full justify-end button-container">
+  <div class="flex gap-2">
+    <button class="button" mat-button color="primary">Back</button>
+    <button class="button" mat-raised-button color="primary">Continue</button>
+  </div>
 </div>

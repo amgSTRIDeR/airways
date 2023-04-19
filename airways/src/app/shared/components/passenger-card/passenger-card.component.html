@@ -1,62 +1,61 @@
-<mat-card class="w-full">
-  <form>
-    <mat-card-content>
-      <mat-card-title class="text-secondary flex flex-column gap-1"
-        >{{ name }}
-      </mat-card-title>
-      <div class="flex gap-2">
-        <mat-form-field class="flex input-width">
-          <mat-label>First name</mat-label>
-          <input required matInput type="text" />
-          <mat-icon
-            matSuffix
-            matTooltipPosition="after"
-            matTooltip="Add the passenger's name as it is written on their documents (passport or ID). Do not use any accents or special characters. Do not use a nickname. "
-            >info
-          </mat-icon>
-        </mat-form-field>
-        <mat-form-field class="flex input-width">
-          <mat-label>Last name</mat-label>
-          <input required matInput type="text" />
-          <mat-icon
-            matSuffix
-            matTooltipPosition="after"
-            matTooltip="Add the passenger's name as it is written on their documents (passport or ID). Do not use any accents or special characters. Do not use a nickname. "
-            >info
-          </mat-icon>
-        </mat-form-field>
-        <mat-button-toggle-group
-          class="button-toggle-container input-width"
-          name="gender"
-        >
-          <mat-button-toggle value="male"> Male</mat-button-toggle>
-          <mat-button-toggle value="female">Female</mat-button-toggle>
-        </mat-button-toggle-group>
-        <mat-form-field appearance="fill" class="input-width">
-          <mat-label>Date of birth</mat-label>
-          <input
-            matInput
-            required
-            placeholder="MM/DD/YYYY"
-            [matDatepicker]="picker"
-          />
-          <mat-datepicker-toggle
-            matIconSuffix
-            [for]="picker"
-          ></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
-        </mat-form-field>
-      </div>
-      <div *ngIf="accessible" class="flex">
-        <mat-slide-toggle color="primary" class="flex">
-          <div class="flex justify-center item-center">
-            <mat-icon>wheelchair_pickup</mat-icon>
-            <mat-card-subtitle class="m-auto">
-              Need special assistance?
-            </mat-card-subtitle>
-          </div>
-        </mat-slide-toggle>
-      </div>
-    </mat-card-content>
-  </form>
-</mat-card>
+<form>
+  <mat-card-content>
+    <!--    <mat-card-title class="text-secondary">{{ name }} </mat-card-title>-->
+    <div class="flex gap-2 passengers-content-position">
+      <mat-form-field class="flex input-width all-passengers-input-width">
+        <mat-label>First name</mat-label>
+        <input required matInput type="text" />
+        <mat-icon
+          matSuffix
+          matTooltipPosition="after"
+          matTooltip="Add the passenger's name as it is written on their documents (passport or ID). Do not use any accents or special characters. Do not use a nickname. "
+          >info
+        </mat-icon>
+      </mat-form-field>
+      <mat-form-field class="flex input-width all-passengers-input-width">
+        <mat-label>Last name</mat-label>
+        <input required matInput type="text" />
+        <mat-icon
+          matSuffix
+          matTooltipPosition="after"
+          matTooltip="Add the passenger's name as it is written on their documents (passport or ID). Do not use any accents or special characters. Do not use a nickname. "
+          >info
+        </mat-icon>
+      </mat-form-field>
+      <mat-button-toggle-group
+        class="button-toggle-container input-width all-passengers-input-width button-toggle-group"
+        name="gender"
+      >
+        <mat-button-toggle value="male"> Male</mat-button-toggle>
+        <mat-button-toggle value="female">Female</mat-button-toggle>
+      </mat-button-toggle-group>
+      <mat-form-field
+        appearance="fill"
+        class="input-width all-passengers-input-width"
+      >
+        <mat-label>Date of birth</mat-label>
+        <input
+          matInput
+          required
+          placeholder="MM/DD/YYYY"
+          [matDatepicker]="picker"
+        />
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="picker"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </div>
+    <div *ngIf="accessible" class="flex">
+      <mat-slide-toggle color="primary" class="flex">
+        <div class="flex justify-center item-center">
+          <mat-icon>wheelchair_pickup</mat-icon>
+          <mat-card-subtitle class="m-auto">
+            Need special assistance?
+          </mat-card-subtitle>
+        </div>
+      </mat-slide-toggle>
+    </div>
+  </mat-card-content>
+</form>

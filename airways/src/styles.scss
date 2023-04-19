@@ -82,6 +82,10 @@ body {
   align-items: end;
 }
 
+.self-end {
+  align-self: end;
+}
+
 .gap-half {
   gap: 0.5rem;
 }
@@ -141,4 +145,15 @@ body {
   height: 26px !important;
   border-radius: 50% !important;
 }
+
+@media screen and (max-width: 992px) {
+  .passengers-content-position {
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+  .all-passengers-input-width {
+    width: 100%;
+  }
+}
+
 

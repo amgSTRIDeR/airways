@@ -1,0 +1,43 @@
+<mat-card>
+  <mat-card-content>
+    <form class="flex justify-between passengers-content-position">
+      <mat-form-field
+        class="input-code all-passengers-input-width"
+        appearance="fill"
+      >
+        <mat-label>Country code</mat-label>
+        <mat-select required>
+          <mat-option *ngFor="let item of countryCode" [value]="item.value"
+            >{{ item.name + " (" + item.value + ")" }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="input-tel all-passengers-input-width">
+        <mat-label>Telephone</mat-label>
+        <input type="tel" matInput placeholder="Ex. 555-555-1234" />
+        <mat-icon matSuffix>mode_edit</mat-icon>
+      </mat-form-field>
+      <mat-form-field class="input-email all-passengers-input-width">
+        <mat-label>Email</mat-label>
+        <input
+          type="email"
+          matInput
+          [formControl]="emailFormControl"
+          [errorStateMatcher]="matcher"
+          placeholder="Ex. pat@example.com"
+        />
+        <mat-error
+          *ngIf="
+            emailFormControl.hasError('email') &&
+            !emailFormControl.hasError('required')
+          "
+        >
+          Please enter a valid email address
+        </mat-error>
+        <mat-error *ngIf="emailFormControl.hasError('required')">
+          Email is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+    </form>
+  </mat-card-content>
+</mat-card>
