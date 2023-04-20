@@ -1,4 +1,113 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+// work only in this file
+.mat-stepper {
+  height: 30px;
+
+  & .mat-step-icon-selected,
+  & .mat-step-icon-state-edit {
+    background-color: #0090BD;
+  }
+
+  & .mat-step-header {
+    height: 30px;
+
+    background: rgba(116, 118, 122, 0.2);
+  }
+
+  & .mat-step-icon {
+    width: 16px;
+    height: 16px;
+  }
+
+  & .mat-step-icon-content {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 16px;
+
+    display: flex;
+    align-items: center;
+    text-align: center;
+    letter-spacing: 0.5px;
+
+    color: #ffffff;
+  }
+
+  & .mat-step-icon .mat-icon {
+    width: 12px;
+    height: 12px;
+    font-size: 12px;
+  }
+
+  & .mat-stepper-horizontal-line {
+    height: 1px;
+    background: rgba(116, 118, 122, 0.6);
+  }
+
+  & .mat-step-text-label {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.1px;
+
+    color: #74767a;
+  }
+}
+
+.mat-select-currency,
+.mat-select-date {
+
+  & .mat-mdc-select-value {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 16px;
+    letter-spacing: 0.5px;
+
+    color: #ffffff;
+  }
+
+  & .ng-tns-c9-0 {
+    fill: #ffffff;
+  }
+
+}
+
+.mat-option-currency,
+.mat-option-date {
+  & .mdc-list-item__primary-text {
+    color: #49454F;
+  }
+
+  & .mat-pseudo-checkbox-checked.mat-pseudo-checkbox-minimal::after {
+    color: #11397E;
+  }
+}
+
+.cdk-overlay-pane:not(.mat-mdc-select-panel-above) .mdc-menu-surface.mat-mdc-select-panel {
+  position: relative;
+  left: -17px;
+  top: 10px;
+}
+
+.mat-select-currency .mat-mdc-select-arrow svg {
+  display: none;
+}

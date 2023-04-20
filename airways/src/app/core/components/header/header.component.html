@@ -39,6 +39,34 @@
         />
       </g>
     </svg>
+    <app-stepper></app-stepper>
+    <button
+      class="button-header button__book-flights"
+      (click)="showBookWindow = !showBookWindow"
+      [class.active]="showBookWindow"
+    >
+      Book flights
+    </button>
+    <mat-select [(value)]="selectedDateFormat" class="mat-select-date">
+      <mat-option class="mat-option-date" [value]="'MM/DD/YYYY'"
+        >MM/DD/YYYY</mat-option
+      >
+      <mat-option class="mat-option-date" [value]="'DD/MM/YYYY'"
+        >DD/MM/YYYY</mat-option
+      >
+      <mat-option class="mat-option-date" [value]="'YYYY/DD/MM'"
+        >YYYY/DD/MM</mat-option
+      >
+      <mat-option class="mat-option-date" [value]="'YYYY/MM/DD'"
+        >YYYY/MM/DD</mat-option
+      >
+    </mat-select>
+    <mat-select [(value)]="selectedCurrency" class="mat-select-currency">
+      <mat-option class="mat-option-currency" [value]="'EUR'">EUR</mat-option>
+      <mat-option class="mat-option-currency" [value]="'USA'">USA</mat-option>
+      <mat-option class="mat-option-currency" [value]="'RUB'">RUB</mat-option>
+      <mat-option class="mat-option-currency" [value]="'PLN'">PLN</mat-option>
+    </mat-select>
   </div>
   <div class="header-additional"></div>
 </header>

@@ -1,0 +1,23 @@
+<mat-horizontal-stepper class="mat-stepper">
+  <mat-step label="Flights">
+    <div class="stepper-container">
+      <!-- <app-flight-form></app-flight-form> -->
+      <button mat-button matStepperNext>Continue</button>
+    </div>
+  </mat-step>
+  <mat-step label="Passengers">
+    <div class="stepper-container">
+      <!-- <app-passenger-form></app-passenger-form> -->
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button matStepperNext>Continue</button>
+    </div>
+  </mat-step>
+  <mat-step label="Review & Payment">
+    <div class="stepper-container">
+      <!-- <app-review-payment></app-review-payment> -->
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button>Add to order cart</button>
+      <button mat-button>Buy now</button>
+    </div>
+  </mat-step>
+</mat-horizontal-stepper>

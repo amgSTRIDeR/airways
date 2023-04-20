@@ -10,9 +10,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FooterComponent } from './core/components/footer/footer.component';
 import { HeaderComponent } from './core/components/header/header.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { StepperComponent } from './core/components/stepper/stepper.component';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
-  declarations: [AppComponent, FooterComponent, HeaderComponent],
+  declarations: [AppComponent, FooterComponent, HeaderComponent, StepperComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -21,6 +24,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     EffectsModule.forRoot([]),
     BrowserAnimationsModule,
     MatTooltipModule,
+    MatStepperModule,
+    MatSelectModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

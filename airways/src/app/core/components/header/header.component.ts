@@ -7,7 +7,12 @@ import { Router } from '@angular/router';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent {
+  public showBookWindow = false;
+  public selectedDateFormat = 'MM/DD/YYYY';
+  public selectedCurrency = 'EUR';
+
   constructor(private router: Router) {}
+
   toMainPage() {
     this.router.navigate(['/']);
   }
