@@ -1,14 +1,16 @@
 .header {
-  // position: fixed;
+  position: fixed;
 
   display: flex;
   flex-direction: column;
+  width: 100%;
+
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(4px);
 }
 
 .header-main-wrapper {
   padding: 24px 5vw;
-
-  background: rgba(116, 118, 122, 0.2);
 }
 
 .header-main {
@@ -25,20 +27,32 @@
 
   transition: transform 0.3s ease;
 
+  & .logo-airplane {
+    transition: transform 1s ease;
+  }
+
   &:hover {
     transform: scale(1.05);
     cursor: pointer;
 
+    transition: all 0.3s ease;
+
     & .logo-path__fill {
-      fill: #000000;
+      fill: #0090BD;
 
       transition: fill 0.3s ease;
     }
 
     & .logo-path__stroke {
-      stroke: #000000;
+      stroke: #0090BD;
 
       transition: stroke 0.3s ease;
+    }
+
+    & .logo-airplane {
+      transform: rotate(90deg) translateX(1px) translateY(-40px);
+
+      transition: transform 1s ease;
     }
   }
 
@@ -54,13 +68,13 @@
 }
 
 .logo-path__fill {
-  fill: #11397e;
+  fill: #ffffff;
 
   transition: fill 0.3s ease;
 }
 
 .logo-path__stroke {
-  stroke: #11397e;
+  stroke: #ffffff;
 
   transition: stroke 0.3s ease;
 }
@@ -132,6 +146,8 @@
 
   &:hover {
     background: #f5f5f5;
+    color: #000000;
+
     cursor: pointer;
 
     transition: all 0.3s ease;
@@ -192,19 +208,29 @@
   justify-content: space-between;
   align-items: center;
 
+  transition: all 0.3s ease;
+
   & svg {
     fill: #ffffff;
+
+    transition: all 0.3s ease;
+  }
+
+  &:hover svg {
+    fill: #000000;
+
+    transition: all 0.3s ease;
   }
 }
 
 .shopping-basket {
-  fill: #ffffff;
+  fill: #ffffffcc;
 
   transition: all 0.3s ease;
 
   &:hover {
     transform: scale(1.05);
-    fill: #cecece;
+    fill: #ffffff;
     cursor: pointer;
 
     transition: all 0.3s ease;
@@ -271,7 +297,7 @@
     }
 
     &::before {
-      top: -11px;
+      top: -12px;
     }
 
     &::after {
@@ -289,7 +315,7 @@
   z-index: 100;
   right: 10px;
   top: 80px;
-  transform: translateX(230px);
+  transform: translateX(231px);
 
   display: none;
   row-gap: 10px;
@@ -300,10 +326,16 @@
   width: 200px;
   height: auto;
 
-  background-color: rgba(116, 118, 122, 0.8);
+  background-color: rgba(0, 0, 0, 0.7);
+  outline: 1px solid #0090BD;
+  backdrop-filter: blur(40px);
   border-radius: 5px;
 
   transition: transform 0.3s ease;
+
+  @media (max-width: 300px) {
+    width: calc(50.000vw + 50.00px);
+  }
 
   & .button__book-flights,
   & .button__SignIn,

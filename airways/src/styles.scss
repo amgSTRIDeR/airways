@@ -13,6 +13,7 @@ body {
 // work only in this file
 .mat-stepper {
   height: 30px;
+  background-color: #00000000;
 
   & .mat-step-icon-selected,
   & .mat-step-icon-state-edit {
@@ -21,8 +22,6 @@ body {
 
   & .mat-step-header {
     height: 30px;
-
-    background: rgba(116, 118, 122, 0.2);
 
     @media (max-width: 500px) {
       padding: 0 calc(15.385vw - 53.92px);
@@ -36,17 +35,19 @@ body {
   & .mat-step-icon {
     width: 16px;
     height: 16px;
+
+    outline: 1px solid #0090BD;
   }
 
   & .mat-step-icon-content {
+    display: flex;
+    align-items: center;
+
     font-family: 'Roboto';
     font-style: normal;
     font-weight: 600;
     font-size: 12px;
     line-height: 16px;
-
-    display: flex;
-    align-items: center;
     text-align: center;
     letter-spacing: 0.5px;
 
@@ -61,7 +62,7 @@ body {
 
   & .mat-stepper-horizontal-line {
     height: 1px;
-    background: rgba(116, 118, 122, 0.6);
+    background: #ffffff;
 
     @media (max-width: 470px) {
       display: none;
@@ -85,12 +86,21 @@ body {
     align-items: center;
     letter-spacing: 0.1px;
 
-    color: #74767a;
+    color: #ffffff;
   }
 }
 
 .mat-select-currency,
 .mat-select-date {
+
+  &:hover .mat-mdc-select-value {
+    color: #000000;
+  }
+
+  &:hover .ng-tns-c9-0,
+  &:hover .ng-tns-c9-2 {
+    fill: #000000;
+  }
 
   & .mat-mdc-select-value {
     font-family: 'Roboto';
@@ -103,6 +113,7 @@ body {
     color: #ffffff;
   }
 
+  & .ng-tns-c9-2,
   & .ng-tns-c9-0 {
     fill: #ffffff;
   }
