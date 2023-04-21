@@ -48,7 +48,7 @@
     transition: transform 0.3s ease;
   }
 
-  @media (max-width: 1274px) {
+  @media (max-width: 1292px) {
     order: -2;
   }
 }
@@ -71,7 +71,7 @@
   align-items: center;
   width: 573px;
 
-  @media (max-width: 1274px) {
+  @media (max-width: 1292px) {
     order: -1;
 
     width: calc(7.156vw + 481.90px);
@@ -93,7 +93,7 @@
     }
   }
 
-  @media (max-width: 500px) {
+  @media (max-width: 515px) {
     & .shopping-basket {
       display: none;
     }
@@ -327,7 +327,7 @@
     }
   }
 
-  @media (max-width: 500px) {
+  @media (max-width: 515px) {
     & .shopping-basket {
       display: block;
     }
@@ -335,7 +335,7 @@
 
   @media (max-width: 470px) {
     & .button__SignIn {
-      display: block;
+      display: flex;
     }
   }
 
