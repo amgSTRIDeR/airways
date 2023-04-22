@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import {
+  FormArray,
   FormControl,
+  FormGroup,
   FormGroupDirective,
   NgForm,
-  Validators,
 } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 
@@ -27,7 +28,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   styleUrls: ['./contact-details-form.component.scss'],
 })
 export class ContactDetailsFormComponent {
-  public countryCode = [
+  public countryCode1 = [
     {
       name: 'Afghanistan',
       value: '+93',
@@ -44,12 +45,7 @@ export class ContactDetailsFormComponent {
     { name: 'Japan', value: '+81' },
     { name: 'USA', value: '+1' },
   ];
-  public hide = true;
 
-  emailFormControl = new FormControl('', [
-    Validators.required,
-    Validators.email,
-  ]);
-
-  matcher = new MyErrorStateMatcher();
+  @Input() countryCode!: FormArray;
+  @Input() details!: FormGroup;
 }

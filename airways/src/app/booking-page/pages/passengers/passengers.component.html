@@ -1,42 +1,64 @@
-<div class="flex flex-column gap-1 w-full">
-  <div class="flex-column flex item-start">
-    <app-icon-label icon="groups" logo="Passenger"></app-icon-label>
-    <mat-card-subtitle>
-      Enter the passenger's names as they appear on document (passport or ID).
-    </mat-card-subtitle>
+<form [formGroup]="passengersForm">
+  <div class="flex flex-column gap-1 w-full">
+    <div class="flex-column flex item-start">
+      <app-icon-label icon="groups" logo="Passenger"></app-icon-label>
+      <mat-card-subtitle>
+        Enter the passenger's names as they appear on document (passport or ID).
+      </mat-card-subtitle>
+    </div>
+    <app-all-passengers-card
+      name="adult"
+      [accessible]="true"
+      [cards]="cards"
+      [form]="adult"
+      [allForm]="allForm"
+    ></app-all-passengers-card>
+    <app-all-passengers-card
+      name="child"
+      [accessible]="true"
+      class="w-full"
+      [cards]="cards"
+      [form]="child"
+      [allForm]="allForm"
+    ></app-all-passengers-card>
+    <app-all-passengers-card
+      name="infant"
+      [accessible]="false"
+      class="w-full"
+      [cards]="cards"
+      [form]="infant"
+      [allForm]="allForm"
+    ></app-all-passengers-card>
   </div>
-  <app-all-passengers-card
-    name="Aduit"
-    [accessible]="true"
-    [cards]="cards"
-  ></app-all-passengers-card>
+  <div class="flex flex-column gap-1 w-full">
+    <div class="flex-column flex item-start">
+      <app-icon-label
+        icon="contact_page"
+        logo="Contact details"
+      ></app-icon-label>
+      <mat-card-subtitle>
+        We need contact details to be able to deliver the latest information
+        regarding your flight.
+      </mat-card-subtitle>
+    </div>
 
-  <app-all-passengers-card
-    name="Child"
-    [accessible]="true"
-    class="w-full"
-    [cards]="cards"
-  ></app-all-passengers-card>
-  <app-all-passengers-card
-    name="Infant"
-    [accessible]="false"
-    class="w-full"
-    [cards]="cards"
-  ></app-all-passengers-card>
-</div>
-<div class="flex flex-column gap-1 w-full">
-  <div class="flex-column flex item-start">
-    <app-icon-label icon="contact_page" logo="Contact details"></app-icon-label>
-    <mat-card-subtitle>
-      We need contact details to be able to deliver the latest information
-      regarding your flight.
-    </mat-card-subtitle>
+    <app-contact-details-form
+      [countryCode]="countryCode"
+      [details]="details"
+      class="w-full"
+    ></app-contact-details-form>
   </div>
-  <app-contact-details-form class="w-full"></app-contact-details-form>
-</div>
-<div class="flex w-full justify-end button-container">
-  <div class="flex gap-2">
-    <button class="button" mat-button color="primary">Back</button>
-    <button class="button" mat-raised-button color="primary">Continue</button>
+  <div class="flex w-full justify-end button-container">
+    <div class="flex gap-2">
+      <button class="button" mat-button color="primary">Back</button>
+      <button
+        class="button"
+        mat-raised-button
+        color="primary"
+        (click)="logForm()"
+      >
+        Continue
+      </button>
+    </div>
   </div>
-</div>
+</form>

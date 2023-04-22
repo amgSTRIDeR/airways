@@ -1,23 +1,29 @@
-<mat-stepper #stepper>
-  <mat-step *ngFor="let card of cards; let i = index">
-    <ng-template matStepLabel>{{ name }}</ng-template>
-    <app-passenger-card
-      [name]="name"
-      [accessible]="accessible"
-      class="w-full"
-    ></app-passenger-card>
-    <div>
-      <button *ngIf="i > 0" mat-button color="warn" matStepperPrevious>
-        Prev
-      </button>
-      <button
-        *ngIf="i < cards.length - 1"
-        mat-button
-        color="primary"
-        matStepperNext
-      >
-        Next
-      </button>
-    </div>
-  </mat-step>
+<mat-stepper #stepper [formGroup]="allForm">
+  <div [formArrayName]="name">
+    <mat-step *ngFor="let card of form.controls; let i = index">
+      <ng-template matStepLabel>{{ name }}</ng-template>
+
+      <app-passenger-card
+        [name]="name"
+        [accessible]="accessible"
+        [card]="card"
+        [i]="i"
+        class="w-full"
+      ></app-passenger-card>
+
+      <div>
+        <button *ngIf="i > 0" mat-button color="warn" matStepperPrevious>
+          Prev
+        </button>
+        <button
+          *ngIf="i < cards.length - 1"
+          mat-button
+          color="primary"
+          matStepperNext
+        >
+          Next
+        </button>
+      </div>
+    </mat-step>
+  </div>
 </mat-stepper>
