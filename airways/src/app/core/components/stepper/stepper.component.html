@@ -1,23 +1,44 @@
 <mat-horizontal-stepper class="mat-stepper">
   <mat-step label="Flights">
-    <div class="stepper-container">
+    <div
+      class="stepper-container"
+      style="--scrollPosition: {{ scrollPosition }};"
+    >
       <!-- <app-flight-form></app-flight-form> -->
-      <button mat-button matStepperNext>Continue</button>
+      <div class="buttons-wrapper">
+        <button mat-button matStepperNext class="button colored-button">
+          Continue
+        </button>
+      </div>
     </div>
   </mat-step>
   <mat-step label="Passengers">
-    <div class="stepper-container">
+    <div
+      class="stepper-container"
+      style="--scrollPosition: {{ scrollPosition }};"
+    >
       <!-- <app-passenger-form></app-passenger-form> -->
-      <button mat-button matStepperPrevious>Back</button>
-      <button mat-button matStepperNext>Continue</button>
+      <div class="buttons-wrapper">
+        <button mat-button matStepperPrevious class="button">Back</button>
+        <button mat-button matStepperNext class="button colored-button">
+          Continue
+        </button>
+      </div>
     </div>
   </mat-step>
   <mat-step label="Review & Payment">
-    <div class="stepper-container">
+    <div
+      class="stepper-container"
+      style="--scrollPosition: {{ scrollPosition }};"
+    >
       <!-- <app-review-payment></app-review-payment> -->
-      <button mat-button matStepperPrevious>Back</button>
-      <button mat-button>Add to order cart</button>
-      <button mat-button>Buy now</button>
+      <div class="buttons-wrapper">
+        <button mat-button matStepperPrevious class="button">Back</button>
+        <button mat-button class="button border-button">
+          Add to order cart
+        </button>
+        <button mat-button class="button colored-button">Buy now</button>
+      </div>
     </div>
   </mat-step>
 </mat-horizontal-stepper>

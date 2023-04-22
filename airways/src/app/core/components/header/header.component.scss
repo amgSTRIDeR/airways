@@ -6,11 +6,15 @@
   width: 100%;
 
   background: rgba(0, 0, 0, 0.2);
-  backdrop-filter: blur(4px);
+  backdrop-filter: blur(20px);
 }
 
 .header-main-wrapper {
   padding: 24px 5vw;
+
+  @media (max-width: 1292px) {
+    padding: calc(1.282vw + 7.44px) 5vw calc(2.198vw - 4.40px) 5vw;
+  }
 }
 
 .header-main {
@@ -21,6 +25,10 @@
   max-width: 1440px;
   margin: 0 auto;
   row-gap: 24px;
+
+  @media (max-width: 1292px) {
+    row-gap: calc(1.740vw + 1.52px);
+  }
 }
 
 .logo {

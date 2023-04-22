@@ -3,7 +3,7 @@
   box-sizing: border-box;
   width: 100%;
   align-items: center;
-  padding: 20px 0 20px 5vw;
+  padding: 20px 5vw 20px 5vw;
   row-gap: 10px;
   column-gap: 20px;
 
@@ -12,6 +12,12 @@
 
   @media (max-width: 560px) {
     flex-direction: column;
+  }
+
+  @media (max-width: 1292px) {
+    padding: calc(1.374vw + 2.25px) 5vw calc(1.374vw + 2.25px) 5vw;
+    row-gap: calc(0.458vw + 4.08px);
+    column-gap: calc(0.916vw + 8.17px);
   }
 }
 

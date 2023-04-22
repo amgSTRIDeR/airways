@@ -2,8 +2,9 @@
   position: relative;
   z-index: -10;
   width: 100%;
-  // height: 702px;
   height: calc(100vh - 93px);
+  //  set when responsive element sizes are known
+  min-height: 1702px;
 
   background-blend-mode: multiply;
   background-position: center center;
