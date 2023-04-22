@@ -17,7 +17,14 @@ import { BookingHeaderComponent } from './core/components/booking-header/booking
 import { BasisComponent } from './core/components/basis/basis.component';
 
 @NgModule({
-  declarations: [AppComponent, FooterComponent, HeaderComponent, StepperComponent, BookingHeaderComponent, BasisComponent],
+  declarations: [
+    AppComponent,
+    FooterComponent,
+    HeaderComponent,
+    StepperComponent,
+    BookingHeaderComponent,
+    BasisComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
