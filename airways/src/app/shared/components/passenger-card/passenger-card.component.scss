@@ -1,0 +1,35 @@
+//@import "app/core/styles/variables";
+.mat-button-toggle-group {
+  height: 3.5rem;
+}
+
+.mat-button-toggle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50% !important;
+}
+
+
+.mat-button-toggle-checked {
+  font-weight: 500;
+  color: #11397e;
+
+  &::before {
+    display: inline-block;
+    width: 5px;
+    height: 8px;
+    margin: -4px -23px 1px 15px;
+    border: solid #11397e;
+    border-width: 0 3px 3px 0;
+    transform: rotate(45deg);
+    content: '';
+
+  }
+}
+
+
+.input-width {
+  width: 24%;
+}
+

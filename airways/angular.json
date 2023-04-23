@@ -17,9 +17,9 @@
       "architect": {
         "deploy": {
           "builder": "angular-cli-ghpages:deploy",
-            "options": {
+          "options": {
             "baseHref": "https://github.com/aleshkinpaul/",
-              "message": "Deploying Airways App to Github Pages"
+            "message": "Deploying Airways App to Github Pages"
           }
         },
         "build": {
@@ -102,7 +102,7 @@
               "src/assets"
             ],
             "styles": [
-              "@angular/material/prebuilt-themes/deeppurple-amber.css",
+              "@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.scss"
             ],
             "scripts": []
@@ -123,6 +123,7 @@
   "cli": {
     "schematicCollections": [
       "@angular-eslint/schematics"
-    ]
+    ],
+    "analytics": false
   }
 }
