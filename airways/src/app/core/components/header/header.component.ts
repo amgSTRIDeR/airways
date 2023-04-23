@@ -1,5 +1,5 @@
 import { Component, HostListener } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -8,13 +8,21 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent {
   public showBookWindow = false;
+  public isBookingPage = false;
   public isUserSignIn = false;
   public isHamburgerMenuActive = false;
   public selectedDateFormat = 'MM/DD/YYYY';
   public selectedCurrency = 'EUR';
   windowWidth: number = window.innerWidth;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router) {
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.isBookingPage =
+          event.url.startsWith('/booking-page') || event.url === '/';
+      }
+    });
+  }
 
   @HostListener('window:resize')
   onWindowResize() {
@@ -25,6 +33,6 @@ export class HeaderComponent {
   }
 
   toMainPage() {
-    this.router.navigate(['/']);
+    this.router.navigate(['main']);
   }
 }
