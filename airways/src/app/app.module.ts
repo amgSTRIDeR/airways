@@ -14,7 +14,6 @@ import { StepperComponent } from './core/components/stepper/stepper.component';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatSelectModule } from '@angular/material/select';
 import { BookingHeaderComponent } from './core/components/booking-header/booking-header.component';
-import { BasisComponent } from './core/components/basis/basis.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +22,6 @@ import { BasisComponent } from './core/components/basis/basis.component';
     HeaderComponent,
     StepperComponent,
     BookingHeaderComponent,
-    BasisComponent,
   ],
   imports: [
     BrowserModule,
