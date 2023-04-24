@@ -9,6 +9,7 @@ import { NavigationEnd, Router } from '@angular/router';
 export class HeaderComponent {
   public showBookWindow = false;
   public isBookingPage = false;
+  public isMainPage = false;
   public isUserSignIn = false;
   public isHamburgerMenuActive = false;
   public selectedDateFormat = 'MM/DD/YYYY';
@@ -20,6 +21,8 @@ export class HeaderComponent {
       if (event instanceof NavigationEnd) {
         this.isBookingPage =
           event.url.startsWith('/booking-page') || event.url === '/';
+
+        this.isMainPage = event.url.startsWith('/main');
       }
     });
   }

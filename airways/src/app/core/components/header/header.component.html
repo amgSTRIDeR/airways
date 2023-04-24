@@ -46,6 +46,7 @@
           class="button-header button__book-flights"
           (click)="showBookWindow = !showBookWindow"
           [class.active]="showBookWindow"
+          *ngIf="isMainPage"
         >
           Book flights
         </button>
