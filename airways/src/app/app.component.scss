@@ -3,3 +3,28 @@
   flex-direction: column;
   min-height: 100vh;
 }
+
+.bg-image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 0;
+
+  background-image: url("../assets/images/main-background-6.jpg");
+  background-size: cover;
+  background-position: center center;
+}
+
+.main {
+  margin-top: 163px;
+
+  @media (max-width: 1292px) {
+    margin-top: calc(7.934vw + 114.49px);
+  }
+
+  @media (max-width: 560px) {
+    margin-top: calc(8.889vw + 165.22px);
+  }
+}
