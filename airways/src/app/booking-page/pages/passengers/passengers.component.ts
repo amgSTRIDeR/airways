@@ -1,35 +1,21 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import {
+  FormArray,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+import {
+  AllPassengerFormGroup,
+  DetailsFormGroup,
+  PassengerFormGroup,
+} from '@booking/models/PassengerFormModels';
 
 export interface CountyCode {
   country: string;
   value: string;
 }
-
-export interface personData {
-  firstName: string;
-  lastName: string;
-  gender: string;
-  birthdayDate: string;
-}
-
-const countryCode: CountyCode[] = [
-  {
-    country: 'Afghanistan',
-    value: '+93',
-  },
-  { country: 'Albania', value: '+355' },
-  { country: 'Belarus', value: '+375' },
-  { country: 'Bolivia', value: '+591' },
-  { country: 'Canada', value: '+1' },
-  { country: 'China', value: '+86' },
-  { country: 'Colombia', value: '+57' },
-  { country: 'Dominica', value: '+1-767' },
-  { country: 'Estonia', value: '+372' },
-  { country: 'France', value: '+33' },
-  { country: 'Japan', value: '+81' },
-  { country: 'USA', value: '+1' },
-];
 
 @Component({
   selector: 'app-passengers',
@@ -37,81 +23,73 @@ const countryCode: CountyCode[] = [
   styleUrls: ['./passengers.component.scss'],
 })
 export class PassengersComponent implements OnInit {
-  cards = [2, 1, 3, 4];
-
-  adultCount = 3;
+  adultCount = 5;
   childCount = 2;
   infantCount = 1;
-  passengersForm!: FormGroup;
+  passengersForm!: FormGroup<AllPassengerFormGroup>;
 
   constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
-    this.passengersForm = this.fb.group({
-      adult: this.fb.array([]),
-      child: this.fb.array([]),
-      infant: this.fb.array([]),
-      details: this.fb.group({
-        countryCode: this.fb.array([]),
-        phone: '',
-        email: '',
+    this.passengersForm = this.fb.group<AllPassengerFormGroup>({
+      adult: this.fb.array<FormGroup<PassengerFormGroup>>([]),
+      child: this.fb.array<FormGroup<PassengerFormGroup>>([]),
+      infant: this.fb.array<FormGroup<PassengerFormGroup>>([]),
+      details: this.fb.group<DetailsFormGroup>({
+        countryCode: new FormControl('', [Validators.required]),
+        phone: new FormControl('', [Validators.required]),
+        email: new FormControl('', [Validators.required]),
       }),
     });
-    this.addCountryCodeToForm();
+
     this.addPersonToForm(this.adult, this.adultCount);
     this.addPersonToForm(this.child, this.childCount);
     this.addPersonToForm(this.infant, this.infantCount);
   }
 
-  private addCountryCodeToForm(): void {
-    for (const countryCodeElement of countryCode) {
-      const fg = this.fb.group({
-        country: [countryCodeElement.country],
-        value: [countryCodeElement.value],
-      });
-      this.countryCode.push(fg);
-    }
-  }
-
-  private addPersonToForm(typeOfControl: FormArray, count: number) {
-    const person = this.fb.group({
-      firstName: '',
-      lastName: '',
-      gender: '',
-      birthdayDate: '',
-      invalid: false,
-    });
+  private addPersonToForm(
+    typeOfControl: FormArray<FormGroup<PassengerFormGroup>>,
+    count: number
+  ) {
     while (count > 0) {
+      const person: FormGroup<PassengerFormGroup> = this.fb.group({
+        firstName: ['', [Validators.required, Validators.minLength(5)]],
+        lastName: ['', [Validators.required]],
+        gender: ['', [Validators.required]],
+        birthdayDate: ['', [Validators.required]],
+        invalid: '',
+      });
       typeOfControl.push(person);
       count--;
     }
   }
 
-  get adult() {
-    return this.passengersForm.get('adult') as FormArray;
+  get adult(): FormArray<FormGroup<PassengerFormGroup>> {
+    return this.passengersForm.controls.adult;
   }
 
-  get child() {
-    return this.passengersForm.get('child') as FormArray;
+  get child(): FormArray<FormGroup<PassengerFormGroup>> {
+    return this.passengersForm.controls.child;
   }
 
-  get infant() {
-    return this.passengersForm.get('infant') as FormArray;
+  get infant(): FormArray<FormGroup<PassengerFormGroup>> {
+    return this.passengersForm.controls.infant;
   }
 
-  get details() {
-    return this.passengersForm.get('details') as FormGroup;
+  get details(): FormGroup<DetailsFormGroup> {
+    return this.passengersForm.controls.details;
   }
 
-  get countryCode(): FormArray {
-    return this.details.get('countryCode') as FormArray;
+  get countryCode(): FormControl<string | null> {
+    return this.details.controls.countryCode;
   }
 
-  get allForm() {
-    return this.passengersForm as FormGroup;
+  get allForm(): FormGroup<AllPassengerFormGroup> {
+    return this.passengersForm;
   }
 
   logForm() {
+    console.log(this.passengersForm.valid);
     console.log(this.passengersForm.value);
   }
 }

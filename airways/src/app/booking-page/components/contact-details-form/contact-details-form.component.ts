@@ -1,12 +1,12 @@
 import { Component, Input } from '@angular/core';
 import {
-  FormArray,
   FormControl,
   FormGroup,
   FormGroupDirective,
   NgForm,
 } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
+import { DetailsFormGroup } from '@booking/models/PassengerFormModels';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(
@@ -28,7 +28,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   styleUrls: ['./contact-details-form.component.scss'],
 })
 export class ContactDetailsFormComponent {
-  public countryCode1 = [
+  public countryCode = [
     {
       name: 'Afghanistan',
       value: '+93',
@@ -46,6 +46,6 @@ export class ContactDetailsFormComponent {
     { name: 'USA', value: '+1' },
   ];
 
-  @Input() countryCode!: FormArray;
-  @Input() details!: FormGroup;
+  // @Input() countryCode!: FormArray<FormGroup<CountryCodeFormGroup>>;
+  @Input() details!: FormGroup<DetailsFormGroup>;
 }

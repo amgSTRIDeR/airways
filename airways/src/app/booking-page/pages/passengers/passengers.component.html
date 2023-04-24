@@ -1,5 +1,5 @@
-<form [formGroup]="passengersForm">
-  <div class="flex flex-column gap-1 w-full">
+<form class="w-full flex flex-column gap-2" [formGroup]="passengersForm">
+  <div class="flex flex-column gap-1">
     <div class="flex-column flex item-start">
       <app-icon-label icon="groups" logo="Passenger"></app-icon-label>
       <mat-card-subtitle>
@@ -9,7 +9,6 @@
     <app-all-passengers-card
       name="adult"
       [accessible]="true"
-      [cards]="cards"
       [form]="adult"
       [allForm]="allForm"
     ></app-all-passengers-card>
@@ -17,7 +16,6 @@
       name="child"
       [accessible]="true"
       class="w-full"
-      [cards]="cards"
       [form]="child"
       [allForm]="allForm"
     ></app-all-passengers-card>
@@ -25,13 +23,12 @@
       name="infant"
       [accessible]="false"
       class="w-full"
-      [cards]="cards"
       [form]="infant"
       [allForm]="allForm"
     ></app-all-passengers-card>
   </div>
   <div class="flex flex-column gap-1 w-full">
-    <div class="flex-column flex item-start">
+    <div class="flex-column flex item-start w-full">
       <app-icon-label
         icon="contact_page"
         logo="Contact details"
@@ -43,7 +40,6 @@
     </div>
 
     <app-contact-details-form
-      [countryCode]="countryCode"
       [details]="details"
       class="w-full"
     ></app-contact-details-form>

@@ -1,5 +1,9 @@
 import { Component, Input } from '@angular/core';
 import { FormArray, FormGroup } from '@angular/forms';
+import {
+  AllPassengerFormGroup,
+  PassengerFormGroup,
+} from '@booking/models/PassengerFormModels';
 
 @Component({
   selector: 'app-all-passengers-card',
@@ -9,7 +13,6 @@ import { FormArray, FormGroup } from '@angular/forms';
 export class AllPassengersCardComponent {
   @Input() name!: string;
   @Input() accessible!: boolean;
-  @Input() cards!: number[];
-  @Input() form!: FormArray;
-  @Input() allForm!: FormGroup;
+  @Input() form!: FormArray<FormGroup<PassengerFormGroup>>;
+  @Input() allForm!: FormGroup<AllPassengerFormGroup>;
 }

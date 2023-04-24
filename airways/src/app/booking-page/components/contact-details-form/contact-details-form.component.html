@@ -6,10 +6,10 @@
         appearance="fill"
       >
         <mat-label>Country code</mat-label>
-        <mat-select required>
-          <div *ngFor="let item of countryCode.controls; index as i">
-            <mat-option [value]="item.value.value"
-              >{{ item.value.country + " (" + item.value.value + ")" }}
+        <mat-select [formControl]="details.controls.countryCode">
+          <div *ngFor="let item of countryCode">
+            <mat-option [value]="item.value"
+              >{{ item.name + " (" + item.value + ")" }}
             </mat-option>
           </div>
         </mat-select>
@@ -18,7 +18,7 @@
         <mat-label>Telephone</mat-label>
         <input
           type="tel"
-          formControlName="phone"
+          [formControl]="details.controls.phone"
           matInput
           placeholder="Ex. 555-555-1234"
         />
@@ -27,7 +27,7 @@
       <mat-form-field class="input-email all-passengers-input-width">
         <mat-label>Email</mat-label>
         <input
-          formControlName="email"
+          [formControl]="details.controls.email"
           type="email"
           matInput
           placeholder="Ex. pat@example.com"
