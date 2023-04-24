@@ -11,6 +11,9 @@ import {
   DetailsFormGroup,
   PassengerFormGroup,
 } from '@booking/models/PassengerFormModels';
+import nameValidator from '@booking/validators/name-validator';
+import dateValidator from '@booking/validators/date-validator';
+import phoneValidator from '@booking/validators/phone-validator';
 
 export interface CountyCode {
   country: string;
@@ -23,8 +26,8 @@ export interface CountyCode {
   styleUrls: ['./passengers.component.scss'],
 })
 export class PassengersComponent implements OnInit {
-  adultCount = 5;
-  childCount = 2;
+  adultCount = 1;
+  childCount = 1;
   infantCount = 1;
   passengersForm!: FormGroup<AllPassengerFormGroup>;
 
@@ -37,8 +40,8 @@ export class PassengersComponent implements OnInit {
       infant: this.fb.array<FormGroup<PassengerFormGroup>>([]),
       details: this.fb.group<DetailsFormGroup>({
         countryCode: new FormControl('', [Validators.required]),
-        phone: new FormControl('', [Validators.required]),
-        email: new FormControl('', [Validators.required]),
+        phone: new FormControl('', [Validators.required, phoneValidator()]),
+        email: new FormControl('', [Validators.required, Validators.email]),
       }),
     });
 
@@ -53,10 +56,16 @@ export class PassengersComponent implements OnInit {
   ) {
     while (count > 0) {
       const person: FormGroup<PassengerFormGroup> = this.fb.group({
-        firstName: ['', [Validators.required, Validators.minLength(5)]],
-        lastName: ['', [Validators.required]],
+        firstName: [
+          '',
+          [Validators.required, Validators.minLength(3), nameValidator()],
+        ],
+        lastName: [
+          '',
+          [Validators.required, Validators.minLength(3), nameValidator()],
+        ],
         gender: ['', [Validators.required]],
-        birthdayDate: ['', [Validators.required]],
+        birthdayDate: ['', [Validators.required, dateValidator()]],
         invalid: '',
       });
       typeOfControl.push(person);
@@ -78,10 +87,6 @@ export class PassengersComponent implements OnInit {
 
   get details(): FormGroup<DetailsFormGroup> {
     return this.passengersForm.controls.details;
-  }
-
-  get countryCode(): FormControl<string | null> {
-    return this.details.controls.countryCode;
   }
 
   get allForm(): FormGroup<AllPassengerFormGroup> {

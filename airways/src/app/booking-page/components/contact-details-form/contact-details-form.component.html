@@ -13,6 +13,9 @@
             </mat-option>
           </div>
         </mat-select>
+        <mat-error *ngIf="details.controls.countryCode.hasError('required')"
+          >Required field
+        </mat-error>
       </mat-form-field>
       <mat-form-field class="input-tel all-passengers-input-width">
         <mat-label>Telephone</mat-label>
@@ -22,6 +25,17 @@
           matInput
           placeholder="Ex. 555-555-1234"
         />
+        <mat-error
+          *ngIf="
+            details.controls.phone.hasError('validPhone') &&
+            !details.controls.phone.hasError('required')
+          "
+          >Phone is not valid
+        </mat-error>
+        <mat-error *ngIf="details.controls.phone.hasError('required')"
+          >Required field
+        </mat-error>
+
         <mat-icon matSuffix>mode_edit</mat-icon>
       </mat-form-field>
       <mat-form-field class="input-email all-passengers-input-width">
@@ -32,6 +46,12 @@
           matInput
           placeholder="Ex. pat@example.com"
         />
+        <mat-error *ngIf="details.controls.email.hasError('required')"
+          >Required field
+        </mat-error>
+        <mat-error *ngIf="details.controls.email.hasError('email')"
+          >Enter correct email
+        </mat-error>
       </mat-form-field>
     </div>
   </mat-card-content>

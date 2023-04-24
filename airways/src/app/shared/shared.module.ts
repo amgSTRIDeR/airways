@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { IconLabelComponent } from './components/icon-label/icon-label.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
-import { PassengerCardComponent } from './components/passenger-card/passenger-card.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
@@ -18,7 +17,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatStepperModule } from '@angular/material/stepper';
 
 @NgModule({
-  declarations: [IconLabelComponent, PassengerCardComponent],
+  declarations: [IconLabelComponent],
   imports: [
     CommonModule,
     MatCardModule,
@@ -40,7 +39,6 @@ import { MatStepperModule } from '@angular/material/stepper';
     IconLabelComponent,
     MatCardModule,
     MatIconModule,
-    PassengerCardComponent,
     MatInputModule,
     MatTooltipModule,
     MatButtonToggleModule,

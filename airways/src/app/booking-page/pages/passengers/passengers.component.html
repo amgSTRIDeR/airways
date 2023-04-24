@@ -50,6 +50,7 @@
       <button
         class="button"
         mat-raised-button
+        [disabled]="!passengersForm.valid"
         color="primary"
         (click)="logForm()"
       >
