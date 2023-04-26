@@ -9,6 +9,9 @@ import { SharedModule } from '@shared/shared.module';
 import { ContactDetailsFormComponent } from './components/contact-details-form/contact-details-form.component';
 import { AllPassengersCardComponent } from './components/all-passengers-card/all-passengers-card.component';
 import { PassengerCardComponent } from '@booking/components/passenger-card/passenger-card.component';
+import { OrderComponent } from './components/order/order.component';
+import { BgOrderDirective } from '@booking/directives/bg-order.directive';
+import { PriseComponent } from './components/prise/prise.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +22,9 @@ import { PassengerCardComponent } from '@booking/components/passenger-card/passe
     ContactDetailsFormComponent,
     AllPassengersCardComponent,
     PassengerCardComponent,
+    OrderComponent,
+    BgOrderDirective,
+    PriseComponent,
   ],
   imports: [CommonModule, BookingPageRoutingModule, SharedModule],
 })

@@ -1,0 +1,26 @@
+<mat-card *ngIf="data && passengers" class="w-full">
+  <mat-card-header appBgOrder class="column gap-half">
+    <div class="flex gap-1 item-center">
+      <mat-card-title>{{ data.plane }}</mat-card-title>
+      <mat-card-subtitle class="route-text">{{ data.route }}</mat-card-subtitle>
+    </div>
+    <div class="flex gap-1 item-center">
+      <mat-card-subtitle class="route-date">{{ data.date }}</mat-card-subtitle>
+      <mat-card-subtitle class="route-date">{{ data.time }}</mat-card-subtitle>
+    </div>
+  </mat-card-header>
+
+  <ng-container *ngFor="let passenger of passengers; let i = index">
+    <mat-card-content class="w-full">
+      <div class="passenger">
+        <p>{{ passenger.name | uppercase }}</p>
+        <ul>
+          <li>{{ passenger.checkedBag }}</li>
+          <li>{{ passenger.cabinBag }}</li>
+          <li>{{ passenger.seat }}</li>
+        </ul>
+      </div>
+    </mat-card-content>
+    <mat-divider *ngIf="i !== passengers.length - 1"></mat-divider>
+  </ng-container>
+</mat-card>
