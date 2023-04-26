@@ -2,11 +2,9 @@
 @import '@angular/material/prebuilt-themes/indigo-pink.css';
 
 @import "app/core/styles/variables";
+@import "app/core/styles/helpSimpleClasses";
+@import "app/core/styles/material";
 
-.mat-mdc-card-title {
-  color: $primary-color;
-  font-weight: 700;
-}
 
 html, body {
   height: 100%;
@@ -21,126 +19,17 @@ body {
   width: 80%;
 }
 
-.w-full {
-  width: 100%;
+
+@media screen and (max-width: 992px) {
+  .passengers-content-position {
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+  .all-passengers-input-width {
+    width: 100%;
+  }
 }
 
-.m-auto {
-  margin: auto;
-}
-
-
-.flex {
-  display: flex;
-}
-
-.flex-wrap {
-  flex-wrap: wrap;
-}
-
-.flex-grow {
-  flex: 1 1 auto;
-}
-
-.flex-column {
-  flex-direction: column;
-}
-
-.flex-row {
-  flex-direction: row;
-}
-
-.justify-between {
-  justify-content: space-between;
-}
-
-.justify-around {
-  justify-content: space-around;
-}
-
-.justify-start {
-  justify-content: start;
-}
-
-.justify-center {
-  justify-content: center;
-}
-
-.justify-end {
-  justify-content: end;
-}
-
-.item-center {
-  align-items: center;
-}
-
-.item-start {
-  align-items: start;
-}
-
-.item-end {
-  align-items: end;
-}
-
-.gap-half {
-  gap: 0.5rem;
-}
-
-.gap-1 {
-  gap: 1rem;
-}
-
-.gap-2 {
-  gap: 2rem;
-}
-
-.gap-3 {
-  gap: 3rem;
-}
-
-.gap-4 {
-  gap: 4rem;
-}
-
-.gap-5 {
-  gap: 5rem;
-}
-
-.text-primary {
-  color: $primary-color;
-}
-
-.text-secondary {
-  color: $secondary-color;
-}
-
-.bg-primary {
-  background-color: $primary-color
-}
-
-.bg-light {
-  background-color: $bg-light-color
-}
-
-.mdc-switch {
-  width: 52px !important;
-}
-
-.mdc-switch__track {
-  height: 32px !important;
-  border-radius: 16px !important;
-}
-
-.mdc-switch__handle-track {
-  width: calc(100% - var(--mdc-switch-handle-width, 34px)) !important;
-}
-
-.mdc-switch__handle {
-  margin-left: 5px !important;
-  width: 26px !important;
-  height: 26px !important;
-  border-radius: 50% !important;
-}
 
 // work only in this file
 .mat-stepper {
