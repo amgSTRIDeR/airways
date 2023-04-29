@@ -1,8 +1,7 @@
 <form class="main-form">
-  <h3>Trip Details</h3>
-  <div>
+  <div class="radio-buttons">
     <label>
-      <input type="radio" name="tripType" value="roundTrip" required />
+      <input type="radio" name="tripType" value="roundTrip" required checked />
       Round Trip
     </label>
     <label>
@@ -53,59 +52,3 @@
 
   <button type="submit">Submit</button>
 </form>
-
-<!-- <form (ngSubmit)="onSubmit()" #bookingForm="ngForm">
-  <h3>Trip Details</h3>
-  <div>
-    <label>
-      <input type="radio" name="tripType" [(ngModel)]="tripType" value="roundTrip" required>
-      Round Trip
-    </label>
-    <label>
-      <input type="radio" name="tripType" [(ngModel)]="tripType" value="oneWay" required>
-      One Way
-    </label>
-  </div>
-
-  <div>
-    <label>From</label>
-    <select [(ngModel)]="fromLocation" name="fromLocation" required>
-      <option value="">Select From Location</option>
-      <option value="location1">Location 1</option>
-      <option value="location2">Location 2</option>
-      <option value="location3">Location 3</option>
-    </select>
-  </div>
-
-  <div>
-    <label>Destination</label>
-    <select [(ngModel)]="toLocation" name="toLocation" required>
-      <option value="">Select Destination</option>
-      <option value="location1">Location 1</option>
-      <option value="location2">Location 2</option>
-      <option value="location3">Location 3</option>
-    </select>
-  </div>
-
-  <div>
-    <label>Travel Date</label>
-    <input type="date" [(ngModel)]="travelDate" name="travelDate" required>
-  </div>
-
-  <div>
-    <label>Adults</label>
-    <input type="number" [(ngModel)]="adults" name="adults" required>
-  </div>
-
-  <div>
-    <label>Children</label>
-    <input type="number" [(ngModel)]="children" name="children" required>
-  </div>
-
-  <div>
-    <label>Infants</label>
-    <input type="number" [(ngModel)]="infants" name="infants" required>
-  </div>
-
-  <button type="submit">Submit</button>
-</form> -->
