@@ -1,1 +1,30 @@
-<p>review works!</p>
+<app-icon-label icon="preview" logo="Summary"></app-icon-label>
+<div class="people-description-container w-full">
+  <app-order [data]="data" [passengers]="passengers"></app-order>
+  <app-order [data]="data" [passengers]="passengers"></app-order>
+</div>
+<div class="sum-container">
+  <mat-card class="column item-center">
+    <mat-card-content class="container">
+      <app-prise [total]="total.adult"></app-prise>
+      <app-prise [total]="total.child"></app-prise>
+      <app-prise [total]="total.infant"></app-prise>
+    </mat-card-content>
+    <mat-card-footer class="w-full">
+      <mat-divider></mat-divider>
+      <strong class="flex justify-center total">
+        <div class="flex justify-between fz-20 container">
+          <p>TOTAL:</p>
+          <p class="text-primary">{{ this.totalValue | currency : "EUR" }}</p>
+        </div>
+      </strong>
+    </mat-card-footer>
+  </mat-card>
+</div>
+<div class="self-end flex button-container">
+  <button class="button" color="primary" mat-button>Back</button>
+  <button class="button" color="primary" mat-stroked-button>
+    Add to order cart
+  </button>
+  <button class="button" color="primary" mat-raised-button>Buy now</button>
+</div>

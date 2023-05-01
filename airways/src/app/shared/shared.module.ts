@@ -15,10 +15,12 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatStepperModule } from '@angular/material/stepper';
+import { MatDividerModule } from '@angular/material/divider';
 
 @NgModule({
   declarations: [IconLabelComponent],
   imports: [
+    MatDividerModule,
     CommonModule,
     MatCardModule,
     MatIconModule,
@@ -36,6 +38,7 @@ import { MatStepperModule } from '@angular/material/stepper';
     MatStepperModule,
   ],
   exports: [
+    MatDividerModule,
     IconLabelComponent,
     MatCardModule,
     MatIconModule,

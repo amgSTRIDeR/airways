@@ -1,0 +1,18 @@
+<div>
+  <p>
+    <strong>{{ total.count }} x {{ total.name | titlecase }} Fare</strong>
+  </p>
+  <div class="padding-left">
+    <p>Fare</p>
+    <p>Tax & Service Changes</p>
+  </div>
+</div>
+<div>
+  <p>
+    <strong>{{
+      total.fare * total.count + total.tax * total.count | currency : currency
+    }}</strong>
+  </p>
+  <p>{{ total.fare * total.count | currency : currency }}</p>
+  <p>{{ total.tax * total.count | currency : currency }}</p>
+</div>
