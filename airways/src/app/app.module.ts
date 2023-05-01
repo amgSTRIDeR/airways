@@ -8,13 +8,23 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CoreModule } from '@core/core.module';
+import { SettingsReducer } from '@redux/reducers/settings.reducer';
+import { AuthReducer } from '@redux/reducers/auth.reducer';
+import { MainPageReducer } from '@redux/reducers/main-page.reducer';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    StoreModule.forRoot({}, {}),
+    StoreModule.forRoot(
+      {
+        settings: SettingsReducer,
+        auth: AuthReducer,
+        mainPage: MainPageReducer,
+      },
+      {}
+    ),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
     EffectsModule.forRoot([]),
     BrowserAnimationsModule,

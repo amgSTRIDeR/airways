@@ -38,6 +38,9 @@
       ],
       "@booking/*": [
         "src/app/booking-page/*"
+      ],
+      "@redux/*": [
+        "src/app/redux/*"
       ]
     }
   },
