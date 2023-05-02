@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { AuthActions } from '@redux/actions/auth.actions';
 
 export interface plainInformation {
   plane: string;
@@ -75,7 +77,7 @@ export class ReviewComponent {
   total: Total;
   totalValue: number;
 
-  constructor() {
+  constructor(private store: Store) {
     this.data = data;
     this.passengers = passengers;
     this.total = total;
@@ -91,5 +93,9 @@ export class ReviewComponent {
       this.total.child.tax * this.total.child.count +
       this.total.child.fare * this.total.child.count
     );
+  }
+
+  sss() {
+    this.store.dispatch(AuthActions.meStart({ email: 'asdasd' }));
   }
 }
