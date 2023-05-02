@@ -161,3 +161,9 @@ body {
 .mat-select-currency .mat-mdc-select-arrow svg {
   display: none;
 }
+
+.main-component-location-form {
+  & .mat-mdc-select-arrow-wrapper {
+    display: none;
+  }
+}
