@@ -1,0 +1,43 @@
+:host {
+  min-width: 49%;
+}
+
+.route-text {
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
+  letter-spacing: 0.5px;
+  color: black;
+}
+
+.route-date {
+  font-size: 16px;
+  color: black;
+  font-weight: 400;
+}
+
+
+.mat-mdc-card-content:last-child {
+  padding-bottom: 0;
+}
+
+.passenger {
+  padding: 1.25rem 1rem;
+  line-height: 24px;
+  font-size: 16px;
+}
+
+li {
+  list-style-type: none;
+}
+
+ul {
+  padding: 0 1.25rem;
+}
+
+@media screen and (max-width: 992px) {
+  :host {
+    width: 100%;
+  }
+
+}
