@@ -37,4 +37,10 @@ export class MainComponent implements OnInit {
         this.airports = data;
       });
   }
+
+  switchLocations() {
+    const temp = this.originAirport;
+    this.originAirport = this.destinationAirport;
+    this.destinationAirport = temp;
+  }
 }
