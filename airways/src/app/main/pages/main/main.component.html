@@ -12,12 +12,21 @@
 
   <mat-form-field appearance="fill" class="main-component-location-form">
     <mat-label>From</mat-label>
-    <mat-select [(value)]="selectedAirport">
-      <mat-option *ngFor="let airport of airports" [value]="airport.key">
+    <mat-select
+      [(value)]="originAirport"
+      class="location-select"
+      placeholder="Choose your origin"
+    >
+      <mat-select-trigger
+        ><span>{{ originAirport.city }}</span
+        ><span class="trigger-key"> {{ originAirport.key }}</span>
+      </mat-select-trigger>
+      <mat-option
+        *ngFor="let airport of airports | airportsFilter : destinationAirport"
+        [value]="airport"
+      >
         <p class="airport-information">
-          {{ airport.city }} <span class="parenthes">(</span
-          ><span class="airport-key"> {{ airport.key }} </span
-          ><span class="parenthes">)</span>
+          {{ airport.city }} ({{ airport.key }})
         </p>
         <p class="airport-additional-information">
           {{ airport.name }}, {{ airport.country }}
@@ -26,13 +35,27 @@
     </mat-select>
   </mat-form-field>
 
-  <p>{{ selectedAirport }}</p>
-
-  <mat-form-field appearance="fill">
+  <mat-form-field appearance="fill" class="main-component-location-form">
     <mat-label>Destination</mat-label>
-    <mat-select>
-      <mat-option *ngFor="let airport of airports" [value]="airport.name">
-        {{ airport.name }}
+    <mat-select
+      [(value)]="destinationAirport"
+      class="location-select"
+      placeholder="Choose your destination"
+    >
+      <mat-select-trigger
+        ><span>{{ destinationAirport.city }}</span
+        ><span class="trigger-key"> {{ destinationAirport.key }}</span>
+      </mat-select-trigger>
+      <mat-option
+        *ngFor="let airport of airports | airportsFilter : originAirport"
+        [value]="airport"
+      >
+        <p class="airport-information">
+          {{ airport.city }} ({{ airport.key }})
+        </p>
+        <p class="airport-additional-information">
+          {{ airport.name }}, {{ airport.country }}
+        </p>
       </mat-option>
     </mat-select>
   </mat-form-field>
