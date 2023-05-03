@@ -50,7 +50,11 @@
         >
           Book flights
         </button>
-        <mat-select [(value)]="selectedDateFormat" class="mat-select-date">
+        <mat-select
+          [(value)]="selectedDateFormat"
+          class="mat-select-date"
+          (selectionChange)="changeDateType($event.value)"
+        >
           <mat-option class="mat-option-date" [value]="'MM/DD/YYYY'"
             >MM/DD/YYYY</mat-option
           >
@@ -64,7 +68,11 @@
             >YYYY/MM/DD</mat-option
           >
         </mat-select>
-        <mat-select [(value)]="selectedCurrency" class="mat-select-currency">
+        <mat-select
+          [(value)]="selectedCurrency"
+          class="mat-select-currency"
+          (selectionChange)="changeCurrency($event.value)"
+        >
           <mat-option class="mat-option-currency" [value]="'EUR'"
             >EUR</mat-option
           >
@@ -122,7 +130,11 @@
     class="hamburger-menu"
     [ngClass]="{ 'hamburger-menu_active': isHamburgerMenuActive }"
   >
-    <mat-select [(value)]="selectedDateFormat" class="mat-select-date">
+    <mat-select
+      [(value)]="selectedDateFormat"
+      class="mat-select-date"
+      (selectionChange)="changeDateType($event.value)"
+    >
       <mat-option class="mat-option-date" [value]="'MM/DD/YYYY'"
         >MM/DD/YYYY</mat-option
       >
@@ -136,7 +148,11 @@
         >YYYY/MM/DD</mat-option
       >
     </mat-select>
-    <mat-select [(value)]="selectedCurrency" class="mat-select-currency">
+    <mat-select
+      [(value)]="selectedCurrency"
+      class="mat-select-currency"
+      (selectionChange)="changeCurrency($event.value)"
+    >
       <mat-option class="mat-option-currency" [value]="'EUR'">EUR</mat-option>
       <mat-option class="mat-option-currency" [value]="'USA'">USA</mat-option>
       <mat-option class="mat-option-currency" [value]="'RUB'">RUB</mat-option>
