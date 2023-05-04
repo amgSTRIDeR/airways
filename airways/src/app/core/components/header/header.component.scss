@@ -105,13 +105,13 @@
     column-gap: 3vw;
     justify-content: end;
 
-    & .mat-select-date {
+    & app-date-select {
       display: none;
     }
   }
 
   @media (max-width: 650px) {
-    & .mat-select-currency {
+    & app-currency-select {
       display: none;
     }
   }
@@ -177,39 +177,39 @@
   transition: all 0.3s ease;
 }
 
-.mat-select-date,
-.mat-select-currency {
-  box-sizing: border-box;
-  width: 162px;
-  height: 40px;
-  padding: 8px 16px;
+// .mat-select-date,
+// .mat-select-currency {
+//   box-sizing: border-box;
+//   width: 162px;
+//   height: 40px;
+//   padding: 8px 16px;
 
-  background: rgba(241, 243, 246, 0.15);
-  border: 0.5px solid #cecece;
-  border-radius: 4px;
+//   background: rgba(241, 243, 246, 0.15);
+//   border: 0.5px solid #cecece;
+//   border-radius: 4px;
 
 
-  transition: all 0.3s ease;
+//   transition: all 0.3s ease;
 
-  &:hover {
-    background: #f5f5f5;
-    cursor: pointer;
+//   &:hover {
+//     background: #f5f5f5;
+//     cursor: pointer;
 
-    transition: all 0.3s ease;
-  }
+//     transition: all 0.3s ease;
+//   }
 
-  &:active {
-    background: #e9edf1;
-    color: #000000;
+//   &:active {
+//     background: #e9edf1;
+//     color: #000000;
 
-    transition: all 0.3s ease;
-  }
-}
+//     transition: all 0.3s ease;
+//   }
+// }
 
-.mat-select-currency {
-  width: 62px;
-  padding: 8px 0 8px 15px;
-}
+// .mat-select-currency {
+//   width: 62px;
+//   padding: 8px 0 8px 15px;
+// }
 
 .button__SignIn {
   width: 114px;
@@ -349,21 +349,21 @@
   & .button__book-flights,
   & .button__SignIn,
   & .shopping-basket,
-  & .mat-select-currency,
-  & .mat-select-date {
+  & app-currency-select,
+  & app-date-select {
     display: none;
   }
 
   @media (max-width: 750px) {
     display: flex;
 
-    & .mat-select-date {
+    & app-date-select {
       display: block;
     }
   }
 
   @media (max-width: 650px) {
-    & .mat-select-currency {
+    & app-currency-select {
       display: block;
     }
   }

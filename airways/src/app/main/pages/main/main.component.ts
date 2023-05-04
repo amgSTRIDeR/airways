@@ -20,6 +20,9 @@ export class MainComponent implements OnInit {
     city: '',
   };
   dateType$ = this.store.pipe(select(SettingsSelectors.DateTypeSelector));
+  public tripType = 'roundTrip';
+  public departureDate!: Date;
+  public returnDate!: Date;
 
   constructor(private http: HttpClient, private store: Store<SettingsState>) {}
 
