@@ -11,6 +11,8 @@ import { CoreModule } from '@core/core.module';
 import { SettingsReducer } from '@redux/reducers/settings.reducer';
 import { AuthReducer } from '@redux/reducers/auth.reducer';
 import { MainPageReducer } from '@redux/reducers/main-page.reducer';
+import { BookingPageReducer } from '@redux/reducers/booking-page.reducer';
+import { BasketPageReducer } from '@redux/reducers/basket.reduser';
 import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
@@ -23,6 +25,8 @@ import { HttpClientModule } from '@angular/common/http';
         settings: SettingsReducer,
         auth: AuthReducer,
         mainPage: MainPageReducer,
+        booking: BookingPageReducer,
+        basket: BasketPageReducer,
       },
       {}
     ),
