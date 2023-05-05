@@ -33,9 +33,9 @@
       class="location-select"
       placeholder="Choose your origin"
     >
-      <mat-select-trigger
-        ><span>{{ originAirport.city }}</span
-        ><span class="trigger-key"> {{ originAirport.key }}</span>
+      <mat-select-trigger>
+        <span>{{ originAirport?.city }}</span>
+        <span class="trigger-key"> {{ originAirport?.key }}</span>
       </mat-select-trigger>
       <mat-option
         *ngFor="let airport of airports | airportsFilter : destinationAirport"
@@ -78,8 +78,8 @@
       placeholder="Choose your destination"
     >
       <mat-select-trigger
-        ><span>{{ destinationAirport.city }}</span
-        ><span class="trigger-key"> {{ destinationAirport.key }}</span>
+        ><span>{{ destinationAirport?.city }}</span
+        ><span class="trigger-key"> {{ destinationAirport?.key }}</span>
       </mat-select-trigger>
       <mat-option
         *ngFor="let airport of airports | airportsFilter : originAirport"
