@@ -8,7 +8,7 @@ import { Component } from '@angular/core';
 export class BookingPageComponent {
   step = {
     flight: false,
-    passengers: false,
+    passengers: true,
     review: true,
   };
 }
