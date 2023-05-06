@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import {
   FormArray,
   FormBuilder,
@@ -14,6 +14,13 @@ import {
 import nameValidator from '@booking/validators/name-validator';
 import dateValidator from '@booking/validators/date-validator';
 import phoneValidator from '@booking/validators/phone-validator';
+import { Store } from '@ngrx/store';
+import { PassengersCount } from '@redux/models/main-page.models';
+import { Observable, Subscription } from 'rxjs';
+import { MainPageSelectors } from '@redux/selectors/main-page.selectors';
+import { BookingActions } from '@redux/actions/booking-page.actions';
+import { passenger, PassengerInfo } from '@redux/models/booking-page.models';
+import { BookingSelectors } from '@redux/selectors/booking-page.selectors';
 
 export interface CountyCode {
   country: string;
@@ -25,51 +32,101 @@ export interface CountyCode {
   templateUrl: './passengers.component.html',
   styleUrls: ['./passengers.component.scss'],
 })
-export class PassengersComponent implements OnInit {
-  adultCount = 1;
-  childCount = 1;
-  infantCount = 1;
-  passengersForm!: FormGroup<AllPassengerFormGroup>;
+export class PassengersComponent implements OnInit, OnDestroy {
+  public passengersForm!: FormGroup<AllPassengerFormGroup>;
 
-  constructor(private fb: FormBuilder) {}
+  private passengersCount$: Observable<PassengersCount | null> =
+    this.store.select(MainPageSelectors.PassengersCount);
+
+  private passengersCountSub: Subscription = this.passengersCount$.subscribe(
+    (passengers: PassengersCount | null): void => {
+      if (passengers !== null) this.passengersCount = passengers;
+    }
+  );
+
+  private passengersInfo$: Observable<PassengerInfo | null> = this.store.select(
+    BookingSelectors.passengersInfoSelector
+  );
+
+  private passengersInfoSub: Subscription = this.passengersInfo$.subscribe(
+    (passengers: PassengerInfo | null): void => {
+      this.passengersInfo = passengers;
+    }
+  );
+
+  private passengersCount!: PassengersCount;
+  private passengersInfo!: PassengerInfo | null;
+
+  constructor(private fb: FormBuilder, private store: Store) {}
 
   ngOnInit(): void {
+    console.log(this.passengersInfo);
     this.passengersForm = this.fb.group<AllPassengerFormGroup>({
       adult: this.fb.array<FormGroup<PassengerFormGroup>>([]),
       child: this.fb.array<FormGroup<PassengerFormGroup>>([]),
       infant: this.fb.array<FormGroup<PassengerFormGroup>>([]),
       details: this.fb.group<DetailsFormGroup>({
-        countryCode: new FormControl('', [Validators.required]),
-        phone: new FormControl('', [Validators.required, phoneValidator()]),
-        email: new FormControl('', [Validators.required, Validators.email]),
+        countryCode: new FormControl(
+          this.passengersInfo?.details.countryCode || '',
+          [Validators.required]
+        ),
+        phone: new FormControl(this.passengersInfo?.details.phone || '', [
+          Validators.required,
+          phoneValidator(),
+        ]),
+        email: new FormControl(this.passengersInfo?.details.email || '', [
+          Validators.required,
+          Validators.email,
+        ]),
       }),
     });
 
-    this.addPersonToForm(this.adult, this.adultCount);
-    this.addPersonToForm(this.child, this.childCount);
-    this.addPersonToForm(this.infant, this.infantCount);
+    this.addPersonToForm(
+      this.adult,
+      this.passengersCount.adults,
+      this.passengersInfo ? this.passengersInfo.adult : ''
+    );
+    this.addPersonToForm(
+      this.child,
+      this.passengersCount.children,
+      this.passengersInfo ? this.passengersInfo.child : ''
+    );
+    this.addPersonToForm(
+      this.infant,
+      this.passengersCount.infants,
+      this.passengersInfo ? this.passengersInfo.infant : ''
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.passengersCountSub.unsubscribe();
+    this.passengersInfoSub.unsubscribe();
   }
 
   private addPersonToForm(
     typeOfControl: FormArray<FormGroup<PassengerFormGroup>>,
-    count: number
-  ) {
-    while (count > 0) {
+    count: number,
+    passenger: passenger[] | ''
+  ): void {
+    for (let i = 0; i < count; i++) {
+      if (passenger) count = passenger.length;
       const person: FormGroup<PassengerFormGroup> = this.fb.group({
         firstName: [
-          '',
+          passenger ? passenger[i].firstName : '',
           [Validators.required, Validators.minLength(3), nameValidator()],
         ],
         lastName: [
-          '',
+          passenger ? passenger[i].lastName : '',
           [Validators.required, Validators.minLength(3), nameValidator()],
         ],
-        gender: ['', [Validators.required]],
-        birthdayDate: ['', [Validators.required, dateValidator()]],
-        invalid: '',
+        gender: [passenger ? passenger[i].gender : '', [Validators.required]],
+        birthdayDate: [
+          passenger ? passenger[i].birthdayDate : '',
+          [Validators.required, dateValidator()],
+        ],
+        invalid: passenger ? passenger[i].invalid : '',
       });
       typeOfControl.push(person);
-      count--;
     }
   }
 
@@ -94,7 +151,21 @@ export class PassengersComponent implements OnInit {
   }
 
   logForm() {
-    console.log(this.passengersForm.valid);
-    console.log(this.passengersForm.value);
+    // if (this.passengersForm.valid) {
+    //   const readyPassengers = this.passengersForm.value as PassengerInfo;
+    //   this.store.dispatch(
+    //     BookingActions.AddPassengersInformation(readyPassengers)
+    //   );
+    // }
+
+    const readyPassengers = this.passengersForm.value as PassengerInfo;
+    this.store.dispatch(
+      BookingActions.AddPassengersInformation(readyPassengers)
+    );
+    this.store.dispatch(BookingActions.OnReviewSubPage());
+  }
+
+  backToFlight() {
+    this.store.dispatch(BookingActions.OnFlightSubPage());
   }
 }

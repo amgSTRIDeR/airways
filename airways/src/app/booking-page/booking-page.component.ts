@@ -1,4 +1,8 @@
 import { Component } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { CurrentPageDirection } from '@redux/models/state.models';
+import { BookingSelectors } from '@redux/selectors/booking-page.selectors';
 
 @Component({
   selector: 'app-booking-page',
@@ -6,9 +10,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./booking-page.component.scss'],
 })
 export class BookingPageComponent {
-  step = {
-    flight: false,
-    passengers: true,
-    review: true,
-  };
+  public step$: Observable<CurrentPageDirection> = this.store.select(
+    BookingSelectors.currentPageDirectionSelector
+  );
+
+  constructor(private store: Store) {}
 }

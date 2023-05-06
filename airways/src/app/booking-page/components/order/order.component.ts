@@ -1,8 +1,6 @@
 import { Component, Input } from '@angular/core';
-import {
-  passengerInformation,
-  plainInformation,
-} from '@booking/pages/review/review.component';
+import { PassengerInfo } from '@redux/models/booking-page.models';
+import { FlightRes } from '@redux/models/main-page.models';
 
 @Component({
   selector: 'app-order',
@@ -10,6 +8,6 @@ import {
   styleUrls: ['./order.component.scss'],
 })
 export class OrderComponent {
-  @Input() data?: plainInformation;
-  @Input() passengers?: passengerInformation[];
+  @Input() data?: FlightRes;
+  @Input() passengers!: PassengerInfo;
 }

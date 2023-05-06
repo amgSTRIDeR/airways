@@ -7,12 +7,10 @@
     <p>Tax & Service Changes</p>
   </div>
 </div>
-<div>
+<div *ngIf="currency$ | async as currency">
   <p>
-    <strong>{{
-      total.fare * total.count + total.tax * total.count | currency : currency
-    }}</strong>
+    <strong>{{ total.allPrice | currency : currency }}</strong>
   </p>
-  <p>{{ total.fare * total.count | currency : currency }}</p>
-  <p>{{ total.tax * total.count | currency : currency }}</p>
+  <p>{{ total.fare | currency : currency }}</p>
+  <p>{{ total.tax | currency : currency }}</p>
 </div>

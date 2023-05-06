@@ -37,10 +37,12 @@ export interface MainPageState {
   FlightError: string | null;
 }
 
+export type CurrentPageDirection = 'flight' | 'passengers' | 'review';
+
 export interface BookingPageState {
   passengersCount: PassengersCount | null;
   onBookingPage: boolean;
-  currentPageDirection: 'flight' | 'passengers' | 'review';
+  currentPageDirection: CurrentPageDirection;
   isEditWindowOpen: boolean;
   flights: SelectedFlight | null;
   passengersInfo: PassengerInfo | null;
