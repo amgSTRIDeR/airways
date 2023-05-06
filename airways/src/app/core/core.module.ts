@@ -8,6 +8,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatSelectModule } from '@angular/material/select';
 import { StepperComponent } from './components/stepper/stepper.component';
+import { DateSelectComponent } from './components/date-select/date-select.component';
+import { CurrencySelectComponent } from './components/currency-select/currency-select.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +18,8 @@ import { StepperComponent } from './components/stepper/stepper.component';
     HeaderComponent,
     BookingHeaderComponent,
     StepperComponent,
+    DateSelectComponent,
+    CurrencySelectComponent,
   ],
   imports: [CommonModule, MatTooltipModule, MatStepperModule, MatSelectModule],
   exports: [

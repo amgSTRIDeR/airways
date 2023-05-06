@@ -1,0 +1,166 @@
+.main-form {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 580px;
+  height: 390px;
+  padding: 24px;
+
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.85);
+
+  & .location-switch {
+    position: absolute;
+    z-index: 1;
+    right: 44px;
+    top: 122px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+
+    border: 0.5px solid #74767A;
+    border-radius: 100px;
+    background-color: #fff;
+
+    transition: border 0.3s;
+    transition: transform 0.3s;
+
+    & svg {
+      fill: #74767A;
+
+      transition: fill 0.3s;
+    }
+
+    &:hover {
+      cursor: pointer;
+
+      border: 0.5px solid #11397E;
+
+      transition: border 0.3s;
+      transition: transform 0.3s;
+
+      & svg {
+        fill: #11397E;
+
+        transition: fill 0.3s;
+      }
+    }
+
+    &:active {
+      cursor: pointer;
+
+      transform: scale(0.95);
+
+      transition: transform 0.3s;
+    }
+  }
+}
+
+.radio-buttons {
+  display: flex;
+  justify-content: space-around;
+  width: 303px;
+  height: 48px;
+
+  & label {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
+    letter-spacing: 0.1px;
+
+    color: #11397E;
+
+    transition: color 0.3s;
+
+    &:hover {
+      color: #0090BD;
+
+      cursor: pointer;
+
+      transition: color 0.3s;
+
+      & input {
+        border: 2px solid #0090BD;
+
+        transition: border 0.3s;
+      }
+    }
+  }
+
+  & input {
+    position: relative;
+    -webkit-appearance: none;
+    appearance: none;
+
+    display: grid;
+    place-content: center;
+    box-sizing: border-box;
+    width: 20px;
+    height: 20px;
+    margin: 0 10px 0 0;
+    border: 2px solid #74767A;
+    border-radius: 50%;
+
+    transition: border 0.3s;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    &::before {
+      position: relative;
+      content: "";
+      width: 12px;
+      height: 12px;
+      border-radius: 10px;
+      transform: scale(0);
+      background-color: #11397E;
+    }
+
+  }
+
+  & input:checked {
+
+    border-color: #11397E;
+
+    &::before {
+      transform: scale(1);
+    }
+  }
+}
+
+.trigger-key {
+  color: #74767A;
+}
+
+.airport-information {
+  margin: 0;
+}
+
+.airport-additional-information {
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+
+  letter-spacing: 0.25px;
+
+  color: #74767A;
+}
+
+.main-component-location-form__destination {
+  position: relative;
+  top: -29px;
+}

@@ -13,6 +13,7 @@ import { AuthReducer } from '@redux/reducers/auth.reducer';
 import { MainPageReducer } from '@redux/reducers/main-page.reducer';
 import { BookingPageReducer } from '@redux/reducers/booking-page.reducer';
 import { BasketPageReducer } from '@redux/reducers/basket.reduser';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [AppComponent],
@@ -33,6 +34,7 @@ import { BasketPageReducer } from '@redux/reducers/basket.reduser';
     EffectsModule.forRoot([]),
     BrowserAnimationsModule,
     CoreModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

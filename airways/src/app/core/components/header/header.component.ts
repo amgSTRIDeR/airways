@@ -1,5 +1,9 @@
 import { Component, HostListener } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
+import { Store, select } from '@ngrx/store';
+import { BookingActions } from '@redux/actions/booking-page.actions';
+import { BookingPageState } from '@redux/models/state.models';
+import { BookingSelectors } from '@redux/selectors/booking-page.selectors';
 
 @Component({
   selector: 'app-header',
@@ -9,17 +13,25 @@ import { NavigationEnd, Router } from '@angular/router';
 export class HeaderComponent {
   public showBookWindow = false;
   public isBookingPage = false;
+  public isMainPage = false;
   public isUserSignIn = false;
   public isHamburgerMenuActive = false;
-  public selectedDateFormat = 'MM/DD/YYYY';
-  public selectedCurrency = 'EUR';
+  isOnBookingPage$ = this.store.pipe(
+    select(BookingSelectors.onBookingPageSelector)
+  );
+
   windowWidth: number = window.innerWidth;
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private store: Store<BookingPageState>) {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
-        this.isBookingPage =
-          event.url.startsWith('/booking-page') || event.url === '/';
+        if (event.url.startsWith('/booking-page') || event.url === '/') {
+          this.store.dispatch(BookingActions.OnBookingPage());
+        } else {
+          this.store.dispatch(BookingActions.OutBookingPage());
+        }
+
+        this.isMainPage = event.url.startsWith('/main');
       }
     });
   }
