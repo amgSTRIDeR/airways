@@ -10,8 +10,9 @@ import {
   PassengerInfo,
   ReadyFlight,
   SelectedFlight,
+  Total,
 } from '@redux/models/booking-page.models';
-import { BasketFlight, sort } from '@redux/models/basket.models';
+import { Order, sort } from '@redux/models/basket.models';
 
 export interface SettingsState {
   currency: CurrencyType;
@@ -40,6 +41,7 @@ export interface MainPageState {
 export type CurrentPageDirection = 'flight' | 'passengers' | 'review';
 
 export interface BookingPageState {
+  id: string;
   passengersCount: PassengersCount | null;
   onBookingPage: boolean;
   currentPageDirection: CurrentPageDirection;
@@ -48,12 +50,13 @@ export interface BookingPageState {
   passengersInfo: PassengerInfo | null;
   allInformation: AllInformation | null;
   readyFlight: ReadyFlight | null;
+  totalPrice: Total | null;
 }
 
 export interface BasketPageState {
   sortType: sort;
   isReverse: boolean;
-  flight: BasketFlight[];
+  orders: Order[];
   discont: number;
   totalPrice: number;
   promoCode: '1111';

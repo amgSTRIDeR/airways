@@ -46,6 +46,5 @@ export class ContactDetailsFormComponent {
     { name: 'USA', value: '+1' },
   ];
 
-  // @Input() countryCode!: FormArray<FormGroup<CountryCodeFormGroup>>;
   @Input() details!: FormGroup<DetailsFormGroup>;
 }

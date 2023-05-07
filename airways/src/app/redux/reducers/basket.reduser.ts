@@ -1,7 +1,7 @@
 import { BasketPageState } from '@redux/models/state.models';
 import { createReducer, on } from '@ngrx/store';
 import { BaskedActions } from '@redux/actions/bascet.actions';
-import { BasketFlight } from '@redux/models/basket.models';
+import { Order } from '@redux/models/basket.models';
 
 const changeReverse = (
   sortPrev: string,
@@ -19,15 +19,13 @@ export const promoF = (
 ): number =>
   promoCode === currentPromoCode ? totalPrice * discont : totalPrice;
 
-export const deleteFlight = (
-  flight: BasketFlight[],
-  id: string
-): BasketFlight[] => flight.filter((el) => el.id !== id);
+export const deleteFlight = (flight: Order[], id: string): Order[] =>
+  flight.filter((el) => el.id !== id);
 
 export const initialState: BasketPageState = {
   sortType: 'Num',
   isReverse: false,
-  flight: [],
+  orders: [],
   discont: 0.7,
   totalPrice: 0,
   promoCode: '1111',
@@ -35,6 +33,10 @@ export const initialState: BasketPageState = {
 
 export const BasketPageReducer = createReducer(
   initialState,
+  on(BaskedActions.AddFlight, (state, action) => ({
+    ...state,
+    orders: [...state.orders, action],
+  })),
   on(BaskedActions.SortAction, (state, action) => ({
     ...state,
     isReverse: changeReverse(state.sortType, action.sort, state.isReverse),
@@ -51,10 +53,10 @@ export const BasketPageReducer = createReducer(
   })),
   on(BaskedActions.DeleteFlight, (state, action) => ({
     ...state,
-    flight: deleteFlight(state.flight, action.id),
+    orders: deleteFlight(state.orders, action.id),
   })),
   on(BaskedActions.Pay, (state) => ({
     ...state,
-    flight: [],
+    orders: [],
   }))
 );

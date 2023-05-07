@@ -10,7 +10,7 @@
       <div class="flex justify-between fz-20 container">
         <p>TOTAL:</p>
         <p *ngIf="currency$ | async as currency" class="text-primary">
-          {{ allPrice | currency : currency }}
+          {{ total.totalPrice | currency : currency }}
         </p>
       </div>
     </strong>

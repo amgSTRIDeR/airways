@@ -2,25 +2,13 @@ import { Component, Input, OnInit } from '@angular/core';
 import {
   PassengerInfo,
   SelectedFlight,
+  Total,
 } from '@redux/models/booking-page.models';
 import { Store } from '@ngrx/store';
 import { SettingsSelectors } from '@redux/selectors/settings.selectors';
 import { CurrencyType } from '@redux/models/settings.models';
 import { Observable } from 'rxjs';
-
-export interface PersonTotal {
-  name: string;
-  count: number;
-  fare: number;
-  tax: number;
-  allPrice: number;
-}
-
-export interface Total {
-  adult: PersonTotal;
-  child: PersonTotal;
-  infant: PersonTotal;
-}
+import { BookingActions } from '@redux/actions/booking-page.actions';
 
 @Component({
   selector: 'app-total',
@@ -39,27 +27,24 @@ export class TotalComponent implements OnInit {
 
   ngOnInit(): void {
     this.addTotal();
-    this.allPrice;
+    this.store.dispatch(BookingActions.AddTotalPrice(this.total));
   }
 
-  public get allPrice() {
-    return Object.values(this.total).reduce(
-      (acc, el) => (acc += +el.allPrice),
-      0
-    );
-  }
-
-  private addTotal() {
+  private addTotal(): void {
     const flightPrice = this.oneManPrice(this.flight);
     const taxPrice = flightPrice / 2;
     const adult = this.addPersonTotal(flightPrice, taxPrice, 'adult');
     const child = this.addPersonTotal(flightPrice, taxPrice, 'child');
     const infant = this.addPersonTotal(flightPrice, taxPrice, 'infant');
-
+    const totalPrice = [adult, child, infant].reduce(
+      (acc, el) => (acc += +el.allPrice),
+      0
+    );
     this.total = {
       adult,
       child,
       infant,
+      totalPrice,
     };
   }
 

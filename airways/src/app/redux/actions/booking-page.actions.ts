@@ -1,8 +1,8 @@
 import { createAction, props } from '@ngrx/store';
 import {
   PassengerInfo,
-  ReadyFlight,
   SelectedFlight,
+  Total,
 } from '@redux/models/booking-page.models';
 
 const OnBookingPage = createAction('[BOOKING PAGE] On Booking Page');
@@ -22,11 +22,9 @@ const AddPassengersInformation = createAction(
   props<PassengerInfo>()
 );
 
-const AddAllInformation = createAction('[BOOKING PAGE] Add All Information');
-
-const AddReadyFlight = createAction(
-  '[BOOKING PAGE] Add Ready Flight',
-  props<ReadyFlight>()
+const AddTotalPrice = createAction(
+  '[BOOKING PAGE] Add Total Price',
+  props<Total>()
 );
 
 export const BookingActions = {
@@ -38,6 +36,5 @@ export const BookingActions = {
   EditWindowToggle,
   AddSelectedFlight,
   AddPassengersInformation,
-  AddAllInformation,
-  AddReadyFlight,
+  AddTotalPrice,
 };

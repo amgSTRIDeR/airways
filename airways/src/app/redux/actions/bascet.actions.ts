@@ -1,11 +1,8 @@
 import { createAction, props } from '@ngrx/store';
-import { BasketFlight, SortType } from '@redux/models/basket.models';
+import { Order, SortType } from '@redux/models/basket.models';
 
 const SortAction = createAction('[BASKET PAGE] Sort', props<SortType>());
-const AddFlight = createAction(
-  '[BASKET PAGE] Add Flight',
-  props<BasketFlight>()
-);
+const AddFlight = createAction('[BASKET PAGE] Add Flight', props<Order>());
 const PromoCode = createAction(
   '[BASKET PAGE] Promo Code',
   props<{ code: string }>()

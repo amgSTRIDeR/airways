@@ -49,6 +49,7 @@
       <button
         (click)="backToFlight()"
         class="button"
+        type="button"
         mat-button
         color="primary"
       >
@@ -57,7 +58,6 @@
       <button
         class="button"
         mat-raised-button
-        [disabled]="passengersForm.valid"
         color="primary"
         (click)="logForm()"
       >

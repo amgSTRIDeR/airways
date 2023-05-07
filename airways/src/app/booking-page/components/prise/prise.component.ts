@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
-import { PersonTotal } from '@booking/pages/review/total/total.component';
 import { Store } from '@ngrx/store';
 import { SettingsSelectors } from '@redux/selectors/settings.selectors';
+import { PersonTotal } from '@redux/models/booking-page.models';
 
 @Component({
   selector: 'app-prise',

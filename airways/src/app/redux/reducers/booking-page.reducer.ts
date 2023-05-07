@@ -1,17 +1,14 @@
 import { BookingPageState } from '@redux/models/state.models';
 import { createReducer, on } from '@ngrx/store';
 import { BookingActions } from '@redux/actions/booking-page.actions';
-import {
-  PassengerInfo,
-  SelectedFlight,
-} from '@redux/models/booking-page.models';
 import { MainPageActions } from '@redux/actions/main-page.actions';
-import { PassengersCount } from '@redux/models/main-page.models';
 
 export const initialState: BookingPageState = {
+  id: 'SomeId',
   onBookingPage: false,
   currentPageDirection: 'review',
   isEditWindowOpen: false,
+  totalPrice: null,
   flights: {
     twoWays: true,
     forwardFlight: {
@@ -75,14 +72,14 @@ export const initialState: BookingPageState = {
         firstName: 'Pavel',
         lastName: 'arabei',
         gender: 'male',
-        birthdayDate: 'Sat May 06 2003 15:55:10',
+        birthdayDate: '2023-05-01T22:00:00.000Z',
         invalid: 'true',
       },
       {
         firstName: 'Anna',
         lastName: 'arabei',
         gender: 'female',
-        birthdayDate: 'Sat May 06 2003 15:55:10',
+        birthdayDate: '2023-05-01T22:00:00.000Z',
         invalid: 'false',
       },
     ],
@@ -91,7 +88,7 @@ export const initialState: BookingPageState = {
         firstName: 'Pavel',
         lastName: 'arabei',
         gender: 'male',
-        birthdayDate: 'Sat May 06 2003 15:55:10',
+        birthdayDate: '2023-05-01T22:00:00.000Z',
         invalid: 'true',
       },
     ],
@@ -100,13 +97,13 @@ export const initialState: BookingPageState = {
         firstName: 'Pavel',
         lastName: 'arabei',
         gender: 'male',
-        birthdayDate: 'Sat May 06 2003 15:55:10',
+        birthdayDate: '2023-05-01T22:00:00.000Z',
         invalid: 'true',
       },
     ],
     details: {
-      countryCode: 'string',
-      phone: '777-55-88',
+      countryCode: '+355',
+      phone: '7777777',
       email: 'Pahsdfsdf@gmail.com',
     },
   },
@@ -148,12 +145,8 @@ export const BookingPageReducer = createReducer(
     ...state,
     passengersInfo: action,
   })),
-  on(BookingActions.AddAllInformation, (state) => ({
+  on(BookingActions.AddTotalPrice, (state, action) => ({
     ...state,
-    allInformation: {
-      selectedFlight: state.flights as SelectedFlight,
-      passengersInfo: state.passengersInfo as PassengerInfo,
-      passengersCount: state.passengersCount as PassengersCount,
-    },
+    totalPrice: action,
   }))
 );

@@ -1,4 +1,9 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import {
   FormArray,
   FormBuilder,
@@ -22,15 +27,11 @@ import { BookingActions } from '@redux/actions/booking-page.actions';
 import { passenger, PassengerInfo } from '@redux/models/booking-page.models';
 import { BookingSelectors } from '@redux/selectors/booking-page.selectors';
 
-export interface CountyCode {
-  country: string;
-  value: string;
-}
-
 @Component({
   selector: 'app-passengers',
   templateUrl: './passengers.component.html',
   styleUrls: ['./passengers.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PassengersComponent implements OnInit, OnDestroy {
   public passengersForm!: FormGroup<AllPassengerFormGroup>;
@@ -60,24 +61,15 @@ export class PassengersComponent implements OnInit, OnDestroy {
   constructor(private fb: FormBuilder, private store: Store) {}
 
   ngOnInit(): void {
-    console.log(this.passengersInfo);
+    const { countryCode, phone, email } = this.getDetails();
     this.passengersForm = this.fb.group<AllPassengerFormGroup>({
       adult: this.fb.array<FormGroup<PassengerFormGroup>>([]),
       child: this.fb.array<FormGroup<PassengerFormGroup>>([]),
       infant: this.fb.array<FormGroup<PassengerFormGroup>>([]),
       details: this.fb.group<DetailsFormGroup>({
-        countryCode: new FormControl(
-          this.passengersInfo?.details.countryCode || '',
-          [Validators.required]
-        ),
-        phone: new FormControl(this.passengersInfo?.details.phone || '', [
-          Validators.required,
-          phoneValidator(),
-        ]),
-        email: new FormControl(this.passengersInfo?.details.email || '', [
-          Validators.required,
-          Validators.email,
-        ]),
+        countryCode: new FormControl(countryCode, [Validators.required]),
+        phone: new FormControl(phone, [Validators.required, phoneValidator()]),
+        email: new FormControl(email, [Validators.required, Validators.email]),
       }),
     });
 
@@ -109,7 +101,9 @@ export class PassengersComponent implements OnInit, OnDestroy {
     passenger: passenger[] | ''
   ): void {
     for (let i = 0; i < count; i++) {
-      if (passenger) count = passenger.length;
+      if (passenger && passenger.length > 0) {
+        count = passenger.length;
+      }
       const person: FormGroup<PassengerFormGroup> = this.fb.group({
         firstName: [
           passenger ? passenger[i].firstName : '',
@@ -128,6 +122,19 @@ export class PassengersComponent implements OnInit, OnDestroy {
       });
       typeOfControl.push(person);
     }
+  }
+
+  private getDetails() {
+    const countryCode = this.passengersInfo
+      ? this.passengersInfo.details.countryCode
+      : null;
+    const phone = this.passengersInfo
+      ? this.passengersInfo.details.phone
+      : null;
+    const email = this.passengersInfo
+      ? this.passengersInfo.details.email
+      : null;
+    return { countryCode, phone, email };
   }
 
   get adult(): FormArray<FormGroup<PassengerFormGroup>> {
@@ -151,18 +158,13 @@ export class PassengersComponent implements OnInit, OnDestroy {
   }
 
   logForm() {
-    // if (this.passengersForm.valid) {
-    //   const readyPassengers = this.passengersForm.value as PassengerInfo;
-    //   this.store.dispatch(
-    //     BookingActions.AddPassengersInformation(readyPassengers)
-    //   );
-    // }
-
-    const readyPassengers = this.passengersForm.value as PassengerInfo;
-    this.store.dispatch(
-      BookingActions.AddPassengersInformation(readyPassengers)
-    );
-    this.store.dispatch(BookingActions.OnReviewSubPage());
+    if (this.passengersForm.valid) {
+      const readyPassengers = this.passengersForm.value as PassengerInfo;
+      this.store.dispatch(
+        BookingActions.AddPassengersInformation(readyPassengers)
+      );
+      this.store.dispatch(BookingActions.OnReviewSubPage());
+    }
   }
 
   backToFlight() {
