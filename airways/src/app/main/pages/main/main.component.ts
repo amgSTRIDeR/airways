@@ -16,7 +16,7 @@ export class MainComponent {
   public destinationAirport: AirportsRes | null = null;
 
   dateType$ = this.store.pipe(select(SettingsSelectors.DateTypeSelector));
-  public tripType = 'roundTrip';
+  public isRoundTrip = true;
   public departureDate!: Date;
   public returnDate!: Date;
 
@@ -27,6 +27,11 @@ export class MainComponent {
     this.dataService.getAirports().subscribe((data) => {
       this.airports = data;
     });
+  }
+
+  // Через метод потому что при изменении переменной напрямую oneWay не всегда показывается как выбранный (без понятия почему)
+  changeTripType(boolean: boolean) {
+    this.isRoundTrip = boolean;
   }
 
   switchLocations() {

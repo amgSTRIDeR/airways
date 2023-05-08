@@ -1,23 +1,22 @@
 <form class="main-form">
   <div class="radio-buttons">
-    <label>
+    <label for="roundTrip">
       <input
-        [(ngModel)]="tripType"
         type="radio"
+        id="roundTrip"
         name="tripType"
-        value="roundTrip"
-        required
-        checked
+        [checked]="isRoundTrip"
+        (click)="changeTripType(true)"
       />
       Round Trip
     </label>
-    <label>
+    <label for="oneWay">
       <input
-        [(ngModel)]="tripType"
         type="radio"
-        name="tripType"
-        value="oneWay"
-        required
+        id="oneWay"
+        name="oneWay"
+        [checked]="!isRoundTrip"
+        (click)="changeTripType(false)"
       />
       One Way
     </label>
@@ -95,18 +94,19 @@
     </mat-select>
   </mat-form-field>
 
-  <!-- <mat-form-field>
-    <input
-      matInput
-      [matDatepicker]="departureDatePicker"
-      placeholder="Departure Date"
-    />
-    <mat-datepicker-toggle
-      matSuffix
-      [for]="departureDatePicker"
-    ></mat-datepicker-toggle>
-    <mat-datepicker #departureDatePicker></mat-datepicker>
-  </mat-form-field> -->
+  <mat-form-field appearance="fill">
+    <mat-label>Dates</mat-label>
+    <mat-date-range-input [rangePicker]="picker">
+      <input matStartDate placeholder="Start date" />
+      <input matEndDate placeholder="End date" />
+    </mat-date-range-input>
+    <mat-hint *ngIf="picker.opened"
+      ><span>{{ dateType$ | async }}</span
+      ><span> - {{ dateType$ | async }}</span></mat-hint
+    >
+    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-date-range-picker #picker></mat-date-range-picker>
+  </mat-form-field>
 
   <!-- <ng-container *ngIf="tripType === 'roundTrip'">
     <mat-form-field>
