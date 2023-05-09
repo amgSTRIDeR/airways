@@ -7,11 +7,11 @@ const Sort = createSelector(selectBasket, (state) => ({
   reverse: state.isReverse,
 }));
 
-const Flight = createSelector(selectBasket, (state) => state.flight);
+const Orders = createSelector(selectBasket, (state) => state.orders);
 const TotalPrice = createSelector(selectBasket, (state) => state.totalPrice);
 
 export const BasketSelectors = {
   Sort,
-  Flight,
+  Orders,
   TotalPrice,
 };

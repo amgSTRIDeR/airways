@@ -1,5 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 import {
+  EditFlight,
   PassengerInfo,
   SelectedFlight,
   Total,
@@ -27,6 +28,11 @@ const AddTotalPrice = createAction(
   props<Total>()
 );
 
+const EditFlightAction = createAction(
+  '[BOOKING PAGE] EditFlight',
+  props<EditFlight>()
+);
+
 export const BookingActions = {
   OnBookingPage,
   OutBookingPage,
@@ -37,4 +43,5 @@ export const BookingActions = {
   AddSelectedFlight,
   AddPassengersInformation,
   AddTotalPrice,
+  EditFlightAction,
 };

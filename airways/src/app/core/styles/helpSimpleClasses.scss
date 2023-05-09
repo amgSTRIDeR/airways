@@ -93,6 +93,18 @@
   gap: 5rem;
 }
 
+.f-w-400 {
+  font-weight: 400;
+}
+
+.f-w-500 {
+  font-weight: 500;
+}
+
+.f-w-700 {
+  font-weight: 700;
+}
+
 .fz-14 {
   font-size: 14px;
 }
@@ -123,6 +135,14 @@
 
 .text-secondary {
   color: $secondary-color;
+}
+
+.text-black {
+  color: black;
+}
+
+.price-secondary {
+  color: $secondary-price-color;
 }
 
 .bg-primary {

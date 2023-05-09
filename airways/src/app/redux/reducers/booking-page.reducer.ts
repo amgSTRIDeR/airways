@@ -6,7 +6,7 @@ import { MainPageActions } from '@redux/actions/main-page.actions';
 export const initialState: BookingPageState = {
   id: 'SomeId',
   onBookingPage: false,
-  currentPageDirection: 'review',
+  currentPageDirection: 'passengers',
   isEditWindowOpen: false,
   totalPrice: null,
   flights: {
@@ -148,5 +148,15 @@ export const BookingPageReducer = createReducer(
   on(BookingActions.AddTotalPrice, (state, action) => ({
     ...state,
     totalPrice: action,
+  })),
+  on(BookingActions.EditFlightAction, (state, action) => ({
+    ...state,
+    id: action.id,
+    flights: action.flights,
+    passengersInfo: action.passengersInfo,
+    passengersCount: action.passengersCount,
+    totalPrice: action.totalPrice,
+    currentPageDirection: 'flight',
+    onBookingPage: true,
   }))
 );

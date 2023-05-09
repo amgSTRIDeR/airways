@@ -62,3 +62,11 @@ export interface Total {
   infant: PersonTotal;
   totalPrice: number;
 }
+
+export interface EditFlight {
+  id: string;
+  flights: SelectedFlight;
+  passengersInfo: PassengerInfo;
+  passengersCount: PassengersCount;
+  totalPrice: Total;
+}

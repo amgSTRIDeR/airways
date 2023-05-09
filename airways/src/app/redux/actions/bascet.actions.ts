@@ -8,11 +8,6 @@ const PromoCode = createAction(
   props<{ code: string }>()
 );
 
-const checkFlight = createAction(
-  '[BASKET PAGE] Check Flight',
-  props<{ id: string }>()
-);
-
 const DeleteFlight = createAction(
   '[BASKET PAGE] Delete Flight',
   props<{ id: string }>()
@@ -23,14 +18,19 @@ const EditFlight = createAction(
   props<{ id: string }>()
 );
 
+const CheckFlight = createAction(
+  '[BASKET PAGE] Check Flight',
+  props<{ id: string }>()
+);
+
 const Pay = createAction('[BASKET PAGE] Pay');
 
 export const BaskedActions = {
   SortAction,
   AddFlight,
   PromoCode,
-  checkFlight,
   DeleteFlight,
   EditFlight,
   Pay,
+  CheckFlight,
 };

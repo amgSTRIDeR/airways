@@ -56,7 +56,7 @@ export class ReviewComponent implements OnDestroy {
   }
 
   addAllInfoToStore() {
-    const order = { ...this.allInfo, isChecked: false } as Order;
+    const order = { ...this.allInfo, isChecked: true } as Order;
     this.store.dispatch(BaskedActions.AddFlight(order));
   }
 }
