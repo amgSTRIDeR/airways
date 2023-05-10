@@ -12,6 +12,8 @@ import { PassengerCardComponent } from '@booking/components/passenger-card/passe
 import { OrderComponent } from './components/order/order.component';
 import { BgOrderDirective } from '@booking/directives/bg-order.directive';
 import { PriseComponent } from './components/prise/prise.component';
+import { OnePassengerReviewComponent } from './components/order/one-passenger-review/one-passenger-review.component';
+import { TotalComponent } from './pages/review/total/total.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +27,8 @@ import { PriseComponent } from './components/prise/prise.component';
     OrderComponent,
     BgOrderDirective,
     PriseComponent,
+    OnePassengerReviewComponent,
+    TotalComponent,
   ],
   imports: [CommonModule, BookingPageRoutingModule, SharedModule],
 })

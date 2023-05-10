@@ -4,7 +4,11 @@ import { MainPageActions } from '@redux/actions/main-page.actions';
 import { FlightRes } from '@redux/models/main-page.models';
 
 export const initialState: MainPageState = {
-  passengersCount: null,
+  passengersCount: {
+    adults: 1,
+    children: 1,
+    infants: 1,
+  },
   AirportsForward: null,
   AirportsBack: null,
   FlightForward: null,

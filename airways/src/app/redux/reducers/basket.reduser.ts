@@ -1,8 +1,28 @@
 import { BasketPageState } from '@redux/models/state.models';
 import { createReducer, on } from '@ngrx/store';
 import { BaskedActions } from '@redux/actions/bascet.actions';
-import { BasketFlight } from '@redux/models/basket.models';
+import { Order } from '@redux/models/basket.models';
 
+const totalPrise = (orders: Order[] | undefined) => {
+  if (orders === undefined) return 0;
+  return orders.reduce((acc, order) => {
+    if (order.isChecked) acc += +order.total.totalPrice;
+    return acc;
+  }, 0);
+};
+
+const checkFlight = (orders: Order[], id: string) => {
+  return orders.map((el) => {
+    if (el.id === id) {
+      el = { ...el, isChecked: !el.isChecked };
+    }
+    return el;
+  });
+};
+
+const notCheckedFlight = (orders: Order[]) => {
+  return orders.filter((el) => el.isChecked);
+};
 const changeReverse = (
   sortPrev: string,
   sortNext: string,
@@ -19,22 +39,168 @@ export const promoF = (
 ): number =>
   promoCode === currentPromoCode ? totalPrice * discont : totalPrice;
 
-export const deleteFlight = (
-  flight: BasketFlight[],
-  id: string
-): BasketFlight[] => flight.filter((el) => el.id !== id);
+export const deleteFlight = (flight: Order[], id: string): Order[] =>
+  flight.filter((el) => el.id !== id);
 
 export const initialState: BasketPageState = {
   sortType: 'Num',
   isReverse: false,
-  flight: [],
+  orders: [
+    {
+      flights: {
+        twoWays: true,
+        forwardFlight: {
+          avaible: 294,
+          flightNumber: 'PS-3911',
+          timeMins: 412,
+          form: {
+            key: 'AMS',
+            name: 'Amsterdam-Schiphol',
+            city: 'Amsterdam',
+            gmt: '+1.0',
+            country: 'Netherlands',
+          },
+          to: {
+            key: 'MAD',
+            name: 'Barajas',
+            city: 'Madrid',
+            gmt: '+1.0',
+            country: 'Spain',
+          },
+          takeoffDate: '2023-09-22T16:48:00.000Z',
+          landingDate: '2023-09-22T23:36:00.000Z',
+          price: {
+            eur: 470,
+            usd: 518.457,
+            rub: 41580.9,
+            pln: 2157.2999999999997,
+          },
+        },
+        backFlight: {
+          avaible: 294,
+          flightNumber: 'PS-3911',
+          timeMins: 412,
+          form: {
+            key: 'AMS',
+            name: 'Amsterdam-Schiphol',
+            city: 'Amsterdam',
+            gmt: '+1.0',
+            country: 'Netherlands',
+          },
+          to: {
+            key: 'MAD',
+            name: 'Barajas',
+            city: 'Madrid',
+            gmt: '+1.0',
+            country: 'Spain',
+          },
+          takeoffDate: '2023-09-22T16:48:00.000Z',
+          landingDate: '2023-09-22T23:36:00.000Z',
+          price: {
+            eur: 470,
+            usd: 518.457,
+            rub: 41580.9,
+            pln: 2157.2999999999997,
+          },
+        },
+      },
+      passengersInfo: {
+        adult: [
+          {
+            firstName: 'Pavel',
+            lastName: 'arabei',
+            gender: 'male',
+            birthdayDate: '2023-05-01T22:00:00.000Z',
+            invalid: 'true',
+          },
+          {
+            firstName: 'Anna',
+            lastName: 'arabei',
+            gender: 'female',
+            birthdayDate: '2023-05-01T22:00:00.000Z',
+            invalid: 'false',
+          },
+        ],
+        child: [
+          {
+            firstName: 'Pavel',
+            lastName: 'arabei',
+            gender: 'male',
+            birthdayDate: '2023-05-01T22:00:00.000Z',
+            invalid: 'true',
+          },
+        ],
+        infant: [
+          {
+            firstName: 'Pavel',
+            lastName: 'arabei',
+            gender: 'male',
+            birthdayDate: '2023-05-01T22:00:00.000Z',
+            invalid: 'true',
+          },
+        ],
+        details: {
+          countryCode: '+355',
+          phone: '7777777',
+          email: 'Pahsdfsdf@gmail.com',
+        },
+      },
+      passengersCount: {
+        adults: 1,
+        children: 1,
+        infants: 1,
+      },
+      total: {
+        adult: {
+          name: 'adult',
+          count: 3,
+          fare: 2820,
+          tax: 1410,
+          allPrice: 4230,
+        },
+        child: {
+          name: 'child',
+          count: 2,
+          fare: 1316,
+          tax: 658,
+          allPrice: 1974,
+        },
+        infant: {
+          name: 'infant',
+          count: 2,
+          fare: 376,
+          tax: 188,
+          allPrice: 564,
+        },
+        totalPrice: 6768,
+      },
+      id: 'SomeId',
+      isChecked: true,
+    },
+  ],
   discont: 0.7,
-  totalPrice: 0,
+  totalPrice: 6768,
   promoCode: '1111',
 };
 
 export const BasketPageReducer = createReducer(
   initialState,
+  on(BaskedActions.AddFlight, (state, action) => {
+    const isOrderExist = !!state.orders.find((order) => order.id === action.id);
+    let newOrders: Order[];
+    if (isOrderExist)
+      newOrders = [
+        ...state.orders.filter((order) => order.id !== action.id),
+        action,
+      ];
+    else newOrders = [...state.orders, action];
+
+    return {
+      ...state,
+      orders: newOrders,
+      totalPrice: totalPrise(newOrders),
+    };
+  }),
   on(BaskedActions.SortAction, (state, action) => ({
     ...state,
     isReverse: changeReverse(state.sortType, action.sort, state.isReverse),
@@ -49,12 +215,24 @@ export const BasketPageReducer = createReducer(
       state.discont
     ),
   })),
-  on(BaskedActions.DeleteFlight, (state, action) => ({
-    ...state,
-    flight: deleteFlight(state.flight, action.id),
-  })),
+  on(BaskedActions.DeleteFlight, (state, action) => {
+    const newOrders = deleteFlight(state.orders, action.id);
+    return {
+      ...state,
+      orders: newOrders,
+      totalPrice: totalPrise(newOrders),
+    };
+  }),
   on(BaskedActions.Pay, (state) => ({
     ...state,
-    flight: [],
-  }))
+    orders: notCheckedFlight(state.orders),
+  })),
+  on(BaskedActions.CheckFlight, (state, action) => {
+    const newOrders = checkFlight(state.orders, action.id);
+    return {
+      ...state,
+      orders: newOrders,
+      totalPrice: totalPrise(newOrders),
+    };
+  })
 );

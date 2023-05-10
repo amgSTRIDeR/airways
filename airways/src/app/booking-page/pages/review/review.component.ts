@@ -1,101 +1,62 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { AuthActions } from '@redux/actions/auth.actions';
-
-export interface plainInformation {
-  plane: string;
-  route: string;
-  date: string;
-  time: string;
-}
-
-export interface passengerInformation {
-  name: string;
-  checkedBag: string;
-  cabinBag: string;
-  seat: string;
-}
-
-export interface PersonTotal {
-  name: string;
-  count: number;
-  fare: number;
-  tax: number;
-}
-
-export interface Total {
-  adult: PersonTotal;
-  child: PersonTotal;
-  infant: PersonTotal;
-}
-
-const data: plainInformation = {
-  plane: 'FR 1925',
-  route: 'Dublin — Warsaw Modlin',
-  date: 'Wednesday, 1 March, 2023',
-  time: '8:40 — 12:00 ',
-};
-const passenger: passengerInformation = {
-  name: 'Harry Potter',
-  checkedBag: '1checked bag (total 23 kg) included',
-  cabinBag: '1 cabin bag + 1 personal item (max. 8 kg) included',
-  seat: 'Seat 19E',
-};
-const passengers = [passenger, passenger, passenger];
-
-const total = {
-  adult: {
-    name: 'adult',
-    count: 3,
-    fare: 150,
-    tax: 90,
-  },
-
-  child: {
-    name: 'child',
-    count: 3,
-    fare: 100,
-    tax: 90,
-  },
-
-  infant: {
-    name: 'infant',
-    count: 3,
-    fare: 50,
-    tax: 10,
-  },
-};
+import { Observable, Subscription } from 'rxjs';
+import {
+  AllInformation,
+  PassengerInfo,
+  SelectedFlight,
+} from '@redux/models/booking-page.models';
+import { BookingSelectors } from '@redux/selectors/booking-page.selectors';
+import { BookingActions } from '@redux/actions/booking-page.actions';
+import { Router } from '@angular/router';
+import { Order } from '@redux/models/basket.models';
+import { BaskedActions } from '@redux/actions/bascet.actions';
 
 @Component({
   selector: 'app-review',
   templateUrl: './review.component.html',
   styleUrls: ['./review.component.scss'],
 })
-export class ReviewComponent {
-  data: plainInformation;
-  passengers: passengerInformation[];
-  total: Total;
-  totalValue: number;
+export class ReviewComponent implements OnDestroy {
+  public flight$: Observable<SelectedFlight | null> = this.store.select(
+    BookingSelectors.flightsSelector
+  );
+  public passengersInfo$: Observable<PassengerInfo | null> = this.store.select(
+    BookingSelectors.passengersInfoSelector
+  );
 
-  constructor(private store: Store) {
-    this.data = data;
-    this.passengers = passengers;
-    this.total = total;
-    this.totalValue = this.totalF();
+  private allInfo$: Observable<AllInformation> = this.store.select(
+    BookingSelectors.allInformationSelector
+  );
+
+  private allInfoSub: Subscription = this.allInfo$.subscribe(
+    (allInfo) => (this.allInfo = allInfo)
+  );
+  private allInfo!: AllInformation;
+
+  constructor(private store: Store, private router: Router) {}
+
+  ngOnDestroy(): void {
+    this.allInfoSub.unsubscribe();
   }
 
-  totalF(): number {
-    return (
-      this.total.infant.tax * this.total.infant.count +
-      this.total.infant.fare * this.total.infant.count +
-      this.total.adult.tax * this.total.adult.count +
-      this.total.adult.fare * this.total.adult.count +
-      this.total.child.tax * this.total.child.count +
-      this.total.child.fare * this.total.child.count
-    );
+  backToPassengers(): void {
+    this.store.dispatch(BookingActions.OnPassengersSubPage());
   }
 
-  sss() {
-    this.store.dispatch(AuthActions.meStart({ email: 'asdasd' }));
+  goToMainPage() {
+    this.addAllInfoToStore();
+    this.router.navigate(['main']);
+  }
+
+  //allInformationSelector
+  goToShoping() {
+    this.addAllInfoToStore();
+    this.router.navigate(['shopping-card']);
+  }
+
+  addAllInfoToStore() {
+    const order = { ...this.allInfo, isChecked: true } as Order;
+    this.store.dispatch(BaskedActions.AddFlight(order));
   }
 }

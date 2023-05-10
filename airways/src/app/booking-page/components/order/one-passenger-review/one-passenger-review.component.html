@@ -1,0 +1,16 @@
+<ng-container *ngFor="let passenger of passengers; let i = index">
+  <mat-card-content class="w-full">
+    <div class="passenger">
+      <p>
+        {{ passenger.firstName | uppercase }}
+        {{ passenger.lastName | uppercase }}
+      </p>
+      <ul>
+        <li>1checked bag (total 23 kg) included</li>
+        <li>1 cabin bag + 1 personal item (max. 8 kg) included</li>
+        <li>Seat 20E</li>
+      </ul>
+    </div>
+  </mat-card-content>
+  <mat-divider></mat-divider>
+</ng-container>

@@ -20,12 +20,14 @@ export interface FlightRes {
     country: string;
     city: string;
     name: string;
+    gmt: string;
   };
   to: {
     key: string;
     country: string;
     city: string;
     name: string;
+    gmt: string;
   };
   takeoffDate: string;
   landingDate: string;

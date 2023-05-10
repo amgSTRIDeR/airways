@@ -46,11 +46,18 @@
   </div>
   <div class="flex w-full justify-end button-container">
     <div class="flex gap-2">
-      <button class="button" mat-button color="primary">Back</button>
+      <button
+        (click)="backToFlight()"
+        class="button"
+        type="button"
+        mat-button
+        color="primary"
+      >
+        Back
+      </button>
       <button
         class="button"
         mat-raised-button
-        [disabled]="!passengersForm.valid"
         color="primary"
         (click)="logForm()"
       >
