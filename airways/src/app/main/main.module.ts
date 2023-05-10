@@ -9,6 +9,7 @@ import { AirportsFilterPipe } from './pipes/airports-filter.pipe';
 import { FormsModule } from '@angular/forms';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { DateTypeService } from '@core/services/date-type.service';
 
 @NgModule({
   declarations: [MainComponent, AirportsFilterPipe],
@@ -21,5 +22,6 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatDatepickerModule,
     MatNativeDateModule,
   ],
+  providers: [DateTypeService],
 })
 export class MainModule {}

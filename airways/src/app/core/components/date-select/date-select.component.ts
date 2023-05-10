@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { DateTypeService } from '@core/services/date-type.service';
 import { Store, select } from '@ngrx/store';
 import { SettingsActions } from '@redux/actions/settings.actions';
 import { DateType } from '@redux/models/settings.models';

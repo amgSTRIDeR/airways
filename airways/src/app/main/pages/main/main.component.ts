@@ -4,6 +4,8 @@ import { SettingsSelectors } from '@redux/selectors/settings.selectors';
 import { Store, select } from '@ngrx/store';
 import { DataService } from '@core/services/data.service';
 import { AirportsRes } from '@redux/models/main-page.models';
+import { DateAdapter } from '@angular/material/core';
+import { DateTypeService } from '@core/services/date-type.service';
 
 @Component({
   selector: 'app-main',
@@ -22,10 +24,16 @@ export class MainComponent {
 
   constructor(
     private store: Store<SettingsState>,
-    private readonly dataService: DataService
+    private readonly dataService: DataService,
+    private adapter: DateAdapter<Date>,
+    private dateTypeService: DateTypeService
   ) {
     this.dataService.getAirports().subscribe((data) => {
       this.airports = data;
+    });
+
+    this.dateType$.subscribe((dateType) => {
+      this.dateTypeService.changeDateType(dateType);
     });
   }
 
