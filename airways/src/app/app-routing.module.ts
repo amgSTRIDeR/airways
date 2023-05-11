@@ -5,7 +5,7 @@ import { ErrorPageComponent } from '@core/pages/error-page/error-page.component'
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/booking-page',
+    redirectTo: '/shopping-card',
     pathMatch: 'full',
   },
   {

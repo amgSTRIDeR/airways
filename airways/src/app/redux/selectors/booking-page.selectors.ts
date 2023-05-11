@@ -3,7 +3,7 @@ import { BookingPageState } from '@redux/models/state.models';
 import { selectMainPage } from '@redux/selectors/main-page.selectors';
 
 export const selectBooking = createFeatureSelector<BookingPageState>('booking');
-
+const idSelector = createSelector(selectBooking, (state) => state.id);
 const onBookingPageSelector = createSelector(
   selectBooking,
   (state) => state.onBookingPage
@@ -25,13 +25,16 @@ const allInformationSelector = createSelector(
   selectBooking,
   selectMainPage,
   (bookState, MainState) => ({
-    selectedFlight: bookState.flights,
+    flights: bookState.flights,
     passengersInfo: bookState.passengersInfo,
     passengersCount: MainState.passengersCount,
+    total: bookState.totalPrice,
+    id: bookState.id,
   })
 );
 
 export const BookingSelectors = {
+  idSelector,
   onBookingPageSelector,
   currentPageDirectionSelector,
   isEditWindowOpenSelector,

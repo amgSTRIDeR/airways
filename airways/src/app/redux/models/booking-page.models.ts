@@ -27,12 +27,6 @@ export interface PassengerInfo {
   details: PassengersDetails;
 }
 
-export interface AllInformation {
-  selectedFlight: SelectedFlight;
-  passengersInfo: PassengerInfo;
-  passengersCount: PassengersCount;
-}
-
 export interface ReadyFlight {
   flightNumber: string;
   flight: string[];
@@ -44,4 +38,35 @@ export interface ReviewPageInfo {
   flightNumber: string;
   flight: string[];
   tripType: string;
+}
+
+export interface AllInformation {
+  flights: SelectedFlight | null;
+  passengersInfo: PassengerInfo | null;
+  passengersCount: PassengersCount | null;
+  total: Total | null;
+  id: string | null;
+}
+
+export interface PersonTotal {
+  name: string;
+  count: number;
+  fare: number;
+  tax: number;
+  allPrice: number;
+}
+
+export interface Total {
+  adult: PersonTotal;
+  child: PersonTotal;
+  infant: PersonTotal;
+  totalPrice: number;
+}
+
+export interface EditFlight {
+  id: string;
+  flights: SelectedFlight;
+  passengersInfo: PassengerInfo;
+  passengersCount: PassengersCount;
+  totalPrice: Total;
 }

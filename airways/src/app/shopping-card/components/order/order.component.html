@@ -1,0 +1,64 @@
+<div class="order-container">
+  <div class="flex gap-half item-center">
+    <mat-checkbox
+      color="primary"
+      [checked]="data.isChecked"
+      (click)="addCheckboxValueToStore()"
+      class="example-margin"
+    ></mat-checkbox>
+    <mat-card-title style="color: #0090bd; font-size: 20px"
+      >{{ data.flightNum }}
+    </mat-card-title>
+  </div>
+  <div class="column justify-around">
+    <p>{{ data.from }} - {{ data.to }}</p>
+    <p *ngIf="data.backDate">{{ data.to }} - {{ data.from }}</p>
+  </div>
+  <div class="flex item-center">
+    <p *ngIf="data.backDate; else roundTrip">Round Trip</p>
+    <ng-template #roundTrip>
+      <p>One way</p>
+    </ng-template>
+  </div>
+  <div class="justify-around column">
+    <p>
+      {{ data.forvardDate.landingDate | date : "d MMM, y" }},
+      {{ data.forvardDate.landingDate | date : "h:mm" }} -
+      {{ data.forvardDate.takeoffDate | date : "h:mm" }}
+    </p>
+    <p *ngIf="data.backDate">
+      {{ data.backDate.landingDate | date : "d MMM, y" }},
+      {{ data.backDate.landingDate | date : "h:mm" }} -
+      {{ data.backDate.takeoffDate | date : "h:mm" }}
+    </p>
+  </div>
+  <div class="justify-around column">
+    <p *ngIf="data.adult > 0">{{ data.adult }} x Adult</p>
+    <p *ngIf="data.child > 0">{{ data.child }} x Child</p>
+    <p *ngIf="data.infant > 0">{{ data.infant }} x Infant</p>
+  </div>
+  <div
+    *ngIf="currency$ | async as currency"
+    class="flex justify-between item-center"
+  >
+    <p class="price-secondary">{{ data.price | currency : currency }}</p>
+    <div class="menu">
+      <button
+        mat-icon-button
+        [matMenuTriggerFor]="menu"
+        aria-label="Example icon-button with a menu"
+      >
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button (click)="deleteFlight()" mat-menu-item>
+          <span>Delete</span>
+        </button>
+        <button (click)="editFlight()" mat-menu-item>
+          <span>Edit</span>
+        </button>
+      </mat-menu>
+    </div>
+  </div>
+</div>
+<mat-divider></mat-divider>

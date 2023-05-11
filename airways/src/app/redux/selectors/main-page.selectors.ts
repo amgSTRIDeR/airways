@@ -2,7 +2,6 @@ import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { MainPageState } from '@redux/models/state.models';
 
 export const selectMainPage = createFeatureSelector<MainPageState>('mainPage');
-
 const PassengersCount = createSelector(
   selectMainPage,
   (state) => state.passengersCount

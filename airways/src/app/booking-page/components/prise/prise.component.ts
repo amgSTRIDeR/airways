@@ -1,5 +1,7 @@
 import { Component, Input } from '@angular/core';
-import { PersonTotal } from '@booking/pages/review/review.component';
+import { Store } from '@ngrx/store';
+import { SettingsSelectors } from '@redux/selectors/settings.selectors';
+import { PersonTotal } from '@redux/models/booking-page.models';
 
 @Component({
   selector: 'app-prise',
@@ -9,4 +11,7 @@ import { PersonTotal } from '@booking/pages/review/review.component';
 export class PriseComponent {
   @Input() total!: PersonTotal;
   currency = 'EUR';
+  public currency$ = this.store.select(SettingsSelectors.CurrencySelector);
+
+  constructor(private store: Store) {}
 }
