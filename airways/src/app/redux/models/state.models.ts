@@ -34,6 +34,7 @@ export interface MainPageState {
   flightForward: Date | null;
   flightBack: Date | null;
   flightsForBooking: FlightsRes | null;
+  flightsForBookingReturn: FlightsRes | null;
 }
 
 export type CurrentPageDirection = 'flight' | 'passengers' | 'review';

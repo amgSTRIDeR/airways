@@ -29,7 +29,12 @@ const AirportBack = createAction(
 );
 
 const FlightsForBooking = createAction(
-  '[MAIN PAGE] Airport back',
+  '[MAIN PAGE] Flights for booking',
+  props<FlightsRes>()
+);
+
+const FlightsForBookingReturn = createAction(
+  '[MAIN PAGE] Flights for booking return',
   props<FlightsRes>()
 );
 
@@ -40,19 +45,5 @@ export const MainPageActions = {
   AirportForward,
   AirportBack,
   FlightsForBooking,
+  FlightsForBookingReturn,
 };
-
-// const selectCurrency = createAction(
-//   '[Settings] Select Currency',
-//   props<CurrencyI>()
-// );
-
-// const selectDateType = createAction(
-//   '[Settings] Select DateType',
-//   props<DateI>()
-// );
-
-// export const SettingsActions = {
-//   selectDateType,
-//   selectCurrency,
-// };

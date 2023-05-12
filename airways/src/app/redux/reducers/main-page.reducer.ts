@@ -13,6 +13,7 @@ export const initialState: MainPageState = {
   flightForward: null,
   flightBack: null,
   flightsForBooking: null,
+  flightsForBookingReturn: null,
 };
 
 export const MainPageReducer = createReducer(
@@ -45,5 +46,10 @@ export const MainPageReducer = createReducer(
   on(MainPageActions.FlightsForBooking, (state, action) => ({
     ...state,
     flightsForBooking: { ...action },
+  })),
+
+  on(MainPageActions.FlightsForBookingReturn, (state, action) => ({
+    ...state,
+    flightsForBookingReturn: { ...action },
   }))
 );

@@ -3,11 +3,7 @@ import { SettingsState } from '@redux/models/state.models';
 import { SettingsSelectors } from '@redux/selectors/settings.selectors';
 import { Store, select } from '@ngrx/store';
 import { DataService } from '@core/services/data.service';
-import {
-  AirportsRes,
-  FlightsRes,
-  PassengersCount,
-} from '@redux/models/main-page.models';
+import { AirportsRes, PassengersCount } from '@redux/models/main-page.models';
 import { DateTypeService } from '@core/services/date-type.service';
 import { MainPageSelectors } from '@redux/selectors/main-page.selectors';
 import { MainPageActions } from '@redux/actions/main-page.actions';
@@ -68,6 +64,18 @@ export class MainComponent {
         }
       }
     );
+
+    // this.store
+    //   .pipe(select(MainPageSelectors.FlightsForBookingSelector))
+    //   .subscribe((flights) => {
+    //     console.log(flights);
+    //   });
+
+    // this.store
+    //   .pipe(select(MainPageSelectors.FlightsForBookingReturnSelector))
+    //   .subscribe((flights) => {
+    //     console.log(flights);
+    //   });
   }
 
   mainForm = this.fb.group({
@@ -199,6 +207,9 @@ export class MainComponent {
         )
         .subscribe((data) => {
           this.store.dispatch(MainPageActions.FlightsForBooking(data[0]));
+          this.store.dispatch(
+            MainPageActions.FlightsForBookingReturn(data[1] || null)
+          );
           this.router.navigate(['/booking-page']);
         });
     }
