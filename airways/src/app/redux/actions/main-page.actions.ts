@@ -1,8 +1,8 @@
 import { createAction, props } from '@ngrx/store';
 import {
   AirportsRes,
-  Flight,
-  FlightRes,
+  FlightsRes,
+  IDate,
   PassengersCount,
 } from '@redux/models/main-page.models';
 
@@ -11,50 +11,48 @@ const PassengersCount = createAction(
   props<PassengersCount>()
 );
 
-const FlightStart = createAction('[MAIN PAGE] Flight Start', props<Flight>());
+const FlightForward = createAction(
+  '[MAIN PAGE] Flight forward',
+  props<IDate>()
+);
 
-const FlightSuccess = createAction(
-  '[MAIN PAGE] Flight Success',
-  props<{ flight: FlightRes[] }>()
-);
-const FlightError = createAction(
-  '[MAIN PAGE] Flight Error',
-  props<{ error: string }>()
-);
-const AirportsForwardStart = createAction(
-  '[MAIN PAGE] Airports Start',
-  props<{ search: string }>
-);
-const AirportsForwardSuccess = createAction(
-  '[MAIN PAGE] Airports Success',
+const FlightBack = createAction('[MAIN PAGE] Flight back', props<IDate>());
+
+const AirportForward = createAction(
+  '[MAIN PAGE] Airport forward',
   props<AirportsRes>()
 );
-const AirportsForwardError = createAction(
-  '[MAIN PAGE] Airports Error',
-  props<{ error: string }>()
-);
-const AirportsBackStart = createAction(
-  '[MAIN PAGE] Airports Start',
-  props<{ search: string }>
-);
-const AirportsBackSuccess = createAction(
-  '[MAIN PAGE] Airports Success',
+
+const AirportBack = createAction(
+  '[MAIN PAGE] Airport back',
   props<AirportsRes>()
 );
-const AirportsBackError = createAction(
-  '[MAIN PAGE] Airports Error',
-  props<{ error: string }>()
+
+const FlightsForBooking = createAction(
+  '[MAIN PAGE] Airport back',
+  props<FlightsRes>()
 );
 
 export const MainPageActions = {
   PassengersCount,
-  FlightStart,
-  FlightSuccess,
-  FlightError,
-  AirportsForwardStart,
-  AirportsForwardSuccess,
-  AirportsForwardError,
-  AirportsBackStart,
-  AirportsBackSuccess,
-  AirportsBackError,
+  FlightForward,
+  FlightBack,
+  AirportForward,
+  AirportBack,
+  FlightsForBooking,
 };
+
+// const selectCurrency = createAction(
+//   '[Settings] Select Currency',
+//   props<CurrencyI>()
+// );
+
+// const selectDateType = createAction(
+//   '[Settings] Select DateType',
+//   props<DateI>()
+// );
+
+// export const SettingsActions = {
+//   selectDateType,
+//   selectCurrency,
+// };

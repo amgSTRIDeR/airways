@@ -2,7 +2,7 @@ import { CurrencyType, DateType } from '@redux/models/settings.models';
 import { UserRes } from '@redux/models/auth.models';
 import {
   AirportsRes,
-  FlightRes,
+  FlightsRes,
   PassengersCount,
 } from '@redux/models/main-page.models';
 import {
@@ -29,13 +29,11 @@ export interface AuthState {
 
 export interface MainPageState {
   passengersCount: PassengersCount | null;
-  AirportsForward: AirportsRes | null;
-  AirportsBack: AirportsRes | null;
-  FlightForward: FlightRes | null;
-  FlightBack: FlightRes | null;
-  AirportsForwardError: string | null;
-  AirportsBackError: string | null;
-  FlightError: string | null;
+  airportForward: AirportsRes | null;
+  airportBack: AirportsRes | null;
+  flightForward: Date | null;
+  flightBack: Date | null;
+  flightsForBooking: FlightsRes | null;
 }
 
 export type CurrentPageDirection = 'flight' | 'passengers' | 'review';

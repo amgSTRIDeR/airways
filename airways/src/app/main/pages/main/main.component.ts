@@ -3,10 +3,16 @@ import { SettingsState } from '@redux/models/state.models';
 import { SettingsSelectors } from '@redux/selectors/settings.selectors';
 import { Store, select } from '@ngrx/store';
 import { DataService } from '@core/services/data.service';
-import { AirportsRes, PassengersCount } from '@redux/models/main-page.models';
+import {
+  AirportsRes,
+  FlightsRes,
+  PassengersCount,
+} from '@redux/models/main-page.models';
 import { DateTypeService } from '@core/services/date-type.service';
 import { MainPageSelectors } from '@redux/selectors/main-page.selectors';
 import { MainPageActions } from '@redux/actions/main-page.actions';
+import { FormBuilder } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-main',
@@ -15,26 +21,35 @@ import { MainPageActions } from '@redux/actions/main-page.actions';
 })
 export class MainComponent {
   airports: AirportsRes[] = [];
-  public originAirport: AirportsRes | null = null;
-  public destinationAirport: AirportsRes | null = null;
-
-  dateType$ = this.store.pipe(select(SettingsSelectors.DateTypeSelector));
-
-  passengersCount$ = this.store.pipe(select(MainPageSelectors.PassengersCount));
-
-  public adultsCount = 0;
+  public adultsCount = 1;
   public childrenCount = 0;
   public infantsCount = 0;
-
   public isRoundTrip = true;
-  public departureDate!: Date;
-  public returnDate!: Date;
   public isHintVisible = false;
+  public originAirport: AirportsRes | null = null;
+  public destinationAirport: AirportsRes | null = null;
+  public departureDate: Date | null = null;
+  public returnDate: Date | null = null;
+
+  dateType$ = this.store.pipe(select(SettingsSelectors.DateTypeSelector));
+  // flightForward$ = this.store.pipe(
+  //   select(MainPageSelectors.FlightForwardSelector)
+  // );
+  // flightBack$ = this.store.pipe(select(MainPageSelectors.FlightBackSelector));
+
+  // airportForward$ = this.store.pipe(
+  //   select(MainPageSelectors.AirportForwardSelector)
+  // );
+  // airportBack$ = this.store.pipe(select(MainPageSelectors.AirportBackSelector));
+
+  passengersCount$ = this.store.pipe(select(MainPageSelectors.PassengersCount));
 
   constructor(
     private store: Store<SettingsState>,
     private readonly dataService: DataService,
-    private dateTypeService: DateTypeService
+    private dateTypeService: DateTypeService,
+    private fb: FormBuilder,
+    private router: Router
   ) {
     this.dataService.getAirports().subscribe((data) => {
       this.airports = data;
@@ -55,6 +70,29 @@ export class MainComponent {
     );
   }
 
+  mainForm = this.fb.group({
+    // title: [
+    //   '',
+    //   [Validators.required, Validators.minLength(3), Validators.maxLength(20)],
+    // ],
+    // description: ['', Validators.maxLength(255)],
+    // imageLink: [
+    //   '',
+    //   [
+    //     Validators.required,
+    //     Validators.pattern(/^(http(s?):\/\/).+(\.(jpeg|jpg|png|gif))$/),
+    //   ],
+    // ],
+    // videoLink: [
+    //   '',
+    //   [
+    //     Validators.required,
+    //     Validators.pattern(/^(http(s?):\/\/).+(\.(mp4|mpeg|avi|mov))$/),
+    //   ],
+    // ],
+    // creationDate: ['', [Validators.required, this.dateValidator]],
+  });
+
   // Через метод потому что при изменении переменной напрямую oneWay не всегда показывается как выбранный (без понятия почему)
   changeTripType(boolean: boolean) {
     this.isRoundTrip = boolean;
@@ -65,12 +103,15 @@ export class MainComponent {
       this.destinationAirport,
       this.originAirport,
     ];
+
+    this.setOriginAirport();
+    this.setDestinationAirport();
   }
 
   decreasePassengersCount(type: string) {
     switch (type) {
       case 'adults': {
-        if (this.adultsCount > 0) {
+        if (this.adultsCount > 1) {
           this.store.dispatch(
             MainPageActions.PassengersCount({
               adults: this.adultsCount - 1,
@@ -140,6 +181,54 @@ export class MainComponent {
         );
         break;
       }
+    }
+  }
+
+  onSubmit() {
+    if (
+      this.originAirport !== null &&
+      this.destinationAirport !== null &&
+      this.departureDate !== null
+    ) {
+      this.dataService
+        .searchFlight(
+          this.originAirport?.key,
+          this.destinationAirport?.key,
+          this.departureDate,
+          this.returnDate
+        )
+        .subscribe((data) => {
+          this.store.dispatch(MainPageActions.FlightsForBooking(data[0]));
+          this.router.navigate(['/booking-page']);
+        });
+    }
+  }
+
+  setDepartureDate() {
+    this.store.dispatch(
+      MainPageActions.FlightForward({
+        date: this.departureDate,
+      })
+    );
+  }
+
+  setReturnDate() {
+    this.store.dispatch(
+      MainPageActions.FlightBack({
+        date: this.returnDate,
+      })
+    );
+  }
+
+  setOriginAirport() {
+    if (this.originAirport !== null) {
+      this.store.dispatch(MainPageActions.AirportForward(this.originAirport));
+    }
+  }
+
+  setDestinationAirport() {
+    if (this.destinationAirport !== null) {
+      this.store.dispatch(MainPageActions.AirportBack(this.destinationAirport));
     }
   }
 }

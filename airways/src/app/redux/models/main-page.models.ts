@@ -4,30 +4,30 @@ export interface PassengersCount {
   infants: number;
 }
 
-export interface Flight {
-  fromKey: string;
-  toKey: string;
-  forwardDate: string;
-  backDate?: string;
+export interface IDate {
+  date: Date | null;
 }
 
 export interface FlightRes {
-  avaible: number;
+  seats: {
+    total: number;
+    avaible: number;
+  };
   flightNumber: string;
   timeMins: number;
   form: {
     key: string;
-    country: string;
-    city: string;
     name: string;
+    city: string;
     gmt: string;
+    country: string;
   };
   to: {
     key: string;
-    country: string;
-    city: string;
     name: string;
+    city: string;
     gmt: string;
+    country: string;
   };
   takeoffDate: string;
   landingDate: string;
@@ -36,6 +36,21 @@ export interface FlightRes {
     usd: number;
     rub: number;
     pln: number;
+  };
+}
+
+export interface FlightsRes extends FlightRes {
+  otherFlights: {
+    '1'?: FlightRes;
+    '2'?: FlightRes;
+    '3'?: FlightRes;
+    '4'?: FlightRes;
+    '5'?: FlightRes;
+    '-5'?: FlightRes;
+    '-4'?: FlightRes;
+    '-3'?: FlightRes;
+    '-2'?: FlightRes;
+    '-1'?: FlightRes;
   };
 }
 

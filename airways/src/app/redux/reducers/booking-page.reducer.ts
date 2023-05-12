@@ -12,7 +12,10 @@ export const initialState: BookingPageState = {
   flights: {
     twoWays: true,
     forwardFlight: {
-      avaible: 294,
+      seats: {
+        total: 676,
+        avaible: 319,
+      },
       flightNumber: 'PS-3911',
       timeMins: 412,
       form: {
@@ -39,7 +42,10 @@ export const initialState: BookingPageState = {
       },
     },
     backFlight: {
-      avaible: 294,
+      seats: {
+        total: 676,
+        avaible: 319,
+      },
       flightNumber: 'PS-3911',
       timeMins: 412,
       form: {

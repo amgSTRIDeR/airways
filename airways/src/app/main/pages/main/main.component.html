@@ -1,4 +1,4 @@
-<form class="main-form">
+<form class="main-form" (ngSubmit)="onSubmit()">
   <div class="radio-buttons">
     <label for="roundTrip">
       <input
@@ -28,9 +28,11 @@
   >
     <mat-label>From</mat-label>
     <mat-select
-      [(value)]="originAirport"
+      [(ngModel)]="originAirport"
+      name="originAirport"
       class="location-select"
       placeholder="Choose your origin"
+      (ngModelChange)="setOriginAirport()"
     >
       <mat-select-trigger>
         <span>{{ originAirport?.city }}</span>
@@ -99,15 +101,21 @@
     <mat-date-range-input [rangePicker]="picker">
       <input
         matStartDate
+        name="departureDate"
         placeholder="Depart"
         (focus)="isHintVisible = true"
         (blur)="isHintVisible = false"
+        [(ngModel)]="departureDate"
+        (ngModelChange)="setDepartureDate()"
       />
       <input
         matEndDate
+        name="returnDate"
         placeholder="Return"
         (focus)="isHintVisible = true"
         (blur)="isHintVisible = false"
+        [(ngModel)]="returnDate"
+        (ngModelChange)="setReturnDate()"
       />
     </mat-date-range-input>
     <mat-hint *ngIf="picker.opened || isHintVisible"
@@ -122,10 +130,13 @@
     <mat-label>Date</mat-label>
     <input
       matInput
+      name="departureDate"
       [matDatepicker]="picker"
       placeholder="Depart"
       (focus)="isHintVisible = true"
       (blur)="isHintVisible = false"
+      [(ngModel)]="departureDate"
+      (ngModelChange)="setDepartureDate()"
     />
     <mat-hint *ngIf="picker.opened || isHintVisible">{{
       dateType$ | async
@@ -133,17 +144,6 @@
     <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker #picker></mat-datepicker>
   </mat-form-field>
-
-  <!-- <mat-expansion-panel>
-      <mat-expansion-panel-header>
-        <mat-panel-title> Passengers </mat-panel-title>
-        <mat-panel-description>
-          {{ passengersCount.adults }} Adult, {{ passengersCount.children }} Child,
-          {{ passengersCount.infants }} Infant,
-        </mat-panel-description>
-      </mat-expansion-panel-header>
-      <p>This is the primary content of the panel.</p>
-    </mat-expansion-panel> -->
 
   <button mat-button [matMenuTriggerFor]="passengersMenu">
     Passengers
@@ -196,20 +196,5 @@
     </ng-template>
   </mat-menu>
 
-  <!-- <ng-container *ngIf="tripType === 'roundTrip'">
-    <mat-form-field>
-      <input
-        matInput
-        [matDatepicker]="returnDatePicker"
-        placeholder="Return Date"
-      />
-      <mat-datepicker-toggle
-        matSuffix
-        [for]="returnDatePicker"
-      ></mat-datepicker-toggle>
-      <mat-datepicker #returnDatePicker></mat-datepicker>
-    </mat-form-field>
-  </ng-container> -->
-
-  <button type="submit">Submit</button>
+  <button type="submit" [disabled]="!mainForm.valid">Submit</button>
 </form>

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { AirportsRes } from '@redux/models/main-page.models';
+import { AirportsRes, FlightsRes } from '@redux/models/main-page.models';
 
 @Injectable({
   providedIn: 'root',
@@ -20,5 +20,27 @@ export class DataService {
       '/api/search/airport',
       this.httpOptions
     );
+  }
+
+  searchFlight(
+    fromKey: string,
+    toKey: string,
+    forwardDate: Date,
+    backDate: Date | null
+  ) {
+    const url = '/api/search/flight';
+    const body = {
+      fromKey: fromKey,
+      toKey: toKey,
+      forwardDate: forwardDate,
+      backDate: backDate,
+    };
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+    };
+
+    return this.http.post<FlightsRes[]>(url, body, httpOptions);
   }
 }
