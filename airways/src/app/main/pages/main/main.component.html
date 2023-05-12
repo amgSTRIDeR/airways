@@ -94,19 +94,107 @@
     </mat-select>
   </mat-form-field>
 
-  <mat-form-field appearance="fill">
+  <mat-form-field appearance="fill" *ngIf="isRoundTrip">
     <mat-label>Dates</mat-label>
     <mat-date-range-input [rangePicker]="picker">
-      <input matStartDate placeholder="Start date" />
-      <input matEndDate placeholder="End date" />
+      <input
+        matStartDate
+        placeholder="Depart"
+        (focus)="isHintVisible = true"
+        (blur)="isHintVisible = false"
+      />
+      <input
+        matEndDate
+        placeholder="Return"
+        (focus)="isHintVisible = true"
+        (blur)="isHintVisible = false"
+      />
     </mat-date-range-input>
-    <mat-hint *ngIf="picker.opened"
+    <mat-hint *ngIf="picker.opened || isHintVisible"
       ><span>{{ dateType$ | async }}</span
       ><span> - {{ dateType$ | async }}</span></mat-hint
     >
     <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-date-range-picker #picker></mat-date-range-picker>
   </mat-form-field>
+
+  <mat-form-field appearance="fill" *ngIf="!isRoundTrip">
+    <mat-label>Date</mat-label>
+    <input
+      matInput
+      [matDatepicker]="picker"
+      placeholder="Depart"
+      (focus)="isHintVisible = true"
+      (blur)="isHintVisible = false"
+    />
+    <mat-hint *ngIf="picker.opened || isHintVisible">{{
+      dateType$ | async
+    }}</mat-hint>
+    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+
+  <!-- <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title> Passengers </mat-panel-title>
+        <mat-panel-description>
+          {{ passengersCount.adults }} Adult, {{ passengersCount.children }} Child,
+          {{ passengersCount.infants }} Infant,
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <p>This is the primary content of the panel.</p>
+    </mat-expansion-panel> -->
+
+  <button mat-button [matMenuTriggerFor]="passengersMenu">
+    Passengers
+    <p>
+      {{ adultsCount }} Adult, {{ childrenCount }} Child,
+      {{ infantsCount }} Infant
+    </p>
+  </button>
+  <mat-menu #passengersMenu="matMenu">
+    <ng-template matMenuContent>
+      <div class="passenger-item-wrapper" mat-menu-item>
+        <p class="passenger-wrapper">
+          <span class="passenger-title">Adults</span
+          ><span class="passenger-subtitle">14+ years</span>
+        </p>
+        <div>
+          <button (click)="decreasePassengersCount('adults')">-</button>
+          <span>{{ adultsCount }}</span>
+          <button mat-icon-button (click)="increasePassengersCount('adults')">
+            +
+          </button>
+        </div>
+      </div>
+      <div class="passenger-item-wrapper" mat-menu-item>
+        <p class="passenger-wrapper">
+          <span class="passenger-title">Child</span
+          ><span class="passenger-subtitle">2-14 years</span>
+        </p>
+        <div>
+          <button (click)="decreasePassengersCount('children')">-</button>
+          <span>{{ childrenCount }}</span>
+          <button mat-icon-button (click)="increasePassengersCount('children')">
+            +
+          </button>
+        </div>
+      </div>
+      <div class="passenger-item-wrapper" mat-menu-item>
+        <p class="passenger-wrapper">
+          <span class="passenger-title">Infant</span
+          ><span class="passenger-subtitle">0-2 years</span>
+        </p>
+        <div>
+          <button (click)="decreasePassengersCount('infants')">-</button>
+          <span>{{ infantsCount }}</span>
+          <button mat-icon-button (click)="increasePassengersCount('infants')">
+            +
+          </button>
+        </div>
+      </div>
+    </ng-template>
+  </mat-menu>
 
   <!-- <ng-container *ngIf="tripType === 'roundTrip'">
     <mat-form-field>
@@ -122,21 +210,6 @@
       <mat-datepicker #returnDatePicker></mat-datepicker>
     </mat-form-field>
   </ng-container> -->
-
-  <div>
-    <label>Adults</label>
-    <input type="number" name="adults" required />
-  </div>
-
-  <div>
-    <label>Children</label>
-    <input type="number" name="children" required />
-  </div>
-
-  <div>
-    <label>Infants</label>
-    <input type="number" name="infants" required />
-  </div>
 
   <button type="submit">Submit</button>
 </form>
