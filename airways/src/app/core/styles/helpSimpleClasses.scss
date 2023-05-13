@@ -53,6 +53,18 @@
   justify-content: end;
 }
 
+.justify-items-start {
+  justify-items: start;
+}
+
+.justify-items-center {
+  justify-items: center;
+}
+
+.justify-items-end {
+  justify-items: end;
+}
+
 .item-center {
   align-items: center;
 }
@@ -153,4 +165,6 @@
   background-color: $bg-light-color
 }
 
-
+.text-center {
+  text-align: center;
+}

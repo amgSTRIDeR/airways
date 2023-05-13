@@ -20,6 +20,11 @@ body {
   width: 80%;
 }
 
+@media screen and (max-width: 1300px) {
+  .container {
+    width: 95%;
+  }
+}
 
 @media screen and (max-width: 992px) {
   .passengers-content-position {

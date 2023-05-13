@@ -64,3 +64,16 @@ input::placeholder {
   height: 60px;
   letter-spacing: 0.1px;
 }
+
+
+@media screen and (max-width: 1100px) {
+  .cart-footer {
+    flex-direction: column;
+    margin-top: 1rem;
+  }
+  .promo-container {
+    min-width: 0;
+    width: 100%;
+  }
+
+}
