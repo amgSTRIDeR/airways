@@ -84,6 +84,10 @@ export class MainComponent implements OnDestroy {
   ngOnDestroy(): void {
     this.passengersSubscription.unsubscribe();
     this.isRoundTripSubscription.unsubscribe();
+    this.originAirportSubscription.unsubscribe();
+    this.destinationAirportSubscription.unsubscribe();
+    this.departureDateSubscription.unsubscribe();
+    this.returnDateSubscription.unsubscribe();
   }
 
   changeTripType(boolean: boolean) {
