@@ -35,8 +35,6 @@ export interface MainPageState {
   airportBack: AirportsRes | null;
   flightForward: Date | null;
   flightBack: Date | null;
-  flightsForBooking: FlightsRes | null;
-  flightsForBookingReturn: FlightsRes | null;
 }
 
 export type CurrentPageDirection = 'flight' | 'passengers' | 'review';
@@ -52,6 +50,7 @@ export interface BookingPageState {
   allInformation: AllInformation | null;
   readyFlight: ReadyFlight | null;
   totalPrice: Total | null;
+  availableFlights: FlightsRes[] | null;
 }
 
 export interface BasketPageState {

@@ -37,16 +37,6 @@ const AirportBackSelector = createSelector(
   (state) => state.airportBack
 );
 
-const FlightsForBookingSelector = createSelector(
-  selectMainPage,
-  (state) => state.flightsForBooking
-);
-
-const FlightsForBookingReturnSelector = createSelector(
-  selectMainPage,
-  (state) => state.flightsForBookingReturn
-);
-
 export const MainPageSelectors = {
   PassengersCount,
   AirportsSelector,
@@ -54,7 +44,5 @@ export const MainPageSelectors = {
   FlightBackSelector,
   AirportForwardSelector,
   AirportBackSelector,
-  FlightsForBookingSelector,
-  FlightsForBookingReturnSelector,
   IsRoundTripSelector,
 };

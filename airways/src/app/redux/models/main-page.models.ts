@@ -4,6 +4,13 @@ export interface PassengersCount {
   infants: number;
 }
 
+export interface FlightLoadInformation {
+  originAirportKey: string;
+  destinationAirportKey: string;
+  departureDate: Date;
+  returnDate: Date | null;
+}
+
 export interface IDate {
   date: Date | null;
 }

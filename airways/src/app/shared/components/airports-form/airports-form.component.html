@@ -45,9 +45,11 @@
 >
   <mat-label>Destination</mat-label>
   <mat-select
-    [(value)]="destinationAirport"
+    [(ngModel)]="destinationAirport"
+    name="destinationAirport"
     class="location-select"
     placeholder="Choose your destination"
+    (ngModelChange)="setDestinationAirport()"
   >
     <mat-select-trigger
       ><span>{{ destinationAirport?.city }}</span

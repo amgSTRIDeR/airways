@@ -1,13 +1,10 @@
 import { Component, OnDestroy } from '@angular/core';
 import { SettingsState } from '@redux/models/state.models';
-import { SettingsSelectors } from '@redux/selectors/settings.selectors';
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { DataService } from '@core/services/data.service';
 import { AirportsRes, PassengersCount } from '@redux/models/main-page.models';
-import { DateTypeService } from '@core/services/date-type.service';
 import { MainPageSelectors } from '@redux/selectors/main-page.selectors';
 import { MainPageActions } from '@redux/actions/main-page.actions';
-import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
@@ -22,11 +19,25 @@ export class MainComponent implements OnDestroy {
   public infantsCount = 0;
 
   public isRoundTrip = true;
+  public originAirport: AirportsRes | null = null;
+  public destinationAirport: AirportsRes | null = null;
+  public departureDate: Date | null = null;
+  public returnDate: Date | null = null;
 
   passengersCount$ = this.store.select(MainPageSelectors.PassengersCount);
   passengersSubscription!: Subscription;
   isRoundTrip$ = this.store.select(MainPageSelectors.IsRoundTripSelector);
   isRoundTripSubscription!: Subscription;
+  originAirport$ = this.store.select(MainPageSelectors.AirportForwardSelector);
+  originAirportSubscription!: Subscription;
+  destinationAirport$ = this.store.select(
+    MainPageSelectors.AirportBackSelector
+  );
+  destinationAirportSubscription!: Subscription;
+  departureDate$ = this.store.select(MainPageSelectors.FlightForwardSelector);
+  departureDateSubscription!: Subscription;
+  returnDate$ = this.store.select(MainPageSelectors.FlightBackSelector);
+  returnDateSubscription!: Subscription;
 
   constructor(
     private store: Store<SettingsState>,
@@ -43,8 +54,30 @@ export class MainComponent implements OnDestroy {
       }
     );
 
-    this.isRoundTripSubscription = this.isRoundTrip$.subscribe((x) => {
-      this.isRoundTrip = x;
+    this.isRoundTripSubscription = this.isRoundTrip$.subscribe((boolean) => {
+      this.isRoundTrip = boolean;
+    });
+
+    this.originAirportSubscription = this.originAirport$.subscribe(
+      (originAirport) => {
+        this.originAirport = originAirport;
+      }
+    );
+
+    this.destinationAirportSubscription = this.destinationAirport$.subscribe(
+      (destinationAirport) => {
+        this.destinationAirport = destinationAirport;
+      }
+    );
+
+    this.departureDateSubscription = this.departureDate$.subscribe(
+      (departureDate) => {
+        this.departureDate = departureDate;
+      }
+    );
+
+    this.returnDateSubscription = this.returnDate$.subscribe((returnDate) => {
+      this.returnDate = returnDate;
     });
   }
 
@@ -134,25 +167,20 @@ export class MainComponent implements OnDestroy {
   }
 
   onSubmit() {
-    //   if (
-    //     this.originAirport !== null &&
-    //     this.destinationAirport !== null &&
-    //     this.departureDate !== null
-    //   ) {
-    //     this.dataService
-    //       .searchFlight(
-    //         this.originAirport?.key,
-    //         this.destinationAirport?.key,
-    //         this.departureDate,
-    //         this.returnDate
-    //       )
-    //       .subscribe((data) => {
-    //         this.store.dispatch(MainPageActions.FlightsForBooking(data[0]));
-    //         this.store.dispatch(
-    //           MainPageActions.FlightsForBookingReturn(data[1] || null)
-    //         );
-    //         this.router.navigate(['/booking-page']);
-    //       });
-    //   }
+    if (
+      this.originAirport !== null &&
+      this.destinationAirport !== null &&
+      this.departureDate !== null
+    ) {
+      this.store.dispatch(
+        MainPageActions.LoadAvailableFlights({
+          originAirportKey: this.originAirport.key,
+          destinationAirportKey: this.destinationAirport.key,
+          departureDate: this.departureDate,
+          returnDate: this.returnDate,
+        })
+      );
+      this.router.navigate(['/booking-page']);
+    }
   }
 }

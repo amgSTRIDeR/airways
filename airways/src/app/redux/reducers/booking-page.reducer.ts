@@ -116,6 +116,7 @@ export const initialState: BookingPageState = {
   allInformation: null,
   readyFlight: null,
   passengersCount: null,
+  availableFlights: null,
 };
 export const BookingPageReducer = createReducer(
   initialState,
@@ -164,5 +165,9 @@ export const BookingPageReducer = createReducer(
     totalPrice: action.totalPrice,
     currentPageDirection: 'flight',
     onBookingPage: true,
+  })),
+  on(BookingActions.LoadAvailableFlightsSuccess, (state, action) => ({
+    ...state,
+    availableFlights: action.availableFlights,
   }))
 );

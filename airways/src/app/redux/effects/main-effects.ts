@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { DataService } from '@core/services/data.service';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { BookingActions } from '@redux/actions/booking-page.actions';
 import { MainPageActions } from '@redux/actions/main-page.actions';
 import { catchError, map, of, switchMap } from 'rxjs';
 
@@ -18,6 +19,31 @@ export class MainEffects {
             of(MainPageActions.LoadAirportsError({ error }))
           )
         )
+      )
+    )
+  );
+
+  loadFlights$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(MainPageActions.LoadAvailableFlights),
+      switchMap((action) =>
+        this.dataService
+          .searchFlight(
+            action.originAirportKey,
+            action.destinationAirportKey,
+            action.departureDate,
+            action.returnDate
+          )
+          .pipe(
+            map((flights) =>
+              BookingActions.LoadAvailableFlightsSuccess({
+                availableFlights: flights,
+              })
+            ),
+            catchError((error) =>
+              of(MainPageActions.LoadAvailableFlightsError({ error }))
+            )
+          )
       )
     )
   );

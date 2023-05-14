@@ -1,7 +1,7 @@
 import { createAction, props } from '@ngrx/store';
 import {
   AirportsRes,
-  FlightsRes,
+  FlightLoadInformation,
   IDate,
   PassengersCount,
 } from '@redux/models/main-page.models';
@@ -45,14 +45,14 @@ const AirportBack = createAction(
   props<AirportsRes>()
 );
 
-const FlightsForBooking = createAction(
-  '[MAIN PAGE] Flights for booking',
-  props<FlightsRes>()
+const LoadAvailableFlights = createAction(
+  '[MAIN PAGE] Load available flights',
+  props<FlightLoadInformation>()
 );
 
-const FlightsForBookingReturn = createAction(
-  '[MAIN PAGE] Flights for booking return',
-  props<FlightsRes>()
+const LoadAvailableFlightsError = createAction(
+  '[MAIN PAGE] Load available flights Error',
+  props<{ error: string }>()
 );
 
 export const MainPageActions = {
@@ -64,7 +64,7 @@ export const MainPageActions = {
   FlightBack,
   AirportForward,
   AirportBack,
-  FlightsForBooking,
-  FlightsForBookingReturn,
   IsRoundTrip,
+  LoadAvailableFlights,
+  LoadAvailableFlightsError,
 };
