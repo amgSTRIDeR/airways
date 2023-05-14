@@ -19,6 +19,8 @@ import { MatDividerModule } from '@angular/material/divider';
 import { AirportsFormComponent } from './components/airports-form/airports-form.component';
 import { AirportsFilterPipe } from '@main/pipes/airports-filter.pipe';
 import { DateFormComponent } from './components/date-form/date-form.component';
+import { PassengersFormComponent } from './components/passengers-form/passengers-form.component';
+import { MatMenuModule } from '@angular/material/menu';
 
 @NgModule({
   declarations: [
@@ -26,6 +28,7 @@ import { DateFormComponent } from './components/date-form/date-form.component';
     AirportsFormComponent,
     AirportsFilterPipe,
     DateFormComponent,
+    PassengersFormComponent,
   ],
   imports: [
     MatDividerModule,
@@ -45,6 +48,7 @@ import { DateFormComponent } from './components/date-form/date-form.component';
     MatExpansionModule,
     MatStepperModule,
     FormsModule,
+    MatMenuModule,
   ],
   exports: [
     MatDividerModule,
@@ -65,6 +69,7 @@ import { DateFormComponent } from './components/date-form/date-form.component';
     MatStepperModule,
     AirportsFormComponent,
     DateFormComponent,
+    PassengersFormComponent,
   ],
 })
 export class SharedModule {}

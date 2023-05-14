@@ -2,7 +2,7 @@ import { Component, OnDestroy } from '@angular/core';
 import { SettingsState } from '@redux/models/state.models';
 import { Store } from '@ngrx/store';
 import { DataService } from '@core/services/data.service';
-import { AirportsRes, PassengersCount } from '@redux/models/main-page.models';
+import { AirportsRes } from '@redux/models/main-page.models';
 import { MainPageSelectors } from '@redux/selectors/main-page.selectors';
 import { MainPageActions } from '@redux/actions/main-page.actions';
 import { Router } from '@angular/router';
@@ -14,18 +14,12 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./main.component.scss'],
 })
 export class MainComponent implements OnDestroy {
-  public adultsCount = 1;
-  public childrenCount = 0;
-  public infantsCount = 0;
-
   public isRoundTrip = true;
   public originAirport: AirportsRes | null = null;
   public destinationAirport: AirportsRes | null = null;
   public departureDate: Date | null = null;
   public returnDate: Date | null = null;
 
-  passengersCount$ = this.store.select(MainPageSelectors.PassengersCount);
-  passengersSubscription!: Subscription;
   isRoundTrip$ = this.store.select(MainPageSelectors.IsRoundTripSelector);
   isRoundTripSubscription!: Subscription;
   originAirport$ = this.store.select(MainPageSelectors.AirportForwardSelector);
@@ -44,16 +38,6 @@ export class MainComponent implements OnDestroy {
     private readonly dataService: DataService,
     private router: Router
   ) {
-    this.passengersSubscription = this.passengersCount$.subscribe(
-      (passengers: PassengersCount | null): void => {
-        if (passengers !== null) {
-          this.adultsCount = passengers.adults;
-          this.childrenCount = passengers.children;
-          this.infantsCount = passengers.infants;
-        }
-      }
-    );
-
     this.isRoundTripSubscription = this.isRoundTrip$.subscribe((boolean) => {
       this.isRoundTrip = boolean;
     });
@@ -82,7 +66,6 @@ export class MainComponent implements OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.passengersSubscription.unsubscribe();
     this.isRoundTripSubscription.unsubscribe();
     this.originAirportSubscription.unsubscribe();
     this.destinationAirportSubscription.unsubscribe();
@@ -92,82 +75,6 @@ export class MainComponent implements OnDestroy {
 
   changeTripType(boolean: boolean) {
     this.store.dispatch(MainPageActions.IsRoundTrip({ isRoundTrip: boolean }));
-  }
-
-  decreasePassengersCount(type: string) {
-    switch (type) {
-      case 'adults': {
-        if (this.adultsCount > 1) {
-          this.store.dispatch(
-            MainPageActions.PassengersCount({
-              adults: this.adultsCount - 1,
-              children: this.childrenCount,
-              infants: this.infantsCount,
-            })
-          );
-        }
-        break;
-      }
-      case 'children': {
-        if (this.childrenCount > 0) {
-          this.store.dispatch(
-            MainPageActions.PassengersCount({
-              adults: this.adultsCount,
-              children: this.childrenCount - 1,
-              infants: this.infantsCount,
-            })
-          );
-        }
-        break;
-      }
-      case 'infants': {
-        if (this.infantsCount > 0) {
-          this.store.dispatch(
-            MainPageActions.PassengersCount({
-              adults: this.adultsCount,
-              children: this.childrenCount,
-              infants: this.infantsCount - 1,
-            })
-          );
-        }
-        break;
-      }
-    }
-  }
-
-  increasePassengersCount(type: string) {
-    switch (type) {
-      case 'adults': {
-        this.store.dispatch(
-          MainPageActions.PassengersCount({
-            adults: this.adultsCount + 1,
-            children: this.childrenCount,
-            infants: this.infantsCount,
-          })
-        );
-        break;
-      }
-      case 'children': {
-        this.store.dispatch(
-          MainPageActions.PassengersCount({
-            adults: this.adultsCount,
-            children: this.childrenCount + 1,
-            infants: this.infantsCount,
-          })
-        );
-        break;
-      }
-      case 'infants': {
-        this.store.dispatch(
-          MainPageActions.PassengersCount({
-            adults: this.adultsCount,
-            children: this.childrenCount,
-            infants: this.infantsCount + 1,
-          })
-        );
-        break;
-      }
-    }
   }
 
   onSubmit() {
