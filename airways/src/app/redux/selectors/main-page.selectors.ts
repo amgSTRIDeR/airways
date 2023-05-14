@@ -7,6 +7,11 @@ const PassengersCount = createSelector(
   (state) => state.passengersCount
 );
 
+const IsRoundTripSelector = createSelector(
+  selectMainPage,
+  (state) => state.isRoundTrip
+);
+
 const AirportsSelector = createSelector(
   selectMainPage,
   (state) => state.airports
@@ -51,4 +56,5 @@ export const MainPageSelectors = {
   AirportBackSelector,
   FlightsForBookingSelector,
   FlightsForBookingReturnSelector,
+  IsRoundTripSelector,
 };

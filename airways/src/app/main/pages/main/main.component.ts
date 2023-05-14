@@ -17,45 +17,22 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./main.component.scss'],
 })
 export class MainComponent implements OnDestroy {
-  airports: AirportsRes[] = [];
   public adultsCount = 1;
   public childrenCount = 0;
   public infantsCount = 0;
+
   public isRoundTrip = true;
-  public isHintVisible = false;
-  public originAirport: AirportsRes | null = null;
-  public destinationAirport: AirportsRes | null = null;
-  public departureDate: Date | null = null;
-  public returnDate: Date | null = null;
-
-  dateType$ = this.store.select(SettingsSelectors.DateTypeSelector);
-  // flightForward$ = this.store.pipe(
-  //   select(MainPageSelectors.FlightForwardSelector)
-  // );
-  // flightBack$ = this.store.pipe(select(MainPageSelectors.FlightBackSelector));
-
-  // airportForward$ = this.store.pipe(
-  //   select(MainPageSelectors.AirportForwardSelector)
-  // );
-  // airportBack$ = this.store.pipe(select(MainPageSelectors.AirportBackSelector));
 
   passengersCount$ = this.store.select(MainPageSelectors.PassengersCount);
   passengersSubscription!: Subscription;
+  isRoundTrip$ = this.store.select(MainPageSelectors.IsRoundTripSelector);
+  isRoundTripSubscription!: Subscription;
 
   constructor(
     private store: Store<SettingsState>,
     private readonly dataService: DataService,
-    private dateTypeService: DateTypeService,
-    private fb: FormBuilder,
     private router: Router
   ) {
-    this.dataService.getAirports().subscribe((data) => {
-      this.airports = data;
-    });
-
-    this.dateType$.subscribe((dateType) => {
-      this.dateTypeService.changeDateType(dateType);
-    });
     this.passengersSubscription = this.passengersCount$.subscribe(
       (passengers: PassengersCount | null): void => {
         if (passengers !== null) {
@@ -66,58 +43,18 @@ export class MainComponent implements OnDestroy {
       }
     );
 
-    // this.store
-    //   .pipe(select(MainPageSelectors.FlightsForBookingSelector))
-    //   .subscribe((flights) => {
-    //     console.log(flights);
-    //   });
-
-    // this.store
-    //   .pipe(select(MainPageSelectors.FlightsForBookingReturnSelector))
-    //   .subscribe((flights) => {
-    //     console.log(flights);
-    //   });
+    this.isRoundTripSubscription = this.isRoundTrip$.subscribe((x) => {
+      this.isRoundTrip = x;
+    });
   }
 
   ngOnDestroy(): void {
     this.passengersSubscription.unsubscribe();
+    this.isRoundTripSubscription.unsubscribe();
   }
-
-  mainForm = this.fb.group({
-    // title: [
-    //   '',
-    //   [Validators.required, Validators.minLength(3), Validators.maxLength(20)],
-    // ],
-    // description: ['', Validators.maxLength(255)],
-    // imageLink: [
-    //   '',
-    //   [
-    //     Validators.required,
-    //     Validators.pattern(/^(http(s?):\/\/).+(\.(jpeg|jpg|png|gif))$/),
-    //   ],
-    // ],
-    // videoLink: [
-    //   '',
-    //   [
-    //     Validators.required,
-    //     Validators.pattern(/^(http(s?):\/\/).+(\.(mp4|mpeg|avi|mov))$/),
-    //   ],
-    // ],
-    // creationDate: ['', [Validators.required, this.dateValidator]],
-  });
 
   changeTripType(boolean: boolean) {
-    this.isRoundTrip = boolean;
-  }
-
-  switchLocations() {
-    [this.originAirport, this.destinationAirport] = [
-      this.destinationAirport,
-      this.originAirport,
-    ];
-
-    this.setOriginAirport();
-    this.setDestinationAirport();
+    this.store.dispatch(MainPageActions.IsRoundTrip({ isRoundTrip: boolean }));
   }
 
   decreasePassengersCount(type: string) {
@@ -197,53 +134,25 @@ export class MainComponent implements OnDestroy {
   }
 
   onSubmit() {
-    if (
-      this.originAirport !== null &&
-      this.destinationAirport !== null &&
-      this.departureDate !== null
-    ) {
-      this.dataService
-        .searchFlight(
-          this.originAirport?.key,
-          this.destinationAirport?.key,
-          this.departureDate,
-          this.returnDate
-        )
-        .subscribe((data) => {
-          this.store.dispatch(MainPageActions.FlightsForBooking(data[0]));
-          this.store.dispatch(
-            MainPageActions.FlightsForBookingReturn(data[1] || null)
-          );
-          this.router.navigate(['/booking-page']);
-        });
-    }
-  }
-
-  setDepartureDate() {
-    this.store.dispatch(
-      MainPageActions.FlightForward({
-        date: this.departureDate,
-      })
-    );
-  }
-
-  setReturnDate() {
-    this.store.dispatch(
-      MainPageActions.FlightBack({
-        date: this.returnDate,
-      })
-    );
-  }
-
-  setOriginAirport() {
-    if (this.originAirport !== null) {
-      this.store.dispatch(MainPageActions.AirportForward(this.originAirport));
-    }
-  }
-
-  setDestinationAirport() {
-    if (this.destinationAirport !== null) {
-      this.store.dispatch(MainPageActions.AirportBack(this.destinationAirport));
-    }
+    //   if (
+    //     this.originAirport !== null &&
+    //     this.destinationAirport !== null &&
+    //     this.departureDate !== null
+    //   ) {
+    //     this.dataService
+    //       .searchFlight(
+    //         this.originAirport?.key,
+    //         this.destinationAirport?.key,
+    //         this.departureDate,
+    //         this.returnDate
+    //       )
+    //       .subscribe((data) => {
+    //         this.store.dispatch(MainPageActions.FlightsForBooking(data[0]));
+    //         this.store.dispatch(
+    //           MainPageActions.FlightsForBookingReturn(data[1] || null)
+    //         );
+    //         this.router.navigate(['/booking-page']);
+    //       });
+    //   }
   }
 }

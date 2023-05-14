@@ -29,6 +29,7 @@ export interface AuthState {
 
 export interface MainPageState {
   passengersCount: PassengersCount | null;
+  isRoundTrip: boolean;
   airports: AirportsRes[];
   airportForward: AirportsRes | null;
   airportBack: AirportsRes | null;

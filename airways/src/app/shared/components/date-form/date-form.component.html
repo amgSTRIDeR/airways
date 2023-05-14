@@ -1,0 +1,48 @@
+<mat-form-field appearance="fill" *ngIf="isRoundTrip">
+  <mat-label>Dates</mat-label>
+  <mat-date-range-input [rangePicker]="picker">
+    <input
+      matStartDate
+      name="departureDate"
+      placeholder="Depart"
+      (focus)="isHintVisible = true"
+      (blur)="isHintVisible = false"
+      [(ngModel)]="departureDate"
+      (ngModelChange)="setDepartureDate()"
+    />
+    <input
+      matEndDate
+      name="returnDate"
+      placeholder="Return"
+      (focus)="isHintVisible = true"
+      (blur)="isHintVisible = false"
+      [(ngModel)]="returnDate"
+      (ngModelChange)="setReturnDate()"
+    />
+  </mat-date-range-input>
+  <mat-hint *ngIf="picker.opened || isHintVisible"
+    ><span>{{ dateType$ | async }}</span
+    ><span> - {{ dateType$ | async }}</span></mat-hint
+  >
+  <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+  <mat-date-range-picker #picker></mat-date-range-picker>
+</mat-form-field>
+
+<mat-form-field appearance="fill" *ngIf="!isRoundTrip">
+  <mat-label>Date</mat-label>
+  <input
+    matInput
+    name="departureDate"
+    [matDatepicker]="picker"
+    placeholder="Depart"
+    (focus)="isHintVisible = true"
+    (blur)="isHintVisible = false"
+    [(ngModel)]="departureDate"
+    (ngModelChange)="setDepartureDate()"
+  />
+  <mat-hint *ngIf="picker.opened || isHintVisible">{{
+    dateType$ | async
+  }}</mat-hint>
+  <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+  <mat-datepicker #picker></mat-datepicker>
+</mat-form-field>

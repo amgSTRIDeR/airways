@@ -11,6 +11,11 @@ const PassengersCount = createAction(
   props<PassengersCount>()
 );
 
+const IsRoundTrip = createAction(
+  '[MAIN PAGE] Is round trip',
+  props<{ isRoundTrip: boolean }>()
+);
+
 const LoadAirports = createAction('[MAIN PAGE] Load Airports');
 
 const LoadAirportsSuccess = createAction(
@@ -61,4 +66,5 @@ export const MainPageActions = {
   AirportBack,
   FlightsForBooking,
   FlightsForBookingReturn,
+  IsRoundTrip,
 };

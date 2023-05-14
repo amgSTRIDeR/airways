@@ -8,6 +8,7 @@ export const initialState: MainPageState = {
     children: 0,
     infants: 0,
   },
+  isRoundTrip: true,
   airports: [],
   airportForward: null,
   airportBack: null,
@@ -22,6 +23,11 @@ export const MainPageReducer = createReducer(
   on(MainPageActions.PassengersCount, (state, action) => ({
     ...state,
     passengersCount: { ...action },
+  })),
+
+  on(MainPageActions.IsRoundTrip, (state, action) => ({
+    ...state,
+    isRoundTrip: action.isRoundTrip,
   })),
 
   on(MainPageActions.LoadAirportsSuccess, (state, action) => ({

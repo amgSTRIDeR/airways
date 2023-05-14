@@ -18,9 +18,15 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatDividerModule } from '@angular/material/divider';
 import { AirportsFormComponent } from './components/airports-form/airports-form.component';
 import { AirportsFilterPipe } from '@main/pipes/airports-filter.pipe';
+import { DateFormComponent } from './components/date-form/date-form.component';
 
 @NgModule({
-  declarations: [IconLabelComponent, AirportsFormComponent, AirportsFilterPipe],
+  declarations: [
+    IconLabelComponent,
+    AirportsFormComponent,
+    AirportsFilterPipe,
+    DateFormComponent,
+  ],
   imports: [
     MatDividerModule,
     CommonModule,
@@ -58,6 +64,7 @@ import { AirportsFilterPipe } from '@main/pipes/airports-filter.pipe';
     MatExpansionModule,
     MatStepperModule,
     AirportsFormComponent,
+    DateFormComponent,
   ],
 })
 export class SharedModule {}
