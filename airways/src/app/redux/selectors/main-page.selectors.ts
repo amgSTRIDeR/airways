@@ -7,6 +7,11 @@ const PassengersCount = createSelector(
   (state) => state.passengersCount
 );
 
+const AirportsSelector = createSelector(
+  selectMainPage,
+  (state) => state.airports
+);
+
 const FlightForwardSelector = createSelector(
   selectMainPage,
   (state) => state.flightForward
@@ -39,6 +44,7 @@ const FlightsForBookingReturnSelector = createSelector(
 
 export const MainPageSelectors = {
   PassengersCount,
+  AirportsSelector,
   FlightForwardSelector,
   FlightBackSelector,
   AirportForwardSelector,

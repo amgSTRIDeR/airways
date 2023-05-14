@@ -11,6 +11,18 @@ const PassengersCount = createAction(
   props<PassengersCount>()
 );
 
+const LoadAirports = createAction('[MAIN PAGE] Load Airports');
+
+const LoadAirportsSuccess = createAction(
+  '[MAIN PAGE] Load Airports Success',
+  props<{ airports: AirportsRes[] }>()
+);
+
+const LoadAirportsError = createAction(
+  '[MAIN PAGE] Load Airports Error',
+  props<{ error: string }>()
+);
+
 const FlightForward = createAction(
   '[MAIN PAGE] Flight forward',
   props<IDate>()
@@ -40,6 +52,9 @@ const FlightsForBookingReturn = createAction(
 
 export const MainPageActions = {
   PassengersCount,
+  LoadAirports,
+  LoadAirportsSuccess,
+  LoadAirportsError,
   FlightForward,
   FlightBack,
   AirportForward,

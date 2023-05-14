@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { SettingsState } from '@redux/models/state.models';
 import { SettingsSelectors } from '@redux/selectors/settings.selectors';
 import { Store, select } from '@ngrx/store';
@@ -9,13 +9,14 @@ import { MainPageSelectors } from '@redux/selectors/main-page.selectors';
 import { MainPageActions } from '@redux/actions/main-page.actions';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.scss'],
 })
-export class MainComponent {
+export class MainComponent implements OnDestroy {
   airports: AirportsRes[] = [];
   public adultsCount = 1;
   public childrenCount = 0;
@@ -27,7 +28,7 @@ export class MainComponent {
   public departureDate: Date | null = null;
   public returnDate: Date | null = null;
 
-  dateType$ = this.store.pipe(select(SettingsSelectors.DateTypeSelector));
+  dateType$ = this.store.select(SettingsSelectors.DateTypeSelector);
   // flightForward$ = this.store.pipe(
   //   select(MainPageSelectors.FlightForwardSelector)
   // );
@@ -38,7 +39,8 @@ export class MainComponent {
   // );
   // airportBack$ = this.store.pipe(select(MainPageSelectors.AirportBackSelector));
 
-  passengersCount$ = this.store.pipe(select(MainPageSelectors.PassengersCount));
+  passengersCount$ = this.store.select(MainPageSelectors.PassengersCount);
+  passengersSubscription!: Subscription;
 
   constructor(
     private store: Store<SettingsState>,
@@ -54,8 +56,7 @@ export class MainComponent {
     this.dateType$.subscribe((dateType) => {
       this.dateTypeService.changeDateType(dateType);
     });
-
-    this.passengersCount$.subscribe(
+    this.passengersSubscription = this.passengersCount$.subscribe(
       (passengers: PassengersCount | null): void => {
         if (passengers !== null) {
           this.adultsCount = passengers.adults;
@@ -76,6 +77,10 @@ export class MainComponent {
     //   .subscribe((flights) => {
     //     console.log(flights);
     //   });
+  }
+
+  ngOnDestroy(): void {
+    this.passengersSubscription.unsubscribe();
   }
 
   mainForm = this.fb.group({
@@ -101,7 +106,6 @@ export class MainComponent {
     // creationDate: ['', [Validators.required, this.dateValidator]],
   });
 
-  // Через метод потому что при изменении переменной напрямую oneWay не всегда показывается как выбранный (без понятия почему)
   changeTripType(boolean: boolean) {
     this.isRoundTrip = boolean;
   }

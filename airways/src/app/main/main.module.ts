@@ -13,9 +13,10 @@ import { DateTypeService } from '@core/services/date-type.service';
 import { MatInputModule } from '@angular/material/input';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatMenuModule } from '@angular/material/menu';
+import { SharedModule } from '@shared/shared.module';
 
 @NgModule({
-  declarations: [MainComponent, AirportsFilterPipe],
+  declarations: [MainComponent],
   imports: [
     CommonModule,
     MainRoutingModule,
@@ -27,6 +28,7 @@ import { MatMenuModule } from '@angular/material/menu';
     MatInputModule,
     MatExpansionModule,
     MatMenuModule,
+    SharedModule,
   ],
   providers: [DateTypeService],
 })

@@ -11,14 +11,16 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSelectModule } from '@angular/material/select';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatDividerModule } from '@angular/material/divider';
+import { AirportsFormComponent } from './components/airports-form/airports-form.component';
+import { AirportsFilterPipe } from '@main/pipes/airports-filter.pipe';
 
 @NgModule({
-  declarations: [IconLabelComponent],
+  declarations: [IconLabelComponent, AirportsFormComponent, AirportsFilterPipe],
   imports: [
     MatDividerModule,
     CommonModule,
@@ -36,6 +38,7 @@ import { MatDividerModule } from '@angular/material/divider';
     MatButtonModule,
     MatExpansionModule,
     MatStepperModule,
+    FormsModule,
   ],
   exports: [
     MatDividerModule,
@@ -54,6 +57,7 @@ import { MatDividerModule } from '@angular/material/divider';
     MatButtonModule,
     MatExpansionModule,
     MatStepperModule,
+    AirportsFormComponent,
   ],
 })
 export class SharedModule {}
