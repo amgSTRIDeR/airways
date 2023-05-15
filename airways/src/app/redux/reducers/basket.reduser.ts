@@ -187,7 +187,10 @@ export const initialState: BasketPageState = {
       flights: {
         twoWays: true,
         forwardFlight: {
-          avaible: 294,
+          seats: {
+            total: 300,
+            avaible: 294,
+          },
           flightNumber: 'PS-3911',
           timeMins: 412,
           form: {
@@ -214,7 +217,10 @@ export const initialState: BasketPageState = {
           },
         },
         backFlight: {
-          avaible: 294,
+          seats: {
+            total: 300,
+            avaible: 294,
+          },
           flightNumber: 'PS-3911',
           timeMins: 412,
           form: {
