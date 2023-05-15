@@ -1,24 +1,20 @@
 import { MainPageState } from '@redux/models/state.models';
 import { createReducer, on } from '@ngrx/store';
 import { MainPageActions } from '@redux/actions/main-page.actions';
-import { FlightRes } from '@redux/models/main-page.models';
 
 export const initialState: MainPageState = {
   passengersCount: {
     adults: 1,
-    children: 1,
-    infants: 1,
+    children: 0,
+    infants: 0,
   },
-  AirportsForward: null,
-  AirportsBack: null,
-  FlightForward: null,
-  FlightBack: null,
-  AirportsForwardError: null,
-  AirportsBackError: null,
-  FlightError: null,
+  isRoundTrip: true,
+  airports: [],
+  airportForward: null,
+  airportBack: null,
+  flightForward: null,
+  flightBack: null,
 };
-
-const backFlight = (flight: FlightRes[]) => (flight[1] ? flight[1] : null);
 
 export const MainPageReducer = createReducer(
   initialState,
@@ -26,32 +22,34 @@ export const MainPageReducer = createReducer(
     ...state,
     passengersCount: { ...action },
   })),
-  on(MainPageActions.FlightSuccess, (state, action) => ({
+
+  on(MainPageActions.IsRoundTrip, (state, action) => ({
     ...state,
-    FlightError: null,
-    FlightForward: action.flight[0],
-    FlightBack: backFlight(action.flight),
+    isRoundTrip: action.isRoundTrip,
   })),
-  on(MainPageActions.AirportsForwardSuccess, (state, action) => ({
+
+  on(MainPageActions.LoadAirportsSuccess, (state, action) => ({
     ...state,
-    AirportsForwardError: null,
-    AirportsForward: action,
+    airports: action.airports,
   })),
-  on(MainPageActions.AirportsBackSuccess, (state, action) => ({
+
+  on(MainPageActions.FlightForward, (state, action) => ({
     ...state,
-    AirportsBackError: null,
-    AirportsBack: action,
+    flightForward: action.date,
   })),
-  on(MainPageActions.FlightError, (state, action) => ({
+
+  on(MainPageActions.FlightBack, (state, action) => ({
     ...state,
-    FlightError: action.error,
+    flightBack: action.date,
   })),
-  on(MainPageActions.AirportsForwardError, (state, action) => ({
+
+  on(MainPageActions.AirportForward, (state, action) => ({
     ...state,
-    AirportsForwardError: action.error,
+    airportForward: { ...action },
   })),
-  on(MainPageActions.AirportsBackError, (state, action) => ({
+
+  on(MainPageActions.AirportBack, (state, action) => ({
     ...state,
-    AirportsBackErrorError: action.error,
+    airportBack: { ...action },
   }))
 );

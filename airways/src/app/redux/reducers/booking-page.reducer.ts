@@ -12,7 +12,10 @@ export const initialState: BookingPageState = {
   flights: {
     twoWays: true,
     forwardFlight: {
-      avaible: 294,
+      seats: {
+        total: 676,
+        avaible: 319,
+      },
       flightNumber: 'PS-3911',
       timeMins: 412,
       form: {
@@ -39,7 +42,10 @@ export const initialState: BookingPageState = {
       },
     },
     backFlight: {
-      avaible: 294,
+      seats: {
+        total: 676,
+        avaible: 319,
+      },
       flightNumber: 'PS-3911',
       timeMins: 412,
       form: {
@@ -110,6 +116,7 @@ export const initialState: BookingPageState = {
   allInformation: null,
   readyFlight: null,
   passengersCount: null,
+  availableFlights: null,
 };
 export const BookingPageReducer = createReducer(
   initialState,
@@ -158,5 +165,9 @@ export const BookingPageReducer = createReducer(
     totalPrice: action.totalPrice,
     currentPageDirection: 'flight',
     onBookingPage: true,
+  })),
+  on(BookingActions.LoadAvailableFlightsSuccess, (state, action) => ({
+    ...state,
+    availableFlights: action.availableFlights,
   }))
 );

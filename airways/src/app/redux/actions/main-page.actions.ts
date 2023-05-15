@@ -1,8 +1,8 @@
 import { createAction, props } from '@ngrx/store';
 import {
   AirportsRes,
-  Flight,
-  FlightRes,
+  FlightLoadInformation,
+  IDate,
   PassengersCount,
 } from '@redux/models/main-page.models';
 
@@ -11,50 +11,60 @@ const PassengersCount = createAction(
   props<PassengersCount>()
 );
 
-const FlightStart = createAction('[MAIN PAGE] Flight Start', props<Flight>());
+const IsRoundTrip = createAction(
+  '[MAIN PAGE] Is round trip',
+  props<{ isRoundTrip: boolean }>()
+);
 
-const FlightSuccess = createAction(
-  '[MAIN PAGE] Flight Success',
-  props<{ flight: FlightRes[] }>()
+const LoadAirports = createAction('[MAIN PAGE] Load Airports');
+
+const LoadAirportsSuccess = createAction(
+  '[MAIN PAGE] Load Airports Success',
+  props<{ airports: AirportsRes[] }>()
 );
-const FlightError = createAction(
-  '[MAIN PAGE] Flight Error',
+
+const LoadAirportsError = createAction(
+  '[MAIN PAGE] Load Airports Error',
   props<{ error: string }>()
 );
-const AirportsForwardStart = createAction(
-  '[MAIN PAGE] Airports Start',
-  props<{ search: string }>
+
+const FlightForward = createAction(
+  '[MAIN PAGE] Flight forward',
+  props<IDate>()
 );
-const AirportsForwardSuccess = createAction(
-  '[MAIN PAGE] Airports Success',
+
+const FlightBack = createAction('[MAIN PAGE] Flight back', props<IDate>());
+
+const AirportForward = createAction(
+  '[MAIN PAGE] Airport forward',
   props<AirportsRes>()
 );
-const AirportsForwardError = createAction(
-  '[MAIN PAGE] Airports Error',
-  props<{ error: string }>()
-);
-const AirportsBackStart = createAction(
-  '[MAIN PAGE] Airports Start',
-  props<{ search: string }>
-);
-const AirportsBackSuccess = createAction(
-  '[MAIN PAGE] Airports Success',
+
+const AirportBack = createAction(
+  '[MAIN PAGE] Airport back',
   props<AirportsRes>()
 );
-const AirportsBackError = createAction(
-  '[MAIN PAGE] Airports Error',
+
+const LoadAvailableFlights = createAction(
+  '[MAIN PAGE] Load available flights',
+  props<FlightLoadInformation>()
+);
+
+const LoadAvailableFlightsError = createAction(
+  '[MAIN PAGE] Load available flights Error',
   props<{ error: string }>()
 );
 
 export const MainPageActions = {
   PassengersCount,
-  FlightStart,
-  FlightSuccess,
-  FlightError,
-  AirportsForwardStart,
-  AirportsForwardSuccess,
-  AirportsForwardError,
-  AirportsBackStart,
-  AirportsBackSuccess,
-  AirportsBackError,
+  LoadAirports,
+  LoadAirportsSuccess,
+  LoadAirportsError,
+  FlightForward,
+  FlightBack,
+  AirportForward,
+  AirportBack,
+  IsRoundTrip,
+  LoadAvailableFlights,
+  LoadAvailableFlightsError,
 };

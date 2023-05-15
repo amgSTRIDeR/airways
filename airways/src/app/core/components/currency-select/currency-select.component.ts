@@ -11,7 +11,7 @@ import { SettingsSelectors } from '@redux/selectors/settings.selectors';
   styleUrls: ['./currency-select.component.scss'],
 })
 export class CurrencySelectComponent {
-  currency$ = this.store.pipe(select(SettingsSelectors.CurrencySelector));
+  currency$ = this.store.select(SettingsSelectors.CurrencySelector);
 
   constructor(private store: Store<SettingsState>) {}
 

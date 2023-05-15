@@ -33,6 +33,11 @@ const allInformationSelector = createSelector(
   })
 );
 
+const AvailableFlightsSelector = createSelector(
+  selectBooking,
+  (state) => state.availableFlights
+);
+
 export const BookingSelectors = {
   idSelector,
   onBookingPageSelector,
@@ -41,4 +46,5 @@ export const BookingSelectors = {
   flightsSelector,
   passengersInfoSelector,
   allInformationSelector,
+  AvailableFlightsSelector,
 };

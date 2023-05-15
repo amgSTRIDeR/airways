@@ -1,0 +1,50 @@
+<button mat-button [matMenuTriggerFor]="passengersMenu">
+  Passengers
+  <p>
+    {{ passengers.adults }} Adult, {{ passengers.children }} Child,
+    {{ passengers.infants }} Infant
+  </p>
+</button>
+<mat-menu #passengersMenu="matMenu">
+  <ng-template matMenuContent>
+    <div class="passenger-item-wrapper" mat-menu-item>
+      <p class="passenger-wrapper">
+        <span class="passenger-title">Adults</span
+        ><span class="passenger-subtitle">14+ years</span>
+      </p>
+      <div>
+        <button (click)="decreasePassengersCount('adults')">-</button>
+        <span>{{ passengers.adults }}</span>
+        <button mat-icon-button (click)="increasePassengersCount('adults')">
+          +
+        </button>
+      </div>
+    </div>
+    <div class="passenger-item-wrapper" mat-menu-item>
+      <p class="passenger-wrapper">
+        <span class="passenger-title">Child</span
+        ><span class="passenger-subtitle">2-14 years</span>
+      </p>
+      <div>
+        <button (click)="decreasePassengersCount('children')">-</button>
+        <span>{{ passengers.children }}</span>
+        <button mat-icon-button (click)="increasePassengersCount('children')">
+          +
+        </button>
+      </div>
+    </div>
+    <div class="passenger-item-wrapper" mat-menu-item>
+      <p class="passenger-wrapper">
+        <span class="passenger-title">Infant</span
+        ><span class="passenger-subtitle">0-2 years</span>
+      </p>
+      <div>
+        <button (click)="decreasePassengersCount('infants')">-</button>
+        <span>{{ passengers.infants }}</span>
+        <button mat-icon-button (click)="increasePassengersCount('infants')">
+          +
+        </button>
+      </div>
+    </div>
+  </ng-template>
+</mat-menu>

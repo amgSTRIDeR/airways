@@ -14,6 +14,7 @@ import { MainPageReducer } from '@redux/reducers/main-page.reducer';
 import { BookingPageReducer } from '@redux/reducers/booking-page.reducer';
 import { BasketPageReducer } from '@redux/reducers/basket.reduser';
 import { HttpClientModule } from '@angular/common/http';
+import { MainEffects } from '@redux/effects/main-effects';
 
 @NgModule({
   declarations: [AppComponent],
@@ -35,6 +36,7 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserAnimationsModule,
     CoreModule,
     HttpClientModule,
+    EffectsModule.forRoot([MainEffects]),
   ],
   providers: [],
   bootstrap: [AppComponent],

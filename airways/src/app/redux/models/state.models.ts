@@ -2,7 +2,7 @@ import { CurrencyType, DateType } from '@redux/models/settings.models';
 import { UserRes } from '@redux/models/auth.models';
 import {
   AirportsRes,
-  FlightRes,
+  FlightsRes,
   PassengersCount,
 } from '@redux/models/main-page.models';
 import {
@@ -29,13 +29,12 @@ export interface AuthState {
 
 export interface MainPageState {
   passengersCount: PassengersCount | null;
-  AirportsForward: AirportsRes | null;
-  AirportsBack: AirportsRes | null;
-  FlightForward: FlightRes | null;
-  FlightBack: FlightRes | null;
-  AirportsForwardError: string | null;
-  AirportsBackError: string | null;
-  FlightError: string | null;
+  isRoundTrip: boolean;
+  airports: AirportsRes[];
+  airportForward: AirportsRes | null;
+  airportBack: AirportsRes | null;
+  flightForward: Date | null;
+  flightBack: Date | null;
 }
 
 export type CurrentPageDirection = 'flight' | 'passengers' | 'review';
@@ -51,6 +50,7 @@ export interface BookingPageState {
   allInformation: AllInformation | null;
   readyFlight: ReadyFlight | null;
   totalPrice: Total | null;
+  availableFlights: FlightsRes[] | null;
 }
 
 export interface BasketPageState {

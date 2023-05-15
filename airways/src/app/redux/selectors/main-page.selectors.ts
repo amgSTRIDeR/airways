@@ -6,31 +6,43 @@ const PassengersCount = createSelector(
   selectMainPage,
   (state) => state.passengersCount
 );
-const AirportsForward = createSelector(
+
+const IsRoundTripSelector = createSelector(
   selectMainPage,
-  (state) => state.AirportsForward
-);
-const AirportsBack = createSelector(
-  selectMainPage,
-  (state) => state.AirportsBack
+  (state) => state.isRoundTrip
 );
 
-const AirportsTwoWay = createSelector(
-  AirportsForward,
-  AirportsBack,
-  (forward, back) => [forward, back]
-);
-const FlightForward = createSelector(
+const AirportsSelector = createSelector(
   selectMainPage,
-  (state) => state.FlightForward
+  (state) => state.airports
 );
-const FlightBack = createSelector(selectMainPage, (state) => state.FlightBack);
+
+const FlightForwardSelector = createSelector(
+  selectMainPage,
+  (state) => state.flightForward
+);
+
+const FlightBackSelector = createSelector(
+  selectMainPage,
+  (state) => state.flightBack
+);
+
+const AirportForwardSelector = createSelector(
+  selectMainPage,
+  (state) => state.airportForward
+);
+
+const AirportBackSelector = createSelector(
+  selectMainPage,
+  (state) => state.airportBack
+);
 
 export const MainPageSelectors = {
   PassengersCount,
-  AirportsForward,
-  AirportsBack,
-  AirportsTwoWay,
-  FlightForward,
-  FlightBack,
+  AirportsSelector,
+  FlightForwardSelector,
+  FlightBackSelector,
+  AirportForwardSelector,
+  AirportBackSelector,
+  IsRoundTripSelector,
 };
