@@ -1,5 +1,4 @@
 import { Component, OnDestroy } from '@angular/core';
-import { DataService } from '@core/services/data.service';
 import { DateTypeService } from '@core/services/date-type.service';
 import { Store } from '@ngrx/store';
 import { MainPageActions } from '@redux/actions/main-page.actions';
@@ -25,15 +24,19 @@ export class DateFormComponent implements OnDestroy {
 
   constructor(
     private store: Store<MainPageState>,
-    private readonly dataService: DataService,
     private dateTypeService: DateTypeService
   ) {
     this.dateTypeSubscription = this.dateType$.subscribe((dateType) => {
       this.dateTypeService.changeDateType(dateType);
     });
 
-    this.isRoundTripSubscription = this.isRoundTrip$.subscribe((x) => {
-      this.isRoundTrip = x;
+    this.isRoundTripSubscription = this.isRoundTrip$.subscribe((boolean) => {
+      this.isRoundTrip = boolean;
+
+      if (!boolean) {
+        this.returnDate = null;
+        this.setReturnDate();
+      }
     });
   }
 
