@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 import { Order } from '@redux/models/basket.models';
@@ -17,21 +17,35 @@ export class ShoppingCardComponent implements OnInit, OnDestroy {
   public totalPrice$: Observable<number> = this.store.select(
     BasketSelectors.TotalPrice
   );
+
   public currency$: Observable<CurrencyType> = this.store.select(
     SettingsSelectors.CurrencySelector
   );
+
   private orderSubscription!: Subscription;
+
   public orders!: Order[];
+
   public promoCode = '';
+
+  public smallPage = false;
 
   constructor(private store: Store, private router: Router) {}
 
   ngOnInit(): void {
     this.getOrders();
+    this.onResize();
   }
 
   ngOnDestroy(): void {
     this.orderSubscription.unsubscribe();
+  }
+
+  @HostListener('window:resize')
+  onResize() {
+    const width = window.innerWidth;
+    if (width > 1100 && this.smallPage) this.smallPage = false;
+    else if (width <= 1100 && !this.smallPage) this.smallPage = true;
   }
 
   public get ordersChecked(): number {
