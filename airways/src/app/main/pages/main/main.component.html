@@ -1,4 +1,4 @@
-<form class="main-form" (ngSubmit)="onSubmit()" *ngIf="isVisible$ | async">
+<form class="main-form" *ngIf="isVisible$ | async">
   <div class="radio-buttons">
     <label for="roundTrip">
       <input
@@ -28,7 +28,12 @@
     <app-passengers-form></app-passengers-form>
   </div>
 
-  <button type="submit" class="search-button" [disabled]="!readyForSearch">
+  <button
+    type="submit"
+    class="search-button"
+    [disabled]="!readyForSearch"
+    (click)="onSubmit()"
+  >
     Search
   </button>
 </form>
