@@ -16,6 +16,8 @@ export class BookingHeaderComponent implements OnDestroy {
   public departDate = '';
   public returnDate = '';
   public passengersCount = 1;
+  public isEditorOpen = false;
+  public currentPageDirection = 'flight';
 
   private availableFlights$ = this.store.select(
     BookingSelectors.AvailableFlightsSelector
@@ -26,6 +28,11 @@ export class BookingHeaderComponent implements OnDestroy {
     MainPageSelectors.PassengersCount
   );
   private passengersCountSubscription!: Subscription;
+
+  private currentPageDirection$ = this.store.select(
+    BookingSelectors.currentPageDirectionSelector
+  );
+  private currentPageDirectionSubscription!: Subscription;
 
   constructor(private store: Store<BookingPageState>) {
     this.availableFlightsSubscription = this.availableFlights$.subscribe(
@@ -48,11 +55,20 @@ export class BookingHeaderComponent implements OnDestroy {
           passengers.adults + passengers.children + passengers.infants;
       }
     );
+
+    this.currentPageDirectionSubscription =
+      this.currentPageDirection$.subscribe((direction) => {
+        if (!direction) {
+          return;
+        }
+        this.currentPageDirection = direction;
+      });
   }
 
   ngOnDestroy(): void {
     this.availableFlightsSubscription.unsubscribe();
     this.passengersCountSubscription.unsubscribe();
+    this.currentPageDirectionSubscription.unsubscribe();
   }
 
   convertDate(date: string): string {

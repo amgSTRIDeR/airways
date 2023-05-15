@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { MainPageActions } from '@redux/actions/main-page.actions';
 import { AirportsRes } from '@redux/models/main-page.models';
@@ -14,8 +15,9 @@ export class AirportsFormComponent {
   airports: AirportsRes[] = [];
   public originAirport: AirportsRes | null = null;
   public destinationAirport: AirportsRes | null = null;
+  public showSwitch = this.router.url === '/main';
 
-  constructor(private store: Store<MainPageState>) {
+  constructor(private store: Store<MainPageState>, private router: Router) {
     this.store.dispatch(MainPageActions.LoadAirports());
 
     this.store.subscribe((state) => {

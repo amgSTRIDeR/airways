@@ -47,5 +47,14 @@
       </svg>
     </li>
   </ul>
-  <button class="edit-button">Edit</button>
+  <button
+    class="edit-button"
+    (click)="isEditorOpen = !isEditorOpen"
+    *ngIf="currentPageDirection === 'flight'"
+  >
+    Edit
+  </button>
 </aside>
+<app-editor-header
+  *ngIf="isEditorOpen && currentPageDirection === 'flight'"
+></app-editor-header>

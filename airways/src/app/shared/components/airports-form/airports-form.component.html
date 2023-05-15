@@ -23,7 +23,7 @@
   </mat-select>
 </mat-form-field>
 
-<div class="location-switch" (click)="switchLocations()">
+<div class="location-switch" (click)="switchLocations()" *ngIf="showSwitch">
   <svg
     width="16"
     height="16"

@@ -55,6 +55,11 @@ const LoadAvailableFlightsError = createAction(
   props<{ error: string }>()
 );
 
+const ChangeIsShownValue = createAction(
+  '[MAIN PAGE] Change is shown value',
+  props<{ IsShownMainPage: boolean }>()
+);
+
 export const MainPageActions = {
   PassengersCount,
   LoadAirports,
@@ -67,4 +72,5 @@ export const MainPageActions = {
   IsRoundTrip,
   LoadAvailableFlights,
   LoadAvailableFlightsError,
+  ChangeIsShownValue,
 };

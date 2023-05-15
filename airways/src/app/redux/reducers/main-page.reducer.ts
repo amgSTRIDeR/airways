@@ -14,6 +14,7 @@ export const initialState: MainPageState = {
   airportBack: null,
   flightForward: null,
   flightBack: null,
+  isShowMainForm: false,
 };
 
 export const MainPageReducer = createReducer(
@@ -51,5 +52,10 @@ export const MainPageReducer = createReducer(
   on(MainPageActions.AirportBack, (state, action) => ({
     ...state,
     airportBack: { ...action },
+  })),
+
+  on(MainPageActions.ChangeIsShownValue, (state, action) => ({
+    ...state,
+    isShowMainForm: action.IsShownMainPage,
   }))
 );

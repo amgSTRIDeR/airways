@@ -40,11 +40,11 @@
           />
         </g>
       </svg>
-      <app-stepper *ngIf="isOnBookingPage$ | async"></app-stepper>
+      <app-stepper *ngIf="isBookingPage"></app-stepper>
       <nav class="header-nav">
         <button
           class="button-header button__book-flights"
-          (click)="showBookWindow = !showBookWindow"
+          (click)="toggleBookWindowVisibility()"
           [class.active]="showBookWindow"
           *ngIf="isMainPage"
         >
@@ -131,11 +131,11 @@
     </button>
     <button
       class="button-header button__book-flights"
-      (click)="showBookWindow = !showBookWindow"
+      (click)="toggleBookWindowVisibility()"
       [class.active]="showBookWindow"
     >
       Book flights
     </button>
   </div>
-  <app-booking-header *ngIf="isOnBookingPage$ | async"></app-booking-header>
+  <app-booking-header *ngIf="isBookingPage"></app-booking-header>
 </header>

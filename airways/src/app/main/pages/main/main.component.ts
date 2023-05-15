@@ -19,25 +19,26 @@ export class MainComponent implements OnDestroy {
   public destinationAirport: AirportsRes | null = null;
   public departureDate: Date | null = null;
   public returnDate: Date | null = null;
+  isVisible$ = this.store.select(MainPageSelectors.IsShowMainFormSelector);
 
   isRoundTrip$ = this.store.select(MainPageSelectors.IsRoundTripSelector);
   isRoundTripSubscription!: Subscription;
+
   originAirport$ = this.store.select(MainPageSelectors.AirportForwardSelector);
   originAirportSubscription!: Subscription;
+
   destinationAirport$ = this.store.select(
     MainPageSelectors.AirportBackSelector
   );
   destinationAirportSubscription!: Subscription;
+
   departureDate$ = this.store.select(MainPageSelectors.FlightForwardSelector);
   departureDateSubscription!: Subscription;
+
   returnDate$ = this.store.select(MainPageSelectors.FlightBackSelector);
   returnDateSubscription!: Subscription;
 
-  constructor(
-    private store: Store<SettingsState>,
-    private readonly dataService: DataService,
-    private router: Router
-  ) {
+  constructor(private store: Store<SettingsState>, private router: Router) {
     this.isRoundTripSubscription = this.isRoundTrip$.subscribe((boolean) => {
       this.isRoundTrip = boolean;
     });
