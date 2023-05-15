@@ -28,5 +28,7 @@
     <app-passengers-form></app-passengers-form>
   </div>
 
-  <button type="submit">Submit</button>
+  <button type="submit" class="search-button" [disabled]="!readyForSearch">
+    Search
+  </button>
 </form>
