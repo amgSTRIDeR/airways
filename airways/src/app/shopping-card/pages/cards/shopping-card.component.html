@@ -2,7 +2,7 @@
   <mat-card-header>
     <mat-card-title>Cart</mat-card-title>
   </mat-card-header>
-  <mat-card-actions class="bg-light action-container">
+  <mat-card-actions *ngIf="!smallPage" class="bg-light action-container">
     <app-sort-button sortName="No."></app-sort-button>
     <app-sort-button sortName="Flight"></app-sort-button>
     <app-sort-button sortName="Type trip"></app-sort-button>
@@ -11,7 +11,11 @@
     <app-sort-button sortName="Price"></app-sort-button>
   </mat-card-actions>
   <mat-card-content>
-    <app-order *ngFor="let order of orders" [order]="order"></app-order>
+    <app-order
+      *ngFor="let order of orders"
+      [order]="order"
+      [smallPage]="smallPage"
+    ></app-order>
 
     <div class="new-trip flex item-center justify-between">
       <button

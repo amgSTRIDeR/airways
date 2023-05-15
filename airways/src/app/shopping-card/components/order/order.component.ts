@@ -4,8 +4,6 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { SettingsSelectors } from '@redux/selectors/settings.selectors';
 import { BaskedActions } from '@redux/actions/bascet.actions';
-import { BookingActions } from '@redux/actions/booking-page.actions';
-import { Router } from '@angular/router';
 
 export interface OrderForHtml {
   flightNum: string;
@@ -28,12 +26,13 @@ export interface OrderForHtml {
 })
 export class OrderComponent implements OnInit {
   @Input() order!: Order;
+  @Input() smallPage!: boolean;
   public data!: OrderForHtml;
   public currency$: Observable<string> = this.store.select(
     SettingsSelectors.CurrencySelector
   );
 
-  constructor(private store: Store, private router: Router) {}
+  constructor(private store: Store) {}
 
   ngOnInit(): void {
     this.data = this.addVerables();
@@ -41,23 +40,6 @@ export class OrderComponent implements OnInit {
 
   public addCheckboxValueToStore() {
     this.store.dispatch(BaskedActions.CheckFlight({ id: this.order.id }));
-  }
-
-  public deleteFlight() {
-    this.store.dispatch(BaskedActions.DeleteFlight({ id: this.data.id }));
-  }
-
-  public editFlight() {
-    this.store.dispatch(
-      BookingActions.EditFlightAction({
-        id: this.order.id,
-        flights: this.order.flights,
-        passengersInfo: this.order.passengersInfo,
-        passengersCount: this.order.passengersCount,
-        totalPrice: this.order.total,
-      })
-    );
-    this.router.navigate(['/booking-page']);
   }
 
   private addVerables() {

@@ -13,9 +13,15 @@ import { OrderComponent } from './components/order/order.component';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
+import { CardMenuComponent } from './components/order/card-menu/card-menu.component';
 
 @NgModule({
-  declarations: [ShoppingCardComponent, SortButtonComponent, OrderComponent],
+  declarations: [
+    ShoppingCardComponent,
+    SortButtonComponent,
+    OrderComponent,
+    CardMenuComponent,
+  ],
   imports: [
     CommonModule,
     ShoppingCardRoutingModule,
