@@ -1,10 +1,14 @@
 .booking-header {
+  position: relative;
+  
   display: flex;
   box-sizing: border-box;
   justify-content: flex-start;
   width: 100%;
+  max-width: 1400px;
   align-items: center;
   padding: 20px 5vw 20px 5vw;
+  margin: 0 auto;
   row-gap: 10px;
   column-gap: 5vw;
 
@@ -18,6 +22,7 @@
   @media (max-width: 1292px) {
     padding: calc(1.374vw + 2.25px) 5vw calc(1.374vw + 2.25px) 5vw;
     row-gap: calc(0.458vw + 4.08px);
+    margin: 0;
   }
 }
 

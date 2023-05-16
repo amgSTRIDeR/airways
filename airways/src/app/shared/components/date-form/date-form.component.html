@@ -1,4 +1,4 @@
-<mat-form-field appearance="fill" *ngIf="isRoundTrip">
+<mat-form-field appearance="fill" *ngIf="isRoundTrip" class="date-form">
   <mat-label>Dates</mat-label>
   <mat-date-range-input [rangePicker]="picker">
     <input
@@ -9,6 +9,7 @@
       (blur)="isHintVisible = false"
       [ngModel]="departureDate$ | async"
       (dateChange)="setDepartureDate($event.target.value)"
+      matInputTouchUi
     />
     <input
       matEndDate
@@ -18,6 +19,7 @@
       (blur)="isHintVisible = false"
       [ngModel]="returnDate$ | async"
       (dateChange)="setReturnDate($event.target.value)"
+      matInputTouchUi
     />
   </mat-date-range-input>
   <mat-hint *ngIf="picker.opened || isHintVisible"
@@ -25,7 +27,7 @@
     ><span> - {{ dateType$ | async }}</span></mat-hint
   >
   <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-  <mat-date-range-picker #picker></mat-date-range-picker>
+  <mat-date-range-picker #picker matDatepickerTouchUi></mat-date-range-picker>
 </mat-form-field>
 
 <mat-form-field appearance="fill" *ngIf="!isRoundTrip">
