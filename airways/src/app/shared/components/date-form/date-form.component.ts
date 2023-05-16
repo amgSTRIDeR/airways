@@ -13,14 +13,17 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./date-form.component.scss'],
 })
 export class DateFormComponent implements OnDestroy {
-  public departureDate: Date | null = null;
-  public returnDate: Date | null = null;
   public isHintVisible = false;
   public isRoundTrip = true;
+
+  departureDate$ = this.store.select(MainPageSelectors.FlightForwardSelector);
+  returnDate$ = this.store.select(MainPageSelectors.FlightBackSelector);
+
   isRoundTrip$ = this.store.select(MainPageSelectors.IsRoundTripSelector);
+  isRoundTripSubscription!: Subscription;
+
   dateType$ = this.store.select(SettingsSelectors.DateTypeSelector);
   dateTypeSubscription!: Subscription;
-  isRoundTripSubscription!: Subscription;
 
   constructor(
     private store: Store<MainPageState>,
@@ -34,8 +37,7 @@ export class DateFormComponent implements OnDestroy {
       this.isRoundTrip = boolean;
 
       if (!boolean) {
-        this.returnDate = null;
-        this.setReturnDate();
+        this.setReturnDate(null);
       }
     });
   }
@@ -45,18 +47,18 @@ export class DateFormComponent implements OnDestroy {
     this.isRoundTripSubscription.unsubscribe();
   }
 
-  setDepartureDate() {
+  setDepartureDate(departDate: Date | null) {
     this.store.dispatch(
       MainPageActions.FlightForward({
-        date: this.departureDate,
+        date: departDate,
       })
     );
   }
 
-  setReturnDate() {
+  setReturnDate(returnDate: Date | null) {
     this.store.dispatch(
       MainPageActions.FlightBack({
-        date: this.returnDate,
+        date: returnDate,
       })
     );
   }

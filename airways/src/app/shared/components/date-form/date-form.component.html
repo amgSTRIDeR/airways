@@ -7,8 +7,8 @@
       placeholder="Depart"
       (focus)="isHintVisible = true"
       (blur)="isHintVisible = false"
-      [(ngModel)]="departureDate"
-      (ngModelChange)="setDepartureDate()"
+      [ngModel]="departureDate$ | async"
+      (dateChange)="setDepartureDate($event.target.value)"
     />
     <input
       matEndDate
@@ -16,8 +16,8 @@
       placeholder="Return"
       (focus)="isHintVisible = true"
       (blur)="isHintVisible = false"
-      [(ngModel)]="returnDate"
-      (ngModelChange)="setReturnDate()"
+      [ngModel]="returnDate$ | async"
+      (dateChange)="setReturnDate($event.target.value)"
     />
   </mat-date-range-input>
   <mat-hint *ngIf="picker.opened || isHintVisible"
@@ -37,8 +37,8 @@
     placeholder="Depart"
     (focus)="isHintVisible = true"
     (blur)="isHintVisible = false"
-    [(ngModel)]="departureDate"
-    (ngModelChange)="setDepartureDate()"
+    [ngModel]="departureDate$ | async"
+    (dateChange)="setDepartureDate($event.target.value)"
   />
   <mat-hint *ngIf="picker.opened || isHintVisible">{{
     dateType$ | async
