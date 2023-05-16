@@ -1,11 +1,11 @@
 <mat-form-field appearance="fill" class="airport-form airport-form__origin">
   <mat-label>From</mat-label>
   <mat-select
-    [(ngModel)]="originAirport"
+    [ngModel]="originAirport"
     name="originAirport"
     class="location-select"
     placeholder="Choose your origin"
-    (ngModelChange)="setOriginAirport()"
+    (ngModelChange)="setOriginAirport($event)"
   >
     <mat-select-trigger>
       <span>{{ originAirport?.city }}</span>
@@ -45,11 +45,11 @@
 >
   <mat-label>Destination</mat-label>
   <mat-select
-    [(ngModel)]="destinationAirport"
+    [ngModel]="destinationAirport"
     name="destinationAirport"
     class="location-select"
     placeholder="Choose your destination"
-    (ngModelChange)="setDestinationAirport()"
+    (ngModelChange)="setDestinationAirport($event)"
   >
     <mat-select-trigger
       ><span>{{ destinationAirport?.city }}</span

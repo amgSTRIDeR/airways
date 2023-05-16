@@ -46,12 +46,12 @@ export const MainPageReducer = createReducer(
 
   on(MainPageActions.AirportForward, (state, action) => ({
     ...state,
-    airportForward: { ...action },
+    airportForward: action.airport,
   })),
 
   on(MainPageActions.AirportBack, (state, action) => ({
     ...state,
-    airportBack: { ...action },
+    airportBack: action.airport,
   })),
 
   on(MainPageActions.ChangeIsShownValue, (state, action) => ({

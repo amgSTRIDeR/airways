@@ -37,12 +37,12 @@ const FlightBack = createAction('[MAIN PAGE] Flight back', props<IDate>());
 
 const AirportForward = createAction(
   '[MAIN PAGE] Airport forward',
-  props<AirportsRes>()
+  props<{ airport: AirportsRes | null }>()
 );
 
 const AirportBack = createAction(
   '[MAIN PAGE] Airport back',
-  props<AirportsRes>()
+  props<{ airport: AirportsRes | null }>()
 );
 
 const LoadAvailableFlights = createAction(
