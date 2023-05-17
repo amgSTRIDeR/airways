@@ -34,7 +34,7 @@
           >Total
         </mat-card-subtitle>
         <mat-card-title>{{
-          totalPrice$ | async | currency : currency
+          totalPrice$ | async | currencyConverter : currency
         }}</mat-card-title>
       </div>
     </div>

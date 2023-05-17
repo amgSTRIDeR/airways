@@ -108,14 +108,18 @@ export const initialState: BookingPageState = {
       },
     ],
     details: {
-      countryCode: '+355',
+      countryCode: '+591',
       phone: '7777777',
       email: 'Pahsdfsdf@gmail.com',
     },
   },
   allInformation: null,
   readyFlight: null,
-  passengersCount: null,
+  passengersCount: {
+    adults: 2,
+    children: 1,
+    infants: 1,
+  },
   availableFlights: null,
 };
 export const BookingPageReducer = createReducer(

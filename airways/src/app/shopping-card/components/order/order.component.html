@@ -78,7 +78,9 @@
       *ngIf="currency$ | async as currency"
       class="flex justify-between item-center value-container"
     >
-      <p class="price-secondary">{{ data.price | currency : currency }}</p>
+      <p class="price-secondary">
+        {{ data.price | currencyConverter : currency }}
+      </p>
       <app-card-menu
         *ngIf="!smallPage"
         [order]="order"

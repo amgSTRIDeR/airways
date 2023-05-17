@@ -181,7 +181,7 @@ export const initialState: BasketPageState = {
         totalPrice: 6768,
       },
       id: 'SomeId',
-      isChecked: true,
+      isChecked: false,
     },
     {
       flights: {
@@ -318,11 +318,11 @@ export const initialState: BasketPageState = {
         totalPrice: 6768,
       },
       id: 'SomeId2',
-      isChecked: true,
+      isChecked: false,
     },
   ],
   discont: 0.7,
-  totalPrice: 6768,
+  totalPrice: 0,
   promoCode: '1111',
 };
 

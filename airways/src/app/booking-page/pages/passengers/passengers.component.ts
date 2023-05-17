@@ -22,7 +22,6 @@ import phoneValidator from '@booking/validators/phone-validator';
 import { Store } from '@ngrx/store';
 import { PassengersCount } from '@redux/models/main-page.models';
 import { Observable, Subscription } from 'rxjs';
-import { MainPageSelectors } from '@redux/selectors/main-page.selectors';
 import { BookingActions } from '@redux/actions/booking-page.actions';
 import { passenger, PassengerInfo } from '@redux/models/booking-page.models';
 import { BookingSelectors } from '@redux/selectors/booking-page.selectors';
@@ -37,7 +36,7 @@ export class PassengersComponent implements OnInit, OnDestroy {
   public passengersForm!: FormGroup<AllPassengerFormGroup>;
 
   private passengersCount$: Observable<PassengersCount | null> =
-    this.store.select(MainPageSelectors.PassengersCount);
+    this.store.select(BookingSelectors.passengersCount);
 
   private passengersCountSub: Subscription = this.passengersCount$.subscribe(
     (passengers: PassengersCount | null): void => {

@@ -1,16 +1,18 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
-import { Store, select } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
 import { BookingActions } from '@redux/actions/booking-page.actions';
 import { BookingPageState } from '@redux/models/state.models';
 import { BookingSelectors } from '@redux/selectors/booking-page.selectors';
+import { MatDialog } from '@angular/material/dialog';
+import { AuthComponent } from '@core/components/auth/auth.component';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
   public showBookWindow = false;
   public isBookingPage = false;
   public isMainPage = false;
@@ -22,7 +24,11 @@ export class HeaderComponent {
 
   windowWidth: number = window.innerWidth;
 
-  constructor(private router: Router, private store: Store<BookingPageState>) {
+  constructor(
+    private router: Router,
+    private store: Store<BookingPageState>,
+    private dialog: MatDialog
+  ) {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         if (event.url.startsWith('/booking-page') || event.url === '/') {
@@ -36,6 +42,10 @@ export class HeaderComponent {
     });
   }
 
+  ngOnInit(): void {
+    this.dialog.open(AuthComponent);
+  }
+
   @HostListener('window:resize')
   onWindowResize() {
     this.windowWidth = window.innerWidth;
@@ -44,7 +54,11 @@ export class HeaderComponent {
     }
   }
 
-  toMainPage() {
+  public openAuthDialog() {
+    this.dialog.open(AuthComponent);
+  }
+
+  public toMainPage() {
     this.router.navigate(['main']);
   }
 }

@@ -10,6 +10,16 @@ import { MatSelectModule } from '@angular/material/select';
 import { StepperComponent } from './components/stepper/stepper.component';
 import { DateSelectComponent } from './components/date-select/date-select.component';
 import { CurrencySelectComponent } from './components/currency-select/currency-select.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { AuthComponent } from './components/auth/auth.component';
+import { SharedModule } from '@shared/shared.module';
+import { InputEmailComponent } from './components/auth/input-email/input-email.component';
+import { InputPasswordComponent } from './components/auth/input-password/input-password.component';
+import { InputNameComponent } from './components/auth/input-name/input-name.component';
+import { InputCountryCodeComponent } from './components/auth/input-country-code/input-country-code.component';
+import { InputPhoneComponent } from './components/auth/input-phone/input-phone.component';
+import { InputCitizenshipComponent } from './components/auth/input-citizenship/input-citizenship.component';
+import { InputBirthdayComponent } from './components/auth/input-birthday/input-birthday.component';
 
 @NgModule({
   declarations: [
@@ -20,8 +30,23 @@ import { CurrencySelectComponent } from './components/currency-select/currency-s
     StepperComponent,
     DateSelectComponent,
     CurrencySelectComponent,
+    AuthComponent,
+    InputEmailComponent,
+    InputPasswordComponent,
+    InputNameComponent,
+    InputCountryCodeComponent,
+    InputPhoneComponent,
+    InputCitizenshipComponent,
+    InputBirthdayComponent,
   ],
-  imports: [CommonModule, MatTooltipModule, MatStepperModule, MatSelectModule],
+  imports: [
+    CommonModule,
+    MatTooltipModule,
+    MatStepperModule,
+    MatSelectModule,
+    MatDialogModule,
+    SharedModule,
+  ],
   exports: [
     FooterComponent,
     ErrorPageComponent,

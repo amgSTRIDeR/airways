@@ -32,6 +32,10 @@ const allInformationSelector = createSelector(
     id: bookState.id,
   })
 );
+const passengersCount = createSelector(
+  selectBooking,
+  (state) => state.passengersCount
+);
 
 const AvailableFlightsSelector = createSelector(
   selectBooking,
@@ -47,4 +51,5 @@ export const BookingSelectors = {
   passengersInfoSelector,
   allInformationSelector,
   AvailableFlightsSelector,
+  passengersCount,
 };
