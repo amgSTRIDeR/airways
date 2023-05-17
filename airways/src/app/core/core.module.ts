@@ -10,6 +10,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { StepperComponent } from './components/stepper/stepper.component';
 import { DateSelectComponent } from './components/date-select/date-select.component';
 import { CurrencySelectComponent } from './components/currency-select/currency-select.component';
+import { EditorHeaderComponent } from './components/editor-header/editor-header.component';
+import { SharedModule } from '@shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -20,8 +22,15 @@ import { CurrencySelectComponent } from './components/currency-select/currency-s
     StepperComponent,
     DateSelectComponent,
     CurrencySelectComponent,
+    EditorHeaderComponent,
   ],
-  imports: [CommonModule, MatTooltipModule, MatStepperModule, MatSelectModule],
+  imports: [
+    CommonModule,
+    MatTooltipModule,
+    MatStepperModule,
+    MatSelectModule,
+    SharedModule,
+  ],
   exports: [
     FooterComponent,
     ErrorPageComponent,

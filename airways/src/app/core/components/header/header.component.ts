@@ -1,9 +1,9 @@
 import { Component, HostListener } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { BookingActions } from '@redux/actions/booking-page.actions';
+import { MainPageActions } from '@redux/actions/main-page.actions';
 import { BookingPageState } from '@redux/models/state.models';
-import { BookingSelectors } from '@redux/selectors/booking-page.selectors';
 
 @Component({
   selector: 'app-header',
@@ -16,9 +16,6 @@ export class HeaderComponent {
   public isMainPage = false;
   public isUserSignIn = false;
   public isHamburgerMenuActive = false;
-  isOnBookingPage$ = this.store.pipe(
-    select(BookingSelectors.onBookingPageSelector)
-  );
 
   windowWidth: number = window.innerWidth;
 
@@ -27,8 +24,10 @@ export class HeaderComponent {
       if (event instanceof NavigationEnd) {
         if (event.url.startsWith('/booking-page') || event.url === '/') {
           this.store.dispatch(BookingActions.OnBookingPage());
+          this.isBookingPage = true;
         } else {
           this.store.dispatch(BookingActions.OutBookingPage());
+          this.isBookingPage = false;
         }
 
         this.isMainPage = event.url.startsWith('/main');
@@ -46,5 +45,14 @@ export class HeaderComponent {
 
   toMainPage() {
     this.router.navigate(['main']);
+  }
+
+  toggleBookWindowVisibility() {
+    this.showBookWindow = !this.showBookWindow;
+    this.store.dispatch(
+      MainPageActions.ChangeIsShownValue({
+        IsShownMainPage: this.showBookWindow,
+      })
+    );
   }
 }

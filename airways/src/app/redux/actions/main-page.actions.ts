@@ -37,12 +37,12 @@ const FlightBack = createAction('[MAIN PAGE] Flight back', props<IDate>());
 
 const AirportForward = createAction(
   '[MAIN PAGE] Airport forward',
-  props<AirportsRes>()
+  props<{ airport: AirportsRes | null }>()
 );
 
 const AirportBack = createAction(
   '[MAIN PAGE] Airport back',
-  props<AirportsRes>()
+  props<{ airport: AirportsRes | null }>()
 );
 
 const LoadAvailableFlights = createAction(
@@ -53,6 +53,11 @@ const LoadAvailableFlights = createAction(
 const LoadAvailableFlightsError = createAction(
   '[MAIN PAGE] Load available flights Error',
   props<{ error: string }>()
+);
+
+const ChangeIsShownValue = createAction(
+  '[MAIN PAGE] Change is shown value',
+  props<{ IsShownMainPage: boolean }>()
 );
 
 export const MainPageActions = {
@@ -67,4 +72,5 @@ export const MainPageActions = {
   IsRoundTrip,
   LoadAvailableFlights,
   LoadAvailableFlightsError,
+  ChangeIsShownValue,
 };
