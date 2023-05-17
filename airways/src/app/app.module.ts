@@ -15,6 +15,8 @@ import { BookingPageReducer } from '@redux/reducers/booking-page.reducer';
 import { BasketPageReducer } from '@redux/reducers/basket.reduser';
 import { HttpClientModule } from '@angular/common/http';
 import { MainEffects } from '@redux/effects/main-effects';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [AppComponent],
@@ -37,6 +39,8 @@ import { MainEffects } from '@redux/effects/main-effects';
     CoreModule,
     HttpClientModule,
     EffectsModule.forRoot([MainEffects]),
+    MatDatepickerModule,
+    MatNativeDateModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -37,6 +37,11 @@ const AirportBackSelector = createSelector(
   (state) => state.airportBack
 );
 
+const IsShowMainFormSelector = createSelector(
+  selectMainPage,
+  (state) => state.isShowMainForm
+);
+
 export const MainPageSelectors = {
   PassengersCount,
   AirportsSelector,
@@ -45,4 +50,5 @@ export const MainPageSelectors = {
   AirportForwardSelector,
   AirportBackSelector,
   IsRoundTripSelector,
+  IsShowMainFormSelector,
 };

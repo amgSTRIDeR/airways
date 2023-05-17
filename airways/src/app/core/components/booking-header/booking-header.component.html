@@ -1,6 +1,8 @@
 <aside class="booking-header">
   <ul class="destinations">
-    <li class="destinations__departure-city">Dublin</li>
+    <li class="destinations__departure-city">
+      {{ availableFlights[0].form.city }}
+    </li>
     <li class="destinations__image">
       <svg
         width="24"
@@ -16,15 +18,23 @@
         />
       </svg>
     </li>
-    <li class="destinations__arrival-city">Warsaw Modlin</li>
+    <li class="destinations__arrival-city">
+      {{ availableFlights[0].to.city }}
+    </li>
   </ul>
   <ul class="info">
-    <li class="info__return">Return</li>
+    <li class="info__return" *ngIf="availableFlights[1]">Return</li>
     <li class="info__dot"></li>
-    <li class="info__dates">1 Mar - 18 Mar</li>
+    <li class="info__dates">
+      {{ departDate }}
+    </li>
+    <li class="info__dates" *ngIf="availableFlights[1]">-</li>
+    <li class="info__dates" *ngIf="availableFlights[1]">
+      {{ returnDate }}
+    </li>
     <li class="info__dot"></li>
     <li class="info__passengers">
-      3
+      {{ passengersCount }}
       <svg
         width="14"
         height="12"
@@ -37,5 +47,14 @@
       </svg>
     </li>
   </ul>
-  <button class="edit-button">Edit</button>
+  <button
+    class="edit-button"
+    (click)="isEditorOpen = !isEditorOpen"
+    *ngIf="currentPageDirection === 'flight'"
+  >
+    Edit
+  </button>
 </aside>
+<app-editor-header
+  *ngIf="isEditorOpen && currentPageDirection === 'flight'"
+></app-editor-header>
