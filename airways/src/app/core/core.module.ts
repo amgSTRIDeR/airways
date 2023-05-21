@@ -39,7 +39,7 @@ import { EditorHeaderComponent } from './components/editor-header/editor-header.
     InputCountryCodeComponent,
     InputPhoneComponent,
     InputCitizenshipComponent,
-    InputBirthdayComponentб
+    InputBirthdayComponent,
     EditorHeaderComponent,
 
   ],
