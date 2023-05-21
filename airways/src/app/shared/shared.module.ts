@@ -21,6 +21,8 @@ import { AirportsFilterPipe } from '@main/pipes/airports-filter.pipe';
 import { DateFormComponent } from './components/date-form/date-form.component';
 import { PassengersFormComponent } from './components/passengers-form/passengers-form.component';
 import { MatMenuModule } from '@angular/material/menu';
+import { CurrencyConverterPipe } from './pipes/currency-converter.pipe';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
@@ -29,6 +31,7 @@ import { MatMenuModule } from '@angular/material/menu';
     AirportsFilterPipe,
     DateFormComponent,
     PassengersFormComponent,
+    CurrencyConverterPipe,
   ],
   imports: [
     MatDividerModule,
@@ -49,6 +52,7 @@ import { MatMenuModule } from '@angular/material/menu';
     MatStepperModule,
     FormsModule,
     MatMenuModule,
+    MatCheckboxModule,
   ],
   exports: [
     MatDividerModule,
@@ -70,6 +74,9 @@ import { MatMenuModule } from '@angular/material/menu';
     AirportsFormComponent,
     DateFormComponent,
     PassengersFormComponent,
+    FormsModule,
+    CurrencyConverterPipe,
+    MatCheckboxModule,
   ],
 })
 export class SharedModule {}

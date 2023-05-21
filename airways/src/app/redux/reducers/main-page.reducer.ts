@@ -4,7 +4,7 @@ import { MainPageActions } from '@redux/actions/main-page.actions';
 
 export const initialState: MainPageState = {
   passengersCount: {
-    adults: 1,
+    adults: 0,
     children: 0,
     infants: 0,
   },

@@ -9,8 +9,8 @@
 </div>
 <div *ngIf="currency$ | async as currency">
   <p>
-    <strong>{{ total.allPrice | currency : currency }}</strong>
+    <strong>{{ total.allPrice | currencyConverter : currency }}</strong>
   </p>
-  <p>{{ total.fare | currency : currency }}</p>
-  <p>{{ total.tax | currency : currency }}</p>
+  <p>{{ total.fare | currencyConverter : currency }}</p>
+  <p>{{ total.tax | currencyConverter : currency }}</p>
 </div>

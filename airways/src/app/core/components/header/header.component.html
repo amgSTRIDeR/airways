@@ -55,7 +55,7 @@
         <app-currency-select></app-currency-select>
         <button
           class="button-header button__SignIn"
-          (click)="isUserSignIn = !isUserSignIn"
+          (click)="openAuthDialog()"
           [class.active]="isUserSignIn"
         >
           <svg

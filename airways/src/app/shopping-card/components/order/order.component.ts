@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { SettingsSelectors } from '@redux/selectors/settings.selectors';
 import { BaskedActions } from '@redux/actions/bascet.actions';
+import { CurrencyType } from '@redux/models/settings.models';
 
 export interface OrderForHtml {
   flightNum: string;
@@ -28,7 +29,7 @@ export class OrderComponent implements OnInit {
   @Input() order!: Order;
   @Input() smallPage!: boolean;
   public data!: OrderForHtml;
-  public currency$: Observable<string> = this.store.select(
+  public currency$: Observable<CurrencyType> = this.store.select(
     SettingsSelectors.CurrencySelector
   );
 
