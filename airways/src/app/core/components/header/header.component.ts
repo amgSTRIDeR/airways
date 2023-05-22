@@ -6,6 +6,7 @@ import { MainPageActions } from '@redux/actions/main-page.actions';
 import { BookingPageState } from '@redux/models/state.models';
 import { MatDialog } from '@angular/material/dialog';
 import { AuthComponent } from '@core/components/auth/auth.component';
+import { BookingSelectors } from '@redux/selectors/booking-page.selectors';
 
 @Component({
   selector: 'app-header',
@@ -14,10 +15,11 @@ import { AuthComponent } from '@core/components/auth/auth.component';
 })
 export class HeaderComponent implements OnInit {
   public showBookWindow = false;
-  public isBookingPage = false;
   public isMainPage = false;
   public isUserSignIn = false;
   public isHamburgerMenuActive = false;
+
+  onBookingPage$ = this.store.select(BookingSelectors.onBookingPageSelector);
 
   windowWidth: number = window.innerWidth;
 
@@ -28,15 +30,13 @@ export class HeaderComponent implements OnInit {
   ) {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
-        if (event.url.startsWith('/booking-page') || event.url === '/') {
+        if (event.url.startsWith('/booking-page')) {
           this.store.dispatch(BookingActions.OnBookingPage());
-          this.isBookingPage = true;
         } else {
           this.store.dispatch(BookingActions.OutBookingPage());
-          this.isBookingPage = false;
         }
 
-        this.isMainPage = event.url.startsWith('/main');
+        this.isMainPage = event.url.startsWith('/main') || event.url === '/';
       }
     });
   }

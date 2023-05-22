@@ -40,7 +40,7 @@
           />
         </g>
       </svg>
-      <app-stepper *ngIf="isBookingPage"></app-stepper>
+      <app-stepper *ngIf="onBookingPage$ | async"></app-stepper>
       <nav class="header-nav">
         <button
           class="button-header button__book-flights"
@@ -137,5 +137,5 @@
       Book flights
     </button>
   </div>
-  <app-booking-header *ngIf="isBookingPage"></app-booking-header>
+  <app-booking-header *ngIf="onBookingPage$ | async"></app-booking-header>
 </header>
