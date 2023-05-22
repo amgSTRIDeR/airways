@@ -76,7 +76,7 @@
       </mat-error>
     </mat-form-field>
   </div>
-  <div *ngIf="accessible" class="flex">
+  <div *ngIf="accessible" class="flex gap-2 item-center width600">
     <mat-slide-toggle
       [formControl]="card.controls.invalid"
       color="primary"
@@ -89,5 +89,13 @@
         </mat-card-subtitle>
       </div>
     </mat-slide-toggle>
+    <app-baggage
+      [baggageControl]="card.controls.baggageBig"
+      baggageName="Extra baggage(23kg)"
+    ></app-baggage>
+    <app-baggage
+      [baggageControl]="card.controls.baggageSmall"
+      baggageName="cabin bag(8kg)"
+    ></app-baggage>
   </div>
 </mat-card-content>

@@ -1,10 +1,9 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
-import { select, Store } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { BookingActions } from '@redux/actions/booking-page.actions';
 import { MainPageActions } from '@redux/actions/main-page.actions';
 import { BookingPageState } from '@redux/models/state.models';
-import { BookingSelectors } from '@redux/selectors/booking-page.selectors';
 import { MatDialog } from '@angular/material/dialog';
 import { AuthComponent } from '@core/components/auth/auth.component';
 
@@ -13,7 +12,7 @@ import { AuthComponent } from '@core/components/auth/auth.component';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
   public showBookWindow = false;
   public isBookingPage = false;
   public isMainPage = false;
@@ -42,9 +41,9 @@ export class HeaderComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
-    this.dialog.open(AuthComponent);
-  }
+  // ngOnInit(): void {
+  //   this.dialog.open(AuthComponent);
+  // }
 
   @HostListener('window:resize')
   onWindowResize() {

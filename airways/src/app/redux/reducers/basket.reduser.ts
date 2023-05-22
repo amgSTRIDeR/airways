@@ -118,6 +118,8 @@ export const initialState: BasketPageState = {
             gender: 'male',
             birthdayDate: '2023-05-01T22:00:00.000Z',
             invalid: 'true',
+            baggageBig: 0,
+            baggageSmall: 0,
           },
           {
             firstName: 'Anna',
@@ -125,6 +127,8 @@ export const initialState: BasketPageState = {
             gender: 'female',
             birthdayDate: '2023-05-01T22:00:00.000Z',
             invalid: 'false',
+            baggageBig: 0,
+            baggageSmall: 0,
           },
         ],
         child: [
@@ -134,6 +138,8 @@ export const initialState: BasketPageState = {
             gender: 'male',
             birthdayDate: '2023-05-01T22:00:00.000Z',
             invalid: 'true',
+            baggageBig: 0,
+            baggageSmall: 0,
           },
         ],
         infant: [
@@ -143,6 +149,8 @@ export const initialState: BasketPageState = {
             gender: 'male',
             birthdayDate: '2023-05-01T22:00:00.000Z',
             invalid: 'true',
+            baggageBig: 0,
+            baggageSmall: 0,
           },
         ],
         details: {
@@ -255,6 +263,8 @@ export const initialState: BasketPageState = {
             gender: 'male',
             birthdayDate: '2023-05-01T22:00:00.000Z',
             invalid: 'true',
+            baggageBig: 0,
+            baggageSmall: 0,
           },
           {
             firstName: 'Anna',
@@ -262,6 +272,8 @@ export const initialState: BasketPageState = {
             gender: 'female',
             birthdayDate: '2023-05-01T22:00:00.000Z',
             invalid: 'false',
+            baggageBig: 0,
+            baggageSmall: 0,
           },
         ],
         child: [
@@ -271,6 +283,8 @@ export const initialState: BasketPageState = {
             gender: 'male',
             birthdayDate: '2023-05-01T22:00:00.000Z',
             invalid: 'true',
+            baggageBig: 0,
+            baggageSmall: 0,
           },
         ],
         infant: [
@@ -280,6 +294,8 @@ export const initialState: BasketPageState = {
             gender: 'male',
             birthdayDate: '2023-05-01T22:00:00.000Z',
             invalid: 'true',
+            baggageBig: 0,
+            baggageSmall: 0,
           },
         ],
         details: {

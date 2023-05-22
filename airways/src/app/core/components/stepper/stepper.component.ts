@@ -19,7 +19,6 @@ export class StepperComponent {
   constructor(private store: Store) {}
 
   public changePageDirection(index: number) {
-    console.log(7788);
     if (index === 0) this.store.dispatch(BookingActions.OnFlightSubPage());
     if (index === 1) this.store.dispatch(BookingActions.OnPassengersSubPage());
     if (index === 2) this.store.dispatch(BookingActions.OnReviewSubPage());

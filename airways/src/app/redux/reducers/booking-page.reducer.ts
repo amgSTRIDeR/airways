@@ -6,7 +6,7 @@ import { MainPageActions } from '@redux/actions/main-page.actions';
 export const initialState: BookingPageState = {
   id: 'SomeId',
   onBookingPage: false,
-  currentPageDirection: 'flight',
+  currentPageDirection: 'review',
   isEditWindowOpen: false,
   totalPrice: null,
   flights: {
@@ -80,6 +80,8 @@ export const initialState: BookingPageState = {
         gender: 'male',
         birthdayDate: '2023-05-01T22:00:00.000Z',
         invalid: 'true',
+        baggageBig: 0,
+        baggageSmall: 0,
       },
       {
         firstName: 'Anna',
@@ -87,6 +89,8 @@ export const initialState: BookingPageState = {
         gender: 'female',
         birthdayDate: '2023-05-01T22:00:00.000Z',
         invalid: 'false',
+        baggageBig: 0,
+        baggageSmall: 0,
       },
     ],
     child: [
@@ -96,6 +100,8 @@ export const initialState: BookingPageState = {
         gender: 'male',
         birthdayDate: '2023-05-01T22:00:00.000Z',
         invalid: 'true',
+        baggageBig: 0,
+        baggageSmall: 0,
       },
     ],
     infant: [
@@ -105,6 +111,8 @@ export const initialState: BookingPageState = {
         gender: 'male',
         birthdayDate: '2023-05-01T22:00:00.000Z',
         invalid: 'true',
+        baggageBig: 0,
+        baggageSmall: 0,
       },
     ],
     details: {

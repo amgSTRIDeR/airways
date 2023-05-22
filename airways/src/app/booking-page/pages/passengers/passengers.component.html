@@ -1,4 +1,8 @@
-<form class="w-full flex flex-column gap-2" [formGroup]="passengersForm">
+<form
+  class="w-full flex flex-column gap-2"
+  [formGroup]="passengersForm"
+  (ngSubmit)="goToNextPage()"
+>
   <div class="flex flex-column gap-1">
     <div class="flex-column flex item-start">
       <app-icon-label icon="groups" logo="Passenger"></app-icon-label>
@@ -55,12 +59,7 @@
       >
         Back
       </button>
-      <button
-        class="button"
-        mat-raised-button
-        color="primary"
-        (click)="logForm()"
-      >
+      <button class="button" mat-raised-button color="primary" type="submit">
         Continue
       </button>
     </div>

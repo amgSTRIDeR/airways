@@ -13,6 +13,8 @@ export interface PassengerFormGroup {
   gender: FormControl<string | null>;
   birthdayDate: FormControl<string | null>;
   invalid: FormControl<string | null>;
+  baggageBig: FormControl<number | null>;
+  baggageSmall: FormControl<number | null>;
 }
 
 export interface DetailsFormGroup {
