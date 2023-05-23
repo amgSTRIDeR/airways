@@ -1,3 +1,35 @@
+.header-indent {
+  height: 88px;
+
+  @media (max-width: 1292px) {
+    height: calc(2.564vw + 54.87px);
+  }
+}
+
+.header-indent_booking {
+  height: 152.8px;
+
+  @media (max-width: 1292px) {
+    height: calc(7.046vw + 115.77px);
+  }
+
+  @media (max-width: 600px) {
+    height: calc(7.510vw + 139.74px);
+  }
+}
+
+.header-indent_booking-flight {
+  height: 152.8px;
+
+  @media (max-width: 1292px) {
+    height: calc(7.048vw + 115.74px);
+  }
+
+  @media (max-width: 600px) {
+    height: calc(7.943vw + 166.74px);
+  }
+}
+
 .header {
   position: fixed;
   z-index: 10;

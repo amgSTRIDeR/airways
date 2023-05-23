@@ -20,6 +20,9 @@ export class HeaderComponent implements OnInit {
   public isHamburgerMenuActive = false;
 
   onBookingPage$ = this.store.select(BookingSelectors.onBookingPageSelector);
+  onFlightPage$ = this.store.select(
+    BookingSelectors.currentPageDirectionSelector
+  );
 
   windowWidth: number = window.innerWidth;
 
