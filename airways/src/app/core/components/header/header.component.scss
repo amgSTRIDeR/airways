@@ -235,27 +235,53 @@
 
   background-color: transparent;
   border: none;
+
+  transition: all 0.3s ease;
+
+  &:hover {
+    cursor: pointer;
+
+    & .shopping-basket {
+      transform: scale(1.05);
+      fill: #11397E;
+
+      transition: all 0.3s ease;
+    }
+
+    & .shopping-counter {
+      color: #000000;
+      background-color: #ffffff;
+      border: 1px solid #11397E;
+
+      transform: scale(1.05);
+
+      transition: all 0.3s ease;
+    }
+  }
+
+  &:active {
+    & .shopping-basket {
+      transform: scale(0.95);
+      fill: #11397E;
+
+      transition: all 0.3s ease;
+    }
+
+    & .shopping-counter {
+      color: #000000;
+      transform: scale(0.95);
+      background-color: #ffffff;
+      border: 1px solid #11397E;
+
+      transition: all 0.3s ease;
+    }
+  }
 }
 
 .shopping-basket {
   fill: #ffffffcc;
 
   transition: all 0.3s ease;
-
-  &:hover {
-    transform: scale(1.05);
-    fill: #11397E;
-    cursor: pointer;
-
-    transition: all 0.3s ease;
-  }
-
-  &:active {
-    transform: scale(0.95);
-    fill: #11397E;
-
-    transition: all 0.3s ease;
-  }
 }
 
 .shopping-counter {
@@ -279,6 +305,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
+
+  transition: all 0.3s ease;
 }
 
 .hamburger-icon {
