@@ -20,8 +20,8 @@ const checkFlight = (orders: Order[], id: string) => {
   });
 };
 
-const notCheckedFlight = (orders: Order[]) => {
-  return orders.filter((el) => el.isChecked);
+const checkedFlight = (orders: Order[]) => {
+  return orders.filter((el) => !el.isChecked);
 };
 export const promoF = (
   promoCode: string,
@@ -381,10 +381,14 @@ export const BasketPageReducer = createReducer(
       totalPrice: totalPrise(newOrders),
     };
   }),
-  on(BaskedActions.Pay, (state) => ({
-    ...state,
-    orders: notCheckedFlight(state.orders),
-  })),
+  on(BaskedActions.Pay, (state) => {
+    const newOrders = checkedFlight(state.orders);
+    return {
+      ...state,
+      orders: newOrders,
+      totalPrice: totalPrise(newOrders),
+    };
+  }),
   on(BaskedActions.CheckFlight, (state, action) => {
     const newOrders = checkFlight(state.orders, action.id);
     return {

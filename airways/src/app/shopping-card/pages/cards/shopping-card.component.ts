@@ -17,6 +17,7 @@ import {
   SortOrdersSettings,
   SortSettings,
 } from '@shopping/pipes/sort-orders.pipe';
+import { BookingActions } from '@redux/actions/booking-page.actions';
 
 @Component({
   selector: 'app-shopping-card',
@@ -81,6 +82,7 @@ export class ShoppingCardComponent implements OnInit, OnDestroy {
   }
 
   public addNewTrip() {
+    this.store.dispatch(BookingActions.ClearBookingPageState());
     this.router.navigate(['/main']);
   }
 
@@ -102,5 +104,9 @@ export class ShoppingCardComponent implements OnInit, OnDestroy {
     this.sortSubscription = this.sortType$.subscribe(() => {
       this.sortHelper = true;
     });
+  }
+
+  payForOrders() {
+    this.store.dispatch(BaskedActions.Pay());
   }
 }

@@ -3,7 +3,6 @@ import { Store } from '@ngrx/store';
 import { FlightsRes } from '@redux/models/main-page.models';
 import { BookingPageState } from '@redux/models/state.models';
 import { BookingSelectors } from '@redux/selectors/booking-page.selectors';
-import { MainPageSelectors } from '@redux/selectors/main-page.selectors';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -25,7 +24,7 @@ export class BookingHeaderComponent implements OnDestroy {
   private availableFlightsSubscription!: Subscription;
 
   private passengersCount$ = this.store.select(
-    MainPageSelectors.PassengersCount
+    BookingSelectors.passengersCount
   );
   private passengersCountSubscription!: Subscription;
 

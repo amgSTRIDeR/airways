@@ -3,15 +3,14 @@ import {
   ElementRef,
   HostListener,
   OnDestroy,
-  Renderer2,
   ViewChild,
 } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { MainPageActions } from '@redux/actions/main-page.actions';
 import { PassengersCount } from '@redux/models/main-page.models';
 import { SettingsState } from '@redux/models/state.models';
-import { MainPageSelectors } from '@redux/selectors/main-page.selectors';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
+import { BookingSelectors } from '@redux/selectors/booking-page.selectors';
+import { BookingActions } from '@redux/actions/booking-page.actions';
 
 @Component({
   selector: 'app-passengers-form',
@@ -22,28 +21,20 @@ export class PassengersFormComponent implements OnDestroy {
   @ViewChild('passengersForm') passengersFormRef!: ElementRef;
   @ViewChild('passengersControl') passengersControlRef!: ElementRef;
 
-  public passengers = {
-    adults: 1,
-    children: 0,
-    infants: 0,
-  };
+  public passengers!: PassengersCount;
+
   public isControlVisible = false;
 
-  passengersCount$ = this.store.select(MainPageSelectors.PassengersCount);
+  passengersCount$: Observable<PassengersCount | null> = this.store.select(
+    BookingSelectors.passengersCount
+  );
   passengersSubscription!: Subscription;
 
-  constructor(
-    private store: Store<SettingsState>,
-    private renderer: Renderer2
-  ) {
+  constructor(private store: Store<SettingsState>) {
     this.passengersSubscription = this.passengersCount$.subscribe(
       (passengers: PassengersCount | null): void => {
         if (passengers !== null) {
-          this.passengers = {
-            adults: passengers.adults,
-            children: passengers.children,
-            infants: passengers.infants,
-          };
+          this.passengers = { ...passengers };
         }
       }
     );
@@ -67,7 +58,7 @@ export class PassengersFormComponent implements OnDestroy {
   }
 
   updatePassengersState() {
-    this.store.dispatch(MainPageActions.PassengersCount(this.passengers));
+    this.store.dispatch(BookingActions.PassengersCount(this.passengers));
   }
 
   decreasePassengersCount(type: string) {

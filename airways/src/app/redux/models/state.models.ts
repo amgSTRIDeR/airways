@@ -42,7 +42,7 @@ export interface MainPageState {
 export type CurrentPageDirection = 'flight' | 'passengers' | 'review';
 
 export interface BookingPageState {
-  id: string;
+  id: string | null;
   passengersCount: PassengersCount | null;
   onBookingPage: boolean;
   currentPageDirection: CurrentPageDirection;

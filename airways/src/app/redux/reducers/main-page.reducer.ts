@@ -19,10 +19,10 @@ export const initialState: MainPageState = {
 
 export const MainPageReducer = createReducer(
   initialState,
-  on(MainPageActions.PassengersCount, (state, action) => ({
-    ...state,
-    passengersCount: { ...action },
-  })),
+  // on(MainPageActions.PassengersCount, (state, action) => ({
+  //   ...state,
+  //   passengersCount: { ...action },
+  // })),
 
   on(MainPageActions.IsRoundTrip, (state, action) => ({
     ...state,

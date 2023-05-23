@@ -1,7 +1,6 @@
 import { BookingPageState } from '@redux/models/state.models';
 import { createReducer, on } from '@ngrx/store';
 import { BookingActions } from '@redux/actions/booking-page.actions';
-import { MainPageActions } from '@redux/actions/main-page.actions';
 
 export const initialState: BookingPageState = {
   id: 'SomeId',
@@ -677,7 +676,7 @@ export const initialState: BookingPageState = {
 };
 export const BookingPageReducer = createReducer(
   initialState,
-  on(MainPageActions.PassengersCount, (state, action) => ({
+  on(BookingActions.PassengersCount, (state, action) => ({
     ...state,
     passengersCount: { ...action },
   })),
@@ -726,5 +725,23 @@ export const BookingPageReducer = createReducer(
   on(BookingActions.LoadAvailableFlightsSuccess, (state, action) => ({
     ...state,
     availableFlights: action.availableFlights,
+  })),
+  on(BookingActions.ClearBookingPageState, (state) => ({
+    ...state,
+    onBookingPage: false,
+    id: null,
+    currentPageDirection: 'flight',
+    isEditWindowOpen: false,
+    totalPrice: null,
+    flights: null,
+    passengersInfo: null,
+    allInformation: null,
+    readyFlight: null,
+    passengersCount: {
+      adults: 1,
+      children: 0,
+      infants: 0,
+    },
+    availableFlights: null,
   }))
 );

@@ -5,7 +5,7 @@ import {
   SelectedFlight,
   Total,
 } from '@redux/models/booking-page.models';
-import { FlightsRes } from '@redux/models/main-page.models';
+import { FlightsRes, PassengersCount } from '@redux/models/main-page.models';
 
 const OnBookingPage = createAction('[BOOKING PAGE] On Booking Page');
 const OutBookingPage = createAction('[BOOKING PAGE] Out Booking Page');
@@ -35,10 +35,16 @@ const EditFlightAction = createAction(
 );
 
 const LoadAvailableFlightsSuccess = createAction(
-  '[BOOKING PAGE] Load available flights Success',
+  '[BOOKING PAGE] Load Available Flights Success',
   props<{ availableFlights: FlightsRes[] }>()
 );
-
+const ClearBookingPageState = createAction(
+  '[BOOKING PAGE] Clear Booking Page State'
+);
+const PassengersCount = createAction(
+  '[BOOKING PAGE] Passenger Count',
+  props<PassengersCount>()
+);
 export const BookingActions = {
   OnBookingPage,
   OutBookingPage,
@@ -51,4 +57,6 @@ export const BookingActions = {
   AddTotalPrice,
   EditFlightAction,
   LoadAvailableFlightsSuccess,
+  ClearBookingPageState,
+  PassengersCount,
 };
