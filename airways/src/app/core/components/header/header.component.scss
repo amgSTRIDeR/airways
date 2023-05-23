@@ -230,6 +230,13 @@
   }
 }
 
+.button__shopping-card {
+  position: relative;
+
+  background-color: transparent;
+  border: none;
+}
+
 .shopping-basket {
   fill: #ffffffcc;
 
@@ -237,7 +244,7 @@
 
   &:hover {
     transform: scale(1.05);
-    fill: #ffffff;
+    fill: #11397E;
     cursor: pointer;
 
     transition: all 0.3s ease;
@@ -245,9 +252,33 @@
 
   &:active {
     transform: scale(0.95);
+    fill: #11397E;
 
     transition: all 0.3s ease;
   }
+}
+
+.shopping-counter {
+  position: absolute;
+  top: -3px;
+  right: -1px;
+
+  box-sizing: border-box;
+  width: 16px;
+  height: 16px;
+  padding: 4px;
+  border-radius: 50%;
+  background-color: #B3261E;
+  color: #ffffff;
+
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 11px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .hamburger-icon {

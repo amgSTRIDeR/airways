@@ -7,6 +7,7 @@ import { BookingPageState } from '@redux/models/state.models';
 import { MatDialog } from '@angular/material/dialog';
 import { AuthComponent } from '@core/components/auth/auth.component';
 import { BookingSelectors } from '@redux/selectors/booking-page.selectors';
+import { BasketSelectors } from '@redux/selectors/basket.selectors';
 
 @Component({
   selector: 'app-header',
@@ -23,6 +24,7 @@ export class HeaderComponent implements OnInit {
   onFlightPage$ = this.store.select(
     BookingSelectors.currentPageDirectionSelector
   );
+  ordersCount$ = this.store.select(BasketSelectors.Orders);
 
   windowWidth: number = window.innerWidth;
 
@@ -62,6 +64,10 @@ export class HeaderComponent implements OnInit {
 
   public toMainPage() {
     this.router.navigate(['main']);
+  }
+
+  public toShoppingCardPage() {
+    this.router.navigate(['shopping-card']);
   }
 
   toggleBookWindowVisibility() {
