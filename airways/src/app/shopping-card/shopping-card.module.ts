@@ -9,6 +9,7 @@ import { OrderComponent } from './components/order/order.component';
 import { MatMenuModule } from '@angular/material/menu';
 import { CardMenuComponent } from './components/order/card-menu/card-menu.component';
 import { SharedModule } from '@shared/shared.module';
+import { SortOrdersPipe } from './pipes/sort-orders.pipe';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { SharedModule } from '@shared/shared.module';
     SortButtonComponent,
     OrderComponent,
     CardMenuComponent,
+    SortOrdersPipe,
   ],
   imports: [
     CommonModule,

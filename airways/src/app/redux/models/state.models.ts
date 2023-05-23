@@ -12,7 +12,8 @@ import {
   SelectedFlight,
   Total,
 } from '@redux/models/booking-page.models';
-import { Order, sort } from '@redux/models/basket.models';
+import { Order } from '@redux/models/basket.models';
+import { SortSettings } from '@shopping/pipes/sort-orders.pipe';
 
 export interface SettingsState {
   currency: CurrencyType;
@@ -55,8 +56,7 @@ export interface BookingPageState {
 }
 
 export interface BasketPageState {
-  sortType: sort;
-  isReverse: boolean;
+  sortType: SortSettings;
   orders: Order[];
   discont: number;
   totalPrice: number;

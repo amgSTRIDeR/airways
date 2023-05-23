@@ -3,16 +3,36 @@
     <mat-card-title>Cart</mat-card-title>
   </mat-card-header>
   <mat-card-actions *ngIf="!smallPage" class="bg-light action-container">
-    <app-sort-button sortName="No."></app-sort-button>
-    <app-sort-button sortName="Flight"></app-sort-button>
-    <app-sort-button sortName="Type trip"></app-sort-button>
-    <app-sort-button sortName="Data & Time"></app-sort-button>
-    <app-sort-button sortName="Passengers"></app-sort-button>
-    <app-sort-button sortName="Price"></app-sort-button>
+    <app-sort-button
+      (click)="sortOrders('No')"
+      sortName="No."
+    ></app-sort-button>
+    <app-sort-button
+      (click)="sortOrders('Flight')"
+      sortName="Flight"
+    ></app-sort-button>
+    <app-sort-button
+      (click)="sortOrders('TripType')"
+      sortName="Type trip"
+    ></app-sort-button>
+    <app-sort-button
+      (click)="sortOrders('Date')"
+      sortName="Data & Time"
+    ></app-sort-button>
+    <app-sort-button
+      (click)="sortOrders('Passengers')"
+      sortName="Passengers"
+    ></app-sort-button>
+    <app-sort-button
+      (click)="sortOrders('Price')"
+      sortName="Price"
+    ></app-sort-button>
   </mat-card-actions>
   <mat-card-content>
     <app-order
-      *ngFor="let order of orders"
+      *ngFor="
+        let order of orders | sortOrders : (sortType$ | async) : sortHelper
+      "
       [order]="order"
       [smallPage]="smallPage"
     ></app-order>

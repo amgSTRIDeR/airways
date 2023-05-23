@@ -23,14 +23,6 @@ const checkFlight = (orders: Order[], id: string) => {
 const notCheckedFlight = (orders: Order[]) => {
   return orders.filter((el) => el.isChecked);
 };
-const changeReverse = (
-  sortPrev: string,
-  sortNext: string,
-  isReverse: boolean
-): boolean => {
-  if (sortPrev === sortNext) return !isReverse;
-  else return false;
-};
 export const promoF = (
   promoCode: string,
   currentPromoCode: string,
@@ -43,8 +35,7 @@ export const deleteFlight = (flight: Order[], id: string): Order[] =>
   flight.filter((el) => el.id !== id);
 
 export const initialState: BasketPageState = {
-  sortType: 'Num',
-  isReverse: false,
+  sortType: { sortType: 'NoSort' },
   orders: [
     {
       flights: {
@@ -59,19 +50,19 @@ export const initialState: BasketPageState = {
           form: {
             key: 'AMS',
             name: 'Amsterdam-Schiphol',
-            city: 'Amsterdam',
+            city: 'Grodno',
             gmt: '+1.0',
             country: 'Netherlands',
           },
           to: {
             key: 'MAD',
             name: 'Barajas',
-            city: 'Madrid',
+            city: 'Minsk',
             gmt: '+1.0',
             country: 'Spain',
           },
-          takeoffDate: '2023-09-22T16:48:00.000Z',
-          landingDate: '2023-09-22T23:36:00.000Z',
+          takeoffDate: '2022-05-22T11:48:00.000Z',
+          landingDate: '2022-05-22T13:36:00.000Z',
           price: {
             eur: 470,
             usd: 518.457,
@@ -130,6 +121,15 @@ export const initialState: BasketPageState = {
             baggageBig: 0,
             baggageSmall: 0,
           },
+          {
+            firstName: 'Anna',
+            lastName: 'arabei',
+            gender: 'female',
+            birthdayDate: '2023-05-01T22:00:00.000Z',
+            invalid: 'false',
+            baggageBig: 0,
+            baggageSmall: 0,
+          },
         ],
         child: [
           {
@@ -160,7 +160,7 @@ export const initialState: BasketPageState = {
         },
       },
       passengersCount: {
-        adults: 1,
+        adults: 3,
         children: 1,
         infants: 1,
       },
@@ -305,7 +305,7 @@ export const initialState: BasketPageState = {
         },
       },
       passengersCount: {
-        adults: 1,
+        adults: 2,
         children: 1,
         infants: 1,
       },
@@ -331,10 +331,10 @@ export const initialState: BasketPageState = {
           tax: 188,
           allPrice: 564,
         },
-        totalPrice: 6768,
+        totalPrice: 4000,
       },
       id: 'SomeId2',
-      isChecked: false,
+      isChecked: true,
     },
   ],
   discont: 0.7,
@@ -362,8 +362,7 @@ export const BasketPageReducer = createReducer(
   }),
   on(BaskedActions.SortAction, (state, action) => ({
     ...state,
-    isReverse: changeReverse(state.sortType, action.sort, state.isReverse),
-    sortType: action.sort,
+    sortType: action,
   })),
   on(BaskedActions.PromoCode, (state, action) => ({
     ...state,

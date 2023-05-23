@@ -1,7 +1,8 @@
 import { createAction, props } from '@ngrx/store';
-import { Order, SortType } from '@redux/models/basket.models';
+import { Order } from '@redux/models/basket.models';
+import { SortSettings } from '@shopping/pipes/sort-orders.pipe';
 
-const SortAction = createAction('[BASKET PAGE] Sort', props<SortType>());
+const SortAction = createAction('[BASKET PAGE] Sort', props<SortSettings>());
 const AddFlight = createAction('[BASKET PAGE] Add Flight', props<Order>());
 const PromoCode = createAction(
   '[BASKET PAGE] Promo Code',
