@@ -6,6 +6,16 @@ import { MainPageActions } from '@redux/actions/main-page.actions';
 import { BookingPageState } from '@redux/models/state.models';
 import { MatDialog } from '@angular/material/dialog';
 import { AuthComponent } from '@core/components/auth/auth.component';
+import { basket } from '@core/svg/SVG';
+import { IconService } from '@core/services/icon.service';
+import { BasketSelectors } from '@redux/selectors/basket.selectors';
+import { Order } from '@redux/models/basket.models';
+import { Observable } from 'rxjs';
+
+const ICON = {
+  name: 'basket',
+  source: basket,
+};
 
 @Component({
   selector: 'app-header',
@@ -18,14 +28,20 @@ export class HeaderComponent {
   public isMainPage = false;
   public isUserSignIn = false;
   public isHamburgerMenuActive = false;
+  public ordersCount$: Observable<Order[]> = this.store.select(
+    BasketSelectors.Orders
+  );
 
   windowWidth: number = window.innerWidth;
 
   constructor(
     private router: Router,
     private store: Store<BookingPageState>,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private iconService: IconService
   ) {
+    this.addPathToIcon();
+
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         if (event.url.startsWith('/booking-page') || event.url === '/') {
@@ -68,5 +84,13 @@ export class HeaderComponent {
         IsShownMainPage: this.showBookWindow,
       })
     );
+  }
+
+  private addPathToIcon() {
+    this.iconService.add(ICON.name, ICON.source);
+  }
+
+  rederectToBasketPage() {
+    this.router.navigateByUrl('/shopping-card');
   }
 }

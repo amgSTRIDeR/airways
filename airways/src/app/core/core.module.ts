@@ -22,6 +22,7 @@ import { InputPhoneComponent } from './components/auth/input-phone/input-phone.c
 import { InputCitizenshipComponent } from './components/auth/input-citizenship/input-citizenship.component';
 import { InputBirthdayComponent } from './components/auth/input-birthday/input-birthday.component';
 import { EditorHeaderComponent } from './components/editor-header/editor-header.component';
+import { MatBadgeModule } from '@angular/material/badge';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,6 @@ import { EditorHeaderComponent } from './components/editor-header/editor-header.
     InputCitizenshipComponent,
     InputBirthdayComponent,
     EditorHeaderComponent,
-
   ],
   imports: [
     CommonModule,
@@ -50,6 +50,7 @@ import { EditorHeaderComponent } from './components/editor-header/editor-header.
     MatSelectModule,
     MatDialogModule,
     SharedModule,
+    MatBadgeModule,
   ],
   exports: [
     FooterComponent,
