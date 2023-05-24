@@ -92,28 +92,28 @@
   transition: all 0.3s ease;
 
   &:hover {
-    color: #ffffff;
+    color: #000000;
 
     transform: scale(1.05);
     transition: all 0.3s ease;
 
     & .github-image {
-      fill: #D0D9DF;
-      stroke: #ffffff;
+      fill: #d0d9df00;
+      stroke: #000000;
 
       transition: all 0.3s ease;
     }
   }
 
   &:active {
-    color: #ffffff;
+    color: #11397E;
 
     transform: scale(0.95);
     transition: all 0.3s ease;
 
     & .github-image {
-      fill: #D0D9DF;
-      stroke: #ffffff;
+      fill: #11397e00;
+      stroke: #11397E;
 
       transition: all 0.3s ease;
     }
