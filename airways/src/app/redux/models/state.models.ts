@@ -26,6 +26,9 @@ export interface AuthState {
   email: string | null;
   user: UserRes | null;
   error: string | null;
+  lorInError: string | null;
+  registerError: string | null;
+  meError: string | null;
 }
 
 export interface MainPageState {

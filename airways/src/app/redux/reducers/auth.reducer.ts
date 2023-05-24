@@ -8,6 +8,9 @@ export const initialState: AuthState = {
   email: null,
   user: null,
   error: null,
+  lorInError: null,
+  registerError: null,
+  meError: null,
 };
 
 export const AuthReducer = createReducer(
@@ -19,14 +22,12 @@ export const AuthReducer = createReducer(
   })),
   on(AuthActions.LoginLoadedSuccess, (state, action) => ({
     ...state,
-    isLogged: true,
     token: action.token,
-    error: null,
+    lorInError: null,
   })),
   on(AuthActions.LoginLoadedError, (state, action) => ({
     ...state,
-    isLogged: false,
-    error: action.error,
+    lorInError: action.error,
   })),
   on(AuthActions.RegistrationStart, (state, action) => ({
     ...state,
@@ -35,29 +36,38 @@ export const AuthReducer = createReducer(
   })),
   on(AuthActions.RegistrationLoadedSuccess, (state, action) => ({
     ...state,
-    isLogged: true,
     token: action.token,
-    error: null,
+    registerError: null,
   })),
-  on(AuthActions.LoginLoadedError, (state, action) => ({
+  on(AuthActions.RegistrationLoadedError, (state, action) => ({
     ...state,
     isLogged: false,
-    error: action.error,
+    registerError: action.error,
   })),
-  on(AuthActions.meStart, (state, action) => ({
+  on(AuthActions.meStart, (state) => ({
     ...state,
-    email: action.email,
     isLogged: false,
   })),
   on(AuthActions.meLoadedSuccess, (state, action) => ({
     ...state,
     isLogged: true,
+    token: null,
     user: action,
-    error: null,
+    meError: null,
   })),
   on(AuthActions.meLoadedError, (state, action) => ({
     ...state,
+    meError: action.error,
+  })),
+  on(AuthActions.logOut, (state) => ({
+    ...state,
     isLogged: false,
-    error: action.error,
+    token: null,
+    email: null,
+    user: null,
+    error: null,
+    lorInError: null,
+    registerError: null,
+    meError: null,
   }))
 );

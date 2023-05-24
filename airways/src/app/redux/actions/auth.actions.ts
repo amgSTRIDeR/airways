@@ -26,14 +26,17 @@ const RegistrationLoadedError = createAction(
   props<{ error: string }>()
 );
 
-const meStart = createAction('[AUTH] Me Start', props<{ email: string }>());
+const meStart = createAction('[AUTH] Me Start', props<Token>());
 const meLoadedSuccess = createAction('[AUTH] Me Success', props<UserRes>());
 const meLoadedError = createAction(
   '[AUTH] Me Error',
   props<{ error: string }>()
 );
 
+const logOut = createAction('[AUTH] Log Out');
+
 export const AuthActions = {
+  logOut,
   LoginStart,
   LoginLoadedSuccess,
   LoginLoadedError,

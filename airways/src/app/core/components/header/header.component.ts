@@ -1,4 +1,4 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, OnDestroy } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { BookingActions } from '@redux/actions/booking-page.actions';
@@ -11,9 +11,11 @@ import { basket } from '@core/svg/SVG';
 import { IconService } from '@core/services/icon.service';
 import { BasketSelectors } from '@redux/selectors/basket.selectors';
 import { Order } from '@redux/models/basket.models';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { BookingSelectors } from '@redux/selectors/booking-page.selectors';
 import { MainPageSelectors } from '@redux/selectors/main-page.selectors';
+import { AuthSelectors } from '@redux/selectors/auth.selectors';
+import { AuthActions } from '@redux/actions/auth.actions';
 
 const ICON = {
   name: 'basket',
@@ -25,7 +27,7 @@ const ICON = {
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnDestroy {
   public showBookWindow = false;
   public isMainPage = false;
   public isUserSignIn = false;
@@ -39,8 +41,11 @@ export class HeaderComponent {
     BookingSelectors.currentPageDirectionSelector
   );
   showBookWindow$ = this.store.select(MainPageSelectors.IsShowMainFormSelector);
-
   windowWidth: number = window.innerWidth;
+  public user$ = this.store.select(AuthSelectors.AuthUserSelector);
+
+  private IsLogIn$ = this.store.select(AuthSelectors.IsLogIn);
+  private IsLogInSub!: Subscription;
 
   constructor(
     private router: Router,
@@ -49,6 +54,7 @@ export class HeaderComponent {
     private iconService: IconService
   ) {
     this.addPathToIcon();
+    this.addIsLog();
 
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
@@ -67,6 +73,10 @@ export class HeaderComponent {
     });
   }
 
+  ngOnDestroy(): void {
+    throw new Error('Method not implemented.');
+  }
+
   // ngOnInit(): void {
   //   this.dialog.open(AuthComponent);
   // }
@@ -80,7 +90,7 @@ export class HeaderComponent {
   }
 
   public openAuthDialog() {
-    this.dialog.open(AuthComponent);
+    if (!this.isUserSignIn) this.dialog.open(AuthComponent);
   }
 
   public toMainPage() {
@@ -104,6 +114,13 @@ export class HeaderComponent {
     this.iconService.add(ICON.name, ICON.source);
   }
 
+  private addIsLog() {
+    this.IsLogInSub = this.IsLogIn$.subscribe((isLog) => {
+      if (isLog) this.dialog.closeAll();
+      this.isUserSignIn = isLog;
+    });
+  }
+
   toggleHamburgerMenu() {
     this.isHamburgerMenuActive = !this.isHamburgerMenuActive;
   }
@@ -119,5 +136,9 @@ export class HeaderComponent {
         this.toggleHamburgerMenu();
       }
     }
+  }
+
+  logOut() {
+    this.store.dispatch(AuthActions.logOut());
   }
 }
