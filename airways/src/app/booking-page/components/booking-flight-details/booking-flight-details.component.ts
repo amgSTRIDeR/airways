@@ -34,7 +34,6 @@ export class BookingFlightDetailsComponent implements OnInit, OnChanges {
   ngOnChanges(): void {
     this.flightTitle = `${this.flightInfo?.form.city} to ${this.flightInfo?.to.city}`;
     this.getAlternativeFlightsArray();
-    console.log('flightInfo, ', this.flightInfo);
   }
 
   getAlternativeFlightsArray(): void {
