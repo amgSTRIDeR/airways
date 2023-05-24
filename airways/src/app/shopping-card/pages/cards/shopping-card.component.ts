@@ -1,4 +1,10 @@
-import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  HostListener,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 import { Order } from '@redux/models/basket.models';
@@ -7,11 +13,17 @@ import { BaskedActions } from '@redux/actions/bascet.actions';
 import { CurrencyType } from '@redux/models/settings.models';
 import { SettingsSelectors } from '@redux/selectors/settings.selectors';
 import { Router } from '@angular/router';
+import {
+  SortOrdersSettings,
+  SortSettings,
+} from '@shopping/pipes/sort-orders.pipe';
+import { BookingActions } from '@redux/actions/booking-page.actions';
 
 @Component({
   selector: 'app-shopping-card',
   templateUrl: './shopping-card.component.html',
   styleUrls: ['./shopping-card.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ShoppingCardComponent implements OnInit, OnDestroy {
   public totalPrice$: Observable<number> = this.store.select(
@@ -22,7 +34,12 @@ export class ShoppingCardComponent implements OnInit, OnDestroy {
     SettingsSelectors.CurrencySelector
   );
 
+  public sortType$: Observable<SortSettings> = this.store.select(
+    BasketSelectors.Sort
+  );
+
   private orderSubscription!: Subscription;
+  private sortSubscription!: Subscription;
 
   public orders!: Order[];
 
@@ -30,15 +47,19 @@ export class ShoppingCardComponent implements OnInit, OnDestroy {
 
   public smallPage = false;
 
+  public sortHelper = false;
+
   constructor(private store: Store, private router: Router) {}
 
   ngOnInit(): void {
     this.getOrders();
     this.onResize();
+    this.getSortSubscription();
   }
 
   ngOnDestroy(): void {
     this.orderSubscription.unsubscribe();
+    this.sortSubscription.unsubscribe();
   }
 
   @HostListener('window:resize')
@@ -61,6 +82,7 @@ export class ShoppingCardComponent implements OnInit, OnDestroy {
   }
 
   public addNewTrip() {
+    this.store.dispatch(BookingActions.ClearBookingPageState());
     this.router.navigate(['/main']);
   }
 
@@ -69,7 +91,22 @@ export class ShoppingCardComponent implements OnInit, OnDestroy {
       BasketSelectors.Orders
     );
     this.orderSubscription = orders$.subscribe((orders: Order[]) => {
+      this.sortHelper = false;
       this.orders = orders;
     });
+  }
+
+  sortOrders(sortType: SortOrdersSettings) {
+    this.store.dispatch(BaskedActions.SortAction({ sortType }));
+  }
+
+  private getSortSubscription() {
+    this.sortSubscription = this.sortType$.subscribe(() => {
+      this.sortHelper = true;
+    });
+  }
+
+  payForOrders() {
+    this.store.dispatch(BaskedActions.Pay());
   }
 }

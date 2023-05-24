@@ -1,6 +1,5 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { BookingPageState } from '@redux/models/state.models';
-import { selectMainPage } from '@redux/selectors/main-page.selectors';
 
 export const selectBooking = createFeatureSelector<BookingPageState>('booking');
 const idSelector = createSelector(selectBooking, (state) => state.id);
@@ -21,17 +20,13 @@ const passengersInfoSelector = createSelector(
   selectBooking,
   (state) => state.passengersInfo
 );
-const allInformationSelector = createSelector(
-  selectBooking,
-  selectMainPage,
-  (bookState, MainState) => ({
-    flights: bookState.flights,
-    passengersInfo: bookState.passengersInfo,
-    passengersCount: MainState.passengersCount,
-    total: bookState.totalPrice,
-    id: bookState.id,
-  })
-);
+const allInformationSelector = createSelector(selectBooking, (bookState) => ({
+  flights: bookState.flights,
+  passengersInfo: bookState.passengersInfo,
+  passengersCount: bookState.passengersCount,
+  total: bookState.totalPrice,
+  id: bookState.id,
+}));
 const passengersCount = createSelector(
   selectBooking,
   (state) => state.passengersCount

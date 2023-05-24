@@ -14,6 +14,7 @@ import { BgOrderDirective } from '@booking/directives/bg-order.directive';
 import { PriseComponent } from './components/prise/prise.component';
 import { OnePassengerReviewComponent } from './components/order/one-passenger-review/one-passenger-review.component';
 import { TotalComponent } from './pages/review/total/total.component';
+import { BaggageComponent } from './components/baggage/baggage.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { TotalComponent } from './pages/review/total/total.component';
     PriseComponent,
     OnePassengerReviewComponent,
     TotalComponent,
+    BaggageComponent,
   ],
   imports: [CommonModule, BookingPageRoutingModule, SharedModule],
 })

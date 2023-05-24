@@ -3,13 +3,12 @@ import {
   AirportsRes,
   FlightLoadInformation,
   IDate,
-  PassengersCount,
 } from '@redux/models/main-page.models';
 
-const PassengersCount = createAction(
-  '[MAIN PAGE] Passengers count',
-  props<PassengersCount>()
-);
+// const PassengersCount = createAction(
+//   '[MAIN PAGE] Passengers count',
+//   props<PassengersCount>()
+// );
 
 const IsRoundTrip = createAction(
   '[MAIN PAGE] Is round trip',
@@ -61,7 +60,7 @@ const ChangeIsShownValue = createAction(
 );
 
 export const MainPageActions = {
-  PassengersCount,
+  // PassengersCount,
   LoadAirports,
   LoadAirportsSuccess,
   LoadAirportsError,

@@ -6,8 +6,13 @@
         {{ passenger.lastName | uppercase }}
       </p>
       <ul>
-        <li>1checked bag (total 23 kg) included</li>
-        <li>1 cabin bag + 1 personal item (max. 8 kg) included</li>
+        <li *ngIf="passenger.baggageBig > 0">
+          {{ passenger.baggageBig }} checked bag (total 23 kg) included
+        </li>
+        <li *ngIf="passenger.baggageSmall > 0">
+          {{ passenger.baggageSmall }} cabin bag +
+          {{ passenger.baggageSmall }} personal item (max. 8 kg) included
+        </li>
         <li>Seat 20E</li>
       </ul>
     </div>

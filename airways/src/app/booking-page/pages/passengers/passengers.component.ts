@@ -118,6 +118,8 @@ export class PassengersComponent implements OnInit, OnDestroy {
           [Validators.required, dateValidator()],
         ],
         invalid: passenger ? passenger[i].invalid : '',
+        baggageBig: passenger ? passenger[i].baggageBig : 0,
+        baggageSmall: passenger ? passenger[i].baggageSmall : 0,
       });
       typeOfControl.push(person);
     }
@@ -156,7 +158,7 @@ export class PassengersComponent implements OnInit, OnDestroy {
     return this.passengersForm;
   }
 
-  logForm() {
+  goToNextPage() {
     if (this.passengersForm.valid) {
       const readyPassengers = this.passengersForm.value as PassengerInfo;
       this.store.dispatch(
