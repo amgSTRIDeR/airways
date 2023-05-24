@@ -12,14 +12,13 @@ import { IconService } from '@core/services/icon.service';
 import { BasketSelectors } from '@redux/selectors/basket.selectors';
 import { Order } from '@redux/models/basket.models';
 import { Observable } from 'rxjs';
+import { BookingSelectors } from '@redux/selectors/booking-page.selectors';
+import { MainPageSelectors } from '@redux/selectors/main-page.selectors';
+
 const ICON = {
   name: 'basket',
   source: basket,
 };
-
-import { BookingSelectors } from '@redux/selectors/booking-page.selectors';
-import { BasketSelectors } from '@redux/selectors/basket.selectors';
-import { MainPageSelectors } from '@redux/selectors/main-page.selectors';
 
 @Component({
   selector: 'app-header',
@@ -39,7 +38,6 @@ export class HeaderComponent {
   onFlightPage$ = this.store.select(
     BookingSelectors.currentPageDirectionSelector
   );
-  ordersCount$ = this.store.select(BasketSelectors.Orders);
   showBookWindow$ = this.store.select(MainPageSelectors.IsShowMainFormSelector);
 
   windowWidth: number = window.innerWidth;
@@ -102,11 +100,9 @@ export class HeaderComponent {
     );
   }
 
-
   private addPathToIcon() {
     this.iconService.add(ICON.name, ICON.source);
   }
-
 
   toggleHamburgerMenu() {
     this.isHamburgerMenuActive = !this.isHamburgerMenuActive;

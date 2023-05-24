@@ -7,7 +7,7 @@ interface CurrencySettings {
 }
 
 interface AvailableCurrency {
-  USA: CurrencySettings;
+  USD: CurrencySettings;
   EUR: CurrencySettings;
   RUB: CurrencySettings;
   PLN: CurrencySettings;
@@ -18,7 +18,7 @@ interface AvailableCurrency {
 })
 export class CurrencyConverterPipe implements PipeTransform {
   private availableCurrency: AvailableCurrency = {
-    USA: {
+    USD: {
       currencyLabel: '$',
       modification: 1.09,
     },
