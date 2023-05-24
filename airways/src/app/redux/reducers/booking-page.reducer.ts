@@ -6,7 +6,7 @@ import { MainPageActions } from '@redux/actions/main-page.actions';
 export const initialState: BookingPageState = {
   id: 'SomeId',
   onBookingPage: false,
-  currentPageDirection: 'passengers',
+  currentPageDirection: 'flight',
   isEditWindowOpen: false,
   totalPrice: null,
   flights: {

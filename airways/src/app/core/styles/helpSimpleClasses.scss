@@ -3,6 +3,10 @@
   width: 100%;
 }
 
+.w-half {
+  width: 50%;
+}
+
 .m-auto {
   margin: auto;
 }
@@ -65,8 +69,20 @@
   align-items: end;
 }
 
+.item-stretch {
+  align-items: stretch;
+}
+
+.flex-order-1 {
+  order: 1;
+}
+
 .self-end {
   align-self: end;
+}
+
+.self-center {
+  align-self: center;
 }
 
 .gap-half {
@@ -91,6 +107,10 @@
 
 .gap-5 {
   gap: 5rem;
+}
+
+.f-w-100 {
+  font-weight: 100;
 }
 
 .f-w-400 {
@@ -141,6 +161,10 @@
   color: black;
 }
 
+.text-white {
+  color: $bg-white-color;
+}
+
 .price-secondary {
   color: $secondary-price-color;
 }
@@ -153,4 +177,55 @@
   background-color: $bg-light-color
 }
 
+.bg-white {
+  background-color: $bg-white-color
+}
 
+.bg-gradient-primary {
+  background: linear-gradient(108.75deg, #0090BD 59.91%, #073590 95.36%);
+  border: 1px solid $primary-color;
+}
+
+.ticket-secondary {
+  color: $secondary-ticket-color;
+}
+
+.seats-secondary {
+  color: $secondary-seats-color;
+}
+
+.alternative-flight-color-secondary {
+  color: $secondary-alternative-flight-color;
+}
+
+.seats-green-bg {
+  background-color: $bg-seats-green;
+}
+
+.seats-yellow-bg {
+  background-color: $bg-seats-yellow;
+}
+
+.seats-red-bg {
+  background-color: $bg-seats-red;
+}
+
+.seats-green-bg-transparent {
+  background-color: $bg-seats-green-transparent;
+}
+
+.seats-yellow-bg-transparent {
+  background-color: $bg-seats-yellow-transparent;
+}
+
+.seats-red-bg-transparent {
+  background-color: $bg-seats-red-transparent;
+}
+
+.line-solid {
+  border: 2px solid $border-grey-color;
+}
+
+.line-dashed {
+  border: 2px dashed $border-grey-color;
+}

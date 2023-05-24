@@ -21,12 +21,14 @@ import { AirportsFilterPipe } from '@main/pipes/airports-filter.pipe';
 import { DateFormComponent } from './components/date-form/date-form.component';
 import { PassengersFormComponent } from './components/passengers-form/passengers-form.component';
 import { MatMenuModule } from '@angular/material/menu';
+import { MinutesToHoursPipe } from '@main/pipes/minutes-to-hours.pipe';
 
 @NgModule({
   declarations: [
     IconLabelComponent,
     AirportsFormComponent,
     AirportsFilterPipe,
+    MinutesToHoursPipe,
     DateFormComponent,
     PassengersFormComponent,
   ],
@@ -70,6 +72,7 @@ import { MatMenuModule } from '@angular/material/menu';
     AirportsFormComponent,
     DateFormComponent,
     PassengersFormComponent,
+    MinutesToHoursPipe,
   ],
 })
 export class SharedModule {}
