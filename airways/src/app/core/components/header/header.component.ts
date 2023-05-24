@@ -8,6 +8,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { AuthComponent } from '@core/components/auth/auth.component';
 import { BookingSelectors } from '@redux/selectors/booking-page.selectors';
 import { BasketSelectors } from '@redux/selectors/basket.selectors';
+import { MainPageSelectors } from '@redux/selectors/main-page.selectors';
 
 @Component({
   selector: 'app-header',
@@ -25,6 +26,7 @@ export class HeaderComponent implements OnInit {
     BookingSelectors.currentPageDirectionSelector
   );
   ordersCount$ = this.store.select(BasketSelectors.Orders);
+  showBookWindow$ = this.store.select(MainPageSelectors.IsShowMainFormSelector);
 
   windowWidth: number = window.innerWidth;
 
@@ -43,6 +45,10 @@ export class HeaderComponent implements OnInit {
 
         this.isMainPage = event.url.startsWith('/main') || event.url === '/';
       }
+    });
+
+    this.showBookWindow$.subscribe((value) => {
+      this.showBookWindow = value;
     });
   }
 
