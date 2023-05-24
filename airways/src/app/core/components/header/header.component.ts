@@ -84,4 +84,21 @@ export class HeaderComponent implements OnInit {
       })
     );
   }
+
+  toggleHamburgerMenu() {
+    this.isHamburgerMenuActive = !this.isHamburgerMenuActive;
+  }
+
+  @HostListener('document:click', ['$event'])
+  onClick(event: MouseEvent) {
+    if (event.target instanceof HTMLElement) {
+      if (
+        !document.querySelector('.hamburger-icon')?.contains(event.target) &&
+        !document.querySelector('.hamburger-menu')?.contains(event.target) &&
+        !document.querySelector('.ng-trigger')?.contains(event.target)
+      ) {
+        this.toggleHamburgerMenu();
+      }
+    }
+  }
 }
