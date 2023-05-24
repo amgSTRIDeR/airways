@@ -149,7 +149,7 @@
   }
 
   @media (max-width: 515px) {
-    & .shopping-basket {
+    & .button__shopping-card {
       display: none;
     }
   }
@@ -405,7 +405,7 @@
 
   & .button__book-flights,
   & .button__SignIn,
-  & .shopping-basket,
+  & .button__shopping-card,
   & app-currency-select,
   & app-date-select {
     display: none;
@@ -426,7 +426,7 @@
   }
 
   @media (max-width: 515px) {
-    & .shopping-basket {
+    & .button__shopping-card {
       display: block;
     }
   }
