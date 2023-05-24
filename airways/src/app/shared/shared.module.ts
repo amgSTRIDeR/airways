@@ -22,6 +22,8 @@ import { DateFormComponent } from './components/date-form/date-form.component';
 import { PassengersFormComponent } from './components/passengers-form/passengers-form.component';
 import { MatMenuModule } from '@angular/material/menu';
 import { MinutesToHoursPipe } from '@main/pipes/minutes-to-hours.pipe';
+import { CurrencyConverterPipe } from './pipes/currency-converter.pipe';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
@@ -31,6 +33,7 @@ import { MinutesToHoursPipe } from '@main/pipes/minutes-to-hours.pipe';
     MinutesToHoursPipe,
     DateFormComponent,
     PassengersFormComponent,
+    CurrencyConverterPipe,
   ],
   imports: [
     MatDividerModule,
@@ -51,6 +54,7 @@ import { MinutesToHoursPipe } from '@main/pipes/minutes-to-hours.pipe';
     MatStepperModule,
     FormsModule,
     MatMenuModule,
+    MatCheckboxModule,
   ],
   exports: [
     MatDividerModule,
@@ -73,6 +77,9 @@ import { MinutesToHoursPipe } from '@main/pipes/minutes-to-hours.pipe';
     DateFormComponent,
     PassengersFormComponent,
     MinutesToHoursPipe,
+    FormsModule,
+    CurrencyConverterPipe,
+    MatCheckboxModule,
   ],
 })
 export class SharedModule {}

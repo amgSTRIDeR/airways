@@ -3,13 +3,12 @@ import {
   AirportsRes,
   FlightLoadInformation,
   IDate,
-  PassengersCount,
 } from '@redux/models/main-page.models';
 
-const PassengersCount = createAction(
-  '[MAIN PAGE] Passengers count',
-  props<PassengersCount>()
-);
+// const PassengersCount = createAction(
+//   '[MAIN PAGE] Passengers count',
+//   props<PassengersCount>()
+// );
 
 const IsRoundTrip = createAction(
   '[MAIN PAGE] Is round trip',
@@ -37,12 +36,12 @@ const FlightBack = createAction('[MAIN PAGE] Flight back', props<IDate>());
 
 const AirportForward = createAction(
   '[MAIN PAGE] Airport forward',
-  props<AirportsRes>()
+  props<{ airport: AirportsRes | null }>()
 );
 
 const AirportBack = createAction(
   '[MAIN PAGE] Airport back',
-  props<AirportsRes>()
+  props<{ airport: AirportsRes | null }>()
 );
 
 const LoadAvailableFlights = createAction(
@@ -55,8 +54,13 @@ const LoadAvailableFlightsError = createAction(
   props<{ error: string }>()
 );
 
+const ChangeIsShownValue = createAction(
+  '[MAIN PAGE] Change is shown value',
+  props<{ IsShownMainPage: boolean }>()
+);
+
 export const MainPageActions = {
-  PassengersCount,
+  // PassengersCount,
   LoadAirports,
   LoadAirportsSuccess,
   LoadAirportsError,
@@ -67,4 +71,5 @@ export const MainPageActions = {
   IsRoundTrip,
   LoadAvailableFlights,
   LoadAvailableFlightsError,
+  ChangeIsShownValue,
 };

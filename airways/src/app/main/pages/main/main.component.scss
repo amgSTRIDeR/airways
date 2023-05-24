@@ -4,7 +4,9 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 580px;
+  box-sizing: border-box;
+  width: 90vw;
+  max-width: 580px;
   height: 390px;
   padding: 24px;
 
@@ -15,7 +17,7 @@
 .radio-buttons {
   display: flex;
   justify-content: space-around;
-  width: 303px;
+  width: 100%;
   height: 48px;
 
   & label {
@@ -97,6 +99,73 @@
   flex-direction: column;
   justify-content: space-between;
   width: 100%;
-  height: 150px;
+  height: 120px;
   row-gap: 4px;
 }
+
+.search-button {
+  align-self: flex-end;
+  width: 122px;
+  height: 40px;
+  padding: 8px 16px;
+
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+
+  background: #11397E;
+  border: 0.5px solid #11397E;
+  border-radius: 4px;
+  color: #ffffff;
+
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: #f5f5f5;
+    color: #11397E;
+
+    cursor: pointer;
+
+    transition: all 0.3s ease;
+  }
+
+  &:active {
+    background: #e9edf1;
+    color: #11397E;
+
+    transition: all 0.3s ease;
+  }
+
+  &:disabled {
+    cursor: default;
+
+    background: #11397E;
+    color: #ffffff2c;
+
+    transition: all 0.3s ease;
+  }
+}
+
+.dates-passengers-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  row-gap: 4px;
+
+  & .date-form,
+  & .passengers-form {
+    width: 49%;
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+
+    & .date-form,
+    & .passengers-form {
+      width: 100%;
+    }
+  }
+}
+  

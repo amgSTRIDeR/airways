@@ -1,3 +1,35 @@
+.header-indent {
+  height: 88px;
+
+  @media (max-width: 1292px) {
+    height: calc(2.564vw + 54.87px);
+  }
+}
+
+.header-indent_booking {
+  height: 152.8px;
+
+  @media (max-width: 1292px) {
+    height: calc(7.046vw + 115.77px);
+  }
+
+  @media (max-width: 600px) {
+    height: calc(7.510vw + 139.74px);
+  }
+}
+
+.header-indent_booking-flight {
+  height: 152.8px;
+
+  @media (max-width: 1292px) {
+    height: calc(7.048vw + 115.74px);
+  }
+
+  @media (max-width: 600px) {
+    height: calc(7.943vw + 166.74px);
+  }
+}
+
 .header {
   position: fixed;
   z-index: 10;
@@ -47,13 +79,13 @@
     transition: all 0.3s ease;
 
     & .logo-path__fill {
-      fill: #0090BD;
+      fill: #11397E;
 
       transition: fill 0.3s ease;
     }
 
     & .logo-path__stroke {
-      stroke: #0090BD;
+      stroke: #11397E;
 
       transition: stroke 0.3s ease;
     }
@@ -117,7 +149,7 @@
   }
 
   @media (max-width: 515px) {
-    & .shopping-basket {
+    & .button__shopping-card {
       display: none;
     }
   }
@@ -177,40 +209,6 @@
   transition: all 0.3s ease;
 }
 
-// .mat-select-date,
-// .mat-select-currency {
-//   box-sizing: border-box;
-//   width: 162px;
-//   height: 40px;
-//   padding: 8px 16px;
-
-//   background: rgba(241, 243, 246, 0.15);
-//   border: 0.5px solid #cecece;
-//   border-radius: 4px;
-
-
-//   transition: all 0.3s ease;
-
-//   &:hover {
-//     background: #f5f5f5;
-//     cursor: pointer;
-
-//     transition: all 0.3s ease;
-//   }
-
-//   &:active {
-//     background: #e9edf1;
-//     color: #000000;
-
-//     transition: all 0.3s ease;
-//   }
-// }
-
-// .mat-select-currency {
-//   width: 62px;
-//   padding: 8px 0 8px 15px;
-// }
-
 .button__SignIn {
   width: 114px;
   display: flex;
@@ -232,24 +230,83 @@
   }
 }
 
-.shopping-basket {
-  fill: #ffffffcc;
+.button__shopping-card {
+  position: relative;
+
+  background-color: transparent;
+  border: none;
 
   transition: all 0.3s ease;
 
   &:hover {
-    transform: scale(1.05);
-    fill: #ffffff;
     cursor: pointer;
 
-    transition: all 0.3s ease;
+    & .shopping-basket {
+      transform: scale(1.05);
+      fill: #11397E;
+
+      transition: all 0.3s ease;
+    }
+
+    & .shopping-counter {
+      color: #000000;
+      background-color: #ffffff;
+      border: 1px solid #11397E;
+
+      transform: scale(1.05);
+
+      transition: all 0.3s ease;
+    }
   }
 
   &:active {
-    transform: scale(0.95);
+    & .shopping-basket {
+      transform: scale(0.95);
+      fill: #11397E;
 
-    transition: all 0.3s ease;
+      transition: all 0.3s ease;
+    }
+
+    & .shopping-counter {
+      color: #000000;
+      transform: scale(0.95);
+      background-color: #ffffff;
+      border: 1px solid #11397E;
+
+      transition: all 0.3s ease;
+    }
   }
+}
+
+.shopping-basket {
+  fill: #ffffffcc;
+
+  transition: all 0.3s ease;
+}
+
+.shopping-counter {
+  position: absolute;
+  top: -3px;
+  right: -1px;
+
+  box-sizing: border-box;
+  width: 16px;
+  height: 16px;
+  padding: 4px;
+  border-radius: 50%;
+  background-color: #B3261E;
+  color: #ffffff;
+
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 11px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  transition: all 0.3s ease;
 }
 
 .hamburger-icon {
@@ -348,7 +405,7 @@
 
   & .button__book-flights,
   & .button__SignIn,
-  & .shopping-basket,
+  & .button__shopping-card,
   & app-currency-select,
   & app-date-select {
     display: none;
@@ -369,7 +426,7 @@
   }
 
   @media (max-width: 515px) {
-    & .shopping-basket {
+    & .button__shopping-card {
       display: block;
     }
   }

@@ -1,7 +1,6 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, HostListener } from '@angular/core';
 import { SettingsState } from '@redux/models/state.models';
 import { Store } from '@ngrx/store';
-import { DataService } from '@core/services/data.service';
 import { AirportsRes } from '@redux/models/main-page.models';
 import { MainPageSelectors } from '@redux/selectors/main-page.selectors';
 import { MainPageActions } from '@redux/actions/main-page.actions';
@@ -19,49 +18,56 @@ export class MainComponent implements OnDestroy {
   public destinationAirport: AirportsRes | null = null;
   public departureDate: Date | null = null;
   public returnDate: Date | null = null;
+  public readyForSearch = false;
+  isVisible$ = this.store.select(MainPageSelectors.IsShowMainFormSelector);
 
   isRoundTrip$ = this.store.select(MainPageSelectors.IsRoundTripSelector);
   isRoundTripSubscription!: Subscription;
+
   originAirport$ = this.store.select(MainPageSelectors.AirportForwardSelector);
   originAirportSubscription!: Subscription;
+
   destinationAirport$ = this.store.select(
     MainPageSelectors.AirportBackSelector
   );
   destinationAirportSubscription!: Subscription;
+
   departureDate$ = this.store.select(MainPageSelectors.FlightForwardSelector);
   departureDateSubscription!: Subscription;
+
   returnDate$ = this.store.select(MainPageSelectors.FlightBackSelector);
   returnDateSubscription!: Subscription;
 
-  constructor(
-    private store: Store<SettingsState>,
-    private readonly dataService: DataService,
-    private router: Router
-  ) {
+  constructor(private store: Store<SettingsState>, private router: Router) {
     this.isRoundTripSubscription = this.isRoundTrip$.subscribe((boolean) => {
       this.isRoundTrip = boolean;
+      this.checkReadyForSearch();
     });
 
     this.originAirportSubscription = this.originAirport$.subscribe(
       (originAirport) => {
         this.originAirport = originAirport;
+        this.checkReadyForSearch();
       }
     );
 
     this.destinationAirportSubscription = this.destinationAirport$.subscribe(
       (destinationAirport) => {
         this.destinationAirport = destinationAirport;
+        this.checkReadyForSearch();
       }
     );
 
     this.departureDateSubscription = this.departureDate$.subscribe(
       (departureDate) => {
         this.departureDate = departureDate;
+        this.checkReadyForSearch();
       }
     );
 
     this.returnDateSubscription = this.returnDate$.subscribe((returnDate) => {
       this.returnDate = returnDate;
+      this.checkReadyForSearch();
     });
   }
 
@@ -92,6 +98,37 @@ export class MainComponent implements OnDestroy {
         })
       );
       this.router.navigate(['/booking-page']);
+    }
+  }
+
+  checkReadyForSearch() {
+    if (
+      this.originAirport !== null &&
+      this.destinationAirport !== null &&
+      this.departureDate !== null &&
+      (this.isRoundTrip ? this.returnDate !== null : true)
+    ) {
+      this.readyForSearch = true;
+    } else {
+      this.readyForSearch = false;
+    }
+  }
+
+  @HostListener('document:click', ['$event'])
+  onClick(event: MouseEvent) {
+    if (event.target instanceof HTMLElement) {
+      if (
+        event.target.classList.contains('bg-image') ||
+        document.querySelector('.footer')?.contains(event.target) ||
+        (document.querySelector('.header')?.contains(event.target) &&
+          !event.target.classList.contains('button__book-flights'))
+      ) {
+        this.store.dispatch(
+          MainPageActions.ChangeIsShownValue({
+            IsShownMainPage: false,
+          })
+        );
+      }
     }
   }
 }

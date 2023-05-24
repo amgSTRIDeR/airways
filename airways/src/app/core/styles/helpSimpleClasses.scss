@@ -57,6 +57,18 @@
   justify-content: end;
 }
 
+.justify-items-start {
+  justify-items: start;
+}
+
+.justify-items-center {
+  justify-items: center;
+}
+
+.justify-items-end {
+  justify-items: end;
+}
+
 .item-center {
   align-items: center;
 }
@@ -228,4 +240,7 @@
 
 .line-dashed {
   border: 2px dashed $border-grey-color;
+  
+.text-center {
+  text-align: center;
 }

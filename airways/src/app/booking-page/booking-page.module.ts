@@ -17,6 +17,8 @@ import { TotalComponent } from './pages/review/total/total.component';
 import { BookingFlightDetailsComponent } from './components/booking-flight-details/booking-flight-details.component';
 import { SeatsDirective } from './directives/seats.directive';
 import { AlternativeFlightCardComponent } from './components/alternative-flight-card/alternative-flight-card.component';
+import { BaggageComponent } from './components/baggage/baggage.component';
+
 
 @NgModule({
   declarations: [
@@ -35,6 +37,7 @@ import { AlternativeFlightCardComponent } from './components/alternative-flight-
     TotalComponent,
     BookingFlightDetailsComponent,
     AlternativeFlightCardComponent,
+    BaggageComponent,
   ],
   imports: [CommonModule, BookingPageRoutingModule, SharedModule],
 })

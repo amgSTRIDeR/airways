@@ -1,5 +1,4 @@
 import { Component, OnDestroy } from '@angular/core';
-import { DataService } from '@core/services/data.service';
 import { DateTypeService } from '@core/services/date-type.service';
 import { Store } from '@ngrx/store';
 import { MainPageActions } from '@redux/actions/main-page.actions';
@@ -14,26 +13,32 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./date-form.component.scss'],
 })
 export class DateFormComponent implements OnDestroy {
-  public departureDate: Date | null = null;
-  public returnDate: Date | null = null;
   public isHintVisible = false;
   public isRoundTrip = true;
+
+  departureDate$ = this.store.select(MainPageSelectors.FlightForwardSelector);
+  returnDate$ = this.store.select(MainPageSelectors.FlightBackSelector);
+
   isRoundTrip$ = this.store.select(MainPageSelectors.IsRoundTripSelector);
+  isRoundTripSubscription!: Subscription;
+
   dateType$ = this.store.select(SettingsSelectors.DateTypeSelector);
   dateTypeSubscription!: Subscription;
-  isRoundTripSubscription!: Subscription;
 
   constructor(
     private store: Store<MainPageState>,
-    private readonly dataService: DataService,
     private dateTypeService: DateTypeService
   ) {
     this.dateTypeSubscription = this.dateType$.subscribe((dateType) => {
       this.dateTypeService.changeDateType(dateType);
     });
 
-    this.isRoundTripSubscription = this.isRoundTrip$.subscribe((x) => {
-      this.isRoundTrip = x;
+    this.isRoundTripSubscription = this.isRoundTrip$.subscribe((boolean) => {
+      this.isRoundTrip = boolean;
+
+      if (!boolean) {
+        this.setReturnDate(null);
+      }
     });
   }
 
@@ -42,18 +47,18 @@ export class DateFormComponent implements OnDestroy {
     this.isRoundTripSubscription.unsubscribe();
   }
 
-  setDepartureDate() {
+  setDepartureDate(departDate: Date | null) {
     this.store.dispatch(
       MainPageActions.FlightForward({
-        date: this.departureDate,
+        date: departDate,
       })
     );
   }
 
-  setReturnDate() {
+  setReturnDate(returnDate: Date | null) {
     this.store.dispatch(
       MainPageActions.FlightBack({
-        date: this.returnDate,
+        date: returnDate,
       })
     );
   }

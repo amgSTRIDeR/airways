@@ -2,16 +2,40 @@
   <mat-card-header>
     <mat-card-title>Cart</mat-card-title>
   </mat-card-header>
-  <mat-card-actions class="bg-light action-container">
-    <app-sort-button sortName="No."></app-sort-button>
-    <app-sort-button sortName="Flight"></app-sort-button>
-    <app-sort-button sortName="Type trip"></app-sort-button>
-    <app-sort-button sortName="Data & Time"></app-sort-button>
-    <app-sort-button sortName="Passengers"></app-sort-button>
-    <app-sort-button sortName="Price"></app-sort-button>
+  <mat-card-actions *ngIf="!smallPage" class="bg-light action-container">
+    <app-sort-button
+      (click)="sortOrders('No')"
+      sortName="No."
+    ></app-sort-button>
+    <app-sort-button
+      (click)="sortOrders('Flight')"
+      sortName="Flight"
+    ></app-sort-button>
+    <app-sort-button
+      (click)="sortOrders('TripType')"
+      sortName="Type trip"
+    ></app-sort-button>
+    <app-sort-button
+      (click)="sortOrders('Date')"
+      sortName="Data & Time"
+    ></app-sort-button>
+    <app-sort-button
+      (click)="sortOrders('Passengers')"
+      sortName="Passengers"
+    ></app-sort-button>
+    <app-sort-button
+      (click)="sortOrders('Price')"
+      sortName="Price"
+    ></app-sort-button>
   </mat-card-actions>
   <mat-card-content>
-    <app-order *ngFor="let order of orders" [order]="order"></app-order>
+    <app-order
+      *ngFor="
+        let order of orders | sortOrders : (sortType$ | async) : sortHelper
+      "
+      [order]="order"
+      [smallPage]="smallPage"
+    ></app-order>
 
     <div class="new-trip flex item-center justify-between">
       <button
@@ -30,7 +54,7 @@
           >Total
         </mat-card-subtitle>
         <mat-card-title>{{
-          totalPrice$ | async | currency : currency
+          totalPrice$ | async | currencyConverter : currency
         }}</mat-card-title>
       </div>
     </div>
@@ -53,7 +77,12 @@
       </div>
       <div class="flex gap-2 item-center">
         <span class="selected-count">{{ ordersChecked }} selected</span>
-        <button class="pay-button" color="primary" mat-raised-button>
+        <button
+          class="pay-button"
+          (click)="payForOrders()"
+          color="primary"
+          mat-raised-button
+        >
           Payment
         </button>
       </div>

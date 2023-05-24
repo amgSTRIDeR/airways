@@ -32,7 +32,7 @@ export class TotalComponent implements OnInit {
 
   private addTotal(): void {
     const flightPrice = this.oneManPrice(this.flight);
-    const taxPrice = flightPrice / 2;
+    const taxPrice = flightPrice / 10;
     const adult = this.addPersonTotal(flightPrice, taxPrice, 'adult');
     const child = this.addPersonTotal(flightPrice, taxPrice, 'child');
     const infant = this.addPersonTotal(flightPrice, taxPrice, 'infant');
@@ -60,7 +60,7 @@ export class TotalComponent implements OnInit {
 
     const count = +this.passengersInfo[name].length + 1;
     const fare = flightPrice * count * modifier;
-    const tax = taxPrice * count * modifier;
+    const tax = this.allTax(taxPrice, modifier, name);
     const allPrice = fare + tax;
     return {
       name,
@@ -69,6 +69,22 @@ export class TotalComponent implements OnInit {
       tax,
       allPrice,
     };
+  }
+
+  private allTax(
+    taxPrice: number,
+    modifier: number,
+    personName: 'adult' | 'child' | 'infant'
+  ): number {
+    const bigBaggagePrice = 150;
+    const smallBaggagePrice = 50;
+    let totalTaxPrice = 0;
+    this.passengersInfo[personName].forEach((el) => {
+      totalTaxPrice +=
+        el.baggageBig * bigBaggagePrice + el.baggageSmall * smallBaggagePrice;
+    });
+
+    return Math.round((totalTaxPrice + taxPrice) * modifier);
   }
 
   private oneManPrice(flight: SelectedFlight) {

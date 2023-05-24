@@ -1,5 +1,12 @@
+.airport-switch-wrapper {
+  position: relative;
+  width: 100%;
+}
+
 .airport-form {
   position: relative;
+
+  width: 100%;
 }
 
 .airport-information {
@@ -20,14 +27,13 @@
 
 .airport-form__destination {
   position: relative;
-  top: -29px;
 }
 
 .location-switch {
   position: absolute;
   z-index: 1;
-  right: 44px;
-  top: 122px;
+  right: 20px;
+  top: 38px;
 
   display: flex;
   justify-content: center;
