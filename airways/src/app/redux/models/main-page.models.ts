@@ -16,10 +16,7 @@ export interface IDate {
 }
 
 export interface FlightRes {
-  seats: {
-    total: number;
-    avaible: number;
-  };
+  seats: ISeats;
   flightNumber: string;
   timeMins: number;
   form: {
@@ -38,27 +35,43 @@ export interface FlightRes {
   };
   takeoffDate: string;
   landingDate: string;
-  price: {
-    eur: number;
-    usd: number;
-    rub: number;
-    pln: number;
-  };
+  price: IPrice;
+}
+
+export interface IPrice {
+  eur: number;
+  usd: number;
+  rub: number;
+  pln: number;
+}
+
+export interface ISeats {
+  total: number;
+  avaible: number;
 }
 
 export interface FlightsRes extends FlightRes {
-  otherFlights: {
-    '1'?: FlightRes;
-    '2'?: FlightRes;
-    '3'?: FlightRes;
-    '4'?: FlightRes;
-    '5'?: FlightRes;
-    '-5'?: FlightRes;
-    '-4'?: FlightRes;
-    '-3'?: FlightRes;
-    '-2'?: FlightRes;
-    '-1'?: FlightRes;
-  };
+  otherFlights: IOtherFlights;
+}
+
+export interface IOtherFlights {
+  '1'?: FlightRes;
+  '2'?: FlightRes;
+  '3'?: FlightRes;
+  '4'?: FlightRes;
+  '5'?: FlightRes;
+  '-5'?: FlightRes;
+  '-4'?: FlightRes;
+  '-3'?: FlightRes;
+  '-2'?: FlightRes;
+  '-1'?: FlightRes;
+}
+
+export interface IAlternativeFlight {
+  index: number;
+  takeoffDate?: string;
+  price?: IPrice;
+  seats?: ISeats;
 }
 
 export interface AirportsRes {

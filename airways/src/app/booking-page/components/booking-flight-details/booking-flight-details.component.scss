@@ -1,0 +1,144 @@
+.title-container {
+  margin-bottom: 29px;
+
+  .icon-container {
+    transform: scale(-1, 1);
+  }
+}
+
+.date-slider-container {
+  margin-bottom: 10px;
+  gap: 2px;
+}
+
+.ticket-container {
+  margin-bottom: 32px;
+
+  .main-info {
+    margin: 27px 41px;
+  
+    .date {
+      font-family: 'Roboto';
+      font-size: 16px;
+      line-height: 16px;
+      letter-spacing: 0.5px;
+    }
+  
+    .flight-duration-container {
+      position: relative;
+  
+      .flight-duration-text {
+        font-family: 'Roboto';
+        font-size: 12px;
+        line-height: 16px;
+        letter-spacing: 0.4px;
+      }
+  
+      .flight-direction-icon {
+        width: 45px;
+        height: 24px;
+        box-sizing: border-box;
+  
+        padding: 6px 10px;
+        
+        position: absolute;
+        top: 50%;
+        left: 50%;
+  
+        transform: translate(-50%, -50%);
+      }
+    }
+  
+    .time-info {
+      width: 20%;
+  
+      .flight-time {
+        font-family: 'Roboto';
+        font-size: 30px;
+        line-height: 36px;
+      }
+    
+      .flight-time-utc {
+        font-family: 'Roboto';
+        font-size: 8px;
+        line-height: 20px;
+      }
+    }
+  
+    .city {
+      font-family: 'Roboto';
+      font-size: 12px;
+      line-height: 16px;
+      letter-spacing: 0.4px;
+    }
+  
+    .flight-number-container {
+      margin-left: 20px;
+      width: 20%;
+  
+      .flight-number-label {
+        font-family: 'Roboto';
+        font-size: 14px;
+        line-height: 20px;
+        letter-spacing: 0.25px;
+      }
+    
+      .flight-number {
+        margin-left: 12px;
+        font-family: 'Roboto';
+        font-size: 14px;
+        line-height: 20px;
+        letter-spacing: 0.25px;
+      }
+    }
+  }
+
+  .additional-info-container {
+    margin: 16px 40px;
+    width: 27%;
+
+    .seats-container {
+      font-family: 'Roboto';
+      font-size: 12px;
+      line-height: 16px;
+      text-align: right;
+    }
+
+    .price-container {
+
+      .price-label {
+        font-family: 'Roboto';
+        font-size: 12px;
+        line-height: 16px;
+        text-align: right;
+      }
+
+      .price-amount {
+        font-family: 'Roboto';
+        font-size: 30px;
+        line-height: 36px;
+        text-align: right;
+      }
+    }
+
+    .button-container {
+      
+      .select-button {
+        box-sizing: border-box;
+        padding: 8px 16px;
+        width: 78px;
+        height: 36px;
+        border-radius: 4px;
+        cursor: pointer;
+
+        &:hover {
+          opacity: .6;
+        }
+
+        &:active {
+          opacity: .8;
+        }
+      }
+    }
+  }
+}

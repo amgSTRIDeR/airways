@@ -1,0 +1,27 @@
+.card-container {
+  height: 100%;
+
+  .date {
+    font-family: 'Roboto';
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: 0.1px;
+  }
+
+  .dayOfWeek {
+    font-family: 'Roboto';
+    font-size: 12px;
+    line-height: 12px;
+    text-transform: capitalize;
+  }
+
+  .price {
+    font-family: 'Roboto';
+    font-size: 20px;
+    line-height: 20px;
+  }
+
+  .seats-available {
+    height: 4px;
+  }
+}

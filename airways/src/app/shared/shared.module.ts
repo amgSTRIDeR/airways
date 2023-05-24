@@ -21,6 +21,7 @@ import { AirportsFilterPipe } from '@main/pipes/airports-filter.pipe';
 import { DateFormComponent } from './components/date-form/date-form.component';
 import { PassengersFormComponent } from './components/passengers-form/passengers-form.component';
 import { MatMenuModule } from '@angular/material/menu';
+import { MinutesToHoursPipe } from '@main/pipes/minutes-to-hours.pipe';
 import { CurrencyConverterPipe } from './pipes/currency-converter.pipe';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 
@@ -29,6 +30,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     IconLabelComponent,
     AirportsFormComponent,
     AirportsFilterPipe,
+    MinutesToHoursPipe,
     DateFormComponent,
     PassengersFormComponent,
     CurrencyConverterPipe,
@@ -74,6 +76,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     AirportsFormComponent,
     DateFormComponent,
     PassengersFormComponent,
+    MinutesToHoursPipe,
     FormsModule,
     CurrencyConverterPipe,
     MatCheckboxModule,

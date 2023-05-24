@@ -14,7 +14,11 @@ import { BgOrderDirective } from '@booking/directives/bg-order.directive';
 import { PriseComponent } from './components/prise/prise.component';
 import { OnePassengerReviewComponent } from './components/order/one-passenger-review/one-passenger-review.component';
 import { TotalComponent } from './pages/review/total/total.component';
+import { BookingFlightDetailsComponent } from './components/booking-flight-details/booking-flight-details.component';
+import { SeatsDirective } from './directives/seats.directive';
+import { AlternativeFlightCardComponent } from './components/alternative-flight-card/alternative-flight-card.component';
 import { BaggageComponent } from './components/baggage/baggage.component';
+
 
 @NgModule({
   declarations: [
@@ -27,9 +31,12 @@ import { BaggageComponent } from './components/baggage/baggage.component';
     PassengerCardComponent,
     OrderComponent,
     BgOrderDirective,
+    SeatsDirective,
     PriseComponent,
     OnePassengerReviewComponent,
     TotalComponent,
+    BookingFlightDetailsComponent,
+    AlternativeFlightCardComponent,
     BaggageComponent,
   ],
   imports: [CommonModule, BookingPageRoutingModule, SharedModule],

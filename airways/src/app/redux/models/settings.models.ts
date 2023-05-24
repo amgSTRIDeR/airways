@@ -1,4 +1,4 @@
-export type CurrencyType = 'EUR' | 'USA' | 'RUB' | 'PLN';
+export type CurrencyType = 'EUR' | 'USD' | 'RUB' | 'PLN';
 export type DateType =
   | 'MM/DD/YYYY'
   | 'DD/MM/YYYY'
