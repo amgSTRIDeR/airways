@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, HostListener } from '@angular/core';
 import { SettingsState } from '@redux/models/state.models';
 import { Store } from '@ngrx/store';
 import { AirportsRes } from '@redux/models/main-page.models';
@@ -111,6 +111,24 @@ export class MainComponent implements OnDestroy {
       this.readyForSearch = true;
     } else {
       this.readyForSearch = false;
+    }
+  }
+
+  @HostListener('document:click', ['$event'])
+  onClick(event: MouseEvent) {
+    if (event.target instanceof HTMLElement) {
+      if (
+        event.target.classList.contains('bg-image') ||
+        document.querySelector('.footer')?.contains(event.target) ||
+        (document.querySelector('.header')?.contains(event.target) &&
+          !event.target.classList.contains('button__book-flights'))
+      ) {
+        this.store.dispatch(
+          MainPageActions.ChangeIsShownValue({
+            IsShownMainPage: false,
+          })
+        );
+      }
     }
   }
 }
