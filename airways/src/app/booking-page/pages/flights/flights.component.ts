@@ -27,15 +27,9 @@ export class FlightsComponent implements OnInit {
   ngOnInit(): void {
     this.flightsInfo$.subscribe((event) => {
       if (event && event?.length > 0) {
-        console.log('=== raz');
-        
         this.isTwoWays = event.length > 1;
         this.forwardFlightInfo = event![0];
         if (this.isTwoWays) this.backFlightInfo = event![1];
-
-        console.log('=== forwardFlightInfo', this.forwardFlightInfo);
-        console.log('=== backFlightInfo', this.backFlightInfo);
-        console.log('=== isTwoWays', this.isTwoWays);        
       }
     })
   }
