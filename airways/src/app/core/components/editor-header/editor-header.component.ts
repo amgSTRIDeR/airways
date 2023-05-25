@@ -38,28 +38,44 @@ export class EditorHeaderComponent implements OnDestroy {
   constructor(private store: Store<MainPageState>) {
     this.originAirportSubscription = this.originAirport$.subscribe(
       (originAirport) => {
-        this.originAirport = originAirport;
-        this.loadAirports();
+        if (this.originAirport === null) {
+          this.originAirport = originAirport;
+        } else {
+          this.originAirport = originAirport;
+          this.loadAirports();
+        }
       }
     );
 
     this.destinationAirportSubscription = this.destinationAirport$.subscribe(
       (destinationAirport) => {
-        this.destinationAirport = destinationAirport;
-        this.loadAirports();
+        if (this.destinationAirport === null) {
+          this.destinationAirport = destinationAirport;
+        } else {
+          this.destinationAirport = destinationAirport;
+          this.loadAirports();
+        }
       }
     );
 
     this.departureDateSubscription = this.departureDate$.subscribe(
       (departureDate) => {
-        this.departureDate = departureDate;
-        this.loadAirports();
+        if (this.departureDate === null) {
+          this.departureDate = departureDate;
+        } else {
+          this.departureDate = departureDate;
+          this.loadAirports();
+        }
       }
     );
 
     this.returnDateSubscription = this.returnDate$.subscribe((returnDate) => {
-      this.returnDate = returnDate;
-      this.loadAirports();
+      if (this.returnDate === null) {
+        this.returnDate = returnDate;
+      } else {
+        this.returnDate = returnDate;
+        this.loadAirports();
+      }
     });
 
     this.isRoundTripSubscription = this.isRoundTrip$.subscribe((boolean) => {

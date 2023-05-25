@@ -19,7 +19,6 @@ import { SeatsDirective } from './directives/seats.directive';
 import { AlternativeFlightCardComponent } from './components/alternative-flight-card/alternative-flight-card.component';
 import { BaggageComponent } from './components/baggage/baggage.component';
 
-
 @NgModule({
   declarations: [
     BookingPageComponent,
