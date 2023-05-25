@@ -40,6 +40,7 @@ export interface MainPageState {
   flightForward: Date | null;
   flightBack: Date | null;
   isShowMainForm: boolean;
+  isSearchImplement: boolean;
 }
 
 export type CurrentPageDirection = 'flight' | 'passengers' | 'review';

@@ -19,6 +19,8 @@ export class MainComponent implements OnDestroy {
   public departureDate: Date | null = null;
   public returnDate: Date | null = null;
   public readyForSearch = false;
+  public isSearchImplement = false;
+
   isVisible$ = this.store.select(MainPageSelectors.IsShowMainFormSelector);
 
   isRoundTrip$ = this.store.select(MainPageSelectors.IsRoundTripSelector);
@@ -26,6 +28,9 @@ export class MainComponent implements OnDestroy {
 
   originAirport$ = this.store.select(MainPageSelectors.AirportForwardSelector);
   originAirportSubscription!: Subscription;
+
+  isSearchImplement$ = this.store.select(MainPageSelectors.IsSearchImplement);
+  isSearchImplementSubscription!: Subscription;
 
   destinationAirport$ = this.store.select(
     MainPageSelectors.AirportBackSelector
@@ -69,6 +74,12 @@ export class MainComponent implements OnDestroy {
       this.returnDate = returnDate;
       this.checkReadyForSearch();
     });
+
+    this.isSearchImplementSubscription = this.isSearchImplement$.subscribe(
+      (isSearchImplement) => {
+        this.isSearchImplement = isSearchImplement;
+      }
+    );
   }
 
   ngOnDestroy(): void {
@@ -77,6 +88,7 @@ export class MainComponent implements OnDestroy {
     this.destinationAirportSubscription.unsubscribe();
     this.departureDateSubscription.unsubscribe();
     this.returnDateSubscription.unsubscribe();
+    this.isSearchImplementSubscription.unsubscribe();
   }
 
   changeTripType(boolean: boolean) {
@@ -90,6 +102,12 @@ export class MainComponent implements OnDestroy {
       this.departureDate !== null
     ) {
       this.store.dispatch(
+        MainPageActions.ChangeIsSearchImplement({
+          IsSearchImplement: false,
+        })
+      );
+
+      this.store.dispatch(
         MainPageActions.LoadAvailableFlights({
           originAirportKey: this.originAirport.key,
           destinationAirportKey: this.destinationAirport.key,
@@ -98,6 +116,12 @@ export class MainComponent implements OnDestroy {
         })
       );
       this.router.navigate(['/booking-page']);
+    } else {
+      this.store.dispatch(
+        MainPageActions.ChangeIsSearchImplement({
+          IsSearchImplement: true,
+        })
+      );
     }
   }
 

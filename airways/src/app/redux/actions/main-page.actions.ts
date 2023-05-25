@@ -5,11 +5,6 @@ import {
   IDate,
 } from '@redux/models/main-page.models';
 
-// const PassengersCount = createAction(
-//   '[MAIN PAGE] Passengers count',
-//   props<PassengersCount>()
-// );
-
 const IsRoundTrip = createAction(
   '[MAIN PAGE] Is round trip',
   props<{ isRoundTrip: boolean }>()
@@ -59,8 +54,12 @@ const ChangeIsShownValue = createAction(
   props<{ IsShownMainPage: boolean }>()
 );
 
+const ChangeIsSearchImplement = createAction(
+  '[MAIN PAGE] Change is search implement',
+  props<{ IsSearchImplement: boolean }>()
+);
+
 export const MainPageActions = {
-  // PassengersCount,
   LoadAirports,
   LoadAirportsSuccess,
   LoadAirportsError,
@@ -72,4 +71,5 @@ export const MainPageActions = {
   LoadAvailableFlights,
   LoadAvailableFlightsError,
   ChangeIsShownValue,
+  ChangeIsSearchImplement,
 };

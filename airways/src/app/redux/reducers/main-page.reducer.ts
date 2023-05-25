@@ -15,14 +15,11 @@ export const initialState: MainPageState = {
   flightForward: null,
   flightBack: null,
   isShowMainForm: false,
+  isSearchImplement: false,
 };
 
 export const MainPageReducer = createReducer(
   initialState,
-  // on(MainPageActions.PassengersCount, (state, action) => ({
-  //   ...state,
-  //   passengersCount: { ...action },
-  // })),
 
   on(MainPageActions.IsRoundTrip, (state, action) => ({
     ...state,
@@ -57,5 +54,10 @@ export const MainPageReducer = createReducer(
   on(MainPageActions.ChangeIsShownValue, (state, action) => ({
     ...state,
     isShowMainForm: action.IsShownMainPage,
+  })),
+
+  on(MainPageActions.ChangeIsSearchImplement, (state, action) => ({
+    ...state,
+    isSearchImplement: action.IsSearchImplement,
   }))
 );

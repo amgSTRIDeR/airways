@@ -1,12 +1,22 @@
 <div class="airport-switch-wrapper">
   <mat-form-field appearance="fill" class="airport-form airport-form__origin">
-    <mat-label>From</mat-label>
+    <mat-label
+      >From
+      <mat-error
+        *ngIf="
+          (originAirportControl.value === null &&
+            originAirportControl.touched) ||
+          (originAirportControl.value === null && (isSearchImplement$ | async))
+        "
+        >Please select a departure airport</mat-error
+      ></mat-label
+    >
     <mat-select
-      [ngModel]="originAirport"
       name="originAirport"
       class="location-select"
       placeholder="Choose your origin"
-      (ngModelChange)="setOriginAirport($event)"
+      (selectionChange)="setOriginAirport($event.value)"
+      [formControl]="originAirportControl"
     >
       <mat-select-trigger>
         <span>{{ originAirport?.city }}</span>
@@ -46,13 +56,23 @@
   appearance="fill"
   class="airport-form airport-form__destination"
 >
-  <mat-label>Destination</mat-label>
+  <mat-label
+    >Destination<mat-error
+      *ngIf="
+        (destinationAirportControl.value === null &&
+          destinationAirportControl.touched) ||
+        (destinationAirportControl.value === null &&
+          (isSearchImplement$ | async))
+      "
+      >Please select an airport of arrival</mat-error
+    ></mat-label
+  >
   <mat-select
-    [ngModel]="destinationAirport"
     name="destinationAirport"
     class="location-select"
     placeholder="Choose your destination"
-    (ngModelChange)="setDestinationAirport($event)"
+    (selectionChange)="setDestinationAirport($event.value)"
+    [formControl]="destinationAirportControl"
   >
     <mat-select-trigger
       ><span>{{ destinationAirport?.city }}</span
