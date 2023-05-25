@@ -121,7 +121,8 @@ export class MainComponent implements OnDestroy {
         event.target.classList.contains('bg-image') ||
         document.querySelector('.footer')?.contains(event.target) ||
         (document.querySelector('.header')?.contains(event.target) &&
-          !event.target.classList.contains('button__book-flights'))
+          !event.target.classList.contains('button__book-flights') &&
+          !document.querySelector('app-date-select')?.contains(event.target))
       ) {
         this.store.dispatch(
           MainPageActions.ChangeIsShownValue({
