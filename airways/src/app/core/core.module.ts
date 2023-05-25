@@ -23,6 +23,7 @@ import { InputCitizenshipComponent } from './components/auth/input-citizenship/i
 import { InputBirthdayComponent } from './components/auth/input-birthday/input-birthday.component';
 import { EditorHeaderComponent } from './components/editor-header/editor-header.component';
 import { MatBadgeModule } from '@angular/material/badge';
+import { MatMenuModule } from '@angular/material/menu';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { MatBadgeModule } from '@angular/material/badge';
     MatDialogModule,
     SharedModule,
     MatBadgeModule,
+    MatMenuModule,
   ],
   exports: [
     FooterComponent,

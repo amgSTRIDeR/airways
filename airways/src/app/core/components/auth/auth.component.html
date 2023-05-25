@@ -45,6 +45,7 @@
       <app-input-email [logInForm]="logInForm"></app-input-email>
       <app-input-password [logInForm]="logInForm"></app-input-password>
       <button class="button" mat-raised-button type="submit">Log in</button>
+      <mat-error *ngIf="errors.loginError">User not found</mat-error>
     </form>
     <form
       *ngIf="!logIn"
@@ -87,6 +88,9 @@
         </span>
       </div>
       <button class="button" mat-raised-button type="submit">Sign up</button>
+      <mat-error *ngIf="errors.registerError"
+        >This user already exist
+      </mat-error>
     </form>
   </div>
 </mat-dialog-content>

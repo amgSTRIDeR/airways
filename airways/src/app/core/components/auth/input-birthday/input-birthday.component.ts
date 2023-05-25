@@ -11,6 +11,6 @@ export class InputBirthdayComponent {
   @Input() singInForm!: FormGroup<SingInForm>;
 
   get FG(): FormControl<string | null> | null {
-    return this.singInForm.controls.birthdayDate;
+    return this.singInForm.controls.dateOfBirth;
   }
 }

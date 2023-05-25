@@ -17,6 +17,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MainEffects } from '@redux/effects/main-effects';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { AuthEffects } from '@redux/effects/Auth.effects';
 
 @NgModule({
   declarations: [AppComponent],
@@ -38,7 +39,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     BrowserAnimationsModule,
     CoreModule,
     HttpClientModule,
-    EffectsModule.forRoot([MainEffects]),
+    EffectsModule.forRoot([MainEffects, AuthEffects]),
     MatDatepickerModule,
     MatNativeDateModule,
   ],

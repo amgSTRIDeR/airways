@@ -4,7 +4,6 @@ export interface LoginUser {
 }
 
 export interface UserRes {
-  id: string;
   email: string;
   firstName: string;
   lastName: string;
