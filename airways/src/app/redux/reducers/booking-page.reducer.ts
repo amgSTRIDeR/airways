@@ -8,6 +8,11 @@ export const initialState: BookingPageState = {
   currentPageDirection: 'flight',
   isEditWindowOpen: false,
   totalPrice: null,
+  selectedForwardFlight: null,
+  selectedBackFlight: null,
+  selectedFlightCounter: {
+    value: 0,
+  },
   flights: {
     twoWays: true,
     forwardFlight: {
@@ -703,6 +708,18 @@ export const BookingPageReducer = createReducer(
   on(BookingActions.AddSelectedFlight, (state, action) => ({
     ...state,
     flights: action,
+  })),
+  on(BookingActions.SelectForwardFlight, (state, action) => ({
+    ...state,
+    selectedForwardFlight: action,
+  })),
+  on(BookingActions.SelectBackFlight, (state, action) => ({
+    ...state,
+    selectedBackFlight: action,
+  })),
+  on(BookingActions.SelectedFlightCounter, (state, action) => ({
+    ...state,
+    selectedFlightCounter: action,
   })),
   on(BookingActions.AddPassengersInformation, (state, action) => ({
     ...state,

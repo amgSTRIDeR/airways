@@ -1,6 +1,9 @@
-import { Component, Input, OnInit, OnChanges } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, OnChanges } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { BookingActions } from '@redux/actions/booking-page.actions';
+import { SelectedFlightCounter } from '@redux/models/booking-page.models';
 import { FlightRes, FlightsRes, IAlternativeFlight, IOtherFlights, IPrice } from '@redux/models/main-page.models';
+import { BookingSelectors } from '@redux/selectors/booking-page.selectors';
 import { SettingsSelectors } from '@redux/selectors/settings.selectors';
 import { Observable } from 'rxjs';
 
@@ -12,16 +15,23 @@ import { Observable } from 'rxjs';
 export class BookingFlightDetailsComponent implements OnInit, OnChanges {
   @Input() flightInfo?: FlightsRes;
   @Input() isBackFlight: boolean = false;
+  @Output() onFlightSelected = new EventEmitter<FlightRes | null>();
 
   public flightTitle: string = "";
   public chosenCurrency: string = 'EUR';
   public price?: number = 0;
   public alternativeFlights: IAlternativeFlight[] = [];
   public activeIndex: number = 0;
-  public activeFlight?: FlightsRes | FlightRes;
+  public activeFlight?: FlightRes;
+  public isFlightSelected: boolean = false;
+  public selectedFlightCounterValue: number = 0;
 
   private currencyInfo$: Observable<string> = this.store.select(
     SettingsSelectors.CurrencySelector
+  );
+
+  private selectedFlightCounter$: Observable<SelectedFlightCounter> = this.store.select(
+    BookingSelectors.selectedFlightCounterSelector
   );
 
   constructor(private store: Store){};
@@ -31,6 +41,7 @@ export class BookingFlightDetailsComponent implements OnInit, OnChanges {
       this.chosenCurrency = storeCurrency;
       this.updateActiveFlight();
     });
+    this.selectedFlightCounter$.subscribe((storeCounter) => this.selectedFlightCounterValue = storeCounter.value);
   }
 
   ngOnChanges(): void {
@@ -53,6 +64,32 @@ export class BookingFlightDetailsComponent implements OnInit, OnChanges {
       this.updateActiveFlight();
     }
     this.getNoTicketsMessage();
+  }
+
+  selectFlight(): void {
+    this.isFlightSelected = true;
+    this.store.dispatch(
+      BookingActions.SelectedFlightCounter({
+        value: this.selectedFlightCounterValue + 1,
+      })
+    );
+    if (this.isBackFlight)
+      this.store.dispatch(
+        BookingActions.SelectBackFlight(this.activeFlight!)
+      );
+    if (!this.isBackFlight)
+      this.store.dispatch(
+        BookingActions.SelectForwardFlight(this.activeFlight!)
+      );
+  }
+
+  editFlight(): void {
+    this.isFlightSelected = false;
+    this.store.dispatch(
+      BookingActions.SelectedFlightCounter({
+        value: this.selectedFlightCounterValue - 1,
+      })
+    );
   }
 
   updateActiveFlight(): void {

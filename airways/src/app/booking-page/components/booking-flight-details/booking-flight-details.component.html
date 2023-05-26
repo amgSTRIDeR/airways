@@ -6,7 +6,7 @@
   </div>
   <app-icon-label [logo]="flightTitle"></app-icon-label>
 </div>
-<div class="date-slider-container flex justify-between item-stretch">
+<div *ngIf="!isFlightSelected" class="date-slider-container flex justify-between item-stretch">
   <app-alternative-flight-card [ngClass]="{'carousel-hidden': !showAlternativeFlight(flight.index)}" *ngFor="let flight of alternativeFlights" [activeIndex]="activeIndex" [flightInfo]="flight" [chosenCurrency]="chosenCurrency" class="alternative-flight-card flex w-full"></app-alternative-flight-card>
   <div (click)="decreaseIndex()" class="arrow arrow-left">
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -69,19 +69,19 @@
         <span class="flight-number text-black f-w-400">{{ activeFlight?.flightNumber }}</span>
       </div>
     </div>
-    <div class="ticket-line line-dashed"></div>
-    <div class="additional-info-container flex item-center item-stretch gap-1">
+    <div *ngIf="!isFlightSelected" class="ticket-line line-dashed"></div>
+    <div class="additional-info-container flex item-center item-stretch gap-1 self-center">
       <div class="additional-info w-half flex flex-column justify-between">
-        <div appSeats [seats]="activeFlight?.seats" [isTransparent]="true" class="seats-container">
+        <div *ngIf="!isFlightSelected" appSeats [seats]="activeFlight?.seats" [isTransparent]="true" class="seats-container">
           <span class="seats-count seats-secondary f-w-700">{{ activeFlight?.seats?.avaible }} seats<br>available</span>
         </div>
         <div class="price-container flex flex-column">
-          <span class="price-label ticket-secondary f-w-700">Price</span>
-          <span class="price-amount text-primary f-w-700">{{ price | currency:chosenCurrency:'symbol-narrow':'1.2-2' }}</span>
+          <span *ngIf="!isFlightSelected" class="price-label ticket-secondary f-w-700">Price</span>
+          <span [ngClass]="{'self-center': isFlightSelected}" class="price-amount text-primary f-w-700">{{ price | currency:chosenCurrency:'symbol-narrow':'1.2-2' }}</span>
         </div>
       </div>
       <div class="button-container w-half flex justify-center">
-        <button class="select-button self-center text-white bg-gradient-primary">Select</button>
+        <button (click)="selectFlight()" *ngIf="!isFlightSelected else buttonEdit" class="select-button self-center text-white bg-gradient-primary">Select</button>
       </div>
     </div>
   </div>
@@ -91,4 +91,8 @@
   <div class="ticket-not-exist self-center">
     <span class="ticket-secondary f-w-400">{{ getNoTicketsMessage() }}</span>
   </div>
+</ng-template>
+
+<ng-template #buttonEdit>
+  <button class="button-edit self-center text-primary f-w-500" (click)="editFlight()" >Edit</button>
 </ng-template>

@@ -162,9 +162,25 @@
         &:hover {
           opacity: .6;
         }
+      }
 
-        &:active {
-          opacity: .8;
+      .button-edit {
+        padding: 4px 8px;
+
+        width: 44px;
+        height: 28px;
+
+        font-family: 'Roboto';
+        font-size: 16px;
+        line-height: 20px;
+
+        background: #F4F6F9;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+
+        &:hover {
+          opacity: .6;
         }
       }
     }

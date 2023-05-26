@@ -16,6 +16,9 @@ const isEditWindowOpenSelector = createSelector(
   (state) => state.isEditWindowOpen
 );
 const flightsSelector = createSelector(selectBooking, (state) => state.flights);
+const selectForwardFlightSelector = createSelector(selectBooking, (state) => state.selectedForwardFlight);
+const selectBackFlightSelector = createSelector(selectBooking, (state) => state.selectedBackFlight);
+const selectedFlightCounterSelector = createSelector(selectBooking, (state) => state.selectedFlightCounter);
 const passengersInfoSelector = createSelector(
   selectBooking,
   (state) => state.passengersInfo
@@ -43,6 +46,9 @@ export const BookingSelectors = {
   currentPageDirectionSelector,
   isEditWindowOpenSelector,
   flightsSelector,
+  selectForwardFlightSelector,
+  selectBackFlightSelector,
+  selectedFlightCounterSelector,
   passengersInfoSelector,
   allInformationSelector,
   AvailableFlightsSelector,
