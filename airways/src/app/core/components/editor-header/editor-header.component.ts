@@ -96,7 +96,8 @@ export class EditorHeaderComponent implements OnDestroy {
       this.originAirport !== null &&
       this.destinationAirport !== null &&
       this.departureDate !== null &&
-      (this.isRoundTrip ? this.returnDate !== null : true)
+      this.checkDepartureDate() &&
+      (this.isRoundTrip ? this.checkReturnDate() !== null : true)
     ) {
       this.store.dispatch(
         MainPageActions.LoadAvailableFlights({
@@ -107,5 +108,26 @@ export class EditorHeaderComponent implements OnDestroy {
         })
       );
     }
+  }
+
+  checkDepartureDate() {
+    const today = new Date();
+    if (this.departureDate !== null) {
+      if (this.departureDate > today) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  checkReturnDate() {
+    if (this.returnDate === null || this.departureDate === null) {
+      return false;
+    }
+
+    if (this.returnDate > this.departureDate) {
+      return true;
+    }
+    return false;
   }
 }

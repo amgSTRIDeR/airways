@@ -110,7 +110,6 @@ export class MainComponent implements OnDestroy {
           IsSearchImplement: false,
         })
       );
-
       this.store.dispatch(
         MainPageActions.LoadAvailableFlights({
           originAirportKey: this.originAirport.key,

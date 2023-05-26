@@ -41,7 +41,7 @@ export class BookingHeaderComponent implements OnDestroy {
         }
         this.availableFlights = flights;
         this.departDate = this.convertDate(flights[0].takeoffDate);
-        this.returnDate = this.convertDate(flights[1].takeoffDate);
+        this.returnDate = this.convertDate(flights[1]?.takeoffDate);
       }
     );
 
