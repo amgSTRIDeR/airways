@@ -7,54 +7,88 @@
   <app-icon-label [logo]="flightTitle"></app-icon-label>
 </div>
 <div class="date-slider-container flex justify-between item-stretch">
-  <app-alternative-flight-card *ngFor="let flight of alternativeFlights" [flightInfo]="flight" [chosenCurrency]="chosenCurrency" class="alternative-flight-card w-full"></app-alternative-flight-card>
-</div>
-<div class="ticket-container w-full flex item-stretch bg-white justify-between">
-  <div class="main-info w-full flex item-center justify-between item-stretch">
-    <div class="time-info time-info-from flex flex-column gap-half">
-      <span class="date date-from ticket-secondary f-w-400">{{ flightInfo?.takeoffDate | date:'EEE, d MMM yyyy' }}</span>
-      <div class="time-container time-from-container flex item-center gap-1">
-        <span class="flight-time text-black f-w-700">{{ flightInfo?.takeoffDate | date:'H:mm' }}</span>
-        <span class="flight-time-utc ticket-secondary f-w-400">UTC {{ flightInfo?.form?.gmt }}</span>
-      </div>
-      <span class="city city-from ticket-secondary f-w-400">{{ flightInfo?.form?.city }}</span>
-    </div>
-    <div class="flight-duration-container flex flex-column justify-between flex-grow">
-      <div class="flight-duration flight-duration-text self-center text-black f-w-400">{{ flightInfo?.timeMins | minutesToHours }}</div>
-      <div class="flight-duration-line line-solid"></div>
-      <div class="flight-direction-icon bg-white">
-        <svg [ngClass]="{'icon-container': isBackFlight}" width="25" height="12" viewBox="0 0 25 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M23.6618 1.76214C22.0114 0.880553 20.136 1.34885 18.8536 1.89689L15.0309 3.53057L8.45626 0.5L4.54087 0.654168L9.96998 5.69839L6.51 7.2047L2.9102 5.94913L0.5 6.97909L2.67816 9.45796C2.44803 9.70956 2.2395 10.0638 2.42882 10.4359C2.67608 10.9218 3.40691 11.1667 4.60569 11.1667C4.85152 11.1667 5.11706 11.1564 5.40207 11.1357C6.71799 11.0405 8.14467 10.7326 9.03675 10.3514L22.7016 4.51163C23.8818 4.0072 24.4697 3.47755 24.4989 2.8923C24.514 2.58876 24.3811 2.14618 23.6618 1.76214Z" fill="#0090BD"/>
-        </svg>
-      </div>
-      <span class="direction-label flight-duration-text self-center text-black f-w-400">Direct</span>
-    </div>
-    <div class="time-info time-info-to flex flex-column item-end gap-half">
-      <span class="date date-to ticket-secondary f-w-400">{{ flightInfo?.landingDate | date:'EEE, d MMM yyyy'  }}</span>
-      <div class="time-container time-to-container flex item-center gap-1">
-        <span class="flight-time flex-order-1 text-black f-w-700">{{ flightInfo?.landingDate | date:'H:mm' }}</span>
-        <span class="flight-time-utc ticket-secondary f-w-400">UTC {{ flightInfo?.to?.gmt }}</span>
-      </div>
-      <span class="city city-to ticket-secondary f-w-400">{{ flightInfo?.to?.city }}</span>
-    </div>
-    <div class="flight-number-container flex justify-end item-center">
-      <span class="flight-number-label ticket-secondary f-w-400">Flight no.</span>
-      <span class="flight-number text-black f-w-400">{{ flightInfo?.flightNumber }}</span>
-    </div>
+  <app-alternative-flight-card [ngClass]="{'carousel-hidden': !showAlternativeFlight(flight.index)}" *ngFor="let flight of alternativeFlights" [activeIndex]="activeIndex" [flightInfo]="flight" [chosenCurrency]="chosenCurrency" class="alternative-flight-card flex w-full"></app-alternative-flight-card>
+  <div (click)="decreaseIndex()" class="arrow arrow-left">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <g clip-path="url(#clip0_7244_3134)">
+        <rect width="24" height="24" rx="12" fill="#E9EDF1"/>
+        <path d="M10.3024 12.0883L13.3738 9.01658C13.4633 8.92659 13.5135 8.80472 13.5133 8.67776C13.513 8.55079 13.4624 8.42911 13.3725 8.33946C13.2829 8.24942 13.1612 8.19867 13.0341 8.19837C12.9071 8.19807 12.7851 8.24824 12.6951 8.33786L9.29795 11.735C9.20871 11.8246 9.15857 11.946 9.15845 12.0724C9.15833 12.1989 9.20824 12.3204 9.29731 12.4102L9.29795 12.4108C9.30027 12.4132 9.30262 12.4155 9.30499 12.4179L12.7143 15.7887C12.9008 15.9753 13.1997 15.9788 13.3821 15.7967C13.5642 15.6143 13.5607 15.3158 13.3738 15.1289L10.3024 12.0883Z" fill="#1C1B1F"/>
+      </g>
+      <defs>
+        <clipPath id="clip0_7244_3134">
+          <rect width="24" height="24" rx="12" fill="white"/>
+        </clipPath>
+      </defs>
+    </svg>
   </div>
-  <div class="ticket-line line-dashed"></div>
-  <div class="additional-info-container flex item-center item-stretch gap-1">
-    <div class="additional-info w-half flex flex-column justify-between">
-      <div appSeats [seats]="flightInfo?.seats" [isTransparent]="true" class="seats-container">
-        <span class="seats-count seats-secondary f-w-700">{{ flightInfo?.seats?.avaible }} seats<br>available</span>
-      </div>
-      <div class="price-container flex flex-column">
-        <span class="price-label ticket-secondary f-w-700">Price</span>
-        <span class="price-amount text-primary f-w-700">{{ price | currency:chosenCurrency:'symbol-narrow':'1.2-2' }}</span>
-      </div>
-    </div>
-    <div class="button-container w-half flex justify-center">
-      <button class="select-button self-center text-white bg-gradient-primary">Select</button>
-    </div>
+  <div (click)="increaseIndex()" class="arrow arrow-right">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <g clip-path="url(#clip0_7244_3134)">
+        <rect width="24" height="24" rx="12" fill="#E9EDF1"/>
+        <path d="M10.3024 12.0883L13.3738 9.01658C13.4633 8.92659 13.5135 8.80472 13.5133 8.67776C13.513 8.55079 13.4624 8.42911 13.3725 8.33946C13.2829 8.24942 13.1612 8.19867 13.0341 8.19837C12.9071 8.19807 12.7851 8.24824 12.6951 8.33786L9.29795 11.735C9.20871 11.8246 9.15857 11.946 9.15845 12.0724C9.15833 12.1989 9.20824 12.3204 9.29731 12.4102L9.29795 12.4108C9.30027 12.4132 9.30262 12.4155 9.30499 12.4179L12.7143 15.7887C12.9008 15.9753 13.1997 15.9788 13.3821 15.7967C13.5642 15.6143 13.5607 15.3158 13.3738 15.1289L10.3024 12.0883Z" fill="#1C1B1F"/>
+      </g>
+      <defs>
+        <clipPath id="clip0_7244_3134">
+          <rect width="24" height="24" rx="12" fill="white"/>
+        </clipPath>
+      </defs>
+    </svg>
   </div>
 </div>
+<div class="ticket-container flex justify-center w-full bg-white">
+  <div *ngIf="price !== 0 else noTicket" class="ticket-details-container w-full flex item-stretch justify-between">
+    <div class="main-info w-full flex item-center justify-between item-stretch">
+      <div class="time-info time-info-from flex flex-column gap-half">
+        <span class="date date-from ticket-secondary f-w-400">{{ activeFlight?.takeoffDate | date:'EEE, d MMM yyyy' }}</span>
+        <div class="time-container time-from-container flex item-center gap-1">
+          <span class="flight-time text-black f-w-700">{{ activeFlight?.takeoffDate | date:'H:mm' }}</span>
+          <span class="flight-time-utc ticket-secondary f-w-400">UTC {{ activeFlight?.form?.gmt }}</span>
+        </div>
+        <span class="city city-from ticket-secondary f-w-400">{{ activeFlight?.form?.city }}</span>
+      </div>
+      <div class="flight-duration-container flex flex-column justify-between flex-grow">
+        <div class="flight-duration flight-duration-text self-center text-black f-w-400">{{ activeFlight?.timeMins | minutesToHours }}</div>
+        <div class="flight-duration-line line-solid"></div>
+        <div class="flight-direction-icon bg-white">
+          <svg [ngClass]="{'icon-container': isBackFlight}" width="25" height="12" viewBox="0 0 25 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M23.6618 1.76214C22.0114 0.880553 20.136 1.34885 18.8536 1.89689L15.0309 3.53057L8.45626 0.5L4.54087 0.654168L9.96998 5.69839L6.51 7.2047L2.9102 5.94913L0.5 6.97909L2.67816 9.45796C2.44803 9.70956 2.2395 10.0638 2.42882 10.4359C2.67608 10.9218 3.40691 11.1667 4.60569 11.1667C4.85152 11.1667 5.11706 11.1564 5.40207 11.1357C6.71799 11.0405 8.14467 10.7326 9.03675 10.3514L22.7016 4.51163C23.8818 4.0072 24.4697 3.47755 24.4989 2.8923C24.514 2.58876 24.3811 2.14618 23.6618 1.76214Z" fill="#0090BD"/>
+          </svg>
+        </div>
+        <span class="direction-label flight-duration-text self-center text-black f-w-400">Direct</span>
+      </div>
+      <div class="time-info time-info-to flex flex-column item-end gap-half">
+        <span class="date date-to ticket-secondary f-w-400">{{ activeFlight?.landingDate | date:'EEE, d MMM yyyy'  }}</span>
+        <div class="time-container time-to-container flex item-center gap-1">
+          <span class="flight-time flex-order-1 text-black f-w-700">{{ activeFlight?.landingDate | date:'H:mm' }}</span>
+          <span class="flight-time-utc ticket-secondary f-w-400">UTC {{ activeFlight?.to?.gmt }}</span>
+        </div>
+        <span class="city city-to ticket-secondary f-w-400">{{ activeFlight?.to?.city }}</span>
+      </div>
+      <div class="flight-number-container flex justify-end item-center">
+        <span class="flight-number-label ticket-secondary f-w-400">Flight no.</span>
+        <span class="flight-number text-black f-w-400">{{ activeFlight?.flightNumber }}</span>
+      </div>
+    </div>
+    <div class="ticket-line line-dashed"></div>
+    <div class="additional-info-container flex item-center item-stretch gap-1">
+      <div class="additional-info w-half flex flex-column justify-between">
+        <div appSeats [seats]="activeFlight?.seats" [isTransparent]="true" class="seats-container">
+          <span class="seats-count seats-secondary f-w-700">{{ activeFlight?.seats?.avaible }} seats<br>available</span>
+        </div>
+        <div class="price-container flex flex-column">
+          <span class="price-label ticket-secondary f-w-700">Price</span>
+          <span class="price-amount text-primary f-w-700">{{ price | currency:chosenCurrency:'symbol-narrow':'1.2-2' }}</span>
+        </div>
+      </div>
+      <div class="button-container w-half flex justify-center">
+        <button class="select-button self-center text-white bg-gradient-primary">Select</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #noTicket>
+  <div class="ticket-not-exist self-center">
+    <span class="ticket-secondary f-w-400">{{ getNoTicketsMessage() }}</span>
+  </div>
+</ng-template>

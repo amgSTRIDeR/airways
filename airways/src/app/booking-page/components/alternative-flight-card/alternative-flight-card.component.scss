@@ -1,5 +1,21 @@
-.card-container {
+.inactive-card {
+  height: 70px;
+
+  .seats-available {
+    display: none;
+  }
+}
+
+.active-card {
   height: 100%;
+
+  .seats-available {
+    height: 4px;
+  }
+}
+
+.card-container {
+  width: 100%;
 
   .date {
     font-family: 'Roboto';
@@ -19,9 +35,5 @@
     font-family: 'Roboto';
     font-size: 20px;
     line-height: 20px;
-  }
-
-  .seats-available {
-    height: 4px;
   }
 }
