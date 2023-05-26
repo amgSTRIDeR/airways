@@ -32,7 +32,7 @@
     type="submit"
     class="search-button"
     [disabled]="!readyForSearch && isSearchImplement"
-    (click)="onSubmit()"
+    (click)="onSubmit($event)"
   >
     Search
   </button>

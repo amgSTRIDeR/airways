@@ -95,11 +95,15 @@ export class MainComponent implements OnDestroy {
     this.store.dispatch(MainPageActions.IsRoundTrip({ isRoundTrip: boolean }));
   }
 
-  onSubmit() {
+  onSubmit(event: Event) {
+    event.preventDefault();
+
+    this.checkReadyForSearch();
     if (
       this.originAirport !== null &&
       this.destinationAirport !== null &&
-      this.departureDate !== null
+      this.departureDate !== null &&
+      this.readyForSearch
     ) {
       this.store.dispatch(
         MainPageActions.ChangeIsSearchImplement({
@@ -129,13 +133,34 @@ export class MainComponent implements OnDestroy {
     if (
       this.originAirport !== null &&
       this.destinationAirport !== null &&
-      this.departureDate !== null &&
-      (this.isRoundTrip ? this.returnDate !== null : true)
+      this.checkDepartureDate() &&
+      (this.isRoundTrip ? this.checkReturnDate() : true)
     ) {
       this.readyForSearch = true;
     } else {
       this.readyForSearch = false;
     }
+  }
+
+  checkDepartureDate() {
+    const today = new Date();
+    if (this.departureDate !== null) {
+      if (this.departureDate > today) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  checkReturnDate() {
+    if (this.returnDate === null || this.departureDate === null) {
+      return false;
+    }
+
+    if (this.returnDate > this.departureDate) {
+      return true;
+    }
+    return false;
   }
 
   @HostListener('document:click', ['$event'])

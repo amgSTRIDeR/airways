@@ -1,4 +1,6 @@
 import { Component, OnDestroy } from '@angular/core';
+import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
+import { DateTypeService } from '@core/services/date-type.service';
 import { Store } from '@ngrx/store';
 import { MainPageActions } from '@redux/actions/main-page.actions';
 import { MainPageState } from '@redux/models/state.models';
@@ -16,7 +18,10 @@ export class DateFormComponent implements OnDestroy {
   public isRoundTrip = true;
 
   departureDate$ = this.store.select(MainPageSelectors.FlightForwardSelector);
+  departureDateSubscription!: Subscription;
+
   returnDate$ = this.store.select(MainPageSelectors.FlightBackSelector);
+  returnDateSubscription!: Subscription;
 
   isRoundTrip$ = this.store.select(MainPageSelectors.IsRoundTripSelector);
   isRoundTripSubscription!: Subscription;
@@ -24,7 +29,24 @@ export class DateFormComponent implements OnDestroy {
   dateType$ = this.store.select(SettingsSelectors.DateTypeSelector);
   dateTypeSubscription!: Subscription;
 
-  constructor(private store: Store<MainPageState>) {
+  isSearchImplement$ = this.store.select(MainPageSelectors.IsSearchImplement);
+
+  departureDateControl = new FormControl<Date | null>(null, [
+    this.validateDepartureDate.bind(this),
+  ]);
+  returnDateControl = new FormControl<Date | null>(null, [
+    this.validateReturnDate.bind(this),
+  ]);
+
+  flightForm = new FormGroup({
+    departureDate: this.departureDateControl,
+    returnDate: this.returnDateControl,
+  });
+
+  constructor(
+    private store: Store<MainPageState>,
+    private dateTypeService: DateTypeService
+  ) {
     this.isRoundTripSubscription = this.isRoundTrip$.subscribe((boolean) => {
       this.isRoundTrip = boolean;
 
@@ -32,10 +54,27 @@ export class DateFormComponent implements OnDestroy {
         this.setReturnDate(null);
       }
     });
+
+    this.dateTypeSubscription = this.dateType$.subscribe((dateType) => {
+      this.dateTypeService.changeDateType(dateType);
+    });
+
+    this.departureDateSubscription = this.departureDate$.subscribe(
+      (departureDate) => {
+        this.departureDateControl.setValue(departureDate);
+      }
+    );
+
+    this.returnDateSubscription = this.returnDate$.subscribe((returnDate) => {
+      this.returnDateControl.setValue(returnDate);
+    });
   }
 
   ngOnDestroy(): void {
     this.isRoundTripSubscription.unsubscribe();
+    this.dateTypeSubscription.unsubscribe();
+    this.departureDateSubscription.unsubscribe();
+    this.returnDateSubscription.unsubscribe();
   }
 
   setDepartureDate(departDate: Date | null) {
@@ -52,5 +91,27 @@ export class DateFormComponent implements OnDestroy {
         date: returnDate,
       })
     );
+  }
+
+  validateDepartureDate(control: AbstractControl) {
+    const today = new Date();
+    const departureDate = control.value;
+
+    if (departureDate && departureDate < today) {
+      return { departureDateInvalid: true };
+    }
+
+    return null;
+  }
+
+  validateReturnDate(control: AbstractControl) {
+    const departureDate = this.departureDateControl.value;
+    const returnDate = control.value;
+
+    if (departureDate && returnDate && returnDate < departureDate) {
+      return { returnDateInvalid: true };
+    }
+
+    return null;
   }
 }
