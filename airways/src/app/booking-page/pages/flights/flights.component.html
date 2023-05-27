@@ -1,4 +1,4 @@
-<div *ngIf="forwardFlightInfo else noFlight" class="flight-page-container">
+<div *ngIf="forwardFlightInfo; else noFlight" class="flight-page-container">
   <app-booking-flight-details
     [isBackFlight]="false"
     [flightInfo]="forwardFlightInfo"
@@ -33,7 +33,9 @@
 </div>
 
 <ng-template #noFlight class="flex item-center">
-  <span class="warning-message ticket-secondary f-w-700">Choose your trip on the Main page!</span>
+  <span class="warning-message ticket-secondary f-w-700"
+    >Choose your trip on the Main page!</span
+  >
   <div class="flex w-full justify-center button-container">
     <div class="flex gap-2">
       <button

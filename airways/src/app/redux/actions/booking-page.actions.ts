@@ -6,7 +6,11 @@ import {
   SelectedFlightCounter,
   Total,
 } from '@redux/models/booking-page.models';
-import { FlightRes, FlightsRes, PassengersCount } from '@redux/models/main-page.models';
+import {
+  FlightRes,
+  FlightsRes,
+  PassengersCount,
+} from '@redux/models/main-page.models';
 
 const OnBookingPage = createAction('[BOOKING PAGE] On Booking Page');
 const OutBookingPage = createAction('[BOOKING PAGE] Out Booking Page');
@@ -23,17 +27,17 @@ const AddSelectedFlight = createAction(
 const SelectForwardFlight = createAction(
   '[BOOKING PAGE] Select Forward Flight',
   props<FlightRes>()
-)
+);
 
 const SelectBackFlight = createAction(
   '[BOOKING PAGE] Select Back Flight',
   props<FlightRes>()
-)
+);
 
 const SelectedFlightCounter = createAction(
   '[BOOKING PAGE] Select Flight Counter',
   props<SelectedFlightCounter>()
-)
+);
 
 const AddPassengersInformation = createAction(
   '[BOOKING PAGE] Add Passengers Information',
