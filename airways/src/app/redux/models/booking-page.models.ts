@@ -14,6 +14,7 @@ export interface passenger {
   invalid: string;
   baggageBig: number;
   baggageSmall: number;
+  seat: string;
 }
 
 export interface PassengersDetails {

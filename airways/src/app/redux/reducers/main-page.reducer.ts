@@ -16,6 +16,7 @@ export const initialState: MainPageState = {
   flightBack: null,
   isShowMainForm: false,
   isSearchImplement: false,
+  isEditorOpen: false,
 };
 
 export const MainPageReducer = createReducer(
@@ -59,5 +60,10 @@ export const MainPageReducer = createReducer(
   on(MainPageActions.ChangeIsSearchImplement, (state, action) => ({
     ...state,
     isSearchImplement: action.IsSearchImplement,
+  })),
+
+  on(MainPageActions.IsEditorOpen, (state, action) => ({
+    ...state,
+    isEditorOpen: action.isEditorOpen,
   }))
 );

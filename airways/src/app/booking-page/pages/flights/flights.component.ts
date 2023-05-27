@@ -16,7 +16,7 @@ import { Observable } from 'rxjs';
 export class FlightsComponent implements OnInit {
   constructor(private store: Store, private router: Router) {}
 
-  public isTwoWays = false;
+  public isTwoWays: boolean = false;
   public forwardFlightInfo!: FlightsRes;
   public backFlightInfo?: FlightsRes;
 
@@ -136,6 +136,7 @@ export class FlightsComponent implements OnInit {
         availablePlacesFlatArray[newPlaceInd];
       tmpArray.splice(tmpArray.indexOf(newPlace), 1);
       ind++;
+
     }
 
     return availablePlaces;

@@ -1,8 +1,10 @@
 import { Component, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { MainPageActions } from '@redux/actions/main-page.actions';
 import { FlightsRes } from '@redux/models/main-page.models';
 import { BookingPageState } from '@redux/models/state.models';
 import { BookingSelectors } from '@redux/selectors/booking-page.selectors';
+import { MainPageSelectors } from '@redux/selectors/main-page.selectors';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -33,6 +35,9 @@ export class BookingHeaderComponent implements OnDestroy {
   );
   private currentPageDirectionSubscription!: Subscription;
 
+  private isEditorOpen$ = this.store.select(MainPageSelectors.IsEditorOpen);
+  private isEditorOpenSubscription!: Subscription;
+
   constructor(private store: Store<BookingPageState>) {
     this.availableFlightsSubscription = this.availableFlights$.subscribe(
       (flights) => {
@@ -62,12 +67,19 @@ export class BookingHeaderComponent implements OnDestroy {
         }
         this.currentPageDirection = direction;
       });
+
+    this.isEditorOpenSubscription = this.isEditorOpen$.subscribe(
+      (isEditorOpen) => {
+        this.isEditorOpen = isEditorOpen;
+      }
+    );
   }
 
   ngOnDestroy(): void {
     this.availableFlightsSubscription.unsubscribe();
     this.passengersCountSubscription.unsubscribe();
     this.currentPageDirectionSubscription.unsubscribe();
+    this.isEditorOpenSubscription.unsubscribe();
   }
 
   convertDate(date: string): string {
@@ -75,5 +87,12 @@ export class BookingHeaderComponent implements OnDestroy {
       day: 'numeric',
       month: 'short',
     });
+  }
+
+  toogleEditor(): void {
+    this.isEditorOpen = !this.isEditorOpen;
+    this.store.dispatch(
+      MainPageActions.IsEditorOpen({ isEditorOpen: this.isEditorOpen })
+    );
   }
 }

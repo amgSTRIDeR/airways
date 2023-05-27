@@ -111,6 +111,7 @@ export const initialState: BasketPageState = {
             invalid: 'true',
             baggageBig: 0,
             baggageSmall: 0,
+            seat: '33',
           },
           {
             firstName: 'Anna',
@@ -120,6 +121,7 @@ export const initialState: BasketPageState = {
             invalid: 'false',
             baggageBig: 0,
             baggageSmall: 0,
+            seat: '33',
           },
           {
             firstName: 'Anna',
@@ -129,6 +131,7 @@ export const initialState: BasketPageState = {
             invalid: 'false',
             baggageBig: 0,
             baggageSmall: 0,
+            seat: '33',
           },
         ],
         child: [
@@ -140,6 +143,7 @@ export const initialState: BasketPageState = {
             invalid: 'true',
             baggageBig: 0,
             baggageSmall: 0,
+            seat: '33',
           },
         ],
         infant: [
@@ -151,6 +155,7 @@ export const initialState: BasketPageState = {
             invalid: 'true',
             baggageBig: 0,
             baggageSmall: 0,
+            seat: '33',
           },
         ],
         details: {
@@ -265,6 +270,7 @@ export const initialState: BasketPageState = {
             invalid: 'true',
             baggageBig: 0,
             baggageSmall: 0,
+            seat: '33',
           },
           {
             firstName: 'Anna',
@@ -274,6 +280,7 @@ export const initialState: BasketPageState = {
             invalid: 'false',
             baggageBig: 0,
             baggageSmall: 0,
+            seat: '33',
           },
         ],
         child: [
@@ -285,6 +292,7 @@ export const initialState: BasketPageState = {
             invalid: 'true',
             baggageBig: 0,
             baggageSmall: 0,
+            seat: '33',
           },
         ],
         infant: [
@@ -296,6 +304,7 @@ export const initialState: BasketPageState = {
             invalid: 'true',
             baggageBig: 0,
             baggageSmall: 0,
+            seat: '33',
           },
         ],
         details: {

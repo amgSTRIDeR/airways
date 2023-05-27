@@ -18,6 +18,7 @@ import { MainEffects } from '@redux/effects/main-effects';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { AuthEffects } from '@redux/effects/Auth.effects';
+import { OAuthModule } from 'angular-oauth2-oidc';
 
 @NgModule({
   declarations: [AppComponent],
@@ -36,6 +37,7 @@ import { AuthEffects } from '@redux/effects/Auth.effects';
     ),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
     EffectsModule.forRoot([]),
+    OAuthModule.forRoot(),
     BrowserAnimationsModule,
     CoreModule,
     HttpClientModule,

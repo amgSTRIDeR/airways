@@ -39,10 +39,7 @@
     class="arrow arrow-right"
   ></app-arrow-button>
 </div>
-<div
-  class="ticket-container flex justify-center w-full bg-white"
-  (resize)="adaptToResize()"
->
+<div class="ticket-container flex justify-center w-full bg-white">
   <div
     *ngIf="price !== 0; else noTicket"
     class="ticket-details-container w-full flex item-stretch justify-between"

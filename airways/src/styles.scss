@@ -22,11 +22,13 @@ body {
 
 .container {
   width: 80%;
+  align-items: center;
 }
 
 @media screen and (max-width: 1300px) {
   .container {
     width: 95%;
+    align-items: center;
   }
 }
 

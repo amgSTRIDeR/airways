@@ -36,9 +36,6 @@ export class BookingFlightDetailsComponent implements OnInit, OnChanges {
   public isFlightSelected = false;
   public selectedFlightCounterValue = 0;
 
-  private alternativeFlightOnScreen: number =
-    DEFAULT_ALTERNATIVE_FLIGHTS_ON_SCREEN;
-
   private currencyInfo$: Observable<string> = this.store.select(
     SettingsSelectors.CurrencySelector
   );
@@ -129,18 +126,10 @@ export class BookingFlightDetailsComponent implements OnInit, OnChanges {
   }
 
   showAlternativeFlight(flightIndex: number): boolean {
-    console.log(
-      'this.alternativeFlightOnScreen: ',
-      this.alternativeFlightOnScreen
-    );
-
     return (
-      Math.abs(this.activeIndex - flightIndex) <=
-        this.alternativeFlightOnScreen / 2 ||
-      (this.activeIndex >= this.alternativeFlightOnScreen / 2 &&
-        flightIndex > 0) ||
-      (this.activeIndex <= -this.alternativeFlightOnScreen / 2 &&
-        flightIndex < 0)
+      Math.abs(this.activeIndex - flightIndex) <= this.alternativeFlightOnScreen / 2 ||
+        (this.activeIndex >= this.alternativeFlightOnScreen / 2 && flightIndex > 0) ||
+        (this.activeIndex <= -this.alternativeFlightOnScreen / 2 && flightIndex < 0)
     );
   }
 
@@ -181,11 +170,5 @@ export class BookingFlightDetailsComponent implements OnInit, OnChanges {
     return activeFlightDate < currentDate
       ? DATE_IN_THE_PAST_MESSAGE
       : NO_TICKETS_MESSAGE;
-  }
-
-  adaptToResize(): void {
-    console.log('=== innerWidth', window.innerWidth);
-
-    if (window.innerWidth < 1100) this.alternativeFlightOnScreen = 3;
   }
 }
