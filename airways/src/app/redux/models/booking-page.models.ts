@@ -14,6 +14,7 @@ export interface passenger {
   invalid: string;
   baggageBig: number;
   baggageSmall: number;
+  seat: string;
 }
 
 export interface PassengersDetails {
@@ -74,5 +75,5 @@ export interface EditFlight {
 }
 
 export interface SelectedFlightCounter {
-  value: number,
+  value: number;
 }

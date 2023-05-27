@@ -15,12 +15,17 @@ export class SeatsDirective implements OnChanges {
   }
 
   setBackground(): void {
-    this.el.nativeElement.classList.add(this.getBackgroundColor() + (this.isTransparent ? '-transparent' : ''));
+    this.el.nativeElement.classList.add(
+      this.getBackgroundColor() + (this.isTransparent ? '-transparent' : '')
+    );
   }
 
   getBackgroundColor(): string {
     if (!this.seats?.avaible) return 'seats-red-bg';
-    return this.seats?.avaible < 10 ? 'seats-red-bg' :
-           this.seats?.avaible / this.seats?.total < 0.5 ? 'seats-yellow-bg' : 'seats-green-bg';
+    return this.seats?.avaible < 10
+      ? 'seats-red-bg'
+      : this.seats?.avaible / this.seats?.total < 0.5
+      ? 'seats-yellow-bg'
+      : 'seats-green-bg';
   }
 }

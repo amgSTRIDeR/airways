@@ -2,7 +2,6 @@ import { Component, HostListener, OnDestroy } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { BookingActions } from '@redux/actions/booking-page.actions';
-import { MainPageActions } from '@redux/actions/main-page.actions';
 import { BookingPageState } from '@redux/models/state.models';
 import { MatDialog } from '@angular/material/dialog';
 import { AuthComponent } from '@core/components/auth/auth.component';
@@ -28,24 +27,25 @@ const ICON = {
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnDestroy {
-  public showBookWindow = false;
   public isMainPage = false;
   public isUserSignIn = false;
   public isHamburgerMenuActive = false;
   public ordersCount$: Observable<Order[]> = this.store.select(
     BasketSelectors.Orders
   );
+  public isEditorOpen = false;
 
   onBookingPage$ = this.store.select(BookingSelectors.onBookingPageSelector);
   onFlightPage$ = this.store.select(
     BookingSelectors.currentPageDirectionSelector
   );
-  showBookWindow$ = this.store.select(MainPageSelectors.IsShowMainFormSelector);
   windowWidth: number = window.innerWidth;
   public user$ = this.store.select(AuthSelectors.AuthUserSelector);
 
   private IsLogIn$ = this.store.select(AuthSelectors.IsLogIn);
   private IsLogInSub!: Subscription;
+
+  public isEditorOpen$ = this.store.select(MainPageSelectors.IsEditorOpen);
 
   constructor(
     private router: Router,
@@ -67,19 +67,11 @@ export class HeaderComponent implements OnDestroy {
         this.isMainPage = event.url.startsWith('/main') || event.url === '/';
       }
     });
-
-    this.showBookWindow$.subscribe((value) => {
-      this.showBookWindow = value;
-    });
   }
 
   ngOnDestroy(): void {
     throw new Error('Method not implemented.');
   }
-
-  // ngOnInit(): void {
-  //   this.dialog.open(AuthComponent);
-  // }
 
   @HostListener('window:resize')
   onWindowResize() {
@@ -99,15 +91,6 @@ export class HeaderComponent implements OnDestroy {
 
   public toShoppingCardPage() {
     this.router.navigate(['shopping-card']);
-  }
-
-  toggleBookWindowVisibility() {
-    this.showBookWindow = !this.showBookWindow;
-    this.store.dispatch(
-      MainPageActions.ChangeIsShownValue({
-        IsShownMainPage: this.showBookWindow,
-      })
-    );
   }
 
   private addPathToIcon() {
@@ -131,9 +114,11 @@ export class HeaderComponent implements OnDestroy {
       if (
         !document.querySelector('.hamburger-icon')?.contains(event.target) &&
         !document.querySelector('.hamburger-menu')?.contains(event.target) &&
-        !document.querySelector('.ng-trigger')?.contains(event.target)
+        !document.querySelector('.ng-trigger')?.contains(event.target) &&
+        !event.target.classList.contains('mdc-list-item__primary-text') &&
+        !event.target.classList.contains('mat-mdc-option')
       ) {
-        this.toggleHamburgerMenu();
+        this.isHamburgerMenuActive = false;
       }
     }
   }

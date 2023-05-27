@@ -16,29 +16,28 @@ import { Observable } from 'rxjs';
 export class FlightsComponent implements OnInit {
   constructor(private store: Store, private router: Router) {}
 
+
   public isTwoWays: boolean = false;
+
   public forwardFlightInfo!: FlightsRes;
   public backFlightInfo?: FlightsRes;
 
   public selectedForwardFlightInfo: FlightRes | null = null;
   public selectedBackFlightInfo: FlightRes | null = null;
-  public selectedFlightCounterValue: number = 0;
+  public selectedFlightCounterValue = 0;
 
   private flightsInfo$: Observable<FlightsRes[] | null> = this.store.select(
     BookingSelectors.AvailableFlightsSelector
   );
 
-  private selectedForwardFlightInfo$: Observable<FlightRes | null> = this.store.select(
-    BookingSelectors.selectForwardFlightSelector
-  );
+  private selectedForwardFlightInfo$: Observable<FlightRes | null> =
+    this.store.select(BookingSelectors.selectForwardFlightSelector);
 
-  private selectedBackFlightInfo$: Observable<FlightRes | null> = this.store.select(
-    BookingSelectors.selectBackFlightSelector
-  );
+  private selectedBackFlightInfo$: Observable<FlightRes | null> =
+    this.store.select(BookingSelectors.selectBackFlightSelector);
 
-  private selectedFlightCounter$: Observable<SelectedFlightCounter> = this.store.select(
-    BookingSelectors.selectedFlightCounterSelector
-  );
+  private selectedFlightCounter$: Observable<SelectedFlightCounter> =
+    this.store.select(BookingSelectors.selectedFlightCounterSelector);
 
   ngOnInit(): void {
     this.flightsInfo$.subscribe((event) => {
@@ -47,14 +46,23 @@ export class FlightsComponent implements OnInit {
         this.forwardFlightInfo = event![0];
         if (this.isTwoWays) this.backFlightInfo = event![1];
       }
-    })
-    this.selectedForwardFlightInfo$.subscribe((storeFlightInfo) => { if (!!storeFlightInfo) this.selectedForwardFlightInfo = storeFlightInfo });
-    this.selectedBackFlightInfo$.subscribe((storeFlightInfo) => { if (storeFlightInfo) this.selectedBackFlightInfo = storeFlightInfo });
-    this.selectedFlightCounter$.subscribe((storeCounter) => this.selectedFlightCounterValue = storeCounter.value);
+    });
+    this.selectedForwardFlightInfo$.subscribe((storeFlightInfo) => {
+      if (storeFlightInfo) this.selectedForwardFlightInfo = storeFlightInfo;
+    });
+    this.selectedBackFlightInfo$.subscribe((storeFlightInfo) => {
+      if (storeFlightInfo) this.selectedBackFlightInfo = storeFlightInfo;
+    });
+    this.selectedFlightCounter$.subscribe(
+      (storeCounter) => (this.selectedFlightCounterValue = storeCounter.value)
+    );
   }
 
   checkAllFlightsSelected() {
-    return this.isTwoWays && this.selectedFlightCounterValue === 2 || !this.isTwoWays && this.selectedFlightCounterValue === 1;
+    return (
+      (this.isTwoWays && this.selectedFlightCounterValue === 2) ||
+      (!this.isTwoWays && this.selectedFlightCounterValue === 1)
+    );
   }
 
   logForm(): void {
@@ -67,17 +75,24 @@ export class FlightsComponent implements OnInit {
             seats: {
               total: this.selectedForwardFlightInfo.seats.total,
               avaible: this.selectedForwardFlightInfo.seats.avaible,
-              avaibleArr: this.generateFreePlaces(this.selectedForwardFlightInfo!.seats) 
-            }
+              avaibleArr: this.generateFreePlaces(
+                this.selectedForwardFlightInfo!.seats
+              ),
+            },
           },
-          backFlight: this.isTwoWays && this.selectedBackFlightInfo ? {
-            ...this.selectedBackFlightInfo,
-            seats: {
-              total: this.selectedBackFlightInfo.seats.total,
-              avaible: this.selectedBackFlightInfo.seats.avaible,
-              avaibleArr: this.generateFreePlaces(this.selectedBackFlightInfo!.seats) 
-            }
-          } : undefined,
+          backFlight:
+            this.isTwoWays && this.selectedBackFlightInfo
+              ? {
+                  ...this.selectedBackFlightInfo,
+                  seats: {
+                    total: this.selectedBackFlightInfo.seats.total,
+                    avaible: this.selectedBackFlightInfo.seats.avaible,
+                    avaibleArr: this.generateFreePlaces(
+                      this.selectedBackFlightInfo!.seats
+                    ),
+                  },
+                }
+              : undefined,
         })
       );
     this.store.dispatch(BookingActions.OnPassengersSubPage());
@@ -115,6 +130,7 @@ export class FlightsComponent implements OnInit {
       availablePlaces[newPlaceRowInd][newPlaceLetterInd] = availablePlacesFlatArray[newPlaceInd];
       tmpArray.splice(tmpArray.indexOf(newPlace), 1);
       ind++;
+
     }
 
     return availablePlaces;
