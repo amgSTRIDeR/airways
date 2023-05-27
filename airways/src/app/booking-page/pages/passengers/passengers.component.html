@@ -11,12 +11,14 @@
       </mat-card-subtitle>
     </div>
     <app-all-passengers-card
+      *ngIf="adult.controls.length > 0"
       name="adult"
       [accessible]="true"
       [form]="adult"
       [allForm]="allForm"
     ></app-all-passengers-card>
     <app-all-passengers-card
+      *ngIf="child.controls.length > 0"
       name="child"
       [accessible]="true"
       class="w-full"
@@ -24,6 +26,7 @@
       [allForm]="allForm"
     ></app-all-passengers-card>
     <app-all-passengers-card
+      *ngIf="infant.controls.length > 0"
       name="infant"
       [accessible]="false"
       class="w-full"

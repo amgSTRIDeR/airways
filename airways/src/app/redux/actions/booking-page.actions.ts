@@ -65,6 +65,11 @@ const PassengersCount = createAction(
   '[BOOKING PAGE] Passenger Count',
   props<PassengersCount>()
 );
+
+const ChangeAvailableSeats = createAction(
+  '[BOOKING PAGE] Change Available Seats',
+  props<{ seats: { i: number; j: number } }>()
+);
 export const BookingActions = {
   OnBookingPage,
   OutBookingPage,
@@ -82,4 +87,5 @@ export const BookingActions = {
   LoadAvailableFlightsSuccess,
   ClearBookingPageState,
   PassengersCount,
+  ChangeAvailableSeats,
 };

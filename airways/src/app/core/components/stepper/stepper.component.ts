@@ -18,7 +18,9 @@ export class StepperComponent implements OnDestroy {
   );
 
   private flights$ = this.store.select(BookingSelectors.flightsSelector);
-  private passengerInfo$ = this.store.select(BookingSelectors.flightsSelector);
+  private passengerInfo$ = this.store.select(
+    BookingSelectors.passengersInfoSelector
+  );
   private flightsSub!: Subscription;
   private passengersSub!: Subscription;
 

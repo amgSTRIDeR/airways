@@ -11,6 +11,7 @@ import { PlaceDialogComponent } from '@booking/components/place-dialog/place-dia
 export class SeatsButtonComponent {
   @Input() seatFC!: FormControl<string | null>;
   selectedPlaceControl: FormControl = new FormControl();
+  seat?: string;
 
   constructor(private dialog: MatDialog) {}
 
@@ -21,10 +22,26 @@ export class SeatsButtonComponent {
       },
     });
 
-    dialogRef.afterClosed().subscribe((result: string | null) => {
-      if (result) {
-        this.seatFC.setValue(result);
-      }
-    });
+    dialogRef
+      .afterClosed()
+      .subscribe(
+        (result: {
+          place: string | null;
+          seatIndex: { i: number; j: number } | undefined;
+        }) => {
+          if (!result) return;
+          if (result.place) {
+            this.seat = result.place;
+            this.seatFC.setValue(result.place);
+
+            // const i = result.seatIndex.i;
+            // const j = result.seatIndex.j;
+            // console.log(i, j);
+            // this.store.dispatch(
+            //   BookingActions.ChangeAvailableSeats({ seats: { i, j } })
+            // );
+          }
+        }
+      );
   }
 }

@@ -9,12 +9,19 @@
         class="w-full"
       ></app-passenger-card>
       <div>
-        <button *ngIf="i > 0" mat-button color="warn" matStepperPrevious>
+        <button
+          *ngIf="i > 0"
+          mat-button
+          type="button"
+          color="warn"
+          matStepperPrevious
+        >
           Prev
         </button>
         <button
           *ngIf="i < form.controls.length - 1"
           mat-button
+          type="button"
           color="primary"
           matStepperNext
         >
