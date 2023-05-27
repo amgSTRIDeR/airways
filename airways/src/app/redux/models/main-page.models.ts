@@ -48,6 +48,7 @@ export interface IPrice {
 export interface ISeats {
   total: number;
   avaible: number;
+  avaibleArr?: string[];
 }
 
 export interface FlightsRes extends FlightRes {

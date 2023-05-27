@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { ALPHABET, PLACES_PER_ROW } from '@core/consts/booking';
 import { Store } from '@ngrx/store';
 import { BookingActions } from '@redux/actions/booking-page.actions';
 import { SelectedFlightCounter } from '@redux/models/booking-page.models';
-import { FlightRes, FlightsRes } from '@redux/models/main-page.models';
+import { FlightRes, FlightsRes, ISeats } from '@redux/models/main-page.models';
 import { BookingSelectors } from '@redux/selectors/booking-page.selectors';
 import { Observable } from 'rxjs';
 
@@ -12,7 +14,7 @@ import { Observable } from 'rxjs';
   styleUrls: ['./flights.component.scss'],
 })
 export class FlightsComponent implements OnInit {
-  constructor(private store: Store) {}
+  constructor(private store: Store, private router: Router) {}
 
   private isTwoWays: boolean = false;
   public forwardFlightInfo!: FlightsRes;
@@ -56,18 +58,53 @@ export class FlightsComponent implements OnInit {
   }
 
   logForm(): void {
+    const isExistBackFlight = this.isTwoWays && this.selectedBackFlightInfo;
+
     if (this.checkAllFlightsSelected() && this.selectedForwardFlightInfo)
       this.store.dispatch(
         BookingActions.AddSelectedFlight({
           twoWays: this.isTwoWays,
-          forwardFlight: this.selectedForwardFlightInfo,
-          backFlight: this.isTwoWays && this.selectedBackFlightInfo ? this.selectedBackFlightInfo : undefined,
+          forwardFlight: {
+            ...this.selectedForwardFlightInfo,
+            seats: {
+              total: this.selectedForwardFlightInfo.seats.total,
+              avaible: this.selectedForwardFlightInfo.seats.avaible,
+              avaibleArr: this.generateFreePlaces(this.selectedForwardFlightInfo!.seats) 
+            }
+          },
+          backFlight: this.isTwoWays && this.selectedBackFlightInfo ? {
+            ...this.selectedBackFlightInfo,
+            seats: {
+              total: this.selectedBackFlightInfo.seats.total,
+              avaible: this.selectedBackFlightInfo.seats.avaible,
+              avaibleArr: this.generateFreePlaces(this.selectedBackFlightInfo!.seats) 
+            }
+          } : undefined,
         })
       );
     this.store.dispatch(BookingActions.OnPassengersSubPage());
   }
 
+  generateFreePlaces(seats: ISeats) {
+    const rowCount: number = Math.floor(seats.total / PLACES_PER_ROW);
+    const lettersArr: string[] = ALPHABET.slice(0, PLACES_PER_ROW);
+    const availablePlaces: string[] = [];
+
+    while (availablePlaces.length < seats.avaible) {
+      const newPlace: string = this.getRandomInd(rowCount) + lettersArr[this.getRandomInd(PLACES_PER_ROW)];
+      if (availablePlaces.indexOf(newPlace) < 0) availablePlaces.push(newPlace);
+    }
+
+    console.log('=== available', availablePlaces);
+
+    return availablePlaces;    
+  }
+
+  getRandomInd(max: number) {
+    return Math.floor(Math.random() * max);
+  }
+
   backToMainPage(): void {
-    this.store.dispatch(BookingActions.OutBookingPage());
+    this.router.navigate(['/main']);
   }
 }

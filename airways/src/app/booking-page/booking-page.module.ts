@@ -18,6 +18,8 @@ import { BookingFlightDetailsComponent } from './components/booking-flight-detai
 import { SeatsDirective } from './directives/seats.directive';
 import { AlternativeFlightCardComponent } from './components/alternative-flight-card/alternative-flight-card.component';
 import { BaggageComponent } from './components/baggage/baggage.component';
+import { ArrowButtonComponent } from './components/arrow-button/arrow-button.component';
+import { DateOnTicketComponent } from './components/date-on-ticket/date-on-ticket.component';
 
 
 @NgModule({
@@ -38,6 +40,8 @@ import { BaggageComponent } from './components/baggage/baggage.component';
     BookingFlightDetailsComponent,
     AlternativeFlightCardComponent,
     BaggageComponent,
+    ArrowButtonComponent,
+    DateOnTicketComponent,
   ],
   imports: [CommonModule, BookingPageRoutingModule, SharedModule],
 })
