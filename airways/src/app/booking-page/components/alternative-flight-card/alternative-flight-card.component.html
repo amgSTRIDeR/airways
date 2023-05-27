@@ -1,15 +1,7 @@
-<div
-  class="card-container flex flex-column justify-between item-center bg-white"
->
-  <span class="date alternative-flight-color-secondary f-w-500">{{
-    flightInfo.takeoffDate | date : "d MMM"
-  }}</span>
-  <span class="dayOfWeek ticket-secondary f-w-100">{{
-    flightInfo.takeoffDate | date : "EEEE"
-  }}</span>
-  <span *ngIf="price; else disabled" class="price text-primary f-w-700">{{
-    price | currency : chosenCurrency : "symbol-narrow" : "1.2-2"
-  }}</span>
+<div [ngClass]="{'inactive-card': activeIndex !== flightInfo.index, 'active-card': activeIndex === flightInfo.index}" class="card-container flex flex-column justify-between item-center bg-white self-end">
+  <span class="date alternative-flight-color-secondary f-w-500">{{ flightInfo.takeoffDate | date:'d MMM' }}</span>
+  <span class="dayOfWeek ticket-secondary f-w-100">{{ flightInfo.takeoffDate | date:'EEEE' }}</span>
+  <span *ngIf="price else disabled" class="price text-primary f-w-700">{{ price | currency:chosenCurrency:'symbol-narrow':'1.2-2' }}</span>
   <div appSeats [seats]="flightInfo.seats" class="seats-available w-full"></div>
 </div>
 

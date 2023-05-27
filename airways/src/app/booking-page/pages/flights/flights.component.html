@@ -22,6 +22,7 @@
         class="button"
         mat-raised-button
         color="primary"
+        [disabled]="!checkAllFlightsSelected()"
         (click)="logForm()"
       >
         Continue
