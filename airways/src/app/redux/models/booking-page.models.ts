@@ -74,5 +74,5 @@ export interface EditFlight {
 }
 
 export interface SelectedFlightCounter {
-  value: number,
+  value: number;
 }

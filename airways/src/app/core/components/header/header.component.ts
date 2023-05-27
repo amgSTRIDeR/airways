@@ -2,7 +2,6 @@ import { Component, HostListener, OnDestroy } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { BookingActions } from '@redux/actions/booking-page.actions';
-import { MainPageActions } from '@redux/actions/main-page.actions';
 import { BookingPageState } from '@redux/models/state.models';
 import { MatDialog } from '@angular/material/dialog';
 import { AuthComponent } from '@core/components/auth/auth.component';
@@ -28,7 +27,6 @@ const ICON = {
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnDestroy {
-  public showBookWindow = false;
   public isMainPage = false;
   public isUserSignIn = false;
   public isHamburgerMenuActive = false;
@@ -41,7 +39,6 @@ export class HeaderComponent implements OnDestroy {
   onFlightPage$ = this.store.select(
     BookingSelectors.currentPageDirectionSelector
   );
-  showBookWindow$ = this.store.select(MainPageSelectors.IsShowMainFormSelector);
   windowWidth: number = window.innerWidth;
   public user$ = this.store.select(AuthSelectors.AuthUserSelector);
 
@@ -70,10 +67,6 @@ export class HeaderComponent implements OnDestroy {
         this.isMainPage = event.url.startsWith('/main') || event.url === '/';
       }
     });
-
-    this.showBookWindow$.subscribe((value) => {
-      this.showBookWindow = value;
-    });
   }
 
   ngOnDestroy(): void {
@@ -98,15 +91,6 @@ export class HeaderComponent implements OnDestroy {
 
   public toShoppingCardPage() {
     this.router.navigate(['shopping-card']);
-  }
-
-  toggleBookWindowVisibility() {
-    this.showBookWindow = !this.showBookWindow;
-    this.store.dispatch(
-      MainPageActions.ChangeIsShownValue({
-        IsShownMainPage: this.showBookWindow,
-      })
-    );
   }
 
   private addPathToIcon() {
