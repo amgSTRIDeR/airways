@@ -16,6 +16,7 @@ import { AuthSelectors } from '@redux/selectors/auth.selectors';
 import { Subscription } from 'rxjs';
 import { AuthActions } from '@redux/actions/auth.actions';
 import { LoginUser, RegisterUser } from '@redux/models/auth.models';
+import { GoogleApiService } from '@core/services/google-api.service';
 
 const ICONS: { name: string; source: string }[] = [
   {
@@ -54,7 +55,8 @@ export class AuthComponent implements OnInit, OnDestroy {
   constructor(
     private fb: FormBuilder,
     private iconService: IconService,
-    private store: Store
+    private store: Store,
+    private readonly google: GoogleApiService
   ) {
     this.addPathToIcon();
     this.addErrors();
@@ -143,5 +145,9 @@ export class AuthComponent implements OnInit, OnDestroy {
       if (token) this.store.dispatch(AuthActions.meStart({ token }));
     });
     this.subscriptions.push(tokenSub);
+  }
+
+  public googleLogin() {
+    this.google.login();
   }
 }

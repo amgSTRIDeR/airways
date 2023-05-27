@@ -77,10 +77,6 @@ export class HeaderComponent implements OnDestroy {
     throw new Error('Method not implemented.');
   }
 
-  // ngOnInit(): void {
-  //   this.dialog.open(AuthComponent);
-  // }
-
   @HostListener('window:resize')
   onWindowResize() {
     this.windowWidth = window.innerWidth;
@@ -131,9 +127,12 @@ export class HeaderComponent implements OnDestroy {
       if (
         !document.querySelector('.hamburger-icon')?.contains(event.target) &&
         !document.querySelector('.hamburger-menu')?.contains(event.target) &&
-        !document.querySelector('.ng-trigger')?.contains(event.target)
+        !document.querySelector('.ng-trigger')?.contains(event.target) &&
+        !event.target.classList.contains('mdc-list-item__primary-text') &&
+        !event.target.classList.contains('mat-mdc-option')
       ) {
-        this.toggleHamburgerMenu();
+        console.log(event.target);
+        this.isHamburgerMenuActive = false;
       }
     }
   }
