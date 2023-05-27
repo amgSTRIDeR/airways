@@ -1,5 +1,6 @@
 import { Component, OnDestroy } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
+import { DateFilterFn } from '@angular/material/datepicker';
 import { DateTypeService } from '@core/services/date-type.service';
 import { Store } from '@ngrx/store';
 import { MainPageActions } from '@redux/actions/main-page.actions';
@@ -114,4 +115,11 @@ export class DateFormComponent implements OnDestroy {
 
     return null;
   }
+
+  public filterDepartureDate: DateFilterFn<Date | null> = (
+    date: Date | null
+  ): boolean => {
+    const today = new Date();
+    return date !== null && date >= today;
+  };
 }

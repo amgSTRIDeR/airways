@@ -35,6 +35,7 @@ export class HeaderComponent implements OnDestroy {
   public ordersCount$: Observable<Order[]> = this.store.select(
     BasketSelectors.Orders
   );
+  public isEditorOpen = false;
 
   onBookingPage$ = this.store.select(BookingSelectors.onBookingPageSelector);
   onFlightPage$ = this.store.select(
@@ -46,6 +47,8 @@ export class HeaderComponent implements OnDestroy {
 
   private IsLogIn$ = this.store.select(AuthSelectors.IsLogIn);
   private IsLogInSub!: Subscription;
+
+  public isEditorOpen$ = this.store.select(MainPageSelectors.IsEditorOpen);
 
   constructor(
     private router: Router,
@@ -76,10 +79,6 @@ export class HeaderComponent implements OnDestroy {
   ngOnDestroy(): void {
     throw new Error('Method not implemented.');
   }
-
-  // ngOnInit(): void {
-  //   this.dialog.open(AuthComponent);
-  // }
 
   @HostListener('window:resize')
   onWindowResize() {

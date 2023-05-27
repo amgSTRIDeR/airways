@@ -1,20 +1,25 @@
 import { Component, Input, OnInit, OnChanges } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { FlightsRes, IAlternativeFlight, IOtherFlights, IPrice } from '@redux/models/main-page.models';
+import {
+  FlightsRes,
+  IAlternativeFlight,
+  IOtherFlights,
+  IPrice,
+} from '@redux/models/main-page.models';
 import { SettingsSelectors } from '@redux/selectors/settings.selectors';
 import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-booking-flight-details',
   templateUrl: './booking-flight-details.component.html',
-  styleUrls: ['./booking-flight-details.component.scss']
+  styleUrls: ['./booking-flight-details.component.scss'],
 })
 export class BookingFlightDetailsComponent implements OnInit, OnChanges {
   @Input() flightInfo?: FlightsRes;
-  @Input() isBackFlight: boolean = false;
+  @Input() isBackFlight = false;
 
-  public flightTitle: string = "";
-  public chosenCurrency: string = 'EUR';
+  public flightTitle = '';
+  public chosenCurrency = 'EUR';
   public price?: number = 0;
   public alternativeFlights: IAlternativeFlight[] = [];
 
@@ -22,12 +27,15 @@ export class BookingFlightDetailsComponent implements OnInit, OnChanges {
     SettingsSelectors.CurrencySelector
   );
 
-  constructor(private store: Store){};
+  constructor(private store: Store) {}
 
   ngOnInit(): void {
     this.currencyInfo$.subscribe((storeCurrency) => {
       this.chosenCurrency = storeCurrency;
-      this.price = this.flightInfo?.price[this.chosenCurrency.toLowerCase() as keyof IPrice] || 0;
+      this.price =
+        this.flightInfo?.price[
+          this.chosenCurrency.toLowerCase() as keyof IPrice
+        ] || 0;
     });
   }
 
@@ -39,10 +47,13 @@ export class BookingFlightDetailsComponent implements OnInit, OnChanges {
   getAlternativeFlightsArray(): void {
     this.alternativeFlights = [];
     for (let ind = -5; ind < 0; ind++) {
-      const alternativeFlightInfo = this.flightInfo?.otherFlights[ind.toString() as keyof IOtherFlights];
+      const alternativeFlightInfo =
+        this.flightInfo?.otherFlights[ind.toString() as keyof IOtherFlights];
       this.alternativeFlights.push({
         index: ind,
-        takeoffDate: alternativeFlightInfo?.takeoffDate || this.addDays(new Date(this.flightInfo?.takeoffDate!), ind),
+        takeoffDate:
+          alternativeFlightInfo?.takeoffDate ||
+          this.addDays(new Date(this.flightInfo?.takeoffDate!), ind),
         price: alternativeFlightInfo?.price,
         seats: alternativeFlightInfo?.seats,
       });
@@ -54,10 +65,13 @@ export class BookingFlightDetailsComponent implements OnInit, OnChanges {
       seats: this.flightInfo?.seats,
     });
     for (let ind = 1; ind <= 5; ind++) {
-      const alternativeFlightInfo = this.flightInfo?.otherFlights[ind.toString() as keyof IOtherFlights];
+      const alternativeFlightInfo =
+        this.flightInfo?.otherFlights[ind.toString() as keyof IOtherFlights];
       this.alternativeFlights.push({
         index: ind,
-        takeoffDate: alternativeFlightInfo?.takeoffDate || this.addDays(new Date(this.flightInfo?.takeoffDate!), ind),
+        takeoffDate:
+          alternativeFlightInfo?.takeoffDate ||
+          this.addDays(new Date(this.flightInfo?.takeoffDate!), ind),
         price: alternativeFlightInfo?.price,
         seats: alternativeFlightInfo?.seats,
       });

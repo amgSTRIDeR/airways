@@ -13,7 +13,7 @@ import { Observable } from 'rxjs';
 export class FlightsComponent implements OnInit {
   constructor(private store: Store) {}
 
-  private isTwoWays: boolean = false;
+  private isTwoWays = false;
   public forwardFlightInfo!: FlightsRes;
   // public forwardFlightInfo: FlightsRes = {"seats": {"total": 547,"avaible": 535},"flightNumber": "OK-6455","timeMins": 261,"form": {"key": "AMS","name": "Amsterdam-Schiphol","city": "Amsterdam","gmt": "+1.0","country": "Netherlands"},"to": {"key": "BER","name": "Berlin Metropolitan Area","city": "Berlin","gmt": "+1.0","country": "Germany"},"takeoffDate": "2023-05-14T02:27:00.000Z","landingDate": "2023-05-14T06:43:00.000Z","price": {"eur": 285,"usd": 314.38349999999997,"rub": 25213.95,"pln": 1308.1499999999999},"otherFlights": {}};
 
@@ -31,7 +31,7 @@ export class FlightsComponent implements OnInit {
         this.forwardFlightInfo = event![0];
         if (this.isTwoWays) this.backFlightInfo = event![1];
       }
-    })
+    });
   }
 
   logForm() {

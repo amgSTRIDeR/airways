@@ -18,6 +18,9 @@
   border-radius: 4px;
   background-color: #fff;
 
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(40px);
+
   @media (min-width: 1360px) {
     align-self: center;
     margin: 0 calc(50.000vw - 490.00px);
@@ -50,6 +53,10 @@
     & .passengers-form {
       width: 100%;
     }
+  }
+
+  @media (max-width: 600px) {
+    margin: 0 calc(8.333vw - 20.00px);
   }
 }
 

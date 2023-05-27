@@ -41,6 +41,7 @@ export interface MainPageState {
   flightBack: Date | null;
   isShowMainForm: boolean;
   isSearchImplement: boolean;
+  isEditorOpen: boolean;
 }
 
 export type CurrentPageDirection = 'flight' | 'passengers' | 'review';

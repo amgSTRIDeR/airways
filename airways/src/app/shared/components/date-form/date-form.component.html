@@ -35,7 +35,6 @@
       (focus)="isHintVisible = true"
       (blur)="isHintVisible = false"
       (dateChange)="setDepartureDate($event.target.value)"
-      [formControl]="departureDateControl"
       matInputTouchUi
     />
     <input
@@ -81,6 +80,7 @@
     (blur)="isHintVisible = false"
     (dateChange)="setDepartureDate($event.target.value)"
     [formControl]="departureDateControl"
+    [matDatepickerFilter]="filterDepartureDate"
   />
   <mat-hint *ngIf="picker.opened || isHintVisible">{{
     dateType$ | async

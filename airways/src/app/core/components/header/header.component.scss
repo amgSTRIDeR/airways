@@ -1,6 +1,9 @@
 .header-indent {
   height: 88px;
 
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(40px);
+
   @media (max-width: 1292px) {
     height: calc(2.564vw + 54.87px);
   }
@@ -30,6 +33,22 @@
   }
 }
 
+.header-indent_header-editor {
+  height: 235.8px;
+
+  @media (max-width: 1300px) {
+    height: calc(7.048vw + 332.74px);
+  }
+
+  @media (max-width: 900px) {
+    height: calc(7.055vw + 394.86px);
+  }
+
+  @media (max-width: 600px) {
+    height: calc(7.963vw + 446.05px);
+  }
+}
+
 .header {
   position: fixed;
   z-index: 10;
@@ -37,9 +56,6 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-
-  background: rgba(0, 0, 0, 0.2);
-  backdrop-filter: blur(40px);
 }
 
 .header-main-wrapper {
