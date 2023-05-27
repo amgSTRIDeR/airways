@@ -95,8 +95,6 @@ export class FlightsComponent implements OnInit {
       if (availablePlaces.indexOf(newPlace) < 0) availablePlaces.push(newPlace);
     }
 
-    console.log('=== available', availablePlaces);
-
     return availablePlaces;    
   }
 
