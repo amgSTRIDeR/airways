@@ -4,6 +4,7 @@
     [flightInfo]="forwardFlightInfo"
   ></app-booking-flight-details>
   <app-booking-flight-details
+    *ngIf="isTwoWays"
     [isBackFlight]="true"
     [flightInfo]="backFlightInfo"
   ></app-booking-flight-details>
