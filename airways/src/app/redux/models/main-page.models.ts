@@ -50,7 +50,6 @@ export interface ISeats {
   total: number;
   avaible: number;
   avaibleArr?: (string | boolean)[][];
-  avaibleArr?: string[];
 }
 
 // export interface ISeats {
