@@ -21,8 +21,6 @@ export class MainComponent implements OnDestroy {
   public readyForSearch = false;
   public isSearchImplement = false;
 
-  isVisible$ = this.store.select(MainPageSelectors.IsShowMainFormSelector);
-
   isRoundTrip$ = this.store.select(MainPageSelectors.IsRoundTripSelector);
   isRoundTripSubscription!: Subscription;
 
