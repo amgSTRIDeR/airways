@@ -83,7 +83,6 @@ export class AuthComponent implements OnInit, OnDestroy {
       const formWithOutCheck = { ...this.singInForm.value };
       delete formWithOutCheck.privacyPolicy;
       const userSingIn = { ...formWithOutCheck } as RegisterUser;
-      console.log(userSingIn);
       this.store.dispatch(AuthActions.RegistrationStart(userSingIn));
     }
   }

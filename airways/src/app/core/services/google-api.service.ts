@@ -8,8 +8,8 @@ const authCodeFlowConfig: AuthConfig = {
   redirectUri: window.location.origin,
   clientId:
     '1096837691640-ftj9u3482p1mh626mbu8trq5e8nondr7.apps.googleusercontent.com',
-  scope: 'openid profile email https://www.googleapis.com/auth/gmail.readonly',
-  showDebugInformation: true,
+  scope: 'openid profile email',
+  showDebugInformation: false,
 };
 
 export interface UserInfo {
@@ -24,8 +24,6 @@ export interface UserInfo {
   providedIn: 'root',
 })
 export class GoogleApiService {
-  gmail = 'https://gmail.googleapis.com';
-
   userProfileSubject = new Subject<UserInfo>();
 
   constructor(private readonly oAuthService: OAuthService) {
@@ -40,15 +38,10 @@ export class GoogleApiService {
         } else {
           this.oAuthService.loadUserProfile().then((userProfile) => {
             this.userProfileSubject.next(userProfile as UserInfo);
+            localStorage.setItem('user', JSON.stringify(userProfile));
           });
         }
       });
-    });
-  }
-
-  public getUserData() {
-    this.oAuthService.loadUserProfile().then((userProfile) => {
-      this.userProfileSubject.next(userProfile as UserInfo);
     });
   }
 }

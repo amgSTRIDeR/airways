@@ -131,7 +131,6 @@ export class HeaderComponent implements OnDestroy {
         !event.target.classList.contains('mdc-list-item__primary-text') &&
         !event.target.classList.contains('mat-mdc-option')
       ) {
-        console.log(event.target);
         this.isHamburgerMenuActive = false;
       }
     }
