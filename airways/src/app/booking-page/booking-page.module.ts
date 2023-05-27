@@ -18,6 +18,9 @@ import { BookingFlightDetailsComponent } from './components/booking-flight-detai
 import { SeatsDirective } from './directives/seats.directive';
 import { AlternativeFlightCardComponent } from './components/alternative-flight-card/alternative-flight-card.component';
 import { BaggageComponent } from './components/baggage/baggage.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { SeatsButtonComponent } from './components/seats-button/seats-button.component';
+import { PlaceDialogComponent } from './components/place-dialog/place-dialog.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +40,14 @@ import { BaggageComponent } from './components/baggage/baggage.component';
     BookingFlightDetailsComponent,
     AlternativeFlightCardComponent,
     BaggageComponent,
+    SeatsButtonComponent,
+    PlaceDialogComponent,
   ],
-  imports: [CommonModule, BookingPageRoutingModule, SharedModule],
+  imports: [
+    CommonModule,
+    BookingPageRoutingModule,
+    SharedModule,
+    MatDialogModule,
+  ],
 })
 export class BookingPageModule {}

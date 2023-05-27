@@ -5,7 +5,7 @@ import { BookingActions } from '@redux/actions/booking-page.actions';
 export const initialState: BookingPageState = {
   id: 'SomeId',
   onBookingPage: false,
-  currentPageDirection: 'flight',
+  currentPageDirection: 'passengers',
   isEditWindowOpen: false,
   totalPrice: null,
   selectedForwardFlight: null,
@@ -86,6 +86,7 @@ export const initialState: BookingPageState = {
         invalid: 'true',
         baggageBig: 0,
         baggageSmall: 0,
+        seat: '33',
       },
       {
         firstName: 'Anna',
@@ -95,6 +96,7 @@ export const initialState: BookingPageState = {
         invalid: 'false',
         baggageBig: 0,
         baggageSmall: 0,
+        seat: '33',
       },
     ],
     child: [
@@ -106,6 +108,7 @@ export const initialState: BookingPageState = {
         invalid: 'true',
         baggageBig: 0,
         baggageSmall: 0,
+        seat: '33',
       },
     ],
     infant: [
@@ -117,6 +120,7 @@ export const initialState: BookingPageState = {
         invalid: 'true',
         baggageBig: 0,
         baggageSmall: 0,
+        seat: '33',
       },
     ],
     details: {
@@ -648,7 +652,7 @@ export const initialState: BookingPageState = {
         '-2': {
           seats: {
             total: 291,
-            avaible: 50,
+            avaible: 45,
           },
           flightNumber: 'LF-6007',
           timeMins: 197,

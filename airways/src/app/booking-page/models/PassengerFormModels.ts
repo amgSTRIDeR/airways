@@ -15,6 +15,7 @@ export interface PassengerFormGroup {
   invalid: FormControl<string | null>;
   baggageBig: FormControl<number | null>;
   baggageSmall: FormControl<number | null>;
+  seat: FormControl<string | null>;
 }
 
 export interface DetailsFormGroup {

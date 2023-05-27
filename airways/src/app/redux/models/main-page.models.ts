@@ -45,11 +45,17 @@ export interface IPrice {
   pln: number;
 }
 
+//[['1', false, '2', '3', false]]
 export interface ISeats {
   total: number;
   avaible: number;
+  avaibleArr?: (string | boolean)[][];
 }
 
+// export interface ISeats {
+//   total: number;
+//   avaible: string[];
+// }
 export interface FlightsRes extends FlightRes {
   otherFlights: IOtherFlights;
 }
