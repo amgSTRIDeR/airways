@@ -21,6 +21,8 @@ import { BaggageComponent } from './components/baggage/baggage.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { SeatsButtonComponent } from './components/seats-button/seats-button.component';
 import { PlaceDialogComponent } from './components/place-dialog/place-dialog.component';
+import { ArrowButtonComponent } from './components/arrow-button/arrow-button.component';
+import { DateOnTicketComponent } from './components/date-on-ticket/date-on-ticket.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +50,8 @@ import { PlaceDialogComponent } from './components/place-dialog/place-dialog.com
     BookingPageRoutingModule,
     SharedModule,
     MatDialogModule,
+    ArrowButtonComponent,
+    DateOnTicketComponent,
   ],
 })
 export class BookingPageModule {}
