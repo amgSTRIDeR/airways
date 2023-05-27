@@ -1,4 +1,5 @@
 import { Component, Input, Output, EventEmitter, OnInit, OnChanges } from '@angular/core';
+import { ALTERNATIVE_FLIGHTS_ON_SCREEN, DATE_IN_THE_PAST_MESSAGE, NO_TICKETS_MESSAGE } from '@core/consts/booking';
 import { Store } from '@ngrx/store';
 import { BookingActions } from '@redux/actions/booking-page.actions';
 import { SelectedFlightCounter } from '@redux/models/booking-page.models';
@@ -30,6 +31,8 @@ export class BookingFlightDetailsComponent implements OnInit, OnChanges {
     SettingsSelectors.CurrencySelector
   );
 
+  private selectedFlight$!: Observable<FlightRes | null>;
+
   private selectedFlightCounter$: Observable<SelectedFlightCounter> = this.store.select(
     BookingSelectors.selectedFlightCounterSelector
   );
@@ -37,11 +40,20 @@ export class BookingFlightDetailsComponent implements OnInit, OnChanges {
   constructor(private store: Store){};
 
   ngOnInit(): void {
+    this.selectedFlight$ = !this.isBackFlight ? 
+      this.store.select(BookingSelectors.selectForwardFlightSelector) :
+      this.store.select(BookingSelectors.selectBackFlightSelector);
     this.currencyInfo$.subscribe((storeCurrency) => {
       this.chosenCurrency = storeCurrency;
       this.updateActiveFlight();
     });
     this.selectedFlightCounter$.subscribe((storeCounter) => this.selectedFlightCounterValue = storeCounter.value);
+    this.selectedFlight$.subscribe((flightInfo) => {
+      if (!!flightInfo) {
+        this.activeFlight = flightInfo;
+        this.isFlightSelected = true;
+      };
+    });
   }
 
   ngOnChanges(): void {
@@ -50,16 +62,16 @@ export class BookingFlightDetailsComponent implements OnInit, OnChanges {
     this.getAlternativeFlightsArray();
   }
 
-  increaseIndex(): void {
-    if (this.activeIndex < 5) {
+  increaseActiveIndex(): void {
+    if (this.activeIndex < ALTERNATIVE_FLIGHTS_ON_SCREEN) {
       this.activeIndex++;
       this.updateActiveFlight();
     }
     this.getNoTicketsMessage();
   }
 
-  decreaseIndex(): void {
-    if (this.activeIndex > -5) {
+  decreaseActiveIndex(): void {
+    if (this.activeIndex > -ALTERNATIVE_FLIGHTS_ON_SCREEN) {
       this.activeIndex--;
       this.updateActiveFlight();
     }
@@ -73,14 +85,8 @@ export class BookingFlightDetailsComponent implements OnInit, OnChanges {
         value: this.selectedFlightCounterValue + 1,
       })
     );
-    if (this.isBackFlight)
-      this.store.dispatch(
-        BookingActions.SelectBackFlight(this.activeFlight!)
-      );
-    if (!this.isBackFlight)
-      this.store.dispatch(
-        BookingActions.SelectForwardFlight(this.activeFlight!)
-      );
+    if (this.isBackFlight) this.store.dispatch(BookingActions.SelectBackFlight(this.activeFlight!));
+    if (!this.isBackFlight) this.store.dispatch(BookingActions.SelectForwardFlight(this.activeFlight!));
   }
 
   editFlight(): void {
@@ -93,18 +99,18 @@ export class BookingFlightDetailsComponent implements OnInit, OnChanges {
   }
 
   updateActiveFlight(): void {
-    this.activeFlight = this.activeIndex === 0 ? this.flightInfo : this.flightInfo?.otherFlights[this.activeIndex.toString() as keyof IOtherFlights];
+    this.activeFlight = !this.isFlightSelected && this.activeIndex === 0 ? this.flightInfo : this.flightInfo?.otherFlights[this.activeIndex.toString() as keyof IOtherFlights];
     this.price = this.activeFlight?.price[this.chosenCurrency.toLowerCase() as keyof IPrice] || 0;
   }
 
   showAlternativeFlight(flightIndex: number): boolean {
-    return Math.abs(this.activeIndex - flightIndex) <= 2 || this.activeIndex >= 3 && flightIndex > 0 || this.activeIndex <= -3 && flightIndex < 0;
+    return Math.abs(this.activeIndex - flightIndex) <= ALTERNATIVE_FLIGHTS_ON_SCREEN / 2 || this.activeIndex >= ALTERNATIVE_FLIGHTS_ON_SCREEN / 2 && flightIndex > 0 || this.activeIndex <= -ALTERNATIVE_FLIGHTS_ON_SCREEN / 2 && flightIndex < 0;
   }
 
   getAlternativeFlightsArray(): void {
     this.alternativeFlights = [];
-    for (let ind = -5; ind < 0; ind++) {
-      const alternativeFlightInfo = this.flightInfo?.otherFlights[ind.toString() as keyof IOtherFlights];
+    for (let ind = -ALTERNATIVE_FLIGHTS_ON_SCREEN; ind <= ALTERNATIVE_FLIGHTS_ON_SCREEN; ind++) {
+      const alternativeFlightInfo = ind === 0 ? this.flightInfo : this.flightInfo?.otherFlights[ind.toString() as keyof IOtherFlights];
       this.alternativeFlights.push({
         index: ind,
         takeoffDate: alternativeFlightInfo?.takeoffDate || this.addDays(new Date(this.flightInfo?.takeoffDate!), ind),
@@ -112,31 +118,16 @@ export class BookingFlightDetailsComponent implements OnInit, OnChanges {
         seats: alternativeFlightInfo?.seats,
       });
     }
-    this.alternativeFlights?.push({
-      index: 0,
-      takeoffDate: this.flightInfo?.takeoffDate,
-      price: this.flightInfo?.price,
-      seats: this.flightInfo?.seats,
-    });
-    for (let ind = 1; ind <= 5; ind++) {
-      const alternativeFlightInfo = this.flightInfo?.otherFlights[ind.toString() as keyof IOtherFlights];
-      this.alternativeFlights.push({
-        index: ind,
-        takeoffDate: alternativeFlightInfo?.takeoffDate || this.addDays(new Date(this.flightInfo?.takeoffDate!), ind),
-        price: alternativeFlightInfo?.price,
-        seats: alternativeFlightInfo?.seats,
-      });
-    }
-  }
-
-  getNoTicketsMessage(): string {
-    const currentDate = new Date().getTime();
-    const activeFlightDate = new Date(this.addDays(new Date(this.flightInfo!.takeoffDate), this.activeIndex)).getTime();
-    return activeFlightDate < currentDate ? 'Билеты в прошлом недоступны к продаже' : 'Билет на выбранную дату отсутствует';
   }
 
   addDays(date: Date, days: number): string {
     date.setDate(date.getDate() + days);
     return date.toString();
+  }
+
+  getNoTicketsMessage(): string {
+    const currentDate = new Date().getTime();
+    const activeFlightDate = new Date(this.addDays(new Date(this.flightInfo!.takeoffDate), this.activeIndex)).getTime();
+    return activeFlightDate < currentDate ? DATE_IN_THE_PAST_MESSAGE : NO_TICKETS_MESSAGE;
   }
 }

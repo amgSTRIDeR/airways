@@ -1,9 +1,9 @@
 .title-container {
   margin-bottom: 10px;
+}
 
-  .icon-container {
-    transform: scale(-1, 1);
-  }
+.icon-container {
+  transform: scale(-1, 1);
 }
 
 .date-slider-container {
@@ -29,12 +29,12 @@
 
   .arrow-left {
     left: 0;
-    transform: translate(-50%, -20%);
+    transform: translate(-50%, -10%);
   }
   
   .arrow-right {
     right: 0;
-    transform: scale(-1, 1) translate(-50%, -20%);
+    transform: scale(-1, 1) translate(-50%, -10%);
   }
 }
 
@@ -44,12 +44,9 @@
 
   .main-info {
     margin: 27px 41px;
-  
-    .date {
-      font-family: 'Roboto';
-      font-size: 16px;
-      line-height: 16px;
-      letter-spacing: 0.5px;
+
+    .time-info {
+      width: 20%;
     }
   
     .flight-duration-container {
@@ -75,29 +72,6 @@
   
         transform: translate(-50%, -50%);
       }
-    }
-  
-    .time-info {
-      width: 20%;
-  
-      .flight-time {
-        font-family: 'Roboto';
-        font-size: 30px;
-        line-height: 36px;
-      }
-    
-      .flight-time-utc {
-        font-family: 'Roboto';
-        font-size: 8px;
-        line-height: 20px;
-      }
-    }
-  
-    .city {
-      font-family: 'Roboto';
-      font-size: 12px;
-      line-height: 16px;
-      letter-spacing: 0.4px;
     }
   
     .flight-number-container {

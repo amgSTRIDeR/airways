@@ -8,44 +8,13 @@
 </div>
 <div *ngIf="!isFlightSelected" class="date-slider-container flex justify-between item-stretch">
   <app-alternative-flight-card [ngClass]="{'carousel-hidden': !showAlternativeFlight(flight.index)}" *ngFor="let flight of alternativeFlights" [activeIndex]="activeIndex" [flightInfo]="flight" [chosenCurrency]="chosenCurrency" class="alternative-flight-card flex w-full"></app-alternative-flight-card>
-  <div (click)="decreaseIndex()" class="arrow arrow-left">
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <g clip-path="url(#clip0_7244_3134)">
-        <rect width="24" height="24" rx="12" fill="#E9EDF1"/>
-        <path d="M10.3024 12.0883L13.3738 9.01658C13.4633 8.92659 13.5135 8.80472 13.5133 8.67776C13.513 8.55079 13.4624 8.42911 13.3725 8.33946C13.2829 8.24942 13.1612 8.19867 13.0341 8.19837C12.9071 8.19807 12.7851 8.24824 12.6951 8.33786L9.29795 11.735C9.20871 11.8246 9.15857 11.946 9.15845 12.0724C9.15833 12.1989 9.20824 12.3204 9.29731 12.4102L9.29795 12.4108C9.30027 12.4132 9.30262 12.4155 9.30499 12.4179L12.7143 15.7887C12.9008 15.9753 13.1997 15.9788 13.3821 15.7967C13.5642 15.6143 13.5607 15.3158 13.3738 15.1289L10.3024 12.0883Z" fill="#1C1B1F"/>
-      </g>
-      <defs>
-        <clipPath id="clip0_7244_3134">
-          <rect width="24" height="24" rx="12" fill="white"/>
-        </clipPath>
-      </defs>
-    </svg>
-  </div>
-  <div (click)="increaseIndex()" class="arrow arrow-right">
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <g clip-path="url(#clip0_7244_3134)">
-        <rect width="24" height="24" rx="12" fill="#E9EDF1"/>
-        <path d="M10.3024 12.0883L13.3738 9.01658C13.4633 8.92659 13.5135 8.80472 13.5133 8.67776C13.513 8.55079 13.4624 8.42911 13.3725 8.33946C13.2829 8.24942 13.1612 8.19867 13.0341 8.19837C12.9071 8.19807 12.7851 8.24824 12.6951 8.33786L9.29795 11.735C9.20871 11.8246 9.15857 11.946 9.15845 12.0724C9.15833 12.1989 9.20824 12.3204 9.29731 12.4102L9.29795 12.4108C9.30027 12.4132 9.30262 12.4155 9.30499 12.4179L12.7143 15.7887C12.9008 15.9753 13.1997 15.9788 13.3821 15.7967C13.5642 15.6143 13.5607 15.3158 13.3738 15.1289L10.3024 12.0883Z" fill="#1C1B1F"/>
-      </g>
-      <defs>
-        <clipPath id="clip0_7244_3134">
-          <rect width="24" height="24" rx="12" fill="white"/>
-        </clipPath>
-      </defs>
-    </svg>
-  </div>
+  <app-arrow-button (click)="decreaseActiveIndex()" class="arrow arrow-left"></app-arrow-button>
+  <app-arrow-button (click)="increaseActiveIndex()" class="arrow arrow-right"></app-arrow-button>
 </div>
 <div class="ticket-container flex justify-center w-full bg-white">
   <div *ngIf="price !== 0 else noTicket" class="ticket-details-container w-full flex item-stretch justify-between">
     <div class="main-info w-full flex item-center justify-between item-stretch">
-      <div class="time-info time-info-from flex flex-column gap-half">
-        <span class="date date-from ticket-secondary f-w-400">{{ activeFlight?.takeoffDate | date:'EEE, d MMM yyyy' }}</span>
-        <div class="time-container time-from-container flex item-center gap-1">
-          <span class="flight-time text-black f-w-700">{{ activeFlight?.takeoffDate | date:'H:mm' }}</span>
-          <span class="flight-time-utc ticket-secondary f-w-400">UTC {{ activeFlight?.form?.gmt }}</span>
-        </div>
-        <span class="city city-from ticket-secondary f-w-400">{{ activeFlight?.form?.city }}</span>
-      </div>
+      <app-date-on-ticket [flightInfo]="activeFlight" [isDateFrom]="true" class="time-info time-info-from flex flex-column gap-half"></app-date-on-ticket>
       <div class="flight-duration-container flex flex-column justify-between flex-grow">
         <div class="flight-duration flight-duration-text self-center text-black f-w-400">{{ activeFlight?.timeMins | minutesToHours }}</div>
         <div class="flight-duration-line line-solid"></div>
@@ -56,14 +25,7 @@
         </div>
         <span class="direction-label flight-duration-text self-center text-black f-w-400">Direct</span>
       </div>
-      <div class="time-info time-info-to flex flex-column item-end gap-half">
-        <span class="date date-to ticket-secondary f-w-400">{{ activeFlight?.landingDate | date:'EEE, d MMM yyyy'  }}</span>
-        <div class="time-container time-to-container flex item-center gap-1">
-          <span class="flight-time flex-order-1 text-black f-w-700">{{ activeFlight?.landingDate | date:'H:mm' }}</span>
-          <span class="flight-time-utc ticket-secondary f-w-400">UTC {{ activeFlight?.to?.gmt }}</span>
-        </div>
-        <span class="city city-to ticket-secondary f-w-400">{{ activeFlight?.to?.city }}</span>
-      </div>
+      <app-date-on-ticket [flightInfo]="activeFlight" [isDateFrom]="false" class="time-info time-info-from flex flex-column gap-half item-end"></app-date-on-ticket>
       <div class="flight-number-container flex justify-end item-center">
         <span class="flight-number-label ticket-secondary f-w-400">Flight no.</span>
         <span class="flight-number text-black f-w-400">{{ activeFlight?.flightNumber }}</span>
