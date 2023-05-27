@@ -59,6 +59,11 @@ const ChangeIsSearchImplement = createAction(
   props<{ IsSearchImplement: boolean }>()
 );
 
+const IsEditorOpen = createAction(
+  '[MAIN PAGE] Is round trip',
+  props<{ isEditorOpen: boolean }>()
+);
+
 export const MainPageActions = {
   LoadAirports,
   LoadAirportsSuccess,
@@ -72,4 +77,5 @@ export const MainPageActions = {
   LoadAvailableFlightsError,
   ChangeIsShownValue,
   ChangeIsSearchImplement,
+  IsEditorOpen,
 };

@@ -4,6 +4,9 @@
   [class.header-indent_booking-flight]="
     (onBookingPage$ | async) && (onFlightPage$ | async) === 'flight'
   "
+  [class.header-indent_header-editor]="
+    (isEditorOpen$ | async) && (onFlightPage$ | async)
+  "
 >
   <header class="header">
     <div class="header-main-wrapper">

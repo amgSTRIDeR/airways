@@ -43,6 +43,11 @@ const IsSearchImplement = createSelector(
   (state) => state.isSearchImplement
 );
 
+const IsEditorOpen = createSelector(
+  selectMainPage,
+  (state) => state.isEditorOpen
+);
+
 export const MainPageSelectors = {
   AirportsSelector,
   FlightForwardSelector,
@@ -52,4 +57,5 @@ export const MainPageSelectors = {
   IsRoundTripSelector,
   IsShowMainFormSelector,
   IsSearchImplement,
+  IsEditorOpen,
 };
