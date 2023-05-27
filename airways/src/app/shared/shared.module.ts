@@ -24,6 +24,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MinutesToHoursPipe } from '@main/pipes/minutes-to-hours.pipe';
 import { CurrencyConverterPipe } from './pipes/currency-converter.pipe';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { DateTypeService } from '@core/services/date-type.service';
 
 @NgModule({
   declarations: [
@@ -81,5 +82,6 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     CurrencyConverterPipe,
     MatCheckboxModule,
   ],
+  providers: [DateTypeService],
 })
 export class SharedModule {}

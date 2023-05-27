@@ -2,10 +2,6 @@ import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { MainPageState } from '@redux/models/state.models';
 
 export const selectMainPage = createFeatureSelector<MainPageState>('mainPage');
-// const PassengersCount = createSelector(
-//   selectMainPage,
-//   (state) => state.passengersCount
-// );
 
 const IsRoundTripSelector = createSelector(
   selectMainPage,
@@ -42,8 +38,12 @@ const IsShowMainFormSelector = createSelector(
   (state) => state.isShowMainForm
 );
 
+const IsSearchImplement = createSelector(
+  selectMainPage,
+  (state) => state.isSearchImplement
+);
+
 export const MainPageSelectors = {
-  // PassengersCount,
   AirportsSelector,
   FlightForwardSelector,
   FlightBackSelector,
@@ -51,4 +51,5 @@ export const MainPageSelectors = {
   AirportBackSelector,
   IsRoundTripSelector,
   IsShowMainFormSelector,
+  IsSearchImplement,
 };

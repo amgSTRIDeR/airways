@@ -2,7 +2,7 @@
   <mat-label>Date of birth</mat-label>
   <input
     matInput
-    placeholder="MM/DD/YYYY"
+    [placeholder]="(dateType$ | async) || 'MM/DD/YYYY'"
     [matDatepicker]="picker"
     [formControl]="FG"
   />

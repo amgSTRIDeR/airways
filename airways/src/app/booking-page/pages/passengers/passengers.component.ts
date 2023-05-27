@@ -25,6 +25,8 @@ import { Observable, Subscription } from 'rxjs';
 import { BookingActions } from '@redux/actions/booking-page.actions';
 import { passenger, PassengerInfo } from '@redux/models/booking-page.models';
 import { BookingSelectors } from '@redux/selectors/booking-page.selectors';
+import { DateTypeService } from '@core/services/date-type.service';
+import { SettingsSelectors } from '@redux/selectors/settings.selectors';
 
 @Component({
   selector: 'app-passengers',
@@ -57,7 +59,18 @@ export class PassengersComponent implements OnInit, OnDestroy {
   private passengersCount!: PassengersCount;
   private passengersInfo!: PassengerInfo | null;
 
-  constructor(private fb: FormBuilder, private store: Store) {}
+  dateType$ = this.store.select(SettingsSelectors.DateTypeSelector);
+  dateTypeSubscription!: Subscription;
+
+  constructor(
+    private fb: FormBuilder,
+    private store: Store,
+    private dateTypeService: DateTypeService
+  ) {
+    this.dateTypeSubscription = this.dateType$.subscribe((dateType) => {
+      this.dateTypeService.changeDateType(dateType);
+    });
+  }
 
   ngOnInit(): void {
     const { countryCode, phone, email } = this.getDetails();
@@ -92,6 +105,7 @@ export class PassengersComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.passengersCountSub.unsubscribe();
     this.passengersInfoSub.unsubscribe();
+    this.dateTypeSubscription.unsubscribe();
   }
 
   private addPersonToForm(

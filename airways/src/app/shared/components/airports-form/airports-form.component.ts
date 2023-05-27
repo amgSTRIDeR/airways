@@ -1,4 +1,5 @@
 import { Component, OnDestroy } from '@angular/core';
+import { FormBuilder, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { MainPageActions } from '@redux/actions/main-page.actions';
@@ -26,7 +27,16 @@ export class AirportsFormComponent implements OnDestroy {
   );
   destinationAirportSubscription!: Subscription;
 
-  constructor(private store: Store<MainPageState>, private router: Router) {
+  originAirportControl = new FormControl<AirportsRes | null>(null);
+  destinationAirportControl = new FormControl<AirportsRes | null>(null);
+
+  isSearchImplement$ = this.store.select(MainPageSelectors.IsSearchImplement);
+
+  constructor(
+    private store: Store<MainPageState>,
+    private router: Router,
+    private fb: FormBuilder
+  ) {
     this.store
       .select(MainPageSelectors.AirportsSelector)
       .pipe(filter((airports) => !airports || airports.length === 0))
@@ -51,6 +61,9 @@ export class AirportsFormComponent implements OnDestroy {
         this.destinationAirport = airport;
       }
     );
+
+    this.originAirportControl = this.fb.control(this.originAirport);
+    this.destinationAirportControl = this.fb.control(this.destinationAirport);
   }
 
   ngOnDestroy(): void {
@@ -63,6 +76,9 @@ export class AirportsFormComponent implements OnDestroy {
       this.destinationAirport,
       this.originAirport,
     ];
+
+    this.originAirportControl = this.fb.control(this.originAirport);
+    this.destinationAirportControl = this.fb.control(this.destinationAirport);
 
     this.setOriginAirport(this.originAirport);
     this.setDestinationAirport(this.destinationAirport);
