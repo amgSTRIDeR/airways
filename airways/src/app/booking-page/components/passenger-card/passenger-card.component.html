@@ -77,6 +77,7 @@
     </mat-form-field>
   </div>
   <div *ngIf="accessible" class="flex gap-2 item-center width600">
+    <app-seats-button [seatFC]="card.controls.seat"></app-seats-button>
     <mat-slide-toggle
       [formControl]="card.controls.invalid"
       color="primary"

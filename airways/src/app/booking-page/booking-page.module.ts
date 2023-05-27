@@ -18,6 +18,9 @@ import { BookingFlightDetailsComponent } from './components/booking-flight-detai
 import { SeatsDirective } from './directives/seats.directive';
 import { AlternativeFlightCardComponent } from './components/alternative-flight-card/alternative-flight-card.component';
 import { BaggageComponent } from './components/baggage/baggage.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { SeatsButtonComponent } from './components/seats-button/seats-button.component';
+import { PlaceDialogComponent } from './components/place-dialog/place-dialog.component';
 import { ArrowButtonComponent } from './components/arrow-button/arrow-button.component';
 import { DateOnTicketComponent } from './components/date-on-ticket/date-on-ticket.component';
 
@@ -39,9 +42,16 @@ import { DateOnTicketComponent } from './components/date-on-ticket/date-on-ticke
     BookingFlightDetailsComponent,
     AlternativeFlightCardComponent,
     BaggageComponent,
+    SeatsButtonComponent,
+    PlaceDialogComponent,
+  ],
+  imports: [
+    CommonModule,
+    BookingPageRoutingModule,
+    SharedModule,
+    MatDialogModule,
     ArrowButtonComponent,
     DateOnTicketComponent,
   ],
-  imports: [CommonModule, BookingPageRoutingModule, SharedModule],
 })
 export class BookingPageModule {}
