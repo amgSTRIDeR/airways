@@ -2,6 +2,7 @@ import { CurrencyType, DateType } from '@redux/models/settings.models';
 import { UserRes } from '@redux/models/auth.models';
 import {
   AirportsRes,
+  FlightRes,
   FlightsRes,
   PassengersCount,
 } from '@redux/models/main-page.models';
@@ -10,6 +11,7 @@ import {
   PassengerInfo,
   ReadyFlight,
   SelectedFlight,
+  SelectedFlightCounter,
   Total,
 } from '@redux/models/booking-page.models';
 import { Order } from '@redux/models/basket.models';
@@ -52,6 +54,9 @@ export interface BookingPageState {
   currentPageDirection: CurrentPageDirection;
   isEditWindowOpen: boolean;
   flights: SelectedFlight | null;
+  selectedForwardFlight: FlightRes | null;
+  selectedBackFlight: FlightRes | null;
+  selectedFlightCounter: SelectedFlightCounter;
   passengersInfo: PassengerInfo | null;
   allInformation: AllInformation | null;
   readyFlight: ReadyFlight | null;

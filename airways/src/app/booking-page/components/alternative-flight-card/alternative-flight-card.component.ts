@@ -9,6 +9,7 @@ import { IAlternativeFlight, IPrice } from '@redux/models/main-page.models';
 export class AlternativeFlightCardComponent implements OnChanges {
   @Input() flightInfo!: IAlternativeFlight;
   @Input() chosenCurrency: string = 'EUR';
+  @Input() activeIndex: number = 0;
 
   public price?: number | null = 0;
 

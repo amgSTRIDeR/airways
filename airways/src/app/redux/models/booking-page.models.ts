@@ -72,3 +72,7 @@ export interface EditFlight {
   passengersCount: PassengersCount;
   totalPrice: Total;
 }
+
+export interface SelectedFlightCounter {
+  value: number,
+}

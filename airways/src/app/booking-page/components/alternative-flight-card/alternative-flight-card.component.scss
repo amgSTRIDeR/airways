@@ -1,5 +1,7 @@
 .card-container {
-  height: 100%;
+  padding-top: 5px;
+  width: 100%;
+  box-sizing: border-box;
 
   .date {
     font-family: 'Roboto';
@@ -19,6 +21,37 @@
     font-family: 'Roboto';
     font-size: 20px;
     line-height: 20px;
+  }
+}
+
+.inactive-card {
+  padding-bottom: 10px;
+  max-height: 70px;
+
+  .seats-available {
+    display: none;
+  }
+}
+
+.active-card {
+  height: 100%;
+
+  .date {
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 20px;
+  }
+
+  .dayOfWeek {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: 0.25px;
+  }
+
+  .price {
+    font-size: 30px;
+    line-height: 36px;
   }
 
   .seats-available {
