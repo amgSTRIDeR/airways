@@ -36,7 +36,7 @@ export class GoogleApiService {
         if (!this.oAuthService.hasValidAccessToken()) {
           this.oAuthService.initLoginFlow();
         } else {
-          this.oAuthService.loadUserProfile().then((userProfile) => {
+          this.oAuthService.loadUserProfile().then((userProfile: object) => {
             this.userProfileSubject.next(userProfile as UserInfo);
             localStorage.setItem('user', JSON.stringify(userProfile));
           });
