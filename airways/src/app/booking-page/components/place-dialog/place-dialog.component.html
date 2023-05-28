@@ -5,6 +5,7 @@
       <ng-container *ngFor="let place of row; let j = index">
         <div
           class="cell"
+          [matTooltip]="place === false ? 'unavailable' : (place | json)"
           [class.cell-disabled]="!isPlaceAvailable(i, j)"
           [class.cell-selected]="selectedPlace === place"
           (click)="onCellClick(place)"

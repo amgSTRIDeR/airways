@@ -5,7 +5,7 @@ import { BookingActions } from '@redux/actions/booking-page.actions';
 export const initialState: BookingPageState = {
   id: 'SomeId',
   onBookingPage: false,
-  currentPageDirection: 'passengers',
+  currentPageDirection: 'flight',
   isEditWindowOpen: false,
   totalPrice: null,
   selectedForwardFlight: null,
@@ -763,6 +763,57 @@ export const BookingPageReducer = createReducer(
       children: 0,
       infants: 0,
     },
+    selectedForwardFlight: null,
+    selectedBackFlight: null,
+    selectedFlightCounter: {
+      value: 0,
+    },
     availableFlights: null,
   }))
+  // on(BookingActions.ChangeAvailableSeats, (state, action) => {
+  //   const flights = state.flights;
+  //
+  //   const newFlights = changeSeats(action.seats, flights);
+  //   if (newFlights === null) return { ...state };
+  //   else
+  //     return {
+  //       ...state,
+  //       flights: newFlights,
+  //     };
+  // })
 );
+
+// function changeSeats(
+//   seatsIndex: { i: number; j: number },
+//   flights: SelectedFlight | null
+// ) {
+//   if (!flights) return null;
+//   const flight = { ...flights };
+//   const availableSeats = flight?.forwardFlight?.seats.avaibleArr;
+//   if (!availableSeats || !flight.forwardFlight) return null;
+//   flight.forwardFlight.seats.avaibleArr = changeSeatArr(
+//     availableSeats,
+//     seatsIndex
+//   );
+//   return flight;
+// }
+//
+// function changeSeatArr(
+//   seats: (string | boolean)[][],
+//   seatsIndex: { i: number; j: number }
+// ) {
+//   const newSeats = [...seats];
+//   const SeatI = newSeats[seatsIndex.i];
+//   const SeatJ = [
+//     ...[...SeatI].slice(0, seatsIndex.j),
+//     false,
+//     ...[...SeatI].slice(seatsIndex.j + 1),
+//   ];
+//   const newSeatI = [
+//     ...[...newSeats].slice(0, seatsIndex.i),
+//     SeatJ,
+//     ...[...newSeats].slice(seatsIndex.i + 1),
+//   ];
+//   console.log(7788);
+//   return newSeatI;
+// }

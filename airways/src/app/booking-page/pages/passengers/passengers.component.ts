@@ -174,7 +174,6 @@ export class PassengersComponent implements OnInit, OnDestroy {
   }
 
   goToNextPage() {
-    console.log(this.passengersForm.value);
     if (this.passengersForm.valid) {
       const readyPassengers = this.passengersForm.value as PassengerInfo;
       this.store.dispatch(

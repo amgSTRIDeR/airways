@@ -86,6 +86,7 @@ export class HeaderComponent implements OnDestroy {
   }
 
   public toMainPage() {
+    this.store.dispatch(BookingActions.ClearBookingPageState());
     this.router.navigate(['main']);
   }
 
