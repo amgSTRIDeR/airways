@@ -23,10 +23,12 @@ import { SeatsButtonComponent } from './components/seats-button/seats-button.com
 import { PlaceDialogComponent } from './components/place-dialog/place-dialog.component';
 import { DateOnTicketComponent } from '@booking/components/date-on-ticket/date-on-ticket.component';
 import { ArrowButtonComponent } from '@booking/components/arrow-button/arrow-button.component';
+import { BookingSummaryComponent } from './pages/booking-summary/booking-summary.component';
 
 @NgModule({
   declarations: [
     BookingPageComponent,
+    BookingSummaryComponent,
     FlightsComponent,
     PassengersComponent,
     ReviewComponent,

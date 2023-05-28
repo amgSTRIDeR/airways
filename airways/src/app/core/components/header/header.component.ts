@@ -58,7 +58,10 @@ export class HeaderComponent implements OnDestroy {
 
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
-        if (event.url.startsWith('/booking-page')) {
+        if (
+          event.url.startsWith('/booking-page') &&
+          !event.url.startsWith('/booking-page/booking-summary')
+        ) {
           this.store.dispatch(BookingActions.OnBookingPage());
         } else {
           this.store.dispatch(BookingActions.OutBookingPage());
@@ -130,5 +133,9 @@ export class HeaderComponent implements OnDestroy {
 
   logOut() {
     this.store.dispatch(AuthActions.logOut());
+  }
+
+  toAccountPage() {
+    this.router.navigate(['shopping-card/account-page']);
   }
 }

@@ -95,6 +95,13 @@
             <button *ngIf="isUserSignIn" (click)="logOut()" mat-menu-item>
               Log Out
             </button>
+            <button
+              *ngIf="isUserSignIn"
+              (click)="toAccountPage()"
+              mat-menu-item
+            >
+              Account page
+            </button>
           </mat-menu>
         </button>
         <button
@@ -184,6 +191,9 @@
         </button>
         <button *ngIf="isUserSignIn" (click)="logOut()" mat-menu-item>
           Log Out
+        </button>
+        <button *ngIf="isUserSignIn" (click)="toAccountPage()" mat-menu-item>
+          Account page
         </button>
       </mat-menu>
     </button>

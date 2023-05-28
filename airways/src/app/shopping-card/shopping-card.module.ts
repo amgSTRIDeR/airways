@@ -10,10 +10,12 @@ import { MatMenuModule } from '@angular/material/menu';
 import { CardMenuComponent } from './components/order/card-menu/card-menu.component';
 import { SharedModule } from '@shared/shared.module';
 import { SortOrdersPipe } from './pipes/sort-orders.pipe';
+import { AccountPageComponent } from './pages/account-page/account-page.component';
 
 @NgModule({
   declarations: [
     ShoppingCardComponent,
+    AccountPageComponent,
     SortButtonComponent,
     OrderComponent,
     CardMenuComponent,
