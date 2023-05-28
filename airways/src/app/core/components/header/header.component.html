@@ -111,8 +111,8 @@
           </svg>
           <span
             class="shopping-counter"
-            *ngIf="ordersCount$ | async as ordersCount"
-            >{{ ordersCount.length }}</span
+            *ngIf="(ordersCount$ | async)?.length"
+            >{{ (ordersCount$ | async)?.length }}</span
           >
         </button>
       </nav>

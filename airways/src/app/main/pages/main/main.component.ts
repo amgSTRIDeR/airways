@@ -4,7 +4,6 @@ import { Store } from '@ngrx/store';
 import { AirportsRes } from '@redux/models/main-page.models';
 import { MainPageSelectors } from '@redux/selectors/main-page.selectors';
 import { MainPageActions } from '@redux/actions/main-page.actions';
-import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -41,7 +40,7 @@ export class MainComponent implements OnDestroy {
   returnDate$ = this.store.select(MainPageSelectors.FlightBackSelector);
   returnDateSubscription!: Subscription;
 
-  constructor(private store: Store<SettingsState>, private router: Router) {
+  constructor(private store: Store<SettingsState>) {
     this.isRoundTripSubscription = this.isRoundTrip$.subscribe((boolean) => {
       this.isRoundTrip = boolean;
       this.checkReadyForSearch();
@@ -116,7 +115,6 @@ export class MainComponent implements OnDestroy {
           returnDate: this.returnDate,
         })
       );
-      this.router.navigate(['/booking-page']);
     } else {
       this.store.dispatch(
         MainPageActions.ChangeIsSearchImplement({

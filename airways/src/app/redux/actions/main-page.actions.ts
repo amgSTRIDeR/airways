@@ -60,7 +60,7 @@ const ChangeIsSearchImplement = createAction(
 );
 
 const IsEditorOpen = createAction(
-  '[MAIN PAGE] Is round trip',
+  '[MAIN PAGE] Is editor open',
   props<{ isEditorOpen: boolean }>()
 );
 

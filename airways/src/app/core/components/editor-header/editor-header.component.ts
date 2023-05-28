@@ -74,8 +74,8 @@ export class EditorHeaderComponent implements OnDestroy {
         this.returnDate = returnDate;
       } else {
         this.returnDate = returnDate;
-        this.loadAirports();
       }
+      this.loadAirports();
     });
 
     this.isRoundTripSubscription = this.isRoundTrip$.subscribe((boolean) => {
@@ -92,21 +92,40 @@ export class EditorHeaderComponent implements OnDestroy {
   }
 
   loadAirports(): void {
-    if (
-      this.originAirport !== null &&
-      this.destinationAirport !== null &&
-      this.departureDate !== null &&
-      this.checkDepartureDate() &&
-      (this.isRoundTrip ? this.checkReturnDate() !== null : true)
-    ) {
-      this.store.dispatch(
-        MainPageActions.LoadAvailableFlights({
-          originAirportKey: this.originAirport.key,
-          destinationAirportKey: this.destinationAirport.key,
-          departureDate: this.departureDate,
-          returnDate: this.returnDate,
-        })
-      );
+    if (this.isRoundTrip) {
+      if (
+        this.originAirport !== null &&
+        this.destinationAirport !== null &&
+        this.departureDate !== null &&
+        this.returnDate !== null &&
+        this.checkDepartureDate() &&
+        (this.isRoundTrip ? this.checkReturnDate() !== null : true)
+      ) {
+        this.store.dispatch(
+          MainPageActions.LoadAvailableFlights({
+            originAirportKey: this.originAirport.key,
+            destinationAirportKey: this.destinationAirport.key,
+            departureDate: this.departureDate,
+            returnDate: this.returnDate,
+          })
+        );
+      }
+    } else {
+      if (
+        this.originAirport !== null &&
+        this.destinationAirport !== null &&
+        this.departureDate !== null &&
+        this.checkDepartureDate()
+      ) {
+        this.store.dispatch(
+          MainPageActions.LoadAvailableFlights({
+            originAirportKey: this.originAirport.key,
+            destinationAirportKey: this.destinationAirport.key,
+            departureDate: this.departureDate,
+            returnDate: null,
+          })
+        );
+      }
     }
   }
 
