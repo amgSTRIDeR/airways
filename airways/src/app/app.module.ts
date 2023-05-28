@@ -19,6 +19,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { AuthEffects } from '@redux/effects/Auth.effects';
 import { OAuthModule } from 'angular-oauth2-oidc';
+import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 
 @NgModule({
   declarations: [AppComponent],
@@ -45,7 +46,7 @@ import { OAuthModule } from 'angular-oauth2-oidc';
     MatDatepickerModule,
     MatNativeDateModule,
   ],
-  providers: [],
+  providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
