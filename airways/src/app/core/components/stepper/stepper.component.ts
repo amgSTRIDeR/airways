@@ -5,6 +5,7 @@ import { Observable, Subscription } from 'rxjs';
 import { BookingSelectors } from '@redux/selectors/booking-page.selectors';
 import { BookingActions } from '@redux/actions/booking-page.actions';
 import { FormBuilder, Validators } from '@angular/forms';
+import { AuthSelectors } from '@redux/selectors/auth.selectors';
 
 @Component({
   selector: 'app-stepper',
@@ -24,6 +25,9 @@ export class StepperComponent implements OnDestroy {
   private flightsSub!: Subscription;
   private passengersSub!: Subscription;
 
+  private IsLogIn$ = this.store.select(AuthSelectors.IsLogIn);
+  private IsLogInSub!: Subscription;
+
   firstFormGroup = this.fb.group({
     firstCtrl: ['', Validators.required],
   });
@@ -34,19 +38,35 @@ export class StepperComponent implements OnDestroy {
     thirdCtrl: ['', Validators.required],
   });
 
+  public isUserSignIn = false;
+
   constructor(private store: Store, private fb: FormBuilder) {
     this.addSubscription();
+
+    this.IsLogInSub = this.IsLogIn$.subscribe((isLog) => {
+      this.isUserSignIn = isLog;
+
+      if (!isLog) {
+        this.changePageDirection(0);
+        this.firstFormGroup.controls.firstCtrl.setValue('');
+        this.secondFormGroup.controls.secondCtrl.setValue('');
+        this.thirdFormGroup.controls.thirdCtrl.setValue('');
+      }
+    });
   }
 
   ngOnDestroy(): void {
     this.flightsSub.unsubscribe();
     this.passengersSub.unsubscribe();
+    this.IsLogInSub.unsubscribe();
   }
 
   public changePageDirection(index: number) {
     if (index === 0) this.store.dispatch(BookingActions.OnFlightSubPage());
-    if (index === 1) this.store.dispatch(BookingActions.OnPassengersSubPage());
-    if (index === 2) this.store.dispatch(BookingActions.OnReviewSubPage());
+    if (index === 1 && this.isUserSignIn)
+      this.store.dispatch(BookingActions.OnPassengersSubPage());
+    if (index === 2 && this.isUserSignIn)
+      this.store.dispatch(BookingActions.OnReviewSubPage());
   }
 
   public changePageNameToIndex(page: string) {

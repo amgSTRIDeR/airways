@@ -44,7 +44,6 @@ export class HeaderComponent implements OnDestroy {
   public user$ = this.store.select(AuthSelectors.AuthUserSelector);
 
   private IsLogIn$ = this.store.select(AuthSelectors.IsLogIn);
-  private IsLogInSub!: Subscription;
 
   public isEditorOpen$ = this.store.select(MainPageSelectors.IsEditorOpen);
 
@@ -104,7 +103,7 @@ export class HeaderComponent implements OnDestroy {
   }
 
   private addIsLog() {
-    this.IsLogInSub = this.IsLogIn$.subscribe((isLog) => {
+    this.IsLogIn$.subscribe((isLog) => {
       if (isLog) this.dialog.closeAll();
       this.isUserSignIn = isLog;
     });

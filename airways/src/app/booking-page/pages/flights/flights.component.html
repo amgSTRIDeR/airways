@@ -23,10 +23,13 @@
         class="button"
         mat-raised-button
         color="primary"
-        [disabled]="!checkAllFlightsSelected()"
+        [disabled]="!checkAllFlightsSelected() || !isUserSignIn"
         (click)="logForm()"
       >
         Continue
+        <mat-error *ngIf="checkAllFlightsSelected() && !isUserSignIn"
+          >authorize to continue</mat-error
+        >
       </button>
     </div>
   </div>

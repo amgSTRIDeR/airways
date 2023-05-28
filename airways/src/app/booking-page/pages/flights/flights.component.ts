@@ -1,28 +1,38 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ALPHABET, PLACES_PER_ROW } from '@core/consts/booking';
 import { Store } from '@ngrx/store';
 import { BookingActions } from '@redux/actions/booking-page.actions';
 import { SelectedFlightCounter } from '@redux/models/booking-page.models';
 import { FlightRes, FlightsRes, ISeats } from '@redux/models/main-page.models';
+import { AuthSelectors } from '@redux/selectors/auth.selectors';
 import { BookingSelectors } from '@redux/selectors/booking-page.selectors';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-flights',
   templateUrl: './flights.component.html',
   styleUrls: ['./flights.component.scss'],
 })
-export class FlightsComponent implements OnInit {
-  constructor(private store: Store, private router: Router) {}
+export class FlightsComponent implements OnInit, OnDestroy {
+  constructor(private store: Store, private router: Router) {
+    this.IsLogInSub = this.IsLogIn$.subscribe((isLog) => {
+      this.isUserSignIn = isLog;
+    });
+  }
 
-  public isTwoWays: boolean = false;
+  public isTwoWays = false;
   public forwardFlightInfo!: FlightsRes;
   public backFlightInfo?: FlightsRes;
 
   public selectedForwardFlightInfo: FlightRes | null = null;
   public selectedBackFlightInfo: FlightRes | null = null;
   public selectedFlightCounterValue = 0;
+
+  public isUserSignIn = false;
+
+  private IsLogIn$ = this.store.select(AuthSelectors.IsLogIn);
+  private IsLogInSub!: Subscription;
 
   private flightsInfo$: Observable<FlightsRes[] | null> = this.store.select(
     BookingSelectors.AvailableFlightsSelector
@@ -41,8 +51,8 @@ export class FlightsComponent implements OnInit {
     this.flightsInfo$.subscribe((event) => {
       if (event && event?.length > 0) {
         this.isTwoWays = event.length > 1;
-        this.forwardFlightInfo = event![0];
-        if (this.isTwoWays) this.backFlightInfo = event![1];
+        this.forwardFlightInfo = event?.[0];
+        if (this.isTwoWays) this.backFlightInfo = event?.[1];
       }
     });
     this.selectedForwardFlightInfo$.subscribe((storeFlightInfo) => {
@@ -54,6 +64,10 @@ export class FlightsComponent implements OnInit {
     this.selectedFlightCounter$.subscribe(
       (storeCounter) => (this.selectedFlightCounterValue = storeCounter.value)
     );
+  }
+
+  ngOnDestroy(): void {
+    this.IsLogInSub.unsubscribe();
   }
 
   checkAllFlightsSelected() {
@@ -74,7 +88,7 @@ export class FlightsComponent implements OnInit {
               total: this.selectedForwardFlightInfo.seats.total,
               avaible: this.selectedForwardFlightInfo.seats.avaible,
               avaibleArr: this.generateFreePlaces(
-                this.selectedForwardFlightInfo!.seats
+                this.selectedForwardFlightInfo?.seats
               ),
             },
           },
@@ -86,7 +100,7 @@ export class FlightsComponent implements OnInit {
                     total: this.selectedBackFlightInfo.seats.total,
                     avaible: this.selectedBackFlightInfo.seats.avaible,
                     avaibleArr: this.generateFreePlaces(
-                      this.selectedBackFlightInfo!.seats
+                      this.selectedBackFlightInfo?.seats
                     ),
                   },
                 }
@@ -136,7 +150,6 @@ export class FlightsComponent implements OnInit {
         availablePlacesFlatArray[newPlaceInd];
       tmpArray.splice(tmpArray.indexOf(newPlace), 1);
       ind++;
-
     }
 
     return availablePlaces;
