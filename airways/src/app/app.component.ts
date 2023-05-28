@@ -8,7 +8,7 @@ import { GoogleApiService } from '@core/services/google-api.service';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  public isMainPage = false;
+  public isMainPage = true;
 
   constructor(
     private router: Router,
@@ -16,7 +16,7 @@ export class AppComponent {
   ) {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
-        this.isMainPage = event.url.startsWith('/main');
+        this.isMainPage = event.url.startsWith('/main') || event.url === '/';
       }
     });
 

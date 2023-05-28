@@ -28,7 +28,7 @@ const ICON = {
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnDestroy {
-  public isMainPage = false;
+  public isMainPage = true;
   public isUserSignIn = false;
   public isHamburgerMenuActive = false;
   public ordersCount$: Observable<Order[]> = this.store.select(
