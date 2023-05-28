@@ -33,13 +33,6 @@ export class SeatsButtonComponent {
           if (result.place) {
             this.seat = result.place;
             this.seatFC.setValue(result.place);
-
-            // const i = result.seatIndex.i;
-            // const j = result.seatIndex.j;
-            // console.log(i, j);
-            // this.store.dispatch(
-            //   BookingActions.ChangeAvailableSeats({ seats: { i, j } })
-            // );
           }
         }
       );

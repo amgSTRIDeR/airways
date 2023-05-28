@@ -17,7 +17,7 @@ export class DataService {
 
   getAirports() {
     return this.http.get<AirportsRes[]>(
-      '/api/search/airport',
+      'https://api.air-ways.online/search/airport',
       this.httpOptions
     );
   }
@@ -28,7 +28,7 @@ export class DataService {
     forwardDate: Date,
     backDate: Date | null
   ) {
-    const url = '/api/search/flight';
+    const url = 'https://api.air-ways.online/search/flight';
     const body = {
       fromKey: fromKey,
       toKey: toKey,
