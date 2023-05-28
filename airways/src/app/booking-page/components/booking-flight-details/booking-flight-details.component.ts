@@ -40,6 +40,8 @@ export class BookingFlightDetailsComponent implements OnInit, OnChanges {
     SettingsSelectors.CurrencySelector
   );
 
+  private alternativeFlightOnScreen: number = DEFAULT_ALTERNATIVE_FLIGHTS_ON_SCREEN;
+
   private selectedFlight$!: Observable<FlightRes | null>;
 
   private selectedFlightCounter$: Observable<SelectedFlightCounter> =
