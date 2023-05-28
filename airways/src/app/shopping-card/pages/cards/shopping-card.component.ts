@@ -18,6 +18,7 @@ import {
   SortSettings,
 } from '@shopping/pipes/sort-orders.pipe';
 import { BookingActions } from '@redux/actions/booking-page.actions';
+import { AuthSelectors } from '@redux/selectors/auth.selectors';
 
 @Component({
   selector: 'app-shopping-card',
@@ -38,8 +39,11 @@ export class ShoppingCardComponent implements OnInit, OnDestroy {
     BasketSelectors.Sort
   );
 
+  private IsLogIn$ = this.store.select(AuthSelectors.IsLogIn);
+
   private orderSubscription!: Subscription;
   private sortSubscription!: Subscription;
+  private IsLogInSub!: Subscription;
 
   public orders!: Order[];
 
@@ -49,7 +53,11 @@ export class ShoppingCardComponent implements OnInit, OnDestroy {
 
   public sortHelper = false;
 
-  constructor(private store: Store, private router: Router) {}
+  constructor(private store: Store, private router: Router) {
+    this.IsLogInSub = this.IsLogIn$.subscribe((isLogIn) => {
+      if (!isLogIn) this.router.navigate(['/main']);
+    });
+  }
 
   ngOnInit(): void {
     this.getOrders();
@@ -60,6 +68,7 @@ export class ShoppingCardComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.orderSubscription.unsubscribe();
     this.sortSubscription.unsubscribe();
+    this.IsLogInSub.unsubscribe();
   }
 
   @HostListener('window:resize')

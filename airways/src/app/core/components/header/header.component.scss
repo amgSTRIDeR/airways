@@ -298,6 +298,47 @@
   }
 }
 
+.shopping-card_disabled {
+  &:hover {
+    cursor: default;
+
+    & .shopping-basket {
+      transform: scale(1);
+      fill: rgba(255, 255, 255, 0.8);
+
+      transition: all 0.3s ease;
+    }
+
+    & .shopping-counter {
+      background-color: #B3261E;
+      color: #ffffff;
+      border: none;
+
+      transform: scale(1);
+
+      transition: all 0.3s ease;
+    }
+  }
+
+  &:active {
+    & .shopping-basket {
+      transform: scale(1);
+      fill: rgba(255, 255, 255, 0.8);
+
+      transition: all 0.3s ease;
+    }
+
+    & .shopping-counter {
+      transform: scale(1);
+      background-color: #B3261E;
+      color: #ffffff;
+      border: none;
+
+      transition: all 0.3s ease;
+    }
+  }
+}
+
 .shopping-basket {
   fill: #ffffffcc;
 

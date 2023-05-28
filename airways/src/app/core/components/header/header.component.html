@@ -97,7 +97,11 @@
             </button>
           </mat-menu>
         </button>
-        <button class="button__shopping-card" (click)="toShoppingCardPage()">
+        <button
+          class="button__shopping-card"
+          (click)="toShoppingCardPage()"
+          [class.shopping-card_disabled]="!isUserSignIn"
+        >
           <svg
             class="shopping-basket"
             width="22"
@@ -131,7 +135,11 @@
   >
     <app-date-select></app-date-select>
     <app-currency-select></app-currency-select>
-    <button class="button__shopping-card" (click)="toShoppingCardPage()">
+    <button
+      class="button__shopping-card"
+      (click)="toShoppingCardPage()"
+      [class.shopping-card_disabled]="!isUserSignIn"
+    >
       <svg
         class="shopping-basket"
         width="22"

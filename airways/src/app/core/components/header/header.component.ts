@@ -94,7 +94,9 @@ export class HeaderComponent implements OnDestroy {
   }
 
   public toShoppingCardPage() {
-    this.router.navigate(['shopping-card']);
+    if (this.isUserSignIn) {
+      this.router.navigate(['shopping-card']);
+    }
   }
 
   private addPathToIcon() {
