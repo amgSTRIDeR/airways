@@ -66,8 +66,9 @@ export class ShoppingCardComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.orderSubscription.unsubscribe();
-    this.sortSubscription.unsubscribe();
+    // выбрасывало ошибку при нажатии на buy now
+    // this.orderSubscription.unsubscribe();
+    // this.sortSubscription.unsubscribe();
     this.IsLogInSub.unsubscribe();
   }
 
