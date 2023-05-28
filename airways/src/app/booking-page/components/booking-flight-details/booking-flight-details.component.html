@@ -78,6 +78,10 @@
           class="direction-label flight-duration-text self-center text-black f-w-400"
           >Direct</span
         >
+        <span
+          class="direction-label direction-label-small flight-duration-text self-center text-black f-w-400"
+          >{{ activeFlight?.flightNumber }}</span
+        >
       </div>
       <app-date-on-ticket
         [flightInfo]="activeFlight"

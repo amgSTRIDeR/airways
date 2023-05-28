@@ -1,5 +1,11 @@
-<span class="date date-from ticket-secondary f-w-400">{{
+<span class="date ticket-secondary f-w-400">{{
   flightDate | date : "EEE, d MMM yyyy"
+}}</span>
+<span class="date date-short ticket-secondary f-w-400">{{
+  flightDate | date : "MMM d, y"
+}}</span>
+<span class="date date-extrashort ticket-secondary f-w-400">{{
+  flightDate | date : "MMM d"
 }}</span>
 <div class="time-container time-from-container flex item-center gap-1">
   <span
@@ -12,3 +18,6 @@
   >
 </div>
 <span class="city city-from ticket-secondary f-w-400">{{ flightCity }}</span>
+<span class="flight-time-utc flight-time-utc-small ticket-secondary f-w-400"
+  >U{{ flightGmt }}</span
+>

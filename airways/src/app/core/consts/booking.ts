@@ -1,4 +1,4 @@
-export const ALTERNATIVE_FLIGHTS_ON_SCREEN = 5;
+export const DEFAULT_ALTERNATIVE_FLIGHTS_ON_SCREEN = 5;
 export const PLACES_PER_ROW = 10;
 export const ALPHABET: string[] = [
   'A',

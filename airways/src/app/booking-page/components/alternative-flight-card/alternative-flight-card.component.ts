@@ -12,9 +12,7 @@ export class AlternativeFlightCardComponent implements OnChanges {
   @Input() activeIndex = 0;
 
   public price?: number | null = 0;
-
-  constructor() {}
-
+  
   ngOnChanges() {
     this.price = this.flightInfo.price
       ? this.flightInfo.price[this.chosenCurrency.toLowerCase() as keyof IPrice]

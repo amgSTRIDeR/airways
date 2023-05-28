@@ -1,13 +1,6 @@
+import { Component, Input, OnInit, OnChanges } from '@angular/core';
 import {
-  Component,
-  Input,
-  Output,
-  EventEmitter,
-  OnInit,
-  OnChanges,
-} from '@angular/core';
-import {
-  ALTERNATIVE_FLIGHTS_ON_SCREEN,
+  DEFAULT_ALTERNATIVE_FLIGHTS_ON_SCREEN,
   DATE_IN_THE_PAST_MESSAGE,
   NO_TICKETS_MESSAGE,
 } from '@core/consts/booking';
@@ -33,7 +26,6 @@ import { Observable } from 'rxjs';
 export class BookingFlightDetailsComponent implements OnInit, OnChanges {
   @Input() flightInfo?: FlightsRes;
   @Input() isBackFlight = false;
-  @Output() onFlightSelected = new EventEmitter<FlightRes | null>();
 
   public flightTitle = '';
   public chosenCurrency = 'EUR';
@@ -47,6 +39,8 @@ export class BookingFlightDetailsComponent implements OnInit, OnChanges {
   private currencyInfo$: Observable<string> = this.store.select(
     SettingsSelectors.CurrencySelector
   );
+
+  private alternativeFlightOnScreen: number = DEFAULT_ALTERNATIVE_FLIGHTS_ON_SCREEN;
 
   private selectedFlight$!: Observable<FlightRes | null>;
 
@@ -81,7 +75,7 @@ export class BookingFlightDetailsComponent implements OnInit, OnChanges {
   }
 
   increaseActiveIndex(): void {
-    if (this.activeIndex < ALTERNATIVE_FLIGHTS_ON_SCREEN) {
+    if (this.activeIndex < this.alternativeFlightOnScreen) {
       this.activeIndex++;
       this.updateActiveFlight();
     }
@@ -89,7 +83,7 @@ export class BookingFlightDetailsComponent implements OnInit, OnChanges {
   }
 
   decreaseActiveIndex(): void {
-    if (this.activeIndex > -ALTERNATIVE_FLIGHTS_ON_SCREEN) {
+    if (this.activeIndex > -this.alternativeFlightOnScreen) {
       this.activeIndex--;
       this.updateActiveFlight();
     }
@@ -135,20 +129,17 @@ export class BookingFlightDetailsComponent implements OnInit, OnChanges {
 
   showAlternativeFlight(flightIndex: number): boolean {
     return (
-      Math.abs(this.activeIndex - flightIndex) <=
-        ALTERNATIVE_FLIGHTS_ON_SCREEN / 2 ||
-      (this.activeIndex >= ALTERNATIVE_FLIGHTS_ON_SCREEN / 2 &&
-        flightIndex > 0) ||
-      (this.activeIndex <= -ALTERNATIVE_FLIGHTS_ON_SCREEN / 2 &&
-        flightIndex < 0)
+      Math.abs(this.activeIndex - flightIndex) <= this.alternativeFlightOnScreen / 2 ||
+        (this.activeIndex >= this.alternativeFlightOnScreen / 2 && flightIndex > 0) ||
+        (this.activeIndex <= -this.alternativeFlightOnScreen / 2 && flightIndex < 0)
     );
   }
 
   getAlternativeFlightsArray(): void {
     this.alternativeFlights = [];
     for (
-      let ind = -ALTERNATIVE_FLIGHTS_ON_SCREEN;
-      ind <= ALTERNATIVE_FLIGHTS_ON_SCREEN;
+      let ind = -this.alternativeFlightOnScreen;
+      ind <= this.alternativeFlightOnScreen;
       ind++
     ) {
       const alternativeFlightInfo =

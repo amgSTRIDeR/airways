@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { SettingsActions } from '@redux/actions/settings.actions';
 import { CurrencyType } from '@redux/models/settings.models';
 import { SettingsState } from '@redux/models/state.models';
