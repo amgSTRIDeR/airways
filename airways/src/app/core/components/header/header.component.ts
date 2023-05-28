@@ -15,6 +15,7 @@ import { BookingSelectors } from '@redux/selectors/booking-page.selectors';
 import { MainPageSelectors } from '@redux/selectors/main-page.selectors';
 import { AuthSelectors } from '@redux/selectors/auth.selectors';
 import { AuthActions } from '@redux/actions/auth.actions';
+import { MainPageActions } from '@redux/actions/main-page.actions';
 
 const ICON = {
   name: 'basket',
@@ -88,6 +89,8 @@ export class HeaderComponent implements OnDestroy {
   public toMainPage() {
     this.store.dispatch(BookingActions.ClearBookingPageState());
     this.router.navigate(['main']);
+    this.store.dispatch(BookingActions.OutBookingPage());
+    this.store.dispatch(MainPageActions.IsEditorOpen({ isEditorOpen: false }));
   }
 
   public toShoppingCardPage() {

@@ -43,7 +43,7 @@ export class MainEffects {
             map((flights) => {
               if (this.router.url !== '/booking-page') {
                 this.router.navigate(['/booking-page']);
-              };
+              }
               return BookingActions.LoadAvailableFlightsSuccess({
                 availableFlights: flights,
               });
